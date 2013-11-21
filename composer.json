@@ -1,0 +1,27 @@
+{
+    "name": "codeliner/php-ddd-cargo-sample",
+    "description": "PHP DDD Cargo Sample",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "DDD",
+        "zf2",
+        "Domain Driven Design"
+    ],
+    "homepage": "https://github.com/codeliner/php-ddd-cargo-sample",
+    "authors": [
+        {
+            "name": "Alexander Miertsch",
+            "email": "kontakt@codeliner.ws",
+            "homepage": "http://www.codeliner.ws/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.2.*",
+        "doctrine/doctrine-orm-module": "*",
+        "mwillbanks/zfc-twitter-bootstrap" : "dev-master"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
