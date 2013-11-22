@@ -53,6 +53,9 @@ return array(
         ),
     ),
     'service_manager' => array(
+        'factories' => array(
+            'main_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
@@ -91,6 +94,14 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            'home' => array(
+                'route' => 'home',
+                'label' => 'home'
+            )
+        )
     ),
     // Placeholder for console routes
     'console' => array(
