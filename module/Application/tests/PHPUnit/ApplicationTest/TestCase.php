@@ -10,6 +10,7 @@ namespace ApplicationTest;
 
 use PHPUnit_Framework_TestCase;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Types\Type;
 /**
  *  TestCase
  * 
@@ -47,13 +48,23 @@ class TestCase extends PHPUnit_Framework_TestCase
 
             $config->setQueryCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
             $config->setMetadataCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
-
+            
             $this->entityManager = \Doctrine\ORM\EntityManager::create(array(
                 'driver' => 'pdo_sqlite',
                 'memory' => true
             ), $config);
+            
+            //Add custom DDD types to map ValueObjects correctly
+            if (!Type::hasType('trackingid')) {
+                Type::addType('trackingid', 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId');
+            } 
+            
+            if (!Type::hasType('uid')) {
+                Type::addType('uid', 'Application\Infrastructure\Persistence\Doctrine\Type\UID');
+            }
         }
-
+        
+        
         return $this->entityManager;
     }
 

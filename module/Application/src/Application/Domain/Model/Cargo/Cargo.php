@@ -10,8 +10,19 @@ namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\EntityInterface;
 use Application\Domain\Shared\UID;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Id;
 /**
- *  Cargo
+ * A Cargo. This is the central class in the domain model.
+ * 
+ * A cargo is identified by a unique tracking id.
+ * 
+ * ---Annotations required by Doctrine---
+ * @Entity(repositoryClass="Application\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine")
+ * @Table(name="cargo")
+ * --------------------------------------
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
@@ -19,6 +30,11 @@ class Cargo implements EntityInterface
 {
     /**
      * Unique Identifier
+     * 
+     * ---Annotations required by Doctrine---
+     * @Id
+     * @Column(type="trackingid", length=13, unique=true, nullable=false)
+     * --------------------------------------
      * 
      * @var TrackingId
      */
