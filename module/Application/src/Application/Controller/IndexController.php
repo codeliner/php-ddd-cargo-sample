@@ -1,17 +1,20 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
  *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+/**
+ * MVC Controller for the introduction page
+ * 
+ * @author Alexander Miertsch <kontakt@codeliner.ws>
+ */
 class IndexController extends AbstractActionController
 {
     public function indexAction()

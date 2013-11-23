@@ -1,0 +1,21 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+<div class="jumbotron">
+    <h1><?php echo 'Cargo ' . $this->cargo->getTrackingId()->toString() ?></h1>
+    <p><?php echo $this->translate('You can book a voyage for the cargo as long as the voyage has enough capacity.') ?></p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p><strong><?php echo $this->translate('Size') ?>:</strong>&nbsp;<?php echo $this->cargo->getSize() ?></p>
+    </div>
+    <div class="col-md-6">
+        <p><strong><?php echo $this->translate('Select a Voyage') ?>:</strong></p>
+    </div>
+</div>

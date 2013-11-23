@@ -12,9 +12,6 @@ return array(
         'invokables' => array(
             'Doctrine\ORM\Mapping\UnderscoreNamingStrategy' => 'Doctrine\ORM\Mapping\UnderscoreNamingStrategy',
         ),
-        'aliases' => array(
-            'entitymanager' => 'doctrine.entitymanager.orm_default',
-        ),
     ),
     'doctrine' => array(
         'configuration' => array(
