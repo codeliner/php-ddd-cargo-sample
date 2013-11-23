@@ -62,6 +62,10 @@ class TestCase extends PHPUnit_Framework_TestCase
             if (!Type::hasType('uid')) {
                 Type::addType('uid', 'Application\Infrastructure\Persistence\Doctrine\Type\UID');
             }
+            
+            if (!Type::hasType('voyagenumber')) {
+                Type::addType('voyagenumber', 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber');
+            }
         }
         
         

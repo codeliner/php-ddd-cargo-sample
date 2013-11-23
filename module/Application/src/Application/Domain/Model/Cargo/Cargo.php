@@ -9,7 +9,6 @@
 namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\EntityInterface;
-use Application\Domain\Shared\UID;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Column;

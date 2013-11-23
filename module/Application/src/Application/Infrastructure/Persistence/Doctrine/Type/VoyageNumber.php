@@ -11,20 +11,20 @@ namespace Application\Infrastructure\Persistence\Doctrine\Type;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
-use Application\Domain\Model\Cargo\TrackingId as DomainTrackingId;
+use Application\Domain\Model\Voyage\VoyageNumber as DomainVoyageNumber;
 /**
- * Custom Doctrine Type TrackingId
+ * Custom Doctrine Type VoyageNumber
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class TrackingId extends TextType
+class VoyageNumber extends TextType
 {
     /**
      * {@inheritDoc}
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new DomainTrackingId($value);
+        return new DomainVoyageNumber($value);
     }
     
     /**
@@ -32,7 +32,7 @@ class TrackingId extends TextType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!$value instanceof DomainTrackingId) {            
+        if (!$value instanceof DomainVoyageNumber) {            
             throw ConversionException::conversionFailed($value, $this->getName());        
         }
         

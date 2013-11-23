@@ -132,6 +132,7 @@ return array(
                 'types' => array(
                     'uid'           => 'Application\Infrastructure\Persistence\Doctrine\Type\UID',
                     'trackingid'    => 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId',
+                    'voyagenumber'    => 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber',
                 ),
             ),
         ),
