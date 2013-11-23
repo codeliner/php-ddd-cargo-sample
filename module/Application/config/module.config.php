@@ -99,7 +99,8 @@ return array(
             'orm_default' => array(
                 //Define custom doctrine types to map the ddd value objects
                 'types' => array(
-                    'uid' => 'Application\Infrastructure\Type\UID',
+                    'uid'           => 'Application\Infrastructure\Type\UID',
+                    'trackingid'    => 'Application\Infrastructure\Type\TrackingId',
                 ),
             ),
         ),
