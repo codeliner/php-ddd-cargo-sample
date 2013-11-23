@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 return array(
     'router' => array(
         'routes' => array(
@@ -93,6 +92,16 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+    ),
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                //Define custom doctrine types to map the ddd value objects
+                'types' => array(
+                    'uid' => 'Application\Infrastructure\Type\UID',
+                ),
+            ),
         ),
     ),
     'navigation' => array(

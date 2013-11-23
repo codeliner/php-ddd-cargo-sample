@@ -20,28 +20,28 @@ class Cargo implements EntityInterface
     /**
      * Unique Identifier
      * 
-     * @var UID
+     * @var TrackingId
      */
-    protected $uid;
+    protected $trackingId;
     
     /**
      * Construct
      * 
-     * @param UID $uid The Unique Identifier
+     * @param TrackingId $trackingId The Unique Identifier
      */
-    public function __construct(UID $uid)
+    public function __construct(TrackingId $trackingId)
     {
-        $this->uid = $uid;
+        $this->trackingId = $trackingId;
     }
     
     /**
      * Get the Unique Identifier of the Cargo
      * 
-     * @return UID
+     * @return TrackingId
      */
-    public function getUID()
+    public function getTrackingId()
     {
-        return $this->uid;
+        return $this->trackingId;
     }
 
     /**
@@ -53,6 +53,6 @@ class Cargo implements EntityInterface
             return false;
         }
         
-        return $this->getUID()->sameValueAs($other->getUID());
+        return $this->getTrackingId()->sameValueAs($other->getTrackingId());
     }
 }
