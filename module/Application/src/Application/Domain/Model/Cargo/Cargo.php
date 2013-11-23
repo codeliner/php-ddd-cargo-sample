@@ -41,6 +41,17 @@ class Cargo implements EntityInterface
     protected $trackingId;
     
     /**
+     * Size of the Cargo
+     * 
+     * ---Annotations required by Doctrine---
+     * @Column(type="integer")
+     * --------------------------------------
+     * 
+     * @var integer 
+     */
+    protected $size;
+
+    /**
      * Construct
      * 
      * @param TrackingId $trackingId The Unique Identifier
@@ -59,7 +70,28 @@ class Cargo implements EntityInterface
     {
         return $this->trackingId;
     }
+    
+    /**
+     * Get the size of the Cargo.
+     * 
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
 
+    /**
+     * Set the size of the Cargo.
+     * 
+     * @param integer $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
+
+    
     /**
      * {@inheritDoc}
      */
