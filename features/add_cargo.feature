@@ -1,5 +1,5 @@
 Feature: Add a Cargo
-    In order to ship a Cargo
+    In order to handle a Cargo
     As a booking manager
     I need to be able to add a new Cargo
 
