@@ -11,6 +11,7 @@ namespace Application\Form\Service;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Application\Form\VoyageForm;
+use Application\Form\VoyageNumberHydratorStrategy;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 /**
  * VoyageFormFactory

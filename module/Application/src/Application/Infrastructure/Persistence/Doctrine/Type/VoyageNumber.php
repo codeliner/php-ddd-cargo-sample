@@ -32,7 +32,7 @@ class VoyageNumber extends TextType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!$value instanceof DomainVoyageNumber) {            
+        if (!$value instanceof DomainVoyageNumber) {  
             throw ConversionException::conversionFailed($value, $this->getName());        
         }
         

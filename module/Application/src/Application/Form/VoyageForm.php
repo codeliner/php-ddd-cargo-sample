@@ -25,7 +25,7 @@ class VoyageForm extends Form
         parent::__construct('VoyageForm', $options);
         
         $this->add(array(
-            'name' => 'voyageNumber',
+            'name' => 'voyage_number',
             'options' => array(
                 'label' => 'Number',
             ),
@@ -73,13 +73,13 @@ class VoyageForm extends Form
     public function getInputFilter()
     {
         if (is_null($this->filter)) {
-            $voyageNumberLengthValidator = new StringLength(30);
+            $voyageNumberLengthValidator = new StringLength(3, 30);
             $voyageNumberInput = new Input('voyage_number');
             $voyageNumberInput->setRequired(true)
                 ->getValidatorChain()
                 ->addValidator($voyageNumberLengthValidator);
             
-            $nameLengthValidator = new StringLength(100);
+            $nameLengthValidator = new StringLength(3, 100);
             $nameInput = new Input('name');
             $nameInput->setRequired(true);
             $nameInput->getValidatorChain()

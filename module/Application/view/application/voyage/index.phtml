@@ -1,0 +1,31 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+<div class="jumbotron">
+    <h1><?php echo $this->translate('Voyage Overview') ?></h1>
+    <p><?php echo $this->translate('Choose a Voyage from the list to view all assigned Cargos.') ?></p>    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php if (empty($this->voyages)): ?>
+        <p class="alert-danger"><?php echo $this->translate('The list is empty. You have to add a Voyage first!'); ?></p>
+        <?php else: ?>
+        <ul>
+            <?php foreach ($this->voyages as $voyage): ?>
+            <li><a href="<?php echo $this->url('application/default/voyagenumber', array('controller' => 'voyage', 'action' => 'show', 'voyagenumber' => $voyage->getVoyageNumber()->toString())) ?>"><?php echo $voyage->getVoyageNumber() ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p><a class="btn btn-success btn-lg" href="<?php echo $this->url('application/default', array('controller' => 'voyage', 'action' => 'add')) ?>"><?php echo $this->translate('Add new Voyage') ?> &raquo;</a></p>
+    </div>
+</div>

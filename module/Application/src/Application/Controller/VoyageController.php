@@ -9,6 +9,7 @@
 namespace Application\Controller;
 
 use Application\Domain\Model\Voyage;
+use Application\Form\VoyageForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 /**
@@ -24,5 +25,61 @@ class VoyageController extends AbstractActionController
      */
     protected $voyageRepository;
     
+    /**
+     *
+     * @var VoyageForm 
+     */
+    protected $voyageForm;
+
+
+    public function indexAction()
+    {
+        return array('voyages' => $this->voyageRepository->findAll());
+    }
     
+    public function addAction()
+    {
+        //we use the post redirect get pattern and redirect to same location
+        $prg = $this->prg();
+        
+        if ($prg instanceof \Zend\Http\PhpEnvironment\Response) {
+            // returned a response to redirect us
+            return $prg;
+        } elseif ($prg === false) {
+            // this wasn't a POST request
+            // probably this is the first time the form was loaded
+            return array('form' => $this->voyageForm);
+        }
+        
+        $this->voyageForm->setData($prg);
+        
+        if ($this->voyageForm->isValid()) {
+            $voyageNumber = new Voyage\VoyageNumber($prg['voyage_number']);
+            $newVoyage = new Voyage\Voyage($voyageNumber);            
+            
+            $this->voyageForm->bind($newVoyage);            
+            $this->voyageForm->bindValues();           
+            $this->voyageRepository->store($newVoyage);
+            
+            return $this->redirect()->toRoute(
+                'application/default', 
+                array(
+                    'controller' => 'voyage',
+                    'action'     => 'index'
+                )
+            );
+        } else {
+            return array('form' => $this->voyageForm);
+        }
+    }
+    
+    public function setVoyageRepository(Voyage\VoyageRepositoryInterface $voyageRepository)
+    {
+        $this->voyageRepository = $voyageRepository;
+    }
+
+    public function setVoyageForm(VoyageForm $voyageForm)
+    {
+        $this->voyageForm = $voyageForm;
+    }
 }
