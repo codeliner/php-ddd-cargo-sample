@@ -1,6 +1,8 @@
 <?php
 return array(
     'modules' => array(
+        'DoctrineModule',
+        'DoctrineORMModule',
         'Application',
     ),
     'module_listener_options' => array(

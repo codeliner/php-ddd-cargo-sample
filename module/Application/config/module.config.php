@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 return array(
     'router' => array(
         'routes' => array(
@@ -47,14 +46,53 @@ return array(
                             'defaults' => array(
                             ),
                         ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'trackingid' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/trackingid/[:trackingid]',
+                                    'constraints' => array(
+                                        'trackingid' => '[a-zA-Z0-9_-]*',
+                                    ),
+                                    'defaults' => array(
+                                    ),
+                                ),
+                            ),
+                            'voyagenumber' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/voyagenumber/[:voyagenumber]',
+                                    'constraints' => array(
+                                        'voyagenumber' => '[a-zA-Z0-9_-]*',
+                                    ),
+                                    'defaults' => array(
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
                 ),
             ),
         ),
     ),
     'service_manager' => array(
+        'invokables' => array(
+            'overbooking_policy' => 'Application\Service\Policy\TenPercentOverbookingPolicy',
+        ),
         'factories' => array(
-            'main_navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
+            'voyage_form'       => 'Application\Form\Service\VoyageFormFactory',
+            'booking_service'   => 'Application\Service\Factory\BookingServiceFactory',
+            'cargo_repository'  => function($sl) {
+                $em = $sl->get('doctrine.entitymanager.orm_default');
+                return $em->getRepository('Application\Domain\Model\Cargo\Cargo');
+            },
+            'voyage_repository' => function($sl) {
+                $em = $sl->get('doctrine.entitymanager.orm_default');
+                return $em->getRepository('Application\Domain\Model\Voyage\Voyage');
+            }
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -78,6 +116,36 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
+        'factories' => array(
+            'Application\Controller\Cargo' => function($controllerLoader) {
+                $serviceManager = $controllerLoader->getServiceLocator();
+                
+                $cargoRepository = $serviceManager->get('cargo_repository');
+                
+                $cargoController = new Application\Controller\CargoController();
+                $cargoController->setCargoRepository($cargoRepository);
+                $cargoController->setVoyageRepository($serviceManager->get('voyage_repository'));
+                $cargoController->setCargoForm($serviceManager->get('cargo_form'));
+                return $cargoController;
+            },
+            'Application\Controller\Voyage' => function($controllerLoader) {
+                $serviceManager = $controllerLoader->getServiceLocator();
+                
+                $voyageController = new Application\Controller\VoyageController();
+                $voyageController->setVoyageForm($serviceManager->get('voyage_form'));
+                $voyageController->setVoyageRepository($serviceManager->get('voyage_repository'));
+                return $voyageController;
+            },
+            'Application\Controller\Booking' => function($controllerLoader) {
+                $serviceManager = $controllerLoader->getServiceLocator();
+                
+                $bookingController = new Application\Controller\BookingController();
+                $bookingController->setCargoRepository($serviceManager->get('cargo_repository'));
+                $bookingController->setVoyageRepository($serviceManager->get('voyage_repository'));
+                $bookingController->setBookingService($serviceManager->get('booking_service'));
+                return $bookingController;
+            }
+        )
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
@@ -95,11 +163,73 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'doctrine' => array(
+        'configuration' => array(
+            'orm_default' => array(
+                //Define custom doctrine types to map the ddd value objects
+                'types' => array(
+                    'trackingid'    => 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId',
+                    'voyagenumber'    => 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber',
+                ),
+            ),
+        ),
+        'driver' => array(
+            'application_module_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(
+                    __DIR__ . '/../src/Application/Domain/Model/Cargo/',
+                    __DIR__ . '/../src/Application/Domain/Model/Voyage/'
+                )
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'Application' => 'application_module_driver',
+                )
+            )
+        )
+    ),
     'navigation' => array(
         'default' => array(
             'home' => array(
                 'route' => 'home',
                 'label' => 'home'
+            ),
+            'cargo' => array(
+                'type' => 'uri',
+                'label' => 'Cargo',
+                'pages' => array(
+                    'list' => array(
+                        'route' => 'application/default',
+                        'controller' => 'cargo',
+                        'action' => 'index',
+                        'label' => 'list Cargos'
+                    ),
+                    'add' => array(
+                        'route' => 'application/default',
+                        'controller' => 'cargo',
+                        'action' => 'add',
+                        'label' => 'add Cargo'
+                    )
+                )
+            ),
+            'voyage' => array(
+                'type' => 'uri',
+                'label' => 'Voyage',
+                'pages' => array(
+                    'list' => array(
+                        'route' => 'application/default',
+                        'controller' => 'voyage',
+                        'action' => 'index',
+                        'label' => 'list Voyages'
+                    ),
+                    'add' => array(
+                        'route' => 'application/default',
+                        'controller' => 'voyage',
+                        'action' => 'add',
+                        'label' => 'add Voyage'
+                    )
+                )
             )
         )
     ),
