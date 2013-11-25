@@ -1,0 +1,37 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+<div class="jumbotron">
+    <h1><?php echo $this->translate('Add new Cargo') ?></h1>
+    <p><?php echo $this->translate('In the Chapter One version of the Shipping System you can only set the size of a Cargo. More attributes will follow in next chapters.') ?></p>    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $form = $this->form;
+        $form->prepare();
+
+        $form->setAttribute('method', 'post');
+        
+        echo $this->form()->openTag($form);
+        
+        $size = $form->get('size');
+        echo $this->ztbFormElement($size);
+        
+        $trackingId = $form->get('trackingId');
+        echo $this->ztbFormElement($trackingId);
+        
+        echo '<p></p>';
+
+        echo $this->ztbFormElement($form->get('send'));
+
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+<div class="jumbotron">
+    <h1><?php echo 'Cargo ' . $this->cargo->getTrackingId()->toString() ?></h1>
+    <p><?php echo $this->translate('You can book a voyage for the cargo as long as the voyage has enough capacity.') ?></p>
+</div>
+<form method="post" action="<?php echo $this->url('application/default', array('controller' => 'booking', 'action' => 'booking')) ?>">
+    <div class="row">
+        <div class="col-md-3">
+            <p><strong><?php echo $this->translate('Size') ?>:</strong>&nbsp;<?php echo $this->cargo->getSize() ?></p>
+        </div>
+        <div class="col-md-6">
+            <?php if (!empty($this->voyages)) : ?>
+            <div class="control-group">
+                <label class="col-sm-5 control-label"><?php echo $this->translate('Select a Voyage') ?>:</label>
+                <div class="col-sm-7">
+                    <select name="voyage_number" class="form-control">                
+                    <?php foreach($this->voyages as $voyage) : ?>
+                        <option value="<?php echo $voyage->getVoyageNumber() ?>"><?php echo $voyage->getVoyageNumber() ?> - <?php echo $this->escapeHtml($voyage->getName()) ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <?php elseif ($this->cargo->isBooked()): ?>
+            <p class="alert-info"><?php echo $this->translate('The Cargo is already booked.') ?></p>
+            <?php else: ?>
+            <p class="alert-info"><?php echo $this->translate('No free voyages found.') ?></p>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-3">
+            <?php if(!$this->cargo->isBooked()): ?>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-success" type="submit" value="<?php echo $this->translate('Book Voyage') ?>" name="send">
+                </div>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+    <input type="hidden" name="tracking_id" value="<?php echo $this->cargo->getTrackingId() ?>" />
+</form>
