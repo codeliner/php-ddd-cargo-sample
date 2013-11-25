@@ -12,6 +12,7 @@ use Zend\Form\Form;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\StringLength;
+use Zend\Validator\Regex;
 use Zend\Validator\Digits;
 /**
  * Form class to manage add and update of a Cargo.
@@ -61,11 +62,13 @@ class CargoForm extends Form
                 ->addValidator($sizeValidator);
 
             $trackingIdValidator = new StringLength(13);
+            $regexValidator = new Regex('/^[a-zA-Z0-9_-]+$/');
             $trackingIdInput = new Input('trackingId');
             $trackingIdInput->allowEmpty();
             $trackingIdInput->setRequired(false);
             $trackingIdInput->getValidatorChain()
-                ->addValidator($trackingIdValidator);
+                ->addValidator($trackingIdValidator)
+                ->addValidator($regexValidator);
 
             $filter = new InputFilter();
             $filter->add($sizeInput)->add($trackingIdInput);

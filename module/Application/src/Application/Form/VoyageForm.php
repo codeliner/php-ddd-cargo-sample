@@ -13,6 +13,7 @@ use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\StringLength;
 use Zend\Validator\Digits;
+use Zend\Validator\Regex;
 /**
  *  VoyageForm
  * 
@@ -74,10 +75,12 @@ class VoyageForm extends Form
     {
         if (is_null($this->filter)) {
             $voyageNumberLengthValidator = new StringLength(3, 30);
+            $regexValidator = new Regex('/^[a-zA-Z0-9_-]+$/');
             $voyageNumberInput = new Input('voyage_number');
             $voyageNumberInput->setRequired(true)
                 ->getValidatorChain()
-                ->addValidator($voyageNumberLengthValidator);
+                ->addValidator($voyageNumberLengthValidator)
+                ->addValidator($regexValidator);
             
             $nameLengthValidator = new StringLength(3, 100);
             $nameInput = new Input('name');

@@ -10,6 +10,7 @@ namespace ApplicationTest\Infrastructure\Persistence\Doctrine;
 
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Voyage;
+use Application\Domain\Model\Cargo;
 use Application\Infrastrucure\Persistence\Doctrine\CargoRepositoryDoctrine;
 /**
  *  VoyageRepositoryDoctrineTest
@@ -23,11 +24,19 @@ class VoyageRepositoryDoctrineTest extends TestCase
      */
     protected $voyageRepository;
     
+    /**
+     * @var Cargo\CargoRepositoryInterface
+     */
+    protected $cargoRepository;
+
+
     protected function setUp()
     {
+        $this->createEntitySchema('Application\Domain\Model\Cargo\Cargo');
         $this->createEntitySchema('Application\Domain\Model\Voyage\Voyage');
         
         $this->voyageRepository = $this->getTestEntityManager()->getRepository('Application\Domain\Model\Voyage\Voyage');
+        $this->cargoRepository = $this->getTestEntityManager()->getRepository('Application\Domain\Model\Cargo\Cargo');
     }
     
     public function testStoreAndFindVoyage()
@@ -38,11 +47,22 @@ class VoyageRepositoryDoctrineTest extends TestCase
         $voyage->setName('MyVoyage');
         $voyage->setCapacity(1);
         
+        $cargo = new Cargo\Cargo(new Cargo\TrackingId('1234'));
+        $cargo->setSize(12);
+        
+        $this->getTestEntityManager()->persist($cargo);
+        
+        $voyage->bookCargo($cargo);
+        
         $this->voyageRepository->store($voyage);
+        $this->cargoRepository->store($cargo);
         
         $checkVoyage = $this->voyageRepository->findVoyage($voyageNumber);
         
+        $bookedCargos = $checkVoyage->getBookedCargos();
+        
         $this->assertTrue($voyage->sameIdentityAs($checkVoyage));
         $this->assertEquals('MyVoyage', $checkVoyage->getName());
+        $this->assertTrue($cargo->sameIdentityAs($bookedCargos[0]));
     }
 }

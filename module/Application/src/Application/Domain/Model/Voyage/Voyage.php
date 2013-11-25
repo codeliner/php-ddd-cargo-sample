@@ -9,10 +9,14 @@
 namespace Application\Domain\Model\Voyage;
 
 use Application\Domain\Shared\EntityInterface;
+use Application\Domain\Model\Cargo\Cargo;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * A Voyage. Cargos can be booked on a Voyage.
  * 
@@ -62,6 +66,17 @@ class Voyage implements EntityInterface
     protected $capacity;
     
     /**
+     * Collection of booked Cargos
+     * 
+     * --Annotations required by Doctrine----
+     * @OneToMany(targetEntity="Application\Domain\Model\Cargo\Cargo", mappedBy="voyage", cascade={"persist"}, fetch="LAZY")  
+     * --------------------------------------
+     * 
+     * @var ArrayCollection 
+     */
+    protected $bookedCargos;
+    
+    /**
      * Construct
      * 
      * @param VoyageNumber $voyageNumber
@@ -69,6 +84,7 @@ class Voyage implements EntityInterface
     public function __construct(VoyageNumber $voyageNumber)
     {
         $this->voyageNumber = $voyageNumber;
+        $this->bookedCargos = new ArrayCollection();
     }
     
     /**
@@ -100,6 +116,25 @@ class Voyage implements EntityInterface
     {
         return $this->capacity;
     }
+    
+    /**
+     * Get the free capacity of Voyage.
+     * 
+     * @return integer
+     */
+    public function getFreeCapacity()
+    {
+        $cargos = $this->getBookedCargos();
+        
+        $bookedCapacity = 0;
+        
+        $cargos->forAll(function($key, $cargo) use (&$bookedCapacity) {
+            $bookedCapacity += $cargo->getSize();
+            return true;
+        });
+        
+        return $this->getCapacity() - $bookedCapacity;
+    }
 
     /**
      * Set name of Voyage
@@ -122,8 +157,27 @@ class Voyage implements EntityInterface
     {
         $this->capacity = $capacity;
     }
+    
+    /**
+     * Get the booked Cargos
+     * 
+     * @return ArrayCollection
+     */
+    public function getBookedCargos()
+    {
+        return $this->bookedCargos;
+    }
 
-        
+    /**
+     * Book a cargo
+     * 
+     * @param Cargo $cargo
+     */
+    public function bookCargo(Cargo $cargo)
+    {
+        $cargo->setVoyage($this);
+        $this->bookedCargos->add($cargo);
+    }
     /**
      * {@inheritDoc}
      */

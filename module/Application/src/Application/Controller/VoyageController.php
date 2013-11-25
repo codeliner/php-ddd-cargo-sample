@@ -73,6 +73,19 @@ class VoyageController extends AbstractActionController
         }
     }
     
+    public function showAction()
+    {
+        $voyageNumber = $this->getEvent()->getRouteMatch()->getParam('voyagenumber', '');
+        
+        $voyage = $this->voyageRepository->findVoyage(new Voyage\VoyageNumber($voyageNumber));
+        
+        if(is_null($voyage)) {
+            throw new \Exception('Voyage could not be found');
+        }
+        
+        return array('voyage' => $voyage);
+    }
+    
     public function setVoyageRepository(Voyage\VoyageRepositoryInterface $voyageRepository)
     {
         $this->voyageRepository = $voyageRepository;

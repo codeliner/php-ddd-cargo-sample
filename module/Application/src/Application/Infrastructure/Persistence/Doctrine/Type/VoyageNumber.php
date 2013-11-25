@@ -24,6 +24,10 @@ class VoyageNumber extends TextType
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
+        if (empty($value)) {
+            return null;
+        }
+        
         return new DomainVoyageNumber($value);
     }
     
@@ -32,6 +36,14 @@ class VoyageNumber extends TextType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
+        if (empty($value)) {
+            return null;
+        }
+        
+        if (is_string($value)) {
+            return $value;
+        }
+        
         if (!$value instanceof DomainVoyageNumber) {  
             throw ConversionException::conversionFailed($value, $this->getName());        
         }

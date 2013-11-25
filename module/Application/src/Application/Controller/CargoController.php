@@ -11,6 +11,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Domain\Model\Cargo;
+use Application\Domain\Model\Voyage\VoyageRepositoryInterface;
 use Application\Form\CargoForm;
 /**
  * MVC Controller for Cargo Management
@@ -26,6 +27,13 @@ class CargoController extends AbstractActionController
      */
     protected $cargoRepository;    
     
+    /**
+     *
+     * @var VoyageRepositoryInterface 
+     */
+    protected $voyageRepository;
+
+
     /**
      *
      * @var CargoForm 
@@ -56,7 +64,13 @@ class CargoController extends AbstractActionController
             throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');
         }
         
-        return array('cargo' => $cargo);
+        if ($cargo->isBooked()) {
+            $voyages = array();
+        } else {
+            $voyages = $this->voyageRepository->findAll();
+        }
+        
+        return array('cargo' => $cargo, 'voyages' => $voyages);
     }
     
     public function addAction()
@@ -101,6 +115,17 @@ class CargoController extends AbstractActionController
     public function setCargoRepository(Cargo\CargoRepositoryInterface $cargoRepository) 
     {
         $this->cargoRepository = $cargoRepository;
+    }
+    
+    /**
+     * Set the voyage repository
+     * 
+     * @param VoyageRepositoryInterface $voyageRepository
+     * @return void
+     */
+    public function setVoyageRepository(VoyageRepositoryInterface $voyageRepository)
+    {
+        $this->voyageRepository = $voyageRepository;
     }
     
     /**

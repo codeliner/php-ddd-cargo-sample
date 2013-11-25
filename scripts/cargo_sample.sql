@@ -11,6 +11,7 @@
 CREATE TABLE IF NOT EXISTS `cargo` (
   `tracking_id` varchar(13) NOT NULL,
   `size` int(11) NOT NULL,
+  `voyage_number` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
 );
 

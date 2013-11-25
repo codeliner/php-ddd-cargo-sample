@@ -77,10 +77,14 @@ return array(
         ),
     ),
     'service_manager' => array(
+        'invokables' => array(
+            'overbooking_policy' => 'Application\Service\Policy\TenPercentOverbookingPolicy',
+        ),
         'factories' => array(
             'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
             'voyage_form'       => 'Application\Form\Service\VoyageFormFactory',
+            'booking_service'   => 'Application\Service\Factory\BookingServiceFactory',
             'cargo_repository'  => function($sl) {
                 $em = $sl->get('doctrine.entitymanager.orm_default');
                 return $em->getRepository('Application\Domain\Model\Cargo\Cargo');
@@ -120,6 +124,7 @@ return array(
                 
                 $cargoController = new Application\Controller\CargoController();
                 $cargoController->setCargoRepository($cargoRepository);
+                $cargoController->setVoyageRepository($serviceManager->get('voyage_repository'));
                 $cargoController->setCargoForm($serviceManager->get('cargo_form'));
                 return $cargoController;
             },
@@ -130,6 +135,15 @@ return array(
                 $voyageController->setVoyageForm($serviceManager->get('voyage_form'));
                 $voyageController->setVoyageRepository($serviceManager->get('voyage_repository'));
                 return $voyageController;
+            },
+            'Application\Controller\Booking' => function($controllerLoader) {
+                $serviceManager = $controllerLoader->getServiceLocator();
+                
+                $bookingController = new Application\Controller\BookingController();
+                $bookingController->setCargoRepository($serviceManager->get('cargo_repository'));
+                $bookingController->setVoyageRepository($serviceManager->get('voyage_repository'));
+                $bookingController->setBookingService($serviceManager->get('booking_service'));
+                return $bookingController;
             }
         )
     ),
@@ -154,7 +168,6 @@ return array(
             'orm_default' => array(
                 //Define custom doctrine types to map the ddd value objects
                 'types' => array(
-                    'uid'           => 'Application\Infrastructure\Persistence\Doctrine\Type\UID',
                     'trackingid'    => 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId',
                     'voyagenumber'    => 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber',
                 ),
