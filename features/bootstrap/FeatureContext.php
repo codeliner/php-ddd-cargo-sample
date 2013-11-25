@@ -51,19 +51,15 @@ class FeatureContext extends MinkContext
     }
     
     /**
-     * @BeforeScenario
+     * @BeforeFeature
      */
-    public function clearDatabase()
+    public static function clearDatabase()
     {
-        //to stuff here
-    }
-    
-    /**
-     * @return ServiceManager
-     */
-    private function getServiceManager()
-    {
-        return self::$zendApp->getServiceManager();
+        $em = self::$zendApp->getServiceManager()->get('doctrine.entitymanager.orm_default');
+        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\Cargo');
+        $q->execute();
+        $q = $em->createQuery('delete from Application\Domain\Model\Voyage\Voyage');
+        $q->execute();
     }
     
     /**

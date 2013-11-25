@@ -9,11 +9,13 @@
 namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\EntityInterface;
-use Application\Domain\Shared\UID;
+use Application\Domain\Model\Voyage\Voyage;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * A Cargo. This is the central class in the domain model.
  * 
@@ -50,6 +52,18 @@ class Cargo implements EntityInterface
      * @var integer 
      */
     protected $size;
+    
+    /**
+     * The booked Voyage
+     * 
+     * --Annotations required by Doctrine----
+     * @ManyToOne(targetEntity="Application\Domain\Model\Voyage\Voyage", inversedBy="bookedCargos", fetch="LAZY")
+     * @JoinColumn(name="voyage_number", referencedColumnName="voyage_number")
+     * --------------------------------------
+     * 
+     * @var Voyage
+     */
+    protected $voyage;
 
     /**
      * Construct
@@ -91,7 +105,36 @@ class Cargo implements EntityInterface
         $this->size = $size;
     }
 
+    /**
+     * 
+     * @return Voyage
+     */
+    public function getVoyage()
+    {
+        return $this->voyage;
+    }
+
+    /**
+     * 
+     * @param Voyage $voyage
+     * @return void
+     */
+    public function setVoyage(Voyage $voyage)
+    {
+        $this->voyage = $voyage;
+    }
     
+    /**
+     * Check if Cargo is already booked
+     * 
+     * @return boolean
+     */
+    public function isBooked()
+    {
+        return !is_null($this->getVoyage());
+    }
+
+        
     /**
      * {@inheritDoc}
      */

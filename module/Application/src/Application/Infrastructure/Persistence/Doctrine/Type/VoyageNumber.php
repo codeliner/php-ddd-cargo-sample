@@ -11,20 +11,24 @@ namespace Application\Infrastructure\Persistence\Doctrine\Type;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
-use Application\Domain\Shared\UID as DomainUID;
+use Application\Domain\Model\Voyage\VoyageNumber as DomainVoyageNumber;
 /**
- * Custom Doctrine Type UID
+ * Custom Doctrine Type VoyageNumber
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class UID extends TextType
+class VoyageNumber extends TextType
 {
     /**
      * {@inheritDoc}
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new DomainUID($value);
+        if (empty($value)) {
+            return null;
+        }
+        
+        return new DomainVoyageNumber($value);
     }
     
     /**
@@ -32,7 +36,15 @@ class UID extends TextType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!$value instanceof DomainUID) {            
+        if (empty($value)) {
+            return null;
+        }
+        
+        if (is_string($value)) {
+            return $value;
+        }
+        
+        if (!$value instanceof DomainVoyageNumber) {  
             throw ConversionException::conversionFailed($value, $this->getName());        
         }
         

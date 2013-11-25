@@ -45,6 +45,8 @@ class TestCase extends PHPUnit_Framework_TestCase
                     )
                 )
             );
+            
+            $config->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
 
             $config->setQueryCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
             $config->setMetadataCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
@@ -59,8 +61,8 @@ class TestCase extends PHPUnit_Framework_TestCase
                 Type::addType('trackingid', 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId');
             } 
             
-            if (!Type::hasType('uid')) {
-                Type::addType('uid', 'Application\Infrastructure\Persistence\Doctrine\Type\UID');
+            if (!Type::hasType('voyagenumber')) {
+                Type::addType('voyagenumber', 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber');
             }
         }
         
