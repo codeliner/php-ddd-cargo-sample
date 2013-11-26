@@ -78,5 +78,40 @@ class FeatureContext extends MinkContext
             throw new \RuntimeException("Can not find the submit btn");
         }
     }
+    
+    /**
+     * @When /^I click on first item in the list "([^"]*)"$/
+     */
+    public function iClickOnFirstItemInTheList($arg1)
+    {
+        $session = $this->getSession();
+        $page = $session->getPage();
+        
+        $ul = $page->find('css', '#cargo-list');
+        
+        $li = $ul->find('css', 'li');
+        
+        $li->find('css', 'a')->click();
+    }
+    
+    /**
+     * @Given /^I wait until I am on page "(?P<page>[^"]+)"$/
+     */
+    public function iWaitUntilIAmOnPage($page)
+    {
+        $matchingFound = false;
+        
+        for($i=1;$i++;$i<=5) {
+            if (strpos($this->getSession()->getCurrentUrl(), $this->locatePath($page)) !== false) {
+                $matchingFound = true;
+                break;
+            }
+            sleep(1);
+        }
+        
+        if (!$matchingFound) {
+            throw new \Exception('Stoped waiting, timelimit reached!');
+        }
+    }
 
 }

@@ -41,7 +41,7 @@ class BookingService
         if (!$this->overbookingPolicy->isAllowed($cargo, $voyage)) {
             throw new Exception\RuntimeException(
                 sprintf(
-                    'Cargo <%s> can not be booked. Voyage <%s> has not enough capacity.',
+                    'Cargo [%s] can not be booked. Voyage [%s] has not enough capacity.',
                     $cargo->getTrackingId()->toString(),
                     $voyage->getVoyageNumber()->toString()
                 )
