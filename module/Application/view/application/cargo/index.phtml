@@ -16,7 +16,7 @@
         <?php if (empty($this->cargos)): ?>
         <p class="alert-danger"><?php echo $this->translate('The list is empty. You have to add a cargo first!'); ?></p>
         <?php else: ?>
-        <ul>
+        <ul id="cargo-list">
             <?php foreach ($this->cargos as $cargo): ?>
             <li><a href="<?php echo $this->url('application/default/trackingid', array('controller' => 'cargo', 'action' => 'show', 'trackingid' => $cargo->getTrackingId()->toString())) ?>"><?php echo $cargo->getTrackingId() ?></a></li>
             <?php endforeach; ?>
