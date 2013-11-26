@@ -94,6 +94,12 @@ parts like the domain and the infrastructure implementation can be found in the 
 Chapter Overview
 ----------------
 
+###ChapterOne
+`git checkout ChapterOne`
+Chapter One release contains the first draft of the Cargo DDD model. 
+It contains the Entities `Cargo` and `Voyage` and also an `Application BookingService` that works with an `overbooking policy` 
+to allow the booking of a Cargo even when the Voyage has not enough free capacity.
+
 Support
 -------
 If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws`.
