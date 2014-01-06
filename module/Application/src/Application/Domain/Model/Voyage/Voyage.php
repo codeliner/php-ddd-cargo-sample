@@ -9,19 +9,10 @@
 namespace Application\Domain\Model\Voyage;
 
 use Application\Domain\Shared\EntityInterface;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Table;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Id;
 /**
- * A Voyage. Cargos can be booked on a Voyage.
+ * A Voyage.
  * 
  * A Voyage is identified by a unique voyage number.
- * 
- * ---Annotations required by Doctrine---
- * @Entity(repositoryClass="Application\Infrastructure\Persistence\Doctrine\VoyageRepositoryDoctrine")
- * @Table(name="voyage")
- * --------------------------------------
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
@@ -29,11 +20,6 @@ class Voyage implements EntityInterface
 {
     /**
      * Unique Identifier
-     * 
-     * ---Annotations required by Doctrine---
-     * @Id
-     * @Column(type="voyagenumber", length=30, unique=true, nullable=false)
-     * --------------------------------------
      * 
      * @var VoyageNumber
      */
