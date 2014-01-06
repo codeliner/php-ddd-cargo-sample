@@ -39,9 +39,9 @@ class TestCase extends PHPUnit_Framework_TestCase
             $config->setProxyDir(\sys_get_temp_dir());
             $config->setProxyNamespace(get_class($this) . '\Entities');
             $config->setMetadataDriverImpl(
-                new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
-                    new \Doctrine\Common\Annotations\IndexedReader(
-                        new \Doctrine\Common\Annotations\AnnotationReader()
+                new \Doctrine\ORM\Mapping\Driver\XmlDriver(
+                    array(
+                        __DIR__ . '/../../../config/DoctrineMapping'
                     )
                 )
             );

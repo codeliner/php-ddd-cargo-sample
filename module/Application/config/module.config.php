@@ -162,11 +162,10 @@ return array(
         ),
         'driver' => array(
             'application_module_driver' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
                 'cache' => 'array',
                 'paths' => array(
-                    __DIR__ . '/../src/Application/Domain/Model/Cargo/',
-                    __DIR__ . '/../src/Application/Domain/Model/Voyage/'
+                    __DIR__ . '/DoctrineMapping'
                 )
             ),
             'orm_default' => array(
