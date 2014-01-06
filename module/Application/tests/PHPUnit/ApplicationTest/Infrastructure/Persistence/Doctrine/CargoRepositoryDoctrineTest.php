@@ -42,7 +42,6 @@ class CargoRepositoryDoctrineTest extends TestCase
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         $cargo = new Cargo\Cargo($trackingId);
-        $cargo->setSize(12);
         
         $this->cargoRepository->store($cargo);
         
