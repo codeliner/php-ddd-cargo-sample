@@ -34,17 +34,4 @@ class CargoTest extends TestCase
         
         $this->assertFalse($cargo1->sameIdentityAs($cargo3));
     }
-    
-    public function testIsBooked()
-    {
-        $cargo = new Cargo(new TrackingId('123'));
-        
-        $this->assertFalse($cargo->isBooked());
-        
-        $voyage = new Voyage\Voyage(new Voyage\VoyageNumber('SHIP030'));
-        
-        $cargo->setVoyage($voyage);
-        
-        $this->assertTrue($cargo->isBooked());
-    }
 }
