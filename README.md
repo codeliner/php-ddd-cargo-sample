@@ -84,7 +84,8 @@ business expectations.
 
 Unit Tests
 ----------
-Unit Tests are of course also available. You can find them in the [application module](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/tests).
+Unit Tests are of course also available. You can find them in the in [module/Application/tests/PHPUnit](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/tests/PHPUnit).
+Got to the directory and simply run `phpunit`.
 
 Project Structure
 -----------------
