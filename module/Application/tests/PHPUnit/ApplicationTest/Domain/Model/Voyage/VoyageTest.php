@@ -28,44 +28,11 @@ class VoyageTest extends TestCase
     {
         $voyageNumber = new Voyage\VoyageNumber("SHIP123");
         $this->voyage = new Voyage\Voyage($voyageNumber);
-        $this->voyage->setName('HongkongToHamburg');
-        $this->voyage->setCapacity(100);
     }
     
     public function testGetVoyageNumber()
     {
         $this->assertEquals('SHIP123', $this->voyage->getVoyageNumber()->toString());
-    }
-    
-    public function testGetName() 
-    {
-        $this->assertEquals('HongkongToHamburg', $this->voyage->getName());
-    }
-    
-    public function testGetCapacity()
-    {
-        $this->assertEquals(100, $this->voyage->getCapacity());
-    }
-    
-    public function testBookCargo()
-    {
-        $cargo = new Cargo\Cargo(new Cargo\TrackingId('1234'));
-        $this->voyage->bookCargo($cargo);
-        
-        $cargos = $this->voyage->getBookedCargos();
-        
-        $this->assertTrue($cargo->sameIdentityAs($cargos[0]));
-    }
-    
-    public function testGetFreeCapacity()
-    {
-        $this->assertEquals($this->voyage->getCapacity(), $this->voyage->getFreeCapacity());
-        
-        $cargo = new Cargo\Cargo(new Cargo\TrackingId('1234'));
-        $cargo->setSize(10);
-        $this->voyage->bookCargo($cargo);
-        
-        $this->assertEquals(90, $this->voyage->getFreeCapacity());
     }
     
     public function testSameIdentityAs()
