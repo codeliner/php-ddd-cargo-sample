@@ -11,7 +11,6 @@ namespace ApplicationTest\Domain\Model\Cargo;
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Cargo\Cargo;
 use Application\Domain\Model\Cargo\TrackingId;
-use Application\Domain\Model\Voyage;
 use Application\Domain\Shared\UID;
 /**
  *  CargoTest
