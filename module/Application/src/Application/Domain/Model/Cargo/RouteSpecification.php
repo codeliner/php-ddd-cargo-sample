@@ -47,7 +47,7 @@ class RouteSpecification implements ValueObjectInterface
     /**
      * @return string
      */
-    public function getOrigin()
+    public function origin()
     {
         return $this->origin;
     }
@@ -55,7 +55,7 @@ class RouteSpecification implements ValueObjectInterface
     /**
      * @return string
      */
-    public function getDestination()
+    public function destination()
     {
         return $this->destination;
     }
@@ -63,7 +63,7 @@ class RouteSpecification implements ValueObjectInterface
     /**
      * @return string
      */
-    public function getCustomsClearancePoint()
+    public function customsClearancePoint()
     {
         return $this->customsClearancePoint;
     }
@@ -71,9 +71,9 @@ class RouteSpecification implements ValueObjectInterface
     public function sameValueAs(ValueObjectInterface $other)
     {
         if ($other instanceof RouteSpecification) {
-            if ($this->getOrigin() == $other->getOrigin()
-                && $this->getDestination() == $other->getDestination()
-                && $this->getCustomsClearancePoint() == $other->getCustomsClearancePoint()) {
+            if ($this->origin() == $other->origin()
+                && $this->destination() == $other->destination()
+                && $this->customsClearancePoint() == $other->customsClearancePoint()) {
                 return true;
             }
         }
