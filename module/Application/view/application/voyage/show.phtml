@@ -40,7 +40,7 @@
             <div class="col-md-12">
                 <ul>
                     <?php foreach($this->voyage->getBookedCargos() as $cargo): ?>
-                    <li><a href="<?php echo $this->url('application/default/trackingid', array('controller' => 'cargo', 'action' => 'show', 'trackingid' => $cargo->getTrackingId()->toString())) ?>"><?php echo $cargo->getTrackingId() ?></a></li>
+                    <li><a href="<?php echo $this->url('application/default/trackingid', array('controller' => 'cargo', 'action' => 'show', 'trackingid' => $cargo->trackingId()->toString())) ?>"><?php echo $cargo->trackingId() ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

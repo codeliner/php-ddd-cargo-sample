@@ -30,17 +30,17 @@ class RouteSpecificationTest extends TestCase
     
     public function testGetOrigin()
     {
-        $this->assertEquals('Hongkong', $this->object->getOrigin());
+        $this->assertEquals('Hongkong', $this->object->origin());
     }
     
     public function testGetDestination()
     {
-        $this->assertEquals('Berlin', $this->object->getDestination());
+        $this->assertEquals('Berlin', $this->object->destination());
     }
     
     public function testGetCustomsClearancePoint()
     {
-        $this->assertEquals('Hamburg', $this->object->getCustomsClearancePoint());
+        $this->assertEquals('Hamburg', $this->object->customsClearancePoint());
     }
     
     public function testSameValueAs()

@@ -40,7 +40,7 @@ class Cargo implements EntityInterface
      * 
      * @return TrackingId
      */
-    public function getTrackingId()
+    public function trackingId()
     {
         return $this->trackingId;
     }
@@ -54,6 +54,6 @@ class Cargo implements EntityInterface
             return false;
         }
         
-        return $this->getTrackingId()->sameValueAs($other->getTrackingId());
+        return $this->trackingId()->sameValueAs($other->trackingId());
     }
 }
