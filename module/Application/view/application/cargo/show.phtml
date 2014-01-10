@@ -8,7 +8,7 @@
  */
 ?>
 <div class="jumbotron">
-    <h1><?php echo 'Cargo ' . $this->cargo->getTrackingId()->toString() ?></h1>
+    <h1><?php echo 'Cargo ' . $this->cargo->trackingId()->toString() ?></h1>
     <p><?php echo $this->translate('You can book a voyage for the cargo as long as the voyage has enough capacity.') ?></p>
 </div>
 <form method="post" action="<?php echo $this->url('application/default', array('controller' => 'booking', 'action' => 'booking')) ?>">
@@ -44,5 +44,5 @@
             <?php endif ?>
         </div>
     </div>
-    <input type="hidden" name="tracking_id" value="<?php echo $this->cargo->getTrackingId() ?>" />
+    <input type="hidden" name="tracking_id" value="<?php echo $this->cargo->trackingId() ?>" />
 </form>
