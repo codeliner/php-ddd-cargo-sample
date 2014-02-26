@@ -10,7 +10,7 @@ namespace ApplicationTest\Infrastructure\Persistence\Doctrine;
 
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Cargo;
-use Application\Infrastrucure\Persistence\Doctrine\CargoRepositoryDoctrine;
+use Application\Domain\Model\Cargo\RouteSpecification;
 /**
  *  CargoRepositoryDoctrineTest
  * 
@@ -41,11 +41,12 @@ class CargoRepositoryDoctrineTest extends TestCase
     public function testStoreAndFindCargo()
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
-        $cargo = new Cargo\Cargo($trackingId);
+        $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
+        $cargo = new Cargo\Cargo($trackingId, $routeSpecification);
         
         $this->cargoRepository->store($cargo);
         
-        $checkCargo = $this->cargoRepository->findCargo($trackingId);
+        $checkCargo = $this->cargoRepository->get($trackingId);
         
         $this->assertTrue($cargo->sameIdentityAs($checkCargo));
     }

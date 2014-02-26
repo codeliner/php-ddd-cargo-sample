@@ -43,7 +43,7 @@ class CargoController extends AbstractActionController
 
     public function indexAction()
     {
-        $cargos = $this->cargoRepository->findAll();
+        $cargos = $this->cargoRepository->getAll();
         
         return new ViewModel(array('cargos' => $cargos));
     }
@@ -58,7 +58,7 @@ class CargoController extends AbstractActionController
         
         $trackingId = new Cargo\TrackingId($trackingId);
         
-        $cargo = $this->cargoRepository->findCargo($trackingId);
+        $cargo = $this->cargoRepository->get($trackingId);
         
         if (is_null($cargo)) {
             throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');

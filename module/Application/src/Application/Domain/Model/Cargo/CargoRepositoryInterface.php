@@ -21,14 +21,14 @@ interface CargoRepositoryInterface
      * @param TrackingId $trackingId Id
      * @return Cargo if found, else {@code null}
      */
-    public function findCargo(TrackingId $trackingId);
+    public function get(TrackingId $trackingId);
     
     /**
-     * Finds all cargo.
+     * List all cargo.
      * 
-     * @return Cargo[] all Cargo
+     * @return Cargo[] List of all Cargo
      */
-    public function findAll();
+    public function getAll();
     
     /**
      * Saves given cargo.

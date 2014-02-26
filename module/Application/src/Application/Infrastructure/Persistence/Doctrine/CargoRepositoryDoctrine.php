@@ -22,9 +22,19 @@ class CargoRepositoryDoctrine extends EntityRepository implements CargoRepositor
     /**
      * {@inheritDoc}
      */
-    public function findCargo(TrackingId $trackingId)
+    public function get(TrackingId $trackingId)
     {
-        return $this->find($trackingId);
+        return $this->find($trackingId->toString());
+    }
+
+    /**
+     * List all cargo.
+     *
+     * @return Cargo[] List of all Cargos
+     */
+    public function getAll()
+    {
+        return $this->findAll();
     }
     
     /**
@@ -43,5 +53,4 @@ class CargoRepositoryDoctrine extends EntityRepository implements CargoRepositor
     {
         return new TrackingId(uniqid());
     }
-
 }
