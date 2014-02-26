@@ -21,11 +21,8 @@ class ItineraryTest extends TestCase
 {
     public function testLegs()
     {
-        $legs = new ArrayCollection();
-        
-        $legs->add(new Leg('Hongkong', 'Hamburg'));
-        $legs->add(new Leg('Hamburg', 'New York'));
-        
+        $legs = [new Leg('Hongkong', 'Hamburg'), new Leg('Hamburg', 'New York')];
+
         $itinerary = new Itinerary($legs);
         
         $this->assertSame($legs, $itinerary->legs());
@@ -33,18 +30,13 @@ class ItineraryTest extends TestCase
     
     public function testSameValueAs()
     {
-        $legs = new ArrayCollection();
-        
-        $legs->add(new Leg('Hongkong', 'Hamburg'));
-        $legs->add(new Leg('Hamburg', 'New York'));
-        
+        $legs = [new Leg('Hongkong', 'Hamburg'), new Leg('Hamburg', 'New York')];
+
         $itinerary = new Itinerary($legs);
         $sameItinerary = new Itinerary($legs);
         
-        $otherLegs = new ArrayCollection();
-        $otherLegs->add( new Leg('New York', 'Melbourne'));
-        $otherLegs->add( new Leg('Melbourne', 'Rotterdam'));
-        
+        $otherLegs = [new Leg('New York', 'Melbourne'), new Leg('Melbourne', 'Rotterdam')];
+
         $otherItinerary = new Itinerary($otherLegs);
         
         $this->assertTrue($itinerary->sameValueAs($sameItinerary));

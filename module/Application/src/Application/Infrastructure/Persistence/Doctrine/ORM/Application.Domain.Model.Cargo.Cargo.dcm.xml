@@ -6,7 +6,7 @@
     <entity name="Application\Domain\Model\Cargo\Cargo" 
             table="cargo" 
             repository-class="Application\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine">
-        <id name="trackingId" type="trackingid"></id>
+        <id name="trackingIdString" type="string"></id>
         
     </entity>
 </doctrine-mapping>

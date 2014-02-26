@@ -41,7 +41,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             $config->setMetadataDriverImpl(
                 new \Doctrine\ORM\Mapping\Driver\XmlDriver(
                     array(
-                        __DIR__ . '/../../../config/DoctrineMapping'
+                        __DIR__ . '/../../../src/Application/Infrastructure/Persistence/Doctrine/ORM'
                     )
                 )
             );

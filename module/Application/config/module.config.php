@@ -165,7 +165,7 @@ return array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
                 'cache' => 'array',
                 'paths' => array(
-                    __DIR__ . '/DoctrineMapping'
+                    dirname(__DIR__) . '/src/Application/Infrastructure/Persistence/Doctrine/ORM'
                 )
             ),
             'orm_default' => array(

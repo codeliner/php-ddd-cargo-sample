@@ -9,8 +9,9 @@
 namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\ValueObjectInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Application\Domain\Model\Cargo\Leg;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  *  Itinerary
  * 
@@ -19,38 +20,50 @@ use Application\Domain\Model\Cargo\Leg;
 class Itinerary implements ValueObjectInterface
 {
     /**
-     *
-     * @var ArrayCollection
+     * @var Leg[]
      */
     protected $legs;
-    
-    public function __construct(ArrayCollection $legs)
+
+    /**
+     * @param Leg[] $legs
+     */
+    public function __construct(array $legs)
     {
         $this->legs = $legs;
     }
     
     /**
-     * 
-     * @return ArrayCollection
+     * @return Leg[] Immutable list of Legs
      */
     public function legs()
     {
         return $this->legs;
     }
-    
-    
+
+    /**
+     * @param ValueObjectInterface $other
+     * @return bool
+     */
     public function sameValueAs(ValueObjectInterface $other)
     {
         if (!$other instanceof Itinerary) {
             return false;
         }
+
+        //We use doctrine's ArrayCollection only to ease comparison
+        //If Legs would be stored in an ArrayCollection hole the time
+        //Itinerary itself would not be immutable,
+        //cause a client could call $itinerary->legs()->add($anotherLeg);
+        //Keeping ValueObjects immutable is a rule of thumb
+        $myLegs = new ArrayCollection($this->legs());
+        $otherLegs = new ArrayCollection($other->legs());
         
-        if ($this->legs()->count() !== $other->legs->count()) {
+        if ($myLegs->count() !== $otherLegs->count()) {
             return false;
         }
         
-        return $this->legs->forAll(function($index, Leg $leg) use ($other) {
-           return $other->legs()->exists(function($otherIndex, Leg $otherLeg) use ($leg) {
+        return $myLegs->forAll(function($index, Leg $leg) use ($otherLegs) {
+           return $otherLegs->exists(function($otherIndex, Leg $otherLeg) use ($leg) {
                return $otherLeg->sameValueAs($leg);
            });
         });
