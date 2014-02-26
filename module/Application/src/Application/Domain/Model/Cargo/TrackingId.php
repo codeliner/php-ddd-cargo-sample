@@ -8,32 +8,45 @@
  */
 namespace Application\Domain\Model\Cargo;
 
-use Application\Domain\Shared\UID;
 use Application\Domain\Shared\ValueObjectInterface;
-use Zend\Validator\NotEmpty;
+use Rhumsaa\Uuid\Uuid;
 /**
  * TrackingId is the unique identifier of a Cargo
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class TrackingId extends UID
+class TrackingId implements ValueObjectInterface
 {
+    /**
+     * @var Uuid
+     */
+    private $uuid;
     /**
      * Always provide a string representation of the TrackingId to construct the VO
      * 
-     * @param string $trackingId
+     * @param Uuid $aUuid
      * 
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($trackingId)
+    public function __construct(Uuid $aUuid)
     {
-        $notEmptyValidator = new NotEmpty();
-        
-        if (!$notEmptyValidator->isValid($trackingId)) {
-            throw new Exception\InvalidArgumentException('TrackingId must not be empty.');
-        }
-        
-        parent::__construct($trackingId);
+        $this->uuid = $aUuid;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->uuid->toString();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
     
     /**
@@ -45,6 +58,6 @@ class TrackingId extends UID
             return false;
         }
         
-        return parent::sameValueAs($other);
+        return $this->toString() === $other->toString();
     }
 }

@@ -10,6 +10,8 @@ namespace ApplicationTest\Domain\Model\Cargo;
 
 use Application\Domain\Model\Cargo\TrackingId;
 use ApplicationTest\TestCase;
+use Rhumsaa\Uuid\Uuid;
+
 /**
  * TrackingIdTest
  * 
@@ -18,10 +20,39 @@ use ApplicationTest\TestCase;
 class TrackingIdTest extends TestCase
 {
     /**
-     * @expectedException Application\Domain\Model\Cargo\Exception\InvalidArgumentException
+     * @test
      */
-    public function testConstructNoTrackingId()
+    public function it_returns_string_representation_of_uuid()
     {
-        $trackingId = new TrackingId('');
+        $uuid = Uuid::uuid4();
+
+        $trackingId = new TrackingId($uuid);
+
+        $this->assertEquals($uuid->toString(), $trackingId->toString());
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_same_value_as()
+    {
+        $uuid = Uuid::uuid4();
+
+        $trackingId = new TrackingId($uuid);
+
+        $sameTrackingId = new TrackingId($uuid);
+
+        $this->assertTrue($trackingId->sameValueAs($sameTrackingId));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as()
+    {
+        $trackingId = new TrackingId(Uuid::uuid4());
+        $otherTrackingId = new TrackingId(Uuid::uuid4());
+
+        $this->assertFalse($trackingId->sameValueAs($otherTrackingId));
     }
 }

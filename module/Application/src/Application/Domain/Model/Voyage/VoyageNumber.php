@@ -15,8 +15,37 @@ use Application\Domain\Shared\ValueObjectInterface;
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class VoyageNumber extends UID implements ValueObjectInterface
+class VoyageNumber implements ValueObjectInterface
 {
+    /**
+     * @var string
+     */
+    private $id;
+
+    public function __construct($anId)
+    {
+        if (!is_string($anId)) {
+            throw new \InvalidArgumentException("VoyageNumber must be string");
+        }
+
+        $this->id = $anId;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
     /**
      * {@inheritDoc}
      */
@@ -26,6 +55,6 @@ class VoyageNumber extends UID implements ValueObjectInterface
             return false;
         }
         
-        return parent::sameValueAs($other);
+        return $this->toString() === $other->toString();
     }
 }

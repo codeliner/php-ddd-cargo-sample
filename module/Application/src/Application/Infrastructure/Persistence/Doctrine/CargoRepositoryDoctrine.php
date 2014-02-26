@@ -12,6 +12,8 @@ use Application\Domain\Model\Cargo\CargoRepositoryInterface;
 use Application\Domain\Model\Cargo\Cargo;
 use Application\Domain\Model\Cargo\TrackingId;
 use Doctrine\ORM\EntityRepository;
+use Rhumsaa\Uuid\Uuid;
+
 /**
  *  CargoRepositoryDoctrine
  * 
@@ -51,6 +53,6 @@ class CargoRepositoryDoctrine extends EntityRepository implements CargoRepositor
      */
     public function getNextTrackingId()
     {
-        return new TrackingId(uniqid());
+        return new TrackingId(Uuid::uuid4());
     }
 }
