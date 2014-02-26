@@ -13,8 +13,9 @@ use Application\Domain\Model\Cargo\Leg;
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Cargo\Cargo;
 use Application\Domain\Model\Cargo\TrackingId;
-use Application\Domain\Shared\UID;
 use Application\Domain\Model\Cargo\RouteSpecification;
+use Rhumsaa\Uuid\Uuid;
+
 /**
  *  CargoTest
  * 
@@ -27,11 +28,11 @@ class CargoTest extends TestCase
      */
     public function it_returns_its_tracking_id()
     {
-        $uid = new UID();
+        $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo = new Cargo(new TrackingId($uuid), $routeSpecification);
 
-        $checkTrackingId = new TrackingId($uid->toString());
+        $checkTrackingId = new TrackingId($uuid);
 
         $this->assertTrue($checkTrackingId->sameValueAs($cargo->trackingId()));
     }
@@ -41,9 +42,8 @@ class CargoTest extends TestCase
      */
     public function it_returns_initial_route_specification()
     {
-        $uid = new UID();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
 
         $this->assertEquals('Hongkong', $cargo->routeSpecification()->origin());
         $this->assertEquals('Hamburg', $cargo->routeSpecification()->destination());
@@ -54,9 +54,8 @@ class CargoTest extends TestCase
      */
     public function it_takes_origin_from_initial_route_specification()
     {
-        $uid = new UID();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
         
         $this->assertEquals("Hongkong", $cargo->origin());
     }
@@ -66,9 +65,8 @@ class CargoTest extends TestCase
      */
     public function it_specifies_new_route_but_do_not_change_the_origin()
     {
-        $uid = new UID();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
 
         $anotherRouteSpecification = new RouteSpecification("Dallas", "Rotterdam");
 
@@ -84,9 +82,8 @@ class CargoTest extends TestCase
      */
     public function it_assigns_cargo_to_route_described_by_itinerary()
     {
-        $uid = new UID();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
 
         $legs = [new Leg('Hongkong', 'New York'), new Leg('New York', 'Hamburg')];
 
@@ -102,17 +99,17 @@ class CargoTest extends TestCase
      */
     public function it_detects_same_tracking_id()
     {
-        $uid = new UID();
+        $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo1 = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
-        $cargo2 = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo1 = new Cargo(new TrackingId($uuid), $routeSpecification);
+        $cargo2 = new Cargo(new TrackingId($uuid), $routeSpecification);
         
         $this->assertTrue($cargo1->sameIdentityAs($cargo2));
         
-        $uid2 = new UID();
+        $uuid2 = Uuid::uuid4();
         $routeSpecification2 = new RouteSpecification("New York", "Melburne");
         
-        $cargo3 = new Cargo(new TrackingId($uid2->toString()), $routeSpecification2);
+        $cargo3 = new Cargo(new TrackingId($uuid2), $routeSpecification2);
         
         $this->assertFalse($cargo1->sameIdentityAs($cargo3));
     }
@@ -122,12 +119,12 @@ class CargoTest extends TestCase
      */
     public function it_detects_different_tracking_id()
     {
-        $uid = new UID();
+        $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
-        $cargo1 = new Cargo(new TrackingId($uid->toString()), $routeSpecification);
+        $cargo1 = new Cargo(new TrackingId($uuid), $routeSpecification);
 
-        $uid2 = new UID();
-        $otherCargo = new Cargo(new TrackingId($uid2->toString()), $routeSpecification);
+        $uuid2 = Uuid::uuid4();
+        $otherCargo = new Cargo(new TrackingId($uuid2), $routeSpecification);
 
         $this->assertFalse($cargo1->sameIdentityAs($otherCargo));
     }

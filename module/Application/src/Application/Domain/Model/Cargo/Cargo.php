@@ -9,6 +9,7 @@
 namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\EntityInterface;
+use Rhumsaa\Uuid\Uuid;
 
 /**
  * A Cargo. This is the central class in the domain model.
@@ -80,7 +81,7 @@ class Cargo implements EntityInterface
      */
     public function trackingId()
     {
-        return new TrackingId($this->trackingIdString);
+        return new TrackingId(Uuid::fromString($this->trackingIdString));
     }
     
     /**
