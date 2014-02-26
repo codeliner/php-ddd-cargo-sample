@@ -23,7 +23,10 @@ class Itinerary implements ValueObjectInterface
      * @var Leg[]
      */
     protected $legs;
-    
+
+    /**
+     * @param Leg[] $legs
+     */
     public function __construct(array $legs)
     {
         $this->legs = $legs;
