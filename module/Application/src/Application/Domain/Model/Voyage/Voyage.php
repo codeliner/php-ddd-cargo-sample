@@ -9,6 +9,7 @@
 namespace Application\Domain\Model\Voyage;
 
 use Application\Domain\Shared\EntityInterface;
+
 /**
  * A Voyage.
  * 
@@ -21,9 +22,9 @@ class Voyage implements EntityInterface
     /**
      * Unique Identifier
      * 
-     * @var VoyageNumber
+     * @var string
      */
-    protected $voyageNumber;
+    protected $voyageNumberString;
     
     /**
      * Construct
@@ -32,7 +33,7 @@ class Voyage implements EntityInterface
      */
     public function __construct(VoyageNumber $voyageNumber)
     {
-        $this->voyageNumber = $voyageNumber;
+        $this->voyageNumberString = $voyageNumber->toString();
     }
     
     /**
@@ -42,7 +43,7 @@ class Voyage implements EntityInterface
      */
     public function getVoyageNumber()
     {
-        return $this->voyageNumber;
+        return new VoyageNumber($this->voyageNumberString);
     }
     
     /**
