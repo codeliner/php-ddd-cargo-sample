@@ -9,6 +9,7 @@
 namespace ApplicationTest\Domain\Model\Cargo;
 
 use Application\Domain\Model\Cargo\Itinerary;
+use ApplicationTest\Fixture\LegFixture;
 use ApplicationTest\TestCase;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Domain\Model\Cargo\Leg;
@@ -19,27 +20,44 @@ use Application\Domain\Model\Cargo\Leg;
  */
 class ItineraryTest extends TestCase
 {
-    public function testLegs()
+    /**
+     * @test
+     */
+    public function it_has_list_of_legs()
     {
-        $legs = [new Leg('Hongkong', 'Hamburg'), new Leg('Hamburg', 'New York')];
+        $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
         $itinerary = new Itinerary($legs);
         
         $this->assertSame($legs, $itinerary->legs());
     }
-    
-    public function testSameValueAs()
+
+    /**
+     * @test
+     */
+    public function it_is_same_value_as_itinerary_with_same_legs()
     {
-        $legs = [new Leg('Hongkong', 'Hamburg'), new Leg('Hamburg', 'New York')];
+        $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
         $itinerary = new Itinerary($legs);
         $sameItinerary = new Itinerary($legs);
         
-        $otherLegs = [new Leg('New York', 'Melbourne'), new Leg('Melbourne', 'Rotterdam')];
+        $this->assertTrue($itinerary->sameValueAs($sameItinerary));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as_itinerary_with_other_list_of_legs()
+    {
+        $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
+
+        $itinerary = new Itinerary($legs);
+
+        $otherLegs = [LegFixture::get(LegFixture::HONGKONG_HAMBURG), LegFixture::get(LegFixture::HAMBURG_ROTTERDAM)];
 
         $otherItinerary = new Itinerary($otherLegs);
-        
-        $this->assertTrue($itinerary->sameValueAs($sameItinerary));
+
         $this->assertFalse($itinerary->sameValueAs($otherItinerary));
     }
 }

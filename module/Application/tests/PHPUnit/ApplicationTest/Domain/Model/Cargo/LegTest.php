@@ -9,7 +9,10 @@
 namespace ApplicationTest\Domain\Model\Cargo;
 
 use Application\Domain\Model\Cargo\Leg;
+use Application\Domain\Model\Voyage\Voyage;
+use Application\Domain\Model\Voyage\VoyageNumber;
 use ApplicationTest\TestCase;
+
 /**
  * Class LegTest
  * 
@@ -17,27 +20,82 @@ use ApplicationTest\TestCase;
  */
 class LegTest extends TestCase
 {
-    public function testLoadLocation()
+    /**
+     * @var Leg
+     */
+    private $leg;
+
+    /**
+     * @var Voyage
+     */
+    private $voyage;
+
+    public function setUp()
     {
-        $leg = new Leg('Hongkong', 'Hamburg');
-        
-        $this->assertEquals('Hongkong', $leg->loadLocation());
+        $this->voyage = new Voyage(new VoyageNumber('SHIP123'));
+
+        $this->leg = new Leg(
+            $this->voyage,
+            'Hongkong',
+            'Hamburg',
+            new \DateTime('2014-01-20 10:00:00'),
+            new \DateTime('2014-02-02 18:00:00')
+        );
     }
-    
-    public function testUnloadLocation()
+
+    /**
+     * @test
+     */
+    public function it_has_a_referenced_voyage()
     {
-        $leg = new Leg('Hongkong', 'Hamburg');
-        
-        $this->assertEquals('Hamburg', $leg->unloadLocation());
+        $this->assertTrue($this->voyage->sameIdentityAs($this->leg->voyage()));
     }
-    
-    public function testSameValueAs()
+
+    /**
+     * @test
+     */
+    public function it_has_a_load_location()
     {
-        $leg = new Leg('Hongkong', 'Hamburg');
-        $sameLeg = new Leg('Hongkong', 'Hamburg');
-        $otherLeg = new Leg('Hongkong', 'New York');
-        
-        $this->assertTrue($leg->sameValueAs($sameLeg));
-        $this->assertFalse($leg->sameValueAs($otherLeg));
+        $this->assertEquals('Hongkong', $this->leg->loadLocation());
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_an_unload_location()
+    {
+        $this->assertEquals('Hamburg', $this->leg->unloadLocation());
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_same_value_as_leg_with_same_properties()
+    {
+        $sameLeg = new Leg(
+            $this->voyage,
+            'Hongkong',
+            'Hamburg',
+            new \DateTime('2014-01-20 10:00:00'),
+            new \DateTime('2014-02-02 18:00:00')
+        );
+
+        $this->assertTrue($this->leg->sameValueAs($sameLeg));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as_leg_with_different_voyage()
+    {
+        $otherLeg = new Leg(
+            new Voyage(new VoyageNumber('SHIP003')),
+            'Hongkong',
+            'Hamburg',
+            new \DateTime('2014-01-20 10:00:00'),
+            new \DateTime('2014-02-02 18:00:00')
+        );
+
+        $this->assertFalse($this->leg->sameValueAs($otherLeg));
     }
 }

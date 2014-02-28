@@ -10,6 +10,7 @@ namespace ApplicationTest\Domain\Model\Cargo;
 
 use Application\Domain\Model\Cargo\Itinerary;
 use Application\Domain\Model\Cargo\Leg;
+use ApplicationTest\Fixture\LegFixture;
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Cargo\Cargo;
 use Application\Domain\Model\Cargo\TrackingId;
@@ -85,7 +86,7 @@ class CargoTest extends TestCase
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
         $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
 
-        $legs = [new Leg('Hongkong', 'New York'), new Leg('New York', 'Hamburg')];
+        $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
         $itinerary = new Itinerary($legs);
 
