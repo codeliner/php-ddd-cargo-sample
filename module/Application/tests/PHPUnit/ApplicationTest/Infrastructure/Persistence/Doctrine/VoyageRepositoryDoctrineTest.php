@@ -36,8 +36,11 @@ class VoyageRepositoryDoctrineTest extends TestCase
         
         $this->voyageRepository = $this->getTestEntityManager()->getRepository('Application\Domain\Model\Voyage\Voyage');        
     }
-    
-    public function testStoreAndFindVoyage()
+
+    /**
+     * @test
+     */
+    public function it_stores_and_fetches_a_voyage()
     {
         $voyageNumber = new Voyage\VoyageNumber('SHIP123');
         
@@ -45,7 +48,7 @@ class VoyageRepositoryDoctrineTest extends TestCase
         
         $this->voyageRepository->store($voyage);
         
-        $checkVoyage = $this->voyageRepository->findVoyage($voyageNumber);
+        $checkVoyage = $this->voyageRepository->get($voyageNumber);
         
         $this->assertTrue($voyage->sameIdentityAs($checkVoyage));
     }

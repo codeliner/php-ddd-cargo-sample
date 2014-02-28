@@ -6,6 +6,6 @@
     <entity name="Application\Domain\Model\Voyage\Voyage" 
             table="voyage" 
             repository-class="Application\Infrastructure\Persistence\Doctrine\VoyageRepositoryDoctrine">
-        <id name="voyageNumber" type="voyagenumber"></id>
+        <id name="voyageNumberString" type="string"></id>
     </entity>
 </doctrine-mapping>
