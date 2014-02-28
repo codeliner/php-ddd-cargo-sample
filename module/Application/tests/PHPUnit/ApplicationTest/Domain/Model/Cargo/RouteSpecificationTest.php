@@ -27,30 +27,68 @@ class RouteSpecificationTest extends TestCase
     {
         $this->object = new RouteSpecification('Hongkong', 'Berlin', 'Hamburg');
     }
-    
-    public function testGetOrigin()
+
+    /**
+     * @test
+     */
+    public function it_has_an_origin()
     {
         $this->assertEquals('Hongkong', $this->object->origin());
     }
-    
-    public function testGetDestination()
+
+    /**
+     * @test
+     */
+    public function it_has_a_destination()
     {
         $this->assertEquals('Berlin', $this->object->destination());
     }
-    
-    public function testGetCustomsClearancePoint()
+
+    /**
+     * @test
+     */
+    public function it_has_customs_clearance_point()
     {
         $this->assertEquals('Hamburg', $this->object->customsClearancePoint());
     }
-    
-    public function testSameValueAs()
+
+    /**
+     * @test
+     */
+    public function it_is_same_value_as_route_specification_with_same_properties()
     {
         $validCheck = new RouteSpecification('Hongkong', 'Berlin', 'Hamburg');
         
         $this->assertTrue($this->object->sameValueAs($validCheck));
-        
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as_route_specification_with_different_origin()
+    {
         $invalidCheck = new RouteSpecification('New York', 'Berlin', 'Hamburg');
-        
+
+        $this->assertFalse($this->object->sameValueAs($invalidCheck));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as_route_specification_with_different_destination()
+    {
+        $invalidCheck = new RouteSpecification('Hongkong', 'New York', 'Hamburg');
+
+        $this->assertFalse($this->object->sameValueAs($invalidCheck));
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_not_same_value_as_route_specification_with_different_customs_clearance_point()
+    {
+        $invalidCheck = new RouteSpecification('Hongkong', 'Berlin', 'New York');
+
         $this->assertFalse($this->object->sameValueAs($invalidCheck));
     }
 }
