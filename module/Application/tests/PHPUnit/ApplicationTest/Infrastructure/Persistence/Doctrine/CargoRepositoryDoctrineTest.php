@@ -30,15 +30,21 @@ class CargoRepositoryDoctrineTest extends TestCase
         
         $this->cargoRepository = $this->getTestEntityManager()->getRepository('Application\Domain\Model\Cargo\Cargo');
     }
-    
-    public function testGetNextTrackingId()
+
+    /**
+     * @test
+     */
+    public function it_returns_a_new_tracking_id()
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         
         $this->assertInstanceOf('Application\Domain\Model\Cargo\TrackingId', $trackingId);
     }
-    
-    public function testStoreAndFindCargo()
+
+    /**
+     * @test
+     */
+    public function it_stores_and_returns_a_cargo()
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
