@@ -68,4 +68,9 @@ class Itinerary implements ValueObjectInterface
            });
         });
     }
+
+    /**
+     * surrogate key, required by doctrine
+     */
+    private $id;
 }

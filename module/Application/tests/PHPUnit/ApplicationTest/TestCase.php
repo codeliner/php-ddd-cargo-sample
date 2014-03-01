@@ -57,13 +57,11 @@ class TestCase extends PHPUnit_Framework_TestCase
             ), $config);
             
             //Add custom DDD types to map ValueObjects correctly
-            if (!Type::hasType('trackingid')) {
-                Type::addType('trackingid', 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId');
+            if (!Type::hasType('cargo_itinerary_legs')) {
+                Type::addType('cargo_itinerary_legs', 'Application\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType');
             } 
             
-            if (!Type::hasType('voyagenumber')) {
-                Type::addType('voyagenumber', 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber');
-            }
+
         }
         
         
