@@ -25,30 +25,15 @@ class LegTest extends TestCase
      */
     private $leg;
 
-    /**
-     * @var Voyage
-     */
-    private $voyage;
-
     public function setUp()
     {
-        $this->voyage = new Voyage(new VoyageNumber('SHIP123'));
 
         $this->leg = new Leg(
-            $this->voyage,
             'Hongkong',
             'Hamburg',
             new \DateTime('2014-01-20 10:00:00'),
             new \DateTime('2014-02-02 18:00:00')
         );
-    }
-
-    /**
-     * @test
-     */
-    public function it_has_a_referenced_voyage()
-    {
-        $this->assertTrue($this->voyage->sameIdentityAs($this->leg->voyage()));
     }
 
     /**
@@ -73,7 +58,6 @@ class LegTest extends TestCase
     public function it_is_same_value_as_leg_with_same_properties()
     {
         $sameLeg = new Leg(
-            $this->voyage,
             'Hongkong',
             'Hamburg',
             new \DateTime('2014-01-20 10:00:00'),
@@ -81,21 +65,5 @@ class LegTest extends TestCase
         );
 
         $this->assertTrue($this->leg->sameValueAs($sameLeg));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_not_same_value_as_leg_with_different_voyage()
-    {
-        $otherLeg = new Leg(
-            new Voyage(new VoyageNumber('SHIP003')),
-            'Hongkong',
-            'Hamburg',
-            new \DateTime('2014-01-20 10:00:00'),
-            new \DateTime('2014-02-02 18:00:00')
-        );
-
-        $this->assertFalse($this->leg->sameValueAs($otherLeg));
     }
 }

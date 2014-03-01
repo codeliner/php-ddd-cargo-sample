@@ -37,7 +37,6 @@ class LegFixture
         switch($aLegConstant) {
             case self::HONGKONG_HAMBURG:
                 return new Leg(
-                    new Voyage(new VoyageNumber('SHIP123')),
                     'Hongkong',
                     'Hamburg',
                     new \DateTime('2014-01-20 10:00:00'),
@@ -45,7 +44,6 @@ class LegFixture
                 );
             case self::HONGKONG_NEWYORK:
                 return new Leg(
-                    new Voyage(new VoyageNumber('SHIP003')),
                     'Hongkong',
                     'New York',
                     new \DateTime('2014-01-20 10:00:00'),
@@ -53,7 +51,6 @@ class LegFixture
                 );
             case self::NEWYORK_HAMBURG:
                 return new Leg(
-                    new Voyage(new VoyageNumber('SHIP004')),
                     'New York',
                     'Hamburg',
                     new \DateTime('2014-02-20 10:00:00'),
@@ -61,7 +58,6 @@ class LegFixture
                 );
             case self::HAMBURG_ROTTERDAM:
                 return new Leg(
-                    new Voyage(new VoyageNumber('SHIP001')),
                     'Hamburg',
                     'Rotterdam',
                     new \DateTime('2014-03-10 10:00:00'),

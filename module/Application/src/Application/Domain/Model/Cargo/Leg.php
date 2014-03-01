@@ -20,11 +20,6 @@ use Codeliner\Comparison\EqualsBuilder;
 class Leg implements ValueObjectInterface
 {
     /**
-     * @var Voyage
-     */
-    private $voyage;
-
-    /**
      * @var string
      */
     private $loadLocation;
@@ -45,32 +40,21 @@ class Leg implements ValueObjectInterface
     private $unloadTime;
 
     /**
-     * @param Voyage    $aVoyage
-     * @param string    $aLoadLocation
+    * @param string    $aLoadLocation
      * @param string    $anUnloadLocation
      * @param \DateTime $aLoadTime
      * @param \DateTime $anUnloadTime
      */
-    public function __construct(Voyage $aVoyage,
-                                $aLoadLocation,
+    public function __construct($aLoadLocation,
                                 $anUnloadLocation,
                                 \DateTime $aLoadTime,
                                 \DateTime $anUnloadTime)
     {
-        $this->voyage         = $aVoyage;
-        $this->loadLocation   = $aLoadLocation;
+       $this->loadLocation   = $aLoadLocation;
         $this->unloadLocation = $anUnloadLocation;
         $this->loadTime       = $aLoadTime;
         $this->unloadTime     = $anUnloadTime;
 
-    }
-
-    /**
-     * @return Voyage
-     */
-    public function voyage()
-    {
-        return $this->voyage;
     }
 
     /**
@@ -116,7 +100,6 @@ class Leg implements ValueObjectInterface
         }
         
         return EqualsBuilder::create()
-            ->append($this->voyage()->sameIdentityAs($other->voyage()), true)
             ->append($this->loadLocation(), $other->loadLocation())
             ->append($this->unloadLocation(), $other->unloadLocation())
             ->append($this->loadTime()->getTimestamp(), $other->loadTime()->getTimestamp())
