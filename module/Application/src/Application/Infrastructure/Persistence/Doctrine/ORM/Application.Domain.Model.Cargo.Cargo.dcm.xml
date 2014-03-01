@@ -7,6 +7,13 @@
             table="cargo" 
             repository-class="Application\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine">
         <id name="trackingIdString" type="string"></id>
-        
+        <one-to-one field="routeSpecification" target-entity="Application\Domain\Model\Cargo\RouteSpecification">
+            <cascade><cascade-all /></cascade>
+            <join-column name="route_specification_id" referenced-column-name="id"/>
+        </one-to-one>
+        <one-to-one field="itinerary" target-entity="Application\Domain\Model\Cargo\Itinerary">
+            <cascade><cascade-all /></cascade>
+            <join-column name="itinerary_id" referenced-column-name="id"/>
+        </one-to-one>
     </entity>
 </doctrine-mapping>

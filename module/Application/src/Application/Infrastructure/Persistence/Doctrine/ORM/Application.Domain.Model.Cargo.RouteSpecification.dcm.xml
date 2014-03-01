@@ -6,11 +6,11 @@
     <entity name="Application\Domain\Model\Cargo\RouteSpecification" 
             table="route_specification" 
             >
-        <id name="id" type="string">
+        <id name="id" type="integer">
             <generator strategy="AUTO"/>
         </id>
         <field name="origin" type="string" />
         <field name="destination" type="string" />
-        <field name="customsClearancePoint" type="string" />
+        <field name="customsClearancePoint" type="string" nullable="true"/>
     </entity>
 </doctrine-mapping>

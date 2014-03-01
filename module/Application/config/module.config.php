@@ -155,8 +155,7 @@ return array(
             'orm_default' => array(
                 //Define custom doctrine types to map the ddd value objects
                 'types' => array(
-                    'trackingid'    => 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId',
-                    'voyagenumber'    => 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber',
+                    'cargo_itinerary_legs'    => 'Application\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType',
                 ),
             ),
         ),
