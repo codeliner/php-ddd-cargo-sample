@@ -26,5 +26,5 @@ before_script:
 
 script:
   - php ./bin/phpunit -c ./module/Application/tests/PHPUnit
-  - bin/behat -v
+  - bin/behat --verbose
 

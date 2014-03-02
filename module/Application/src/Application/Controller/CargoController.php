@@ -58,7 +58,7 @@ class CargoController extends AbstractActionController
     public function showAction()
     {
         $trackingId = $this->getEvent()->getRouteMatch()->getParam('trackingid');
-        
+
         if (is_null($trackingId)) {
             throw new \InvalidArgumentException('Cargo can not be found. TrackingId missing!');
         }
