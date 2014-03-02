@@ -8,11 +8,6 @@ services:
 before_script:
   - composer self-update
   - composer update
-  - sudo add-apt-repository ppa:ondrej/php5
-  - sudo apt-get update > /dev/null
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
-  - sudo sed -i -e "s,/var/www,$(pwd)/public,g" /etc/apache2/sites-available/default
-  - sudo /etc/init.d/apache2 restart
   - mysql -e 'create database cargo_sample;'
   - mysql -uroot cargo_sample < ./scripts/cargo_sample.sql
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
@@ -22,6 +17,8 @@ before_script:
   - "export DISPLAY=:99.0"
   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
+  # webserver setup
+  -  php -S localhost:8000 -t public/ &
   - sleep 5
 
 
