@@ -13,7 +13,7 @@ before_script:
   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
   - mysql -e 'create database cargo_sample;'
-  - mysql -uroot database_name < ./scripts/cargo_sample.sql
+  - mysql -uroot cargo_sample < ./scripts/cargo_sample.sql
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
