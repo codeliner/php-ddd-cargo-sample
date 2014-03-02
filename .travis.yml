@@ -8,6 +8,7 @@ services:
 before_script:
   - composer self-update
   - composer update
+  - sudo add-apt-repository ppa:ondrej/php5
   - sudo apt-get update > /dev/null
   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
   - sudo sed -i -e "s,/var/www,$(pwd)/public,g" /etc/apache2/sites-available/default
