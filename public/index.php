@@ -5,6 +5,7 @@
  */
 chdir(dirname(__DIR__));
 
+//we activate full error reporting for our sample, to ease support
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

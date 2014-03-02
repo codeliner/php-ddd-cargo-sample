@@ -43,3 +43,9 @@ project and you should be ready to go! It should look something like below:
             Allow from all
         </Directory>
     </VirtualHost>
+
+
+Permissions
+-----------
+
+The application needs write access for the `data/` dir and all sub folders.

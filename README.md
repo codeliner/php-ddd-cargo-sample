@@ -15,7 +15,7 @@ and let us focus on the Domain Driven Design implementation. Both can be replace
 
 The original cargo sample written in java can be found [here](http://dddsample.sourceforge.net/).
 
-[> Instalation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
+[> Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
 
 Goal of the Project
 -------------------
