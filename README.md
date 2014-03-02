@@ -71,6 +71,7 @@ In Chapter Two we learn the importance of the Ubiquitous Language. With it's hel
 
 Support
 -------
-If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issues](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
-Same applies if you have a question or a feature wish. Maybe we've missed a concept that you hoped to find in our example.
+If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
+Same applies if you have a question or a feature wish.
+Maybe I've missed a concept that you hoped to find in the example.
 
