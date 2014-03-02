@@ -99,13 +99,17 @@ Chapter Overview
 
 ###ChapterOne
 `git checkout ChapterOne`
+
 Chapter One release contains the first draft of the Cargo DDD model. 
 It contains the Entities `Cargo` and `Voyage` and also an `Application BookingService` that works with an `overbooking policy` 
 to allow the booking of a Cargo even when the Voyage has not enough free capacity.
+
 [ChapterOne Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterOne-Review.md)
 ###ChapterTwo
 `git checkout ChapterTwo`
-In Chapter Two we learn the importance of the Ubiquitous Language. With it's help the team works out a Cargo Router and redefines the use cases for the Shipping Application. The `Application BookingService` is rplaced with a `Application RouingService`, cause the system focuses on planing an `Itinerary` for a `Cargo` that satisfies a `RouteSpecification`.
+
+In Chapter Two we learn the importance of the Ubiquitous Language. With it's help the team works out a Cargo Router and redefines the use cases for the Shipping Application. The `Application BookingService` is replaced with a `Application RoutingService`, cause the system focuses on planing an `Itinerary` for a `Cargo` that satisfies a `RouteSpecification`.
+
 [ChapterTwo Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterTwo-Review.md)
 
 Support
