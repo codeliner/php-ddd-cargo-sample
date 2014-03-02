@@ -23,3 +23,12 @@ Another strategy to persist ValueObjects is shown with the [Legs](https://github
 In one of the next chapters, we will show a third way of persisting ValueObjects, called `embedded ValueObject`. If you can't wait, have a look at this [doctrine pull request](https://github.com/doctrine/doctrine2/pull/835).
 
 Finally, a very good article of [Entities vs Value Objects and Doctrine 2](http://russellscottwalker.blogspot.de/2013/11/entities-vs-value-objects-and-doctrine-2.html) written by Russell Walker. He uses another interesting way to persist ValueObjects.
+
+
+Continuous Integration
+----------------------
+During ChapterTwo release the team has setup the php-ddd-cargo-sample to run on [travis-ci](https://travis-ci.org/codeliner/php-ddd-cargo-sample).
+Travis-ci is a Continuous Integration System that can be connected to GitHub projects. It checks out a GitHub repo, read the [.travis.yml](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/.travis.yml) configuration file to
+setup a temporary virtual box and executes the defined test scripts. We have configured travis-ci to first run the PHPUnit tests and than run the Behat feature tests.
+The Behat setup was a bit tricky. If you have a look at the commit history or the travis-ci build history you can find various failed builds. But now everything works as a charm. First we thought, that we have to install an apache2 server with mod_php, but our cargo sample requires PHP 5.4 and with that in mind, we simply use the internal PHP 5.4 for the tests.
+Another nice tool is [Scrutinizer](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/). Scrutinizer performs code analyses after each commit and shows you buggy or confusing parts of your code.
