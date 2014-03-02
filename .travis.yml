@@ -1,12 +1,28 @@
 language: php
 
 php:
-  - 5.3
+  - 5.4
+services:
+  - mysql
 
 before_script:
   - composer self-update
   - composer update
+  - sudo apt-get update > /dev/null
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
+  - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+  - sudo /etc/init.d/apache2 restart
+  - mysql -e 'create database cargo_sample;'
+  - mysql -uroot -p database_name < ./scripts/cargo_sample.sql
+  - cp ./config/autoload/local.php.dist ./config/autoload/local.php
+  - "sh -e /etc/init.d/xvfb start"
+  - "export DISPLAY=:99.0"
+  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
+  - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
+  - sleep 5
+
 
 script:
   - php ./bin/phpunit -c ./module/Application/tests/PHPUnit
+  - bin/behat
 
