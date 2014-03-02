@@ -10,12 +10,12 @@ before_script:
   - composer update
   - sudo apt-get update > /dev/null
   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
-  - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+  - sudo sed -i -e "s,/var/www,$(pwd)/public,g" /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
   - mysql -e 'create database cargo_sample;'
   - mysql -uroot cargo_sample < ./scripts/cargo_sample.sql
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
-  - cp ./config/behat.yml.dist ./config/behat.yml
+  - cp ./config/behat.yml.travis ./config/behat.yml
   - chmod -R 777 ./data/cache
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"

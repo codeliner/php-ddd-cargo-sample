@@ -1,0 +1,10 @@
+default:
+    paths:
+        features: '%behat.paths.base%/../features'
+        bootstrap: '%behat.paths.features%/bootstrap'
+    extensions:
+        Behat\MinkExtension\Extension:
+            goutte: ~
+            selenium2: ~
+            # The base URL to cargo sample
+            base_url: http://localhost/index.php/
