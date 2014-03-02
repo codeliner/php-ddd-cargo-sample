@@ -53,42 +53,39 @@ return array(
                                 'options' => array(
                                     'route'    => '/trackingid/[:trackingid]',
                                     'constraints' => array(
-                                        'trackingid' => '[a-zA-Z0-9_-]*',
+                                        'trackingid' => '[a-zA-Z0-9_-]{36,36}',
                                     ),
                                     'defaults' => array(
                                     ),
                                 ),
-                            ),
-                            'voyagenumber' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/voyagenumber/[:voyagenumber]',
-                                    'constraints' => array(
-                                        'voyagenumber' => '[a-zA-Z0-9_-]*',
-                                    ),
-                                    'defaults' => array(
-                                    ),
-                                ),
-                            ),
+                            )
                         ),
                     ),
                 ),
             ),
+            'assign-itinerary' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/cargo/assign-itinerary/trackingid/[:trackingid]/itinerary/[:index]',
+                    'constraints' => array(
+                        'trackingid' => '[a-zA-Z0-9_-]{36,36}',
+                        'index' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Cargo',
+                        'action'        => 'assign-itinerary',
+                    ),
+                ),
+            )
         ),
     ),
     'service_manager' => array(
         'factories' => array(
             'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
-            'voyage_form'       => 'Application\Form\Service\VoyageFormFactory',
-            'cargo_repository'  => function($sl) {
-                $em = $sl->get('doctrine.entitymanager.orm_default');
-                return $em->getRepository('Application\Domain\Model\Cargo\Cargo');
-            },
-            'voyage_repository' => function($sl) {
-                $em = $sl->get('doctrine.entitymanager.orm_default');
-                return $em->getRepository('Application\Domain\Model\Voyage\Voyage');
-            }
+            'cargo_repository'  => 'Application\Service\CargoRepositoryFactory',
+            'routing_service'   => 'Application\Service\RoutingServiceFactory',
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -102,9 +99,9 @@ return array(
         'locale' => 'en_US',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
+                'type'     => 'PhpArray',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
+                'pattern'  => '%s.php',
             ),
         ),
     ),
@@ -113,25 +110,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
         'factories' => array(
-            'Application\Controller\Cargo' => function($controllerLoader) {
-                $serviceManager = $controllerLoader->getServiceLocator();
-                
-                $cargoRepository = $serviceManager->get('cargo_repository');
-                
-                $cargoController = new Application\Controller\CargoController();
-                $cargoController->setCargoRepository($cargoRepository);
-                $cargoController->setVoyageRepository($serviceManager->get('voyage_repository'));
-                $cargoController->setCargoForm($serviceManager->get('cargo_form'));
-                return $cargoController;
-            },
-            'Application\Controller\Voyage' => function($controllerLoader) {
-                $serviceManager = $controllerLoader->getServiceLocator();
-                
-                $voyageController = new Application\Controller\VoyageController();
-                $voyageController->setVoyageForm($serviceManager->get('voyage_form'));
-                $voyageController->setVoyageRepository($serviceManager->get('voyage_repository'));
-                return $voyageController;
-            }
+            'Application\Controller\Cargo' => 'Application\Controller\Service\CargoControllerFactory'
         )
     ),
     'view_manager' => array(
@@ -198,23 +177,23 @@ return array(
                     )
                 )
             ),
-            'voyage' => array(
-                'type' => 'uri',
-                'label' => 'Voyage',
-                'pages' => array(
-                    'list' => array(
-                        'route' => 'application/default',
-                        'controller' => 'voyage',
-                        'action' => 'index',
-                        'label' => 'list Voyages'
-                    ),
-                    'add' => array(
-                        'route' => 'application/default',
-                        'controller' => 'voyage',
-                        'action' => 'add',
-                        'label' => 'add Voyage'
-                    )
-                )
+        )
+    ),
+    'caches' => array(
+        'filesystem_cache' => array(
+            'adapter' => array(
+                'name'    => 'filesystem',
+                'options' => array(
+                    'cache_dir' => __DIR__ . '/../../../data/cache'
+                ),
+            ),
+            'plugins' => array(
+                // Don't throw exceptions on cache errors
+                'exception_handler' => array(
+                    'throw_exceptions' => false
+                ),
+                // We store arrays on filesystem so we need to serialize them
+                'Serializer'
             )
         )
     ),

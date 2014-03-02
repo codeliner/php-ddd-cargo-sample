@@ -11,6 +11,5 @@
         </id>
         <field name="origin" type="string" />
         <field name="destination" type="string" />
-        <field name="customsClearancePoint" type="string" nullable="true"/>
     </entity>
 </doctrine-mapping>

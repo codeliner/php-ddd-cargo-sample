@@ -9,6 +9,8 @@
 namespace Application\Domain\Model\Cargo;
 
 use Application\Domain\Shared\ValueObjectInterface;
+use Codeliner\Comparison\EqualsBuilder;
+
 /**
  *  RouteSpecification
  * 
@@ -29,19 +31,15 @@ class RouteSpecification implements ValueObjectInterface
      * @var string 
      */
     protected $destination;
-    
+
     /**
-     * Customs clearance point
-     * 
-     * @var string 
+     * @param string $origin
+     * @param string $destination
      */
-    protected $customsClearancePoint;
-    
-    public function __construct($origin, $destination, $customsClearancePoint = null)
+    public function __construct($origin, $destination)
     {
         $this->origin = $origin;
         $this->destination = $destination;
-        $this->customsClearancePoint = $customsClearancePoint;
     }
     
     /**
@@ -60,25 +58,16 @@ class RouteSpecification implements ValueObjectInterface
         return $this->destination;
     }
 
-    /**
-     * @return string
-     */
-    public function customsClearancePoint()
-    {
-        return $this->customsClearancePoint;
-    }
-
     public function sameValueAs(ValueObjectInterface $other)
     {
-        if ($other instanceof RouteSpecification) {
-            if ($this->origin() == $other->origin()
-                && $this->destination() == $other->destination()
-                && $this->customsClearancePoint() == $other->customsClearancePoint()) {
-                return true;
-            }
+        if (!$other instanceof RouteSpecification) {
+            return false;
         }
         
-        return false;
+        return EqualsBuilder::create()
+            ->append($this->origin(), $other->origin())
+            ->append($this->destination(), $other->destination())
+            ->equals();
     }
     
     /**

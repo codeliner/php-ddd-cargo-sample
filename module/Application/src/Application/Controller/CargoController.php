@@ -8,6 +8,8 @@
  */
 namespace Application\Controller;
 
+use Application\Service\RoutingService;
+use Rhumsaa\Uuid\Uuid;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Domain\Model\Cargo;
@@ -25,20 +27,25 @@ class CargoController extends AbstractActionController
      * 
      * @var Cargo\CargoRepositoryInterface 
      */
-    protected $cargoRepository;    
-    
-    /**
-     *
-     * @var VoyageRepositoryInterface 
-     */
-    protected $voyageRepository;
-
+    protected $cargoRepository;
 
     /**
      *
      * @var CargoForm 
      */
     protected $cargoForm;
+
+    /**
+     * @var RoutingService
+     */
+    protected $routingService;
+
+    /**
+     * List of locations
+     *
+     * @var array
+     */
+    protected $locations;
 
 
     public function indexAction()
@@ -56,7 +63,7 @@ class CargoController extends AbstractActionController
             throw new \InvalidArgumentException('Cargo can not be found. TrackingId missing!');
         }
         
-        $trackingId = new Cargo\TrackingId($trackingId);
+        $trackingId = new Cargo\TrackingId(Uuid::fromString($trackingId));
         
         $cargo = $this->cargoRepository->get($trackingId);
         
@@ -64,13 +71,7 @@ class CargoController extends AbstractActionController
             throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');
         }
         
-        if ($cargo->isBooked()) {
-            $voyages = array();
-        } else {
-            $voyages = $this->voyageRepository->findAll();
-        }
-        
-        return array('cargo' => $cargo, 'voyages' => $voyages);
+        return array('cargo' => $cargo);
     }
     
     public function addAction()
@@ -86,56 +87,156 @@ class CargoController extends AbstractActionController
             // probably this is the first time the form was loaded
             return array('form' => $this->cargoForm);
         }
-        
-        $newCargo = new Cargo\Cargo($this->cargoRepository->getNextTrackingId());
-        $this->cargoForm->bind($newCargo);
+
         $this->cargoForm->setData($prg);
         
         if ($this->cargoForm->isValid()) {
+
+            $routeSpecification = new Cargo\RouteSpecification(
+                $this->cargoForm->get('origin')->getValue(),
+                $this->cargoForm->get('destination')->getValue()
+            );
+
+            $newCargo = new Cargo\Cargo($this->cargoRepository->getNextTrackingId(), $routeSpecification);
+
             $this->cargoRepository->store($newCargo);
             
             return $this->redirect()->toRoute(
-                'application/default', 
+                'application/default/trackingid',
                 array(
                     'controller' => 'cargo',
-                    'action'     => 'index'
+                    'action'     => 'suggest-itineraries',
+                    'trackingid' => $newCargo->trackingId()->toString()
                 )
             );
         } else {
             return array('form' => $this->cargoForm);
         }
     }
+
+    public function suggestItinerariesAction()
+    {
+        $trackingId = $this->getEvent()->getRouteMatch()->getParam('trackingid');
+
+        if (is_null($trackingId)) {
+            throw new \InvalidArgumentException('Cargo can not be found. TrackingId missing!');
+        }
+
+        $trackingId = new Cargo\TrackingId(Uuid::fromString($trackingId));
+
+        $cargo = $this->cargoRepository->get($trackingId);
+
+        if (is_null($cargo)) {
+            throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');
+        }
+
+        $itineraries = $this->routingService->fetchRoutesForSpecification($cargo->routeSpecification());
+
+        $itineraryData = array();
+
+        foreach($itineraries as $itinerary) {
+
+            $legs = array();
+
+            foreach($itinerary->legs() as $leg) {
+                $legs[] = array(
+                    'loadLocation' => $this->locations[$leg->loadLocation()],
+                    'unloadLocation' => $this->locations[$leg->unloadLocation()],
+                    'loadTime'       => $leg->loadTime()->format('Y-m-d H:i'),
+                    'unloadTime'     => $leg->unloadTime()->format('Y-m-d H:i')
+                );
+            }
+
+            $itineraryData[] = array(
+                'legs' => $legs
+            );
+        }
+
+        return new ViewModel(array(
+            'cargo' => array(
+                'trackingId' => $cargo->trackingId()->toString(),
+                'origin'     => $this->locations[$cargo->origin()]
+            ),
+            'routeSpecification' => array(
+                'origin' => $this->locations[$cargo->routeSpecification()->origin()],
+                'destination' => $this->locations[$cargo->routeSpecification()->destination()],
+            ),
+            'itineraries' => $itineraryData
+        ));
+    }
+
+    public function assignItineraryAction()
+    {
+        $trackingId = $this->getEvent()->getRouteMatch()->getParam('trackingid');
+        $itineraryIndex = $this->getEvent()->getRouteMatch()->getParam('index');
+
+        if (is_null($trackingId)) {
+            throw new \InvalidArgumentException('Cargo can not be found. TrackingId missing!');
+        }
+
+        $trackingId = new Cargo\TrackingId(Uuid::fromString($trackingId));
+
+        $cargo = $this->cargoRepository->get($trackingId);
+
+        if (is_null($cargo)) {
+            throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');
+        }
+
+        $itineraries = $this->routingService->fetchRoutesForSpecification($cargo->routeSpecification());
+
+        if (!isset($itineraries[$itineraryIndex])) {
+            throw new \RuntimeException('Cargo can not be assigned to route. Invalid route index provided!');
+        }
+
+        $cargo->assignToRoute($itineraries[$itineraryIndex]);
+
+        $this->cargoRepository->store($cargo);
+
+        return $this->redirect()->toRoute(
+            'application/default/trackingid',
+            array(
+                'controller' => 'cargo',
+                'action'     => 'show',
+                'trackingid' => $cargo->trackingId()->toString()
+            )
+        );
+    }
     
     /**
      * Set the CargoRepository
      * 
-     * @param Cargo\CargoRepositoryInterface $cargoRepository
+     * @param Cargo\CargoRepositoryInterface $aCargoRepository
      * @return void
      */
-    public function setCargoRepository(Cargo\CargoRepositoryInterface $cargoRepository) 
+    public function setCargoRepository(Cargo\CargoRepositoryInterface $aCargoRepository)
     {
-        $this->cargoRepository = $cargoRepository;
-    }
-    
-    /**
-     * Set the voyage repository
-     * 
-     * @param VoyageRepositoryInterface $voyageRepository
-     * @return void
-     */
-    public function setVoyageRepository(VoyageRepositoryInterface $voyageRepository)
-    {
-        $this->voyageRepository = $voyageRepository;
+        $this->cargoRepository = $aCargoRepository;
     }
     
     /**
      * Set a cargo form.
      * 
-     * @param CargoForm $cargoForm
+     * @param CargoForm $aCargoForm
      * @return void
      */
-    public function setCargoForm(CargoForm $cargoForm)
+    public function setCargoForm(CargoForm $aCargoForm)
     {
-        $this->cargoForm = $cargoForm;
+        $this->cargoForm = $aCargoForm;
+    }
+
+    /**
+     * @param RoutingService $aRoutingService
+     */
+    public function setRoutingService(RoutingService $aRoutingService)
+    {
+        $this->routingService = $aRoutingService;
+    }
+
+    /**
+     * @param array $aLocationList
+     */
+    public function setLocations(array $aLocationList)
+    {
+        $this->locations = $aLocationList;
     }
 }
