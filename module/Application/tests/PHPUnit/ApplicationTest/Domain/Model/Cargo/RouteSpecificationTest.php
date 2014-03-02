@@ -25,7 +25,7 @@ class RouteSpecificationTest extends TestCase
     
     protected function setUp()
     {
-        $this->object = new RouteSpecification('Hongkong', 'Berlin', 'Hamburg');
+        $this->object = new RouteSpecification('Hongkong', 'Berlin');
     }
 
     /**
@@ -47,17 +47,9 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_has_customs_clearance_point()
-    {
-        $this->assertEquals('Hamburg', $this->object->customsClearancePoint());
-    }
-
-    /**
-     * @test
-     */
     public function it_is_same_value_as_route_specification_with_same_properties()
     {
-        $validCheck = new RouteSpecification('Hongkong', 'Berlin', 'Hamburg');
+        $validCheck = new RouteSpecification('Hongkong', 'Berlin');
         
         $this->assertTrue($this->object->sameValueAs($validCheck));
     }
@@ -67,7 +59,7 @@ class RouteSpecificationTest extends TestCase
      */
     public function it_is_not_same_value_as_route_specification_with_different_origin()
     {
-        $invalidCheck = new RouteSpecification('New York', 'Berlin', 'Hamburg');
+        $invalidCheck = new RouteSpecification('New York', 'Berlin');
 
         $this->assertFalse($this->object->sameValueAs($invalidCheck));
     }
@@ -77,17 +69,7 @@ class RouteSpecificationTest extends TestCase
      */
     public function it_is_not_same_value_as_route_specification_with_different_destination()
     {
-        $invalidCheck = new RouteSpecification('Hongkong', 'New York', 'Hamburg');
-
-        $this->assertFalse($this->object->sameValueAs($invalidCheck));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_not_same_value_as_route_specification_with_different_customs_clearance_point()
-    {
-        $invalidCheck = new RouteSpecification('Hongkong', 'Berlin', 'New York');
+        $invalidCheck = new RouteSpecification('Hongkong', 'New York');
 
         $this->assertFalse($this->object->sameValueAs($invalidCheck));
     }

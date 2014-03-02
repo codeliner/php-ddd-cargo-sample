@@ -24,13 +24,7 @@ class CargoFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $cargoHydrator = new DoctrineObject(
-            $serviceLocator->get('doctrine.entitymanager.orm_default'), 
-            'Application\Domain\Model\Cargo\Cargo'
-        );
-        
-        $cargoForm = new CargoForm();
-        $cargoForm->setHydrator($cargoHydrator);
+        $cargoForm = new CargoForm($serviceLocator->get('config')['locations']);
         
         return $cargoForm;
     }

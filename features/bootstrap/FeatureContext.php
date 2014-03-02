@@ -58,7 +58,9 @@ class FeatureContext extends MinkContext
         $em = self::$zendApp->getServiceManager()->get('doctrine.entitymanager.orm_default');
         $q = $em->createQuery('delete from Application\Domain\Model\Cargo\Cargo');
         $q->execute();
-        $q = $em->createQuery('delete from Application\Domain\Model\Voyage\Voyage');
+        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\RouteSpecification');
+        $q->execute();
+        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\Itinerary');
         $q->execute();
     }
     

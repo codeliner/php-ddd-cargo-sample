@@ -8,12 +8,11 @@
  */
 ?>
 <div class="jumbotron">
-    <h1><?php echo $this->translate('Cargo Overview') ?></h1>
-    <p><?php echo $this->cargo->trackingId()->toString() ?></p>
+    <h1><?php echo $this->translate('Assign Itinerary to Cargo') ?></h1>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h2>Cargo from <?php echo $this->translate($this->cargo->origin())  ?></h2>
+        <h2>Cargo from <?php echo $this->cargo['origin']  ?> (<?php echo $this->cargo['trackingId'] ?> )</h2>
     </div>
 </div>
 <div class="row">
@@ -23,10 +22,10 @@
 </div>
 <div class="row">
     <div class="col-md-6 alert-info">
-        <strong>From: </strong><?php echo $this->translate($this->cargo->routeSpecification()->origin()) ?>
+        <strong>From: </strong><?php echo $this->routeSpecification['origin'] ?>
     </div>
     <div class="col-md-6 alert-info">
-        <strong>To: </strong><?php echo $this->translate($this->cargo->routeSpecification()->destination()) ?>
+        <strong>To: </strong><?php echo $this->routeSpecification['destination'] ?>
     </div>
 </div>
 <div class="row">
@@ -34,33 +33,39 @@
         <h3>Available routes</h3>
     </div>
 </div>
+<?php foreach ($this->itineraries as $index => $itinerary): ?>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default itinerary">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Route') ?></h3>
+                <h3 class="panel-title"><?php echo $this->translate('Route') . ' ' . ($index+1) ?></h3>
             </div>
             <div class="panel-body">
-                <?php foreach ($this->cargo->itinerary()->legs() as $leg): ?>
+                <?php foreach ($itinerary['legs'] as $leg): ?>
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Load location: </strong><?php echo $this->translate($leg->loadLocation()) ?>
+                            <strong>Load location: </strong><?php echo $leg['loadLocation'] ?>
                         </div>
                         <div class="col-md-6">
-                            <strong>Load time: </strong><?php echo $leg->loadTime()->format('Y-m-d H:i') ?>
+                            <strong>Load time: </strong><?php echo $leg['loadTime'] ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Unload location: </strong><?php echo $this->translate($leg->unloadLocation()) ?>
+                            <strong>Unload location: </strong><?php echo $leg['unloadLocation'] ?>
                         </div>
                         <div class="col-md-6">
-                            <strong>Unload time: </strong><?php echo $leg->unloadTime()->format('Y-m-d H:i') ?>
+                            <strong>Unload time: </strong><?php echo $leg['unloadTime'] ?>
                         </div>
                     </div>
                 <?php endforeach ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a id="assign-itinerary-link-<?php echo $index ?>" href="<?php echo $this->url('assign-itinerary', array('trackingid' => $this->cargo['trackingId'], 'index' => $index)) ?>" class="btn btn-success">Assign Cargo</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+<?php endforeach ?>

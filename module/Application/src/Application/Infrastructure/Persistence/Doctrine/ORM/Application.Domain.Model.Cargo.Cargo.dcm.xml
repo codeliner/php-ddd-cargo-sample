@@ -6,7 +6,8 @@
     <entity name="Application\Domain\Model\Cargo\Cargo" 
             table="cargo" 
             repository-class="Application\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine">
-        <id name="trackingIdString" type="string"></id>
+        <id name="trackingIdString" type="string" column="tracking_id" />
+        <field name="origin" type="string" />
         <one-to-one field="routeSpecification" target-entity="Application\Domain\Model\Cargo\RouteSpecification">
             <cascade><cascade-all /></cascade>
             <join-column name="route_specification_id" referenced-column-name="id"/>
