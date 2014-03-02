@@ -21,14 +21,14 @@ interface VoyageRepositoryInterface
      * @param VoyageNumber $voyageNumber
      * @return Voyage
      */
-    public function findVoyage(VoyageNumber $voyageNumber);
+    public function get(VoyageNumber $voyageNumber);
     
     /**
      * List all Voyages
      * 
      * @return Voyage[]
      */
-    public function findAll();
+    public function getAll();
     
     /**
      * Saves given Voyage

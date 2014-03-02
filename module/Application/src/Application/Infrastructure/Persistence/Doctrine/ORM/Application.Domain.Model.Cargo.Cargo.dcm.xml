@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Application\Domain\Model\Cargo\Cargo" 
+            table="cargo" 
+            repository-class="Application\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine">
+        <id name="trackingIdString" type="string" column="tracking_id" />
+        <field name="origin" type="string" />
+        <one-to-one field="routeSpecification" target-entity="Application\Domain\Model\Cargo\RouteSpecification">
+            <cascade><cascade-all /></cascade>
+            <join-column name="route_specification_id" referenced-column-name="id"/>
+        </one-to-one>
+        <one-to-one field="itinerary" target-entity="Application\Domain\Model\Cargo\Itinerary">
+            <cascade><cascade-all /></cascade>
+            <join-column name="itinerary_id" referenced-column-name="id"/>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

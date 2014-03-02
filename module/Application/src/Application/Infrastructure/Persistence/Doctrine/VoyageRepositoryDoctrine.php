@@ -20,9 +20,17 @@ class VoyageRepositoryDoctrine extends EntityRepository implements Voyage\Voyage
     /**
      * {@inheritDoc}
      */
-    public function findVoyage(Voyage\VoyageNumber $voyageNumber)
+    public function get(Voyage\VoyageNumber $voyageNumber)
     {
         return $this->find($voyageNumber);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAll()
+    {
+        return $this->findAll();
     }
 
     /**

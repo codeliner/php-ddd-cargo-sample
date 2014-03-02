@@ -1,3 +1,4 @@
+
 --
 -- Datenbank: `cargo_sample`
 --
@@ -9,21 +10,34 @@
 --
 
 CREATE TABLE IF NOT EXISTS `cargo` (
-  `tracking_id` varchar(13) NOT NULL,
-  `size` int(11) NOT NULL,
-  `voyage_number` varchar(30) DEFAULT NULL,
+  `tracking_id` varchar(36) NOT NULL,
+  `origin` varchar(250) NOT NULL,
+  `route_specification_id` int(11) NOT NULL,
+  `itinerary_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `voyage`
+-- Tabellenstruktur für Tabelle `itinerary`
 --
 
-CREATE TABLE IF NOT EXISTS `voyage` (
-  `voyage_number` varchar(30) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  PRIMARY KEY (`voyage_number`)
-);
+CREATE TABLE IF NOT EXISTS `itinerary` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `legs` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `route_specification`
+--
+
+CREATE TABLE IF NOT EXISTS `route_specification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `origin` varchar(250) NOT NULL,
+  `destination` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;

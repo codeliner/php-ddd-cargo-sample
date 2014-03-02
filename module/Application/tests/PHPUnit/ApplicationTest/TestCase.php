@@ -39,9 +39,9 @@ class TestCase extends PHPUnit_Framework_TestCase
             $config->setProxyDir(\sys_get_temp_dir());
             $config->setProxyNamespace(get_class($this) . '\Entities');
             $config->setMetadataDriverImpl(
-                new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
-                    new \Doctrine\Common\Annotations\IndexedReader(
-                        new \Doctrine\Common\Annotations\AnnotationReader()
+                new \Doctrine\ORM\Mapping\Driver\XmlDriver(
+                    array(
+                        __DIR__ . '/../../../src/Application/Infrastructure/Persistence/Doctrine/ORM'
                     )
                 )
             );
@@ -57,13 +57,11 @@ class TestCase extends PHPUnit_Framework_TestCase
             ), $config);
             
             //Add custom DDD types to map ValueObjects correctly
-            if (!Type::hasType('trackingid')) {
-                Type::addType('trackingid', 'Application\Infrastructure\Persistence\Doctrine\Type\TrackingId');
+            if (!Type::hasType('cargo_itinerary_legs')) {
+                Type::addType('cargo_itinerary_legs', 'Application\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType');
             } 
             
-            if (!Type::hasType('voyagenumber')) {
-                Type::addType('voyagenumber', 'Application\Infrastructure\Persistence\Doctrine\Type\VoyageNumber');
-            }
+
         }
         
         

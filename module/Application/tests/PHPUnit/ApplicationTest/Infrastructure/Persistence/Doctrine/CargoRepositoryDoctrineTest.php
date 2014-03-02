@@ -8,9 +8,10 @@
  */
 namespace ApplicationTest\Infrastructure\Persistence\Doctrine;
 
+use ApplicationTest\Fixture\LegFixture;
 use ApplicationTest\TestCase;
 use Application\Domain\Model\Cargo;
-use Application\Infrastrucure\Persistence\Doctrine\CargoRepositoryDoctrine;
+use Application\Domain\Model\Cargo\RouteSpecification;
 /**
  *  CargoRepositoryDoctrineTest
  * 
@@ -27,27 +28,46 @@ class CargoRepositoryDoctrineTest extends TestCase
     protected function setUp()
     {
         $this->createEntitySchema('Application\Domain\Model\Cargo\Cargo');
+        $this->createEntitySchema('Application\Domain\Model\Cargo\Itinerary');
+        $this->createEntitySchema('Application\Domain\Model\Cargo\RouteSpecification');
         
         $this->cargoRepository = $this->getTestEntityManager()->getRepository('Application\Domain\Model\Cargo\Cargo');
     }
-    
-    public function testGetNextTrackingId()
+
+    /**
+     * @test
+     */
+    public function it_returns_a_new_tracking_id()
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         
         $this->assertInstanceOf('Application\Domain\Model\Cargo\TrackingId', $trackingId);
     }
-    
-    public function testStoreAndFindCargo()
+
+    /**
+     * @test
+     */
+    public function it_stores_and_returns_a_cargo()
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
-        $cargo = new Cargo\Cargo($trackingId);
-        $cargo->setSize(12);
-        
+        $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
+
+        $cargo = new Cargo\Cargo($trackingId, $routeSpecification);
+
+        $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
+
+        $itinerary = new Cargo\Itinerary($legs);
+
+        $cargo->assignToRoute($itinerary);
+
         $this->cargoRepository->store($cargo);
+
+        $this->getTestEntityManager()->clear();
         
-        $checkCargo = $this->cargoRepository->findCargo($trackingId);
+        $checkCargo = $this->cargoRepository->get($trackingId);
         
         $this->assertTrue($cargo->sameIdentityAs($checkCargo));
+
+        $this->assertTrue($itinerary->sameValueAs($checkCargo->itinerary()));
     }
 }

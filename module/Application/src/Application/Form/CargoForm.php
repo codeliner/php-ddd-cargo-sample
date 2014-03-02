@@ -11,6 +11,8 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\Callback;
+use Zend\Validator\InArray;
 use Zend\Validator\StringLength;
 use Zend\Validator\Regex;
 use Zend\Validator\Digits;
@@ -21,20 +23,47 @@ use Zend\Validator\Digits;
  */
 class CargoForm extends Form
 {
-    public function __construct($name = null, $options = array())
+    /**
+     * List of possible locations
+     *
+     * @var array
+     */
+    private $locations = array();
+
+    /**
+     * @param array $aLocationList
+     * @param array $anOptionList
+     */
+    public function __construct(array $aLocationList, $anOptionList = array())
     {
-        parent::__construct('CargoForm', $options);
+        parent::__construct('CargoForm', $anOptionList);
+
+        $this->locations = $aLocationList;
         
         $this->add(array(
-            'name' => 'size',
+            'name' => 'origin',
             'options' => array(
-                'label' => 'Cargo Size',
+                'label' => 'Origin',
+                'value_options' => $this->locations,
             ),
             'attributes' => array(
                 'class' => 'form-control',
             ),
-            'type'  => 'Text',
+            'type'  => 'Select',
             
+        ));
+
+        $this->add(array(
+            'name' => 'destination',
+            'options' => array(
+                'label' => 'Destination',
+                'value_options' => $this->locations,
+            ),
+            'attributes' => array(
+                'class' => 'form-control',
+            ),
+            'type'  => 'Select',
+
         ));
         
         $this->add(array(
@@ -46,7 +75,7 @@ class CargoForm extends Form
             'name' => 'send',
             'type'  => 'Submit',
             'attributes' => array(
-                'value' => 'Submit',
+                'value' => 'assign to itinerary',
                 'class' => 'btn btn-success'
             ),
         ));
@@ -55,23 +84,43 @@ class CargoForm extends Form
     public function getInputFilter()
     {
         if (is_null($this->filter)) {
-            $sizeValidator = new Digits();
-            $sizeInput = new Input('size');
-            $sizeInput->setRequired(true);
-            $sizeInput->getValidatorChain()
-                ->addValidator($sizeValidator);
-
-            $trackingIdValidator = new StringLength(13);
+            $trackingIdValidator = new StringLength(36);
             $regexValidator = new Regex('/^[a-zA-Z0-9_-]+$/');
+
             $trackingIdInput = new Input('trackingId');
             $trackingIdInput->allowEmpty();
             $trackingIdInput->setRequired(false);
             $trackingIdInput->getValidatorChain()
-                ->addValidator($trackingIdValidator)
-                ->addValidator($regexValidator);
+                ->attach($trackingIdValidator)
+                ->attach($regexValidator);
+
+            $inArrayValidator = new InArray();
+            $inArrayValidator->setHaystack(array_keys($this->locations));
+
+            $originInput = new Input('origin');
+            $originInput->getValidatorChain()->attach($inArrayValidator);
+
+
+            $notSameValidator = new Callback(array(
+                'callback' => function($value, $context = null) {
+                        if ($context) {
+                            return $value !== $context['origin'];
+                        }
+
+                        return true;
+                    },
+                'messages' => array(
+                    Callback::INVALID_VALUE => 'Origin and Destination are the same'
+                )
+            ));
+
+            $destinationInput = new Input('destination');
+            $destinationInput->getValidatorChain()
+                ->attach($inArrayValidator)
+                ->attach($notSameValidator);
 
             $filter = new InputFilter();
-            $filter->add($sizeInput)->add($trackingIdInput);
+            $filter->add($trackingIdInput)->add($originInput)->add($destinationInput);
             $this->filter = $filter;
         }
         

@@ -9,7 +9,7 @@
 ?>
 <div class="jumbotron">
     <h1><?php echo $this->translate('Cargo Overview') ?></h1>
-    <p><?php echo $this->translate('Choose a Cargo from the list and add it to a voyage. If the capacity limit of the voyage is reached, you will get an error.') ?></p>    
+    <p><?php echo $this->translate('Choose a Cargo from the list to view it\'s routing details.') ?></p>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -18,7 +18,7 @@
         <?php else: ?>
         <ul id="cargo-list">
             <?php foreach ($this->cargos as $cargo): ?>
-            <li><a href="<?php echo $this->url('application/default/trackingid', array('controller' => 'cargo', 'action' => 'show', 'trackingid' => $cargo->getTrackingId()->toString())) ?>"><?php echo $cargo->getTrackingId() ?></a></li>
+            <li><a href="<?php echo $this->url('application/default/trackingid', array('controller' => 'cargo', 'action' => 'show', 'trackingid' => $cargo->trackingId()->toString())) ?>"><?php echo $cargo->trackingId() ?></a></li>
             <?php endforeach; ?>
         </ul>
         <?php endif; ?>
