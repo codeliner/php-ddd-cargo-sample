@@ -15,6 +15,7 @@ before_script:
   - mysql -e 'create database cargo_sample;'
   - mysql -uroot cargo_sample < ./scripts/cargo_sample.sql
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
+  - cp ./config/behat.yml.dist ./config/behat.yml
   - chmod -R 777 ./data/cache
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
