@@ -6,7 +6,8 @@ Feature: Book new Cargo
 @javascript
 Scenario: Add a Cargo and assign Itinerary
     Given I am on "application/cargo/add"
-    When I select "DEHAM" from "origin"
+    When print last response
+    And I select "DEHAM" from "origin"
     And I select "USNYC" from "destination"
     And I click the submit button
     And I follow "assign-itinerary-link-1"
