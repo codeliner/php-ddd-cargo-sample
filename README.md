@@ -7,7 +7,7 @@ PHP version of the cargo sample used in Eric Evans Domain-Driven Design book
 [![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
 
 [> Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
-
+[> DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md)
 Goal of the Project
 -------------------
 We want to show the PHP way of implementing Domain-Driven Design with the help of
