@@ -13,6 +13,8 @@ use Codeliner\Comparison\EqualsBuilder;
 
 /**
  *  RouteSpecification
+ *
+ * Describes where a cargo origin and destination is.
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */

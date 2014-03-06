@@ -14,6 +14,8 @@ use Codeliner\Comparison\EqualsBuilder;
 
 /**
  * Class Leg
+ *
+ * A Leg is part of an Itinerary. It describes a voyage from one location to another, with concrete load und unload times.
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
@@ -40,7 +42,7 @@ class Leg implements ValueObjectInterface
     private $unloadTime;
 
     /**
-    * @param string    $aLoadLocation
+     * @param string    $aLoadLocation
      * @param string    $anUnloadLocation
      * @param \DateTime $aLoadTime
      * @param \DateTime $anUnloadTime
@@ -54,7 +56,6 @@ class Leg implements ValueObjectInterface
         $this->unloadLocation = $anUnloadLocation;
         $this->loadTime       = $aLoadTime;
         $this->unloadTime     = $anUnloadTime;
-
     }
 
     /**

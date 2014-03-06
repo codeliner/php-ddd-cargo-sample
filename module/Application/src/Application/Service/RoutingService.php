@@ -19,6 +19,9 @@ use Zend\Cache\Storage\StorageInterface;
 /**
  * Class RoutingService
  *
+ * The RoutingService takes a RouteSpecification, that describes the start location and the end location of a cargo
+ * and fetches compatible routes that are described by Itineraries.
+ *
  * @package Application\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */

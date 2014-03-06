@@ -14,6 +14,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  *  Itinerary
+ *
+ * The Itinerary is a ValueObject that describes a route of a cargo.
+ * It is composed of one or more Legs.
+ * Each Leg describes a part of the entire route, f.e. from one port to another.
  * 
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
