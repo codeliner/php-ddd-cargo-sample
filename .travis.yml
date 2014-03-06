@@ -19,7 +19,7 @@ before_script:
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
   # webserver setup
   -  php -S localhost:8000 -t public/ &
-  - sleep 5
+  - sleep 10
 
 
 script:
