@@ -9,7 +9,7 @@ You can follow the decisions by browsing through the [issues of ChapterTwo](http
 
 Value of using an Ubiquitous Language
 -------------------------------------
-We don't want repeat Eric Eveans here. Please read his book for detailed information. The team has changed many method names to better reflect the Ubiquitous Language. This is especially true for all PHPUnit test methods. The team switched to a behavior naming convention for test methods. See [issue #13](https://github.com/codeliner/php-ddd-cargo-sample/issues/13) for details.
+We don't want repeat Eric Evans here. Please read his book for detailed information. The team has changed many method names to better reflect the Ubiquitous Language. This is especially true for all PHPUnit test methods. The team switched to a behavior naming convention for test methods. See [issue #13](https://github.com/codeliner/php-ddd-cargo-sample/issues/13) for details.
 In addition all getter methods were renamed. It is a rule of thumb that you should avoid the usage of `getProperty` and `setProperty` methods in domain model classes. Find more expressive names to reflect the Ubiquitous Language. For simple property getters that means `$entity->property()` is quite enough cause there is no public setter pendant. Instead you define a use case specific method that changes the property of the entity while processing the use case `$entity->doSomethingThatChangesProperty()`.
 
 
