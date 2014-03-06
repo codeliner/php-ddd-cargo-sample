@@ -7,6 +7,7 @@ PHP version of the cargo sample used in Eric Evans Domain-Driven Design book
 [![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
 
 [> Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
+
 [> DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md)
 Goal of the Project
 -------------------
@@ -57,6 +58,8 @@ ChapterThree is about Model-Driven Design.
 > model. Its effect must ripple through the rest of the project's activities accordingly."
 >
 > -- Eric Evans: Domain-Driven Design: Tackling Complexity in the Heart of Software
+
+[ChapterThree Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterThree-Review.md)
 
 Project Structure
 -----------------
