@@ -42,6 +42,28 @@ the more knowledge we get about the domain. Each chapter ships with it's own rev
 + [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
 + [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md)
 
+Project Structure
+-----------------
+There is no problem if you don't know the structure of a ZF2 application. All the important
+parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/src/Application) of the application module.
+
+Behavior Driven Design
+----------------------
+All features of the application are described in feature files. You can find them in
+the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
+We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
+business expectations.
+
+Unit Tests
+----------
+Unit Tests are of course also available. You can find them in [module/Application/tests/PHPUnit](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/tests/PHPUnit).
+Got to the directory and simply run `phpunit`.
+
+Support
+-------
+If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
+Same applies if you have a question or a feature wish.
+Maybe I've missed a concept that you hoped to find in the example.
 
 Chapter Overview
 ----------------
@@ -77,26 +99,3 @@ ChapterThree is about Model-Driven Design.
 > -- Eric Evans: Domain-Driven Design: Tackling Complexity in the Heart of Software
 
 [ChapterThree Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterThree-Review.md)
-
-Project Structure
------------------
-There is no problem if you don't know the structure of a ZF2 application. All the important
-parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/src/Application) of the application module.
-
-Behavior Driven Design
-----------------------
-All features of the application are described in feature files. You can find them in
-the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
-We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
-business expectations.
-
-Unit Tests
-----------
-Unit Tests are of course also available. You can find them in [module/Application/tests/PHPUnit](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/tests/PHPUnit).
-Got to the directory and simply run `phpunit`.
-
-Support
--------
-If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
-Same applies if you have a question or a feature wish.
-Maybe I've missed a concept that you hoped to find in the example.
