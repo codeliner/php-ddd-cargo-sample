@@ -22,16 +22,6 @@ java implementation. The same applies for our version.
 The application layer is based on ZF2 and we use Doctrine2 to persist our aggregates.
 This would be a common combination in a large PHP project but both frameworks are not required. They just make our life easier and let us focus on the Domain-Driven Design implementation. Both can be replaced with any other PHP based components.
 
-<b>If you like our shipping system, become a stargazer or watch the project and come back soon. We have some interssting topics in the pipeline. Here is a preview of what follows next:</b>
-
-+ Introduce an application layer to better shield the domain
-+ Switch to hexagonal architecture
-+ A deep dive into Entities, ValueObjects, Aggregates and DomainServices
-+ Communication across bounded contexts
-+ CQRS and asynchonous Messaging
-+ Use EventSourcing to persist Aggregates
-
-
 Iterative Implementation
 ------------------------
 To go with you when you read the book, our sample has a [release of each chapter](https://github.com/codeliner/php-ddd-cargo-sample#chapter-overview). So you can
