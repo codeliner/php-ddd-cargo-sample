@@ -129,30 +129,6 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-    'doctrine' => array(
-        'configuration' => array(
-            'orm_default' => array(
-                //Define custom doctrine types to map the ddd value objects
-                'types' => array(
-                    'cargo_itinerary_legs'    => 'Application\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType',
-                ),
-            ),
-        ),
-        'driver' => array(
-            'application_module_driver' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
-                'cache' => 'array',
-                'paths' => array(
-                    dirname(__DIR__) . '/src/Application/Infrastructure/Persistence/Doctrine/ORM'
-                )
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'Application' => 'application_module_driver',
-                )
-            )
-        )
-    ),
     'navigation' => array(
         'default' => array(
             'home' => array(

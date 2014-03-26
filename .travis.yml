@@ -23,6 +23,6 @@ before_script:
 
 
 script:
-  - php ./bin/phpunit -c ./module/Application/tests/PHPUnit
+  - php ./bin/phpunit -c ./module/CargoBackend/tests
   - bin/behat --verbose
 
