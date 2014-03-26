@@ -6,40 +6,41 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 26.03.14 - 21:41
+ * Date: 26.03.14 - 22:04
  */
 
 namespace CargoBackend\API\Dto;
 
+use Assert\Assertion;
+
 /**
- * Class TrackingIdListDto
+ * Class TrackingIdDto
  *
  * @package CargoBackend\API\Dto
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class TrackingIdListDto 
+class TrackingIdDto 
 {
     /**
-     * @var array
+     * @var string
      */
-    private $trackingIds = array();
+    private $trackingId;
 
     /**
-     * @param array $trackingIds
+     * @param string $trackingId
      */
-    public function setTrackingIds(array $trackingIds)
+    public function setTrackingId($trackingId)
     {
-        \Assert\that($trackingIds)->all()->uuid();
-
-        $this->trackingIds = $trackingIds;
+        Assertion::uuid($trackingId);
+        $this->trackingId = $trackingId;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getTrackingIds()
+    public function getTrackingId()
     {
-        return $this->trackingIds;
+        return $this->trackingId;
     }
 }
  

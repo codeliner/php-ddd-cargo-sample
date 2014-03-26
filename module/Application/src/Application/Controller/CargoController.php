@@ -9,6 +9,8 @@
 namespace Application\Controller;
 
 use CargoBackend\API\CargoService;
+use CargoBackend\API\Dto\TrackingIdDto;
+use CargoBackend\API\Exception\CargoNotFoundException;
 use RoutingService\RoutingService;
 use Rhumsaa\Uuid\Uuid;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -61,15 +63,17 @@ class CargoController extends AbstractActionController
             throw new \InvalidArgumentException('Cargo can not be found. TrackingId missing!');
         }
         
-        $trackingId = new Cargo\TrackingId(Uuid::fromString($trackingId));
-        
-        $cargo = $this->cargoRepository->get($trackingId);
-        
-        if (is_null($cargo)) {
-            throw new \RuntimeException('Cargo can not be found. Please check the trackingId!');
+        $trackingIdDto = new TrackingIdDto();
+
+        $trackingIdDto->setTrackingId($trackingId);
+
+        try {
+            $cargoData = $this->cargoService->getCargoDataByTrackingId($trackingIdDto);
+        } catch (CargoNotFoundException $ex) {
+            throw new \RuntimeException('Cargo can not be found. Please check the trackingId!', 404, $ex);
         }
         
-        return array('cargo' => $cargo);
+        return array('cargo' => $cargoData);
     }
     
     public function addAction()

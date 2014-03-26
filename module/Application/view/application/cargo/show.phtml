@@ -6,14 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+/* @var $cargo \CargoBackend\API\Dto\CargoDto */
+$cargo = $this->cargo;
 ?>
 <div class="jumbotron">
     <h1><?php echo $this->translate('Cargo Overview') ?></h1>
-    <p><?php echo $this->cargo->trackingId()->toString() ?></p>
+    <p><?php echo $cargo->getTrackingId() ?></p>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h2>Cargo from <?php echo $this->translate($this->cargo->origin())  ?></h2>
+        <h2>Cargo from <?php echo $this->translate($cargo->getOrigin())  ?></h2>
     </div>
 </div>
 <div class="row">
@@ -23,10 +26,10 @@
 </div>
 <div class="row">
     <div class="col-md-6 alert-info">
-        <strong>From: </strong><?php echo $this->translate($this->cargo->routeSpecification()->origin()) ?>
+        <strong>From: </strong><?php echo $this->translate($cargo->getRouteSpecification()->getOrigin()) ?>
     </div>
     <div class="col-md-6 alert-info">
-        <strong>To: </strong><?php echo $this->translate($this->cargo->routeSpecification()->destination()) ?>
+        <strong>To: </strong><?php echo $this->translate($cargo->getRouteSpecification()->getDestination()) ?>
     </div>
 </div>
 <div class="row">
@@ -41,21 +44,21 @@
                 <h3 class="panel-title"><?php echo $this->translate('Route') ?></h3>
             </div>
             <div class="panel-body">
-                <?php foreach ($this->cargo->itinerary()->legs() as $leg): ?>
+                <?php foreach ($cargo->getItinerary()->getLegs() as $leg): ?>
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Load location: </strong><?php echo $this->translate($leg->loadLocation()) ?>
+                            <strong>Load location: </strong><?php echo $this->translate($leg->getLoadLocation()) ?>
                         </div>
                         <div class="col-md-6">
-                            <strong>Load time: </strong><?php echo $leg->loadTime()->format('Y-m-d H:i') ?>
+                            <strong>Load time: </strong><?php echo $leg->getLoadTime() ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <strong>Unload location: </strong><?php echo $this->translate($leg->unloadLocation()) ?>
+                            <strong>Unload location: </strong><?php echo $this->translate($leg->getUnloadLocation()) ?>
                         </div>
                         <div class="col-md-6">
-                            <strong>Unload time: </strong><?php echo $leg->unloadTime()->format('Y-m-d H:i') ?>
+                            <strong>Unload time: </strong><?php echo $leg->getUnloadTime() ?>
                         </div>
                     </div>
                 <?php endforeach ?>
