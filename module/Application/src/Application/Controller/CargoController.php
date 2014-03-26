@@ -8,13 +8,13 @@
  */
 namespace Application\Controller;
 
-use Application\Service\RoutingService;
+use CargoBackend\API\CargoService;
+use RoutingService\RoutingService;
 use Rhumsaa\Uuid\Uuid;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Domain\Model\Cargo;
-use Application\Domain\Model\Voyage\VoyageRepositoryInterface;
 use Application\Form\CargoForm;
+
 /**
  * MVC Controller for Cargo Management
  * 
@@ -23,11 +23,9 @@ use Application\Form\CargoForm;
 class CargoController extends AbstractActionController
 {
     /**
-     * The CargoRepository
-     * 
-     * @var Cargo\CargoRepositoryInterface 
+     * @var CargoService
      */
-    protected $cargoRepository;
+    protected $cargoService;
 
     /**
      *
@@ -50,9 +48,9 @@ class CargoController extends AbstractActionController
 
     public function indexAction()
     {
-        $cargos = $this->cargoRepository->getAll();
+        $trackingIds = $this->cargoService->listAllCargoTrackingIds();
         
-        return new ViewModel(array('cargos' => $cargos));
+        return new ViewModel(array('trackingIds' => $trackingIds->getTrackingIds()));
     }
     
     public function showAction()
@@ -201,16 +199,13 @@ class CargoController extends AbstractActionController
             )
         );
     }
-    
+
     /**
-     * Set the CargoRepository
-     * 
-     * @param Cargo\CargoRepositoryInterface $aCargoRepository
-     * @return void
+     * @param CargoService $aCargoService
      */
-    public function setCargoRepository(Cargo\CargoRepositoryInterface $aCargoRepository)
+    public function setCargoService(CargoService $aCargoService)
     {
-        $this->cargoRepository = $aCargoRepository;
+        $this->cargoService = $aCargoService;
     }
     
     /**

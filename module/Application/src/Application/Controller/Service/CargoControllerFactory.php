@@ -32,10 +32,9 @@ class CargoControllerFactory implements FactoryInterface
     {
         $serviceManager = $serviceLocator->getServiceLocator();
 
-        $cargoRepository = $serviceManager->get('cargo_repository');
-
         $cargoController = new \Application\Controller\CargoController();
-        $cargoController->setCargoRepository($cargoRepository);
+
+        $cargoController->setCargoService($serviceManager->get('cargo_service'));
         $cargoController->setCargoForm($serviceManager->get('cargo_form'));
         $cargoController->setRoutingService($serviceManager->get('routing_service'));
         $cargoController->setLocations($serviceManager->get('config')['locations']);

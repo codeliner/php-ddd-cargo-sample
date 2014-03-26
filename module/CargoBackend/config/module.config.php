@@ -9,6 +9,7 @@
 return array(
     'service_manager' => array(
         'factories' => array(
+            'cargo_service'     => 'CargoBackend\API\Service\CargoServiceFactory',
             'cargo_repository'  => 'CargoBackend\Infrastructure\Persistence\Service\CargoRepositoryFactory',
         ),
     ),
@@ -22,7 +23,7 @@ return array(
             ),
         ),
         'driver' => array(
-            'application_module_driver' => array(
+            'cargo_backend_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
                 'cache' => 'array',
                 'paths' => array(
