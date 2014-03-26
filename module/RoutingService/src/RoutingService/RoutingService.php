@@ -9,7 +9,7 @@
  * Date: 01.03.14 - 22:35
  */
 
-namespace Application\Service;
+namespace RoutingService;
 
 use Application\Domain\Model\Cargo\Itinerary;
 use Application\Domain\Model\Cargo\Leg;

@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace RoutingService;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -23,7 +23,10 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        $config = include __DIR__ . '/config/module.config.php';
+        $config['locations'] = include __DIR__ . '/config/locations.php';
+        $config['itineraries'] = include __DIR__ . '/config/itineraries.php';
+        return $config;
     }
 
     public function getAutoloaderConfig()

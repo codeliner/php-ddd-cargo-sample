@@ -9,7 +9,7 @@
  * Date: 01.03.14 - 22:49
  */
 
-namespace Application\Service;
+namespace RoutingService;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

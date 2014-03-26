@@ -5,6 +5,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcTwitterBootstrap',
+        'CargoBackend',
+        'RoutingService',
         'Application',
     ),
 
