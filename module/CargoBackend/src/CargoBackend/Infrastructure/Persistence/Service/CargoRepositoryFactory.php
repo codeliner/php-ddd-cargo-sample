@@ -9,9 +9,9 @@
  * Date: 01.03.14 - 18:31
  */
 
-namespace Application\Service;
+namespace CargoBackend\Infrastructure\Persistence\Service;
 
-use Application\Domain\Model\Cargo\CargoRepositoryInterface;
+use CargoBackend\Model\Cargo\CargoRepositoryInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

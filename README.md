@@ -35,7 +35,9 @@ the more knowledge we get about the domain. Each chapter ships with it's own rev
 Project Structure
 -----------------
 There is no problem if you don't know the structure of a ZF2 application. All the important
-parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/src/Application) of the application module.
+parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/src/CargoBackend) of the CargoBackend module.
+
+*Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the domain and infrastructure classes were included in the Application module!*
 
 Behavior Driven Design
 ----------------------
@@ -46,8 +48,10 @@ business expectations.
 
 Unit Tests
 ----------
-Unit Tests are of course also available. You can find them in [module/Application/tests/PHPUnit](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/Application/tests/PHPUnit).
+Unit Tests are of course also available. You can find them in [module/CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests).
 Got to the directory and simply run `phpunit`.
+
+*Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the test classes were included in the Application module!*
 
 Support
 -------

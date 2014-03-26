@@ -7,6 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'cargo_repository'  => 'CargoBackend\Infrastructure\Persistence\Service\CargoRepositoryFactory',
+        ),
+    ),
     'doctrine' => array(
         'configuration' => array(
             'orm_default' => array(

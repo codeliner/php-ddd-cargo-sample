@@ -84,8 +84,6 @@ return array(
         'factories' => array(
             'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
-            'cargo_repository'  => 'Application\Service\CargoRepositoryFactory',
-            'routing_service'   => 'Application\Service\RoutingServiceFactory',
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
