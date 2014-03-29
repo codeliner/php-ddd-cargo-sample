@@ -19,6 +19,15 @@ use Rhumsaa\Uuid\Uuid;
 class TrackingId implements ValueObjectInterface
 {
     /**
+     * @param string $aTrackingId
+     * @return TrackingId
+     */
+    public static function fromString($aTrackingId)
+    {
+        return new self(Uuid::fromString($aTrackingId));
+    }
+
+    /**
      * @var Uuid
      */
     private $uuid;

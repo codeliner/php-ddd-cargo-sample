@@ -8,7 +8,7 @@
  */
 namespace Application\Controller;
 
-use CargoBackend\API\CargoService;
+use CargoBackend\API\BookingService;
 use CargoBackend\API\Dto\TrackingIdDto;
 use CargoBackend\API\Exception\CargoNotFoundException;
 use RoutingService\RoutingService;
@@ -25,9 +25,9 @@ use Application\Form\CargoForm;
 class CargoController extends AbstractActionController
 {
     /**
-     * @var CargoService
+     * @var BookingService
      */
-    protected $cargoService;
+    protected $bookingService;
 
     /**
      *
@@ -50,7 +50,7 @@ class CargoController extends AbstractActionController
 
     public function indexAction()
     {
-        $trackingIds = $this->cargoService->listAllCargoTrackingIds();
+        $trackingIds = $this->bookingService->listAllCargoTrackingIds();
         
         return new ViewModel(array('trackingIds' => $trackingIds->getTrackingIds()));
     }
@@ -68,7 +68,7 @@ class CargoController extends AbstractActionController
         $trackingIdDto->setTrackingId($trackingId);
 
         try {
-            $cargoData = $this->cargoService->getCargoDataByTrackingId($trackingIdDto);
+            $cargoData = $this->bookingService->getCargoDataByTrackingId($trackingIdDto);
         } catch (CargoNotFoundException $ex) {
             throw new \RuntimeException('Cargo can not be found. Please check the trackingId!', 404, $ex);
         }
@@ -205,11 +205,11 @@ class CargoController extends AbstractActionController
     }
 
     /**
-     * @param CargoService $aCargoService
+     * @param BookingService $aBookingService
      */
-    public function setCargoService(CargoService $aCargoService)
+    public function setBookingService(BookingService $aBookingService)
     {
-        $this->cargoService = $aCargoService;
+        $this->bookingService = $aBookingService;
     }
     
     /**

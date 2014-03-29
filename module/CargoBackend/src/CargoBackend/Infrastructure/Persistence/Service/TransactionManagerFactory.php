@@ -6,32 +6,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 26.03.14 - 21:45
+ * Date: 27.03.14 - 20:27
  */
 
-namespace CargoBackend\API\Service;
+namespace CargoBackend\Infrastructure\Persistence\Service;
 
-use CargoBackend\API\CargoService;
+use CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class CargoServiceFactory
+ * Class TransactionManagerFactory
  *
- * @package CargoBackend\API\Service
+ * @package CargoBackend\Infrastructure\Persistence\Transaction
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class CargoServiceFactory implements FactoryInterface
+class TransactionManagerFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return TransactionManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new CargoService($serviceLocator->get('cargo_repository'));
+        return new TransactionManager($serviceLocator->get('doctrine.entitymanager.orm_default'));
     }
 }
  

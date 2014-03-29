@@ -2,7 +2,7 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'routing_service'   => 'RoutingService\RoutingServiceFactory',
+            'graph_traversal_service'   => 'GraphTraversalService\GraphTraversalServiceFactory',
         ),
     ),
 );

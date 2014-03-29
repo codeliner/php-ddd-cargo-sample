@@ -7,24 +7,16 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace RoutingService;
+namespace GraphTraversalService;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 class Module
 {
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
-
     public function getConfig()
     {
         $config = include __DIR__ . '/config/module.config.php';
-        $config['locations'] = include __DIR__ . '/config/locations.php';
         $config['itineraries'] = include __DIR__ . '/config/itineraries.php';
         return $config;
     }

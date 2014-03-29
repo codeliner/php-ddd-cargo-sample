@@ -22,6 +22,17 @@ class TrackingIdTest extends TestCase
     /**
      * @test
      */
+    public function it_constructs_itself_from_string()
+    {
+        $uuid = Uuid::uuid4();
+
+        $trackingId = TrackingId::fromString($uuid->toString());
+
+        $this->assertEquals($uuid->toString(), $trackingId->toString());
+    }
+    /**
+     * @test
+     */
     public function it_returns_string_representation_of_uuid()
     {
         $uuid = Uuid::uuid4();

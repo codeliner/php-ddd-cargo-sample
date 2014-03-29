@@ -9,7 +9,7 @@
  * Date: 26.03.14 - 22:22
  */
 
-namespace CargoBackend\API\Dto;
+namespace CargoBackend\API\Booking\Dto;
 
 class LegDto 
 {

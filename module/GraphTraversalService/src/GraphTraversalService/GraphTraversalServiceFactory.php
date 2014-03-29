@@ -9,18 +9,18 @@
  * Date: 01.03.14 - 22:49
  */
 
-namespace RoutingService;
+namespace GraphTraversalService;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class RoutingServiceFactory
+ * Class GraphTraversalServiceFactory
  *
  * @package Application\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class RoutingServiceFactory implements FactoryInterface
+class GraphTraversalServiceFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -30,9 +30,8 @@ class RoutingServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new RoutingService(
-            $serviceLocator->get('config')['itineraries'],
-            $serviceLocator->get('filesystem_cache')
+        return new GraphTraversalService(
+            $serviceLocator->get('config')['itineraries']
         );
     }
 }

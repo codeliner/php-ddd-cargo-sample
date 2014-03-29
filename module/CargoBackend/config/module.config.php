@@ -9,7 +9,7 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'cargo_service'     => 'CargoBackend\API\Service\CargoServiceFactory',
+            'booking_service'   => 'CargoBackend\API\Service\BookingServiceFactory',
             'cargo_repository'  => 'CargoBackend\Infrastructure\Persistence\Service\CargoRepositoryFactory',
         ),
     ),

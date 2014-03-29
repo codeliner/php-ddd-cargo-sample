@@ -24,5 +24,6 @@ before_script:
 
 script:
   - php ./bin/phpunit -c ./module/CargoBackend/tests
+  - php ./bin/phpunit -c ./module/GraphTraversalService/tests
   - bin/behat --verbose
 

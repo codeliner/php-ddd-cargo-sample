@@ -14,16 +14,10 @@ use Zend\Mvc\MvcEvent;
 
 class Module
 {
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
-
     public function getConfig()
     {
         $config = include __DIR__ . '/config/module.config.php';
+        $config['locations'] = include __DIR__ . '/config/locations.php';
         return $config;
     }
 

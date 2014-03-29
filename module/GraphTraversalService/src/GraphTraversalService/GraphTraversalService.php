@@ -9,74 +9,60 @@
  * Date: 01.03.14 - 22:35
  */
 
-namespace RoutingService;
-
-use Application\Domain\Model\Cargo\Itinerary;
-use Application\Domain\Model\Cargo\Leg;
-use Application\Domain\Model\Cargo\RouteSpecification;
-use Zend\Cache\Storage\StorageInterface;
+namespace GraphTraversalService;
+use GraphTraversalService\Dto\EdgeDto;
+use GraphTraversalService\Dto\TransitPathDto;
 
 /**
- * Class RoutingService
+ * Class GraphTraversalService
  *
- * The RoutingService takes a RouteSpecification, that describes the start location and the end location of a cargo
+ * The GraphTraversalService takes a RouteSpecification, that describes the start location and the end location of a cargo
  * and fetches compatible routes that are described by Itineraries.
  *
  * @package Application\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class RoutingService 
+class GraphTraversalService implements GraphTraversalServiceInterface
 {
     /**
      * @var array
      */
     private $routes = array();
 
-    /**
-     * @var StorageInterface
-     */
-    private $cache;
-
-    public function __construct(array $aRouteList, StorageInterface $cache)
+    public function __construct(array $aRouteList)
     {
         $this->routes = $aRouteList;
-        $this->cache  = $cache;
     }
 
     /**
-     * @param RouteSpecification $routeSpecification
-     * @return Itinerary[]
+     * @param string $fromUnLocode
+     * @param string $toUnLocode
+     * @return TransitPathDto[]
      */
-    public function fetchRoutesForSpecification(RouteSpecification $routeSpecification)
+    public function findShortestPath($fromUnLocode, $toUnLocode)
     {
-        $cacheKey = 'itinerary_' . $routeSpecification->origin() . '_' . $routeSpecification->destination();
+        $routes = \array_filter($this->routes, function($route) use ($fromUnLocode, $toUnLocode) {
+            return $route['origin'] === $fromUnLocode && $route['destination'] === $toUnLocode;
+        });
 
-        $itineraries = $this->cache->getItem($cacheKey, $success);
+        $transitPaths = array();
 
-        if (!$success) {
-            $routes = \array_filter($this->routes, function($route) use ($routeSpecification) {
-                return $route['origin'] === $routeSpecification->origin() && $route['destination'] === $routeSpecification->destination();
-            });
-
-            $itineraries = array();
-
-            foreach($routes as $route) {
-                $itineraries[] = $this->routeToItinerary($route);
-            }
-
-            $this->cache->setItem($cacheKey, $itineraries);
+        foreach($routes as $route) {
+            $transitPaths[] = $this->routeToTransitPath($route);
         }
 
-        return $itineraries;
+        return $transitPaths;
     }
+
+
 
     /**
      * @param array $route
-     * @return Itinerary
+     * @return TransitPathDto
      */
-    private function routeToItinerary(array $route)
+    private function routeToTransitPath(array $route)
     {
-        $legs = array();
+        $edges = array();
 
         $loadDay = \rand(1,4);
 
@@ -104,7 +90,14 @@ class RoutingService
 
                 $unloadTime = clone $currentTime;
 
-                $legs[] = new Leg($currentLocation, $unLocode, $loadTime, $unloadTime);
+                $edge = new EdgeDto();
+
+                $edge->setFromUnLocode($currentLocation);
+                $edge->setToUnLocode($unLocode);
+                $edge->setFromDate($loadTime->format(\DateTime::ISO8601));
+                $edge->setToDate($unloadTime->format(\DateTime::ISO8601));
+
+                $edges[] = $edge;
 
                 $currentLocation = $unLocode;
             }
@@ -121,8 +114,21 @@ class RoutingService
 
         $unloadTime = clone $currentTime;
 
-        $legs[] = new Leg($currentLocation, $route['destination'], $loadTime, $unloadTime);
+        $edge = new EdgeDto();
 
-        return new Itinerary($legs);
+        $edge->setFromUnLocode($currentLocation);
+        $edge->setToUnLocode($route['destination']);
+        $edge->setFromDate($loadTime->format(\DateTime::ISO8601));
+        $edge->setToDate($unloadTime->format(\DateTime::ISO8601));
+
+        $edges[] = $edge;
+
+        $transitPath = new TransitPathDto();
+
+        $transitPath->setEdges($edges);
+
+        return $transitPath;
     }
-} 
+
+
+}
