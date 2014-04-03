@@ -9,8 +9,10 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'booking_service'   => 'CargoBackend\API\Service\BookingServiceFactory',
+            'cargo_booking_service'   => 'CargoBackend\API\Booking\Service\BookingServiceFactory',
             'cargo_repository'  => 'CargoBackend\Infrastructure\Persistence\Service\CargoRepositoryFactory',
+            'cargo_transaction_manager' => 'CargoBackend\Infrastructure\Persistence\Service\TransactionManagerFactory',
+            'cargo_routing_service'     => 'CargoBackend\Infrastructure\Routing\Service\ExternalRoutingServiceFactory'
         ),
     ),
     'doctrine' => array(

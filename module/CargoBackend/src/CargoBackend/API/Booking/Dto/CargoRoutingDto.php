@@ -115,5 +115,26 @@ class CargoRoutingDto
     {
         return $this->trackingId;
     }
+
+    public function getArrayCopy()
+    {
+        $legsArrayCopy = array();
+
+        foreach ($this->getLegs() as $leg) {
+            $legsArrayCopy[] = array(
+                'load_location'   => $leg->getLoadLocation(),
+                'unload_location' => $leg->getUnloadLocation(),
+                'load_time'       => $leg->getLoadTime(),
+                'unload_time'     => $leg->getUnloadTime()
+            );
+        }
+
+        return array(
+            'tracking_id'       => $this->getTrackingId(),
+            'origin'            => $this->getOrigin(),
+            'final_destination' => $this->getFinalDestination(),
+            'legs'              => $legsArrayCopy
+        );
+    }
 }
  

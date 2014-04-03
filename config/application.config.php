@@ -7,6 +7,7 @@ return array(
         'ZfcTwitterBootstrap',
         'CargoBackend',
         'GraphTraversalService',
+        'PhlyRestfully',
         'Application',
     ),
 

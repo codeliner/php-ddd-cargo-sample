@@ -22,7 +22,8 @@
         "mwillbanks/zfc-twitter-bootstrap" : "dev-master",
         "codeliner/php-equalsbuilder": "1.1.*",
         "codeliner/shared-domain-set": "1.0.*",
-        "rhumsaa/uuid" : "2.5.*"
+        "rhumsaa/uuid" : "2.5.*",
+        "phly/phly-restfully" : "2.2.*"
     },
     "require-dev" : {
         "phpunit/phpunit": "3.7.*",

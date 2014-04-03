@@ -1,0 +1,214 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+<div class="jumbotron">
+    <h1><?php echo $this->translate('Cargo Booking Application') ?></h1>
+    <p><?php echo $this->translate('Choose a Cargo from the list to view it\'s routing details or book a new Cargo.') ?></p>
+</div>
+<div id="booking-app-container">
+    <img src="<?php echo $this->basePath('/img/ajax-loader.gif') ?>" alt="loading ..." />
+</div>
+
+<script id="cargo-overview-tpl" type="text/template">
+    <div class="row">
+        <div class="col-md-12">
+            <% if (obj.cargos.length === 0) { %>
+            <p class="alert-danger"><?php echo $this->translate('The list is empty. You have to add a cargo first!'); ?></p>
+            <% } else { %>
+            <ul id="cargo-list"></ul>
+            <% } %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><a id="book-cargo" class="btn btn-success btn-lg" href="#"><?php echo $this->translate('Book new Cargo') ?> &raquo;</a></p>
+        </div>
+    </div>
+</script>
+
+<script id="cargo-list-item-tpl" type="text/template">
+    <li><a href="#"><%- obj.cargo.tracking_id %></a> From: <%- obj.locations.get(obj.cargo.origin).get('name') %> To: <%- obj.locations.get(obj.cargo.final_destination).get('name') %></li>
+</script>
+
+<script id="cargo-form-tpl" type="text/template">
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $form = $this->cargoForm;
+            $form->prepare();
+
+            $form->setAttribute('method', 'post');
+
+            echo $this->form()->openTag($form);
+
+            $origin = $form->get('origin');
+            echo $this->ztbFormElement($origin);
+
+            $destination = $form->get('finalDestination');
+            echo $this->ztbFormElement($destination);
+
+            $trackingId = $form->get('trackingId');
+            echo $this->ztbFormElement($trackingId);
+
+            echo '<p></p>';
+
+            echo $this->ztbFormElement($form->get('send'));
+
+            echo $this->form()->closeTag();
+            ?>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+    //Models
+    var CargoRoutingModel = Backbone.Model.extend({
+        idAttribute : "tracking_id"
+    });
+
+    var LocationModel = Backbone.Model.extend({
+        idAttribute : "un_locode"
+    });
+
+    //Collections
+    var CargoRoutingCollection = Backbone.Collection.extend({
+        url : "<?php echo $this->serverUrl() . $this->url('api/cargoroutings') ?>",
+        parse : function(response) {
+            return response._embedded.cargoroutings;
+        },
+        model : CargoRoutingModel
+    });
+
+    var CargoRoutings = new CargoRoutingCollection();
+
+    var LocationCollection = Backbone.Collection.extend({
+        model : LocationModel
+    });
+
+    var Locations = new LocationCollection();
+
+    Locations.reset(<?php echo json_encode($this->locations) ?>);
+
+    //Views
+    var CargoRoutingListItemView = Backbone.View.extend({
+        template : _.template($("#cargo-list-item-tpl").html()),
+        render : function() {
+            this.$el.html(this.template({ cargo : this.model.toJSON(), locations : Locations}));
+            return this;
+        }
+    });
+
+    var CargoOverviewView = Backbone.View.extend({
+        id : "cargo-overview",
+        template : _.template($("#cargo-overview-tpl").html()),
+        events : {
+            "click #book-cargo" : "renderBookCargo"
+        },
+        setApp : function (app) {
+            this.app = app;
+        },
+        render : function() {
+            this.$el.html(this.template({cargos : CargoRoutings}));
+
+            CargoRoutings.each(function(cargoRouting) {
+                var view = new CargoRoutingListItemView({model : cargoRouting});
+
+                this.$("#cargo-list").append(view.render().el);
+            }, this);
+        },
+        renderBookCargo : function (e) {
+            e.preventDefault();
+            this.app.renderBookCargo();
+
+        }
+    });
+
+    var CargoFormView = Backbone.View.extend({
+        template : _.template($("#cargo-form-tpl").html()),
+        events : {
+            "click input[type=submit]" : "bookCargo"
+        },
+        setApp : function (app) {
+            this.app = app;
+        },
+        render : function() {
+            this.$el.html(this.template());
+            return this;
+        },
+        bookCargo : function (e) {
+            e.preventDefault();
+
+            var cargoRoutingData = {
+                origin : this.$("select[name=origin]").val(),
+                finalDestination : this.$("select[name=finalDestination]").val()
+            };
+
+            var cargoRouting = new CargoRoutingModel();
+
+            CargoRoutings.add(cargoRouting);
+
+            var self = this;
+
+            cargoRouting.save(
+                cargoRoutingData,
+                {
+                    success : function () {
+                        console.log(arguments);
+                    },
+                    error : function (model, response) {
+                        var json = response.responseJSON;
+
+                        if (typeof json.errors != "undefined") {
+                            _.each(json.errors, function(error, formEl) {
+                                this.$el.find('#control-group-' + formEl).addClass('has-error').find('.controls').append(
+                                    '<span class="help-block warning">'+
+                                        _.toArray(error).join("<br />")
+                                        +'</span>'
+                                );
+                            }, self);
+                        }
+                    }
+                }
+            );
+        }
+    });
+
+    var AppView = Backbone.View.extend({
+        initialize : function() {
+
+            this.listenTo(CargoRoutings, "reset", this.renderCargoOverview);
+
+            CargoRoutings.fetch({reset : true});
+        },
+        render : function(childView) {
+
+            if (typeof this.currentView != "undefined") {
+                this.currentView.remove();
+            }
+
+            childView.setApp(this);
+
+            childView.render();
+
+            this.$el.html(childView.el);
+
+            this.currentView = childView;
+        },
+        renderCargoOverview : function () {
+            this.render(new CargoOverviewView());
+        },
+        renderBookCargo : function () {
+            this.render(new CargoFormView());
+        }
+    });
+
+    var App = new AppView({el : $("#booking-app-container")});
+</script>
+

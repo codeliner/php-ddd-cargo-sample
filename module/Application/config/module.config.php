@@ -45,23 +45,31 @@ return array(
                             ),
                             'defaults' => array(
                             ),
-                        ),
-                        'may_terminate' => true,
-                        'child_routes' => array(
-                            'trackingid' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/trackingid/[:trackingid]',
-                                    'constraints' => array(
-                                        'trackingid' => '[a-zA-Z0-9_-]{36,36}',
-                                    ),
-                                    'defaults' => array(
-                                    ),
-                                ),
-                            )
-                        ),
+                        )
                     ),
                 ),
+            ),
+            'api' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'      => '/api',
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'cargoroutings' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route'      => '/cargoroutings[/:tracking_id]',
+                            'constraints' => array(
+                                'tracking_id' => '[a-zA-Z0-9-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Api\Controller\CargoRoutings',
+                            ),
+
+                        ),
+                    )
+                )
             ),
             'assign-itinerary' => array(
                 'type'    => 'Segment',
@@ -84,6 +92,7 @@ return array(
         'factories' => array(
             'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
+            'cargo_routing_resource' => 'Application\Resource\Service\CargoRoutingFactory',
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -105,10 +114,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
         ),
         'factories' => array(
-            'Application\Controller\Cargo' => 'Application\Controller\Service\CargoControllerFactory'
+            'Application\Controller\BookingApp' => 'Application\Controller\Service\BookingAppControllerFactory',
         )
     ),
     'view_manager' => array(
@@ -126,6 +135,9 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy'
+        ),
     ),
     'navigation' => array(
         'default' => array(
@@ -133,23 +145,11 @@ return array(
                 'route' => 'home',
                 'label' => 'home'
             ),
-            'cargo' => array(
-                'type' => 'uri',
-                'label' => 'Cargo',
-                'pages' => array(
-                    'list' => array(
-                        'route' => 'application/default',
-                        'controller' => 'cargo',
-                        'action' => 'index',
-                        'label' => 'list Cargos'
-                    ),
-                    'add' => array(
-                        'route' => 'application/default',
-                        'controller' => 'cargo',
-                        'action' => 'add',
-                        'label' => 'add Cargo'
-                    )
-                )
+            'booking_app' => array(
+                'label' => 'Booking App',
+                'route' => 'application/default',
+                'controller' => 'bookingApp',
+                'action' => 'index',
             ),
         )
     ),
@@ -170,6 +170,26 @@ return array(
                 'Serializer'
             )
         )
+    ),
+    'phlyrestfully' => array(
+        'resources' => array(
+            'Api\Controller\CargoRoutings' => array(
+                'listener' => 'cargo_routing_resource',
+                'route_name' => 'api/cargoroutings',
+                'identifier_name' => 'tracking_id',
+                'collection_name' => 'cargoroutings',
+            )
+        ),
+        'renderer' => array(
+            'default_hydrator' => 'ArraySerializable'
+        ),
+        'metadata_map' => array(
+            'CargoBackend\API\Booking\Dto\CargoRoutingDto' => array(
+                'hydrator'        => 'ArraySerializable',
+                'identifier_name' => 'tracking_id',
+                'route'           => 'api/cargoroutings',
+            )
+        ),
     ),
     // Placeholder for console routes
     'console' => array(

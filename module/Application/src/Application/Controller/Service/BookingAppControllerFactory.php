@@ -6,38 +6,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 01.03.14 - 18:26
+ * Date: 30.03.14 - 23:54
  */
 
 namespace Application\Controller\Service;
 
+use Application\Controller\BookingAppController;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Class CargoControllerFactory
+ * Class BookingAppControllerFactory
  *
  * @package Application\Controller\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class CargoControllerFactory implements FactoryInterface
+class BookingAppControllerFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return \Application\Controller\CargoController
+     * @return BookingAppController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceManager = $serviceLocator->getServiceLocator();
+        $services = $serviceLocator->getServiceLocator();
 
-        $cargoController = new \Application\Controller\CargoController();
-
-        $cargoController->setCargoService($serviceManager->get('cargo_service'));
-        $cargoController->setCargoForm($serviceManager->get('cargo_form'));
-        $cargoController->setRoutingService($serviceManager->get('routing_service'));
-        $cargoController->setLocations($serviceManager->get('config')['locations']);
-        return $cargoController;
+        return new BookingAppController($services->get('cargo_booking_service'), $services->get('cargo_form'));
     }
 }
+ 
