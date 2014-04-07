@@ -35,5 +35,24 @@ class RouteCandidateDto
     {
         return $this->legs;
     }
+
+    /**
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        $legsList = array();
+
+        foreach ($this->getLegs() as $leg) {
+            $legsList[] = array(
+                'load_location'   => $leg->getLoadLocation(),
+                'unload_location' => $leg->getUnloadLocation(),
+                'load_time'       => $leg->getLoadTime(),
+                'unload_time'     => $leg->getUnloadTime()
+            );
+        }
+
+        return array('legs' => $legsList);
+    }
 }
  

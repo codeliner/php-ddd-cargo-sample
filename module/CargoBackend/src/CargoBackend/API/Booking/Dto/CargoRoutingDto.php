@@ -130,10 +130,10 @@ class CargoRoutingDto
         }
 
         return array(
-            'tracking_id'       => $this->getTrackingId(),
-            'origin'            => $this->getOrigin(),
-            'final_destination' => $this->getFinalDestination(),
-            'legs'              => $legsArrayCopy
+            'tracking_id'        => $this->getTrackingId(),
+            'origin'             => $this->getOrigin(),
+            'final_destination'  => $this->getFinalDestination(),
+            'legs'               => $legsArrayCopy
         );
     }
 }

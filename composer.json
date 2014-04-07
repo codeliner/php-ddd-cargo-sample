@@ -5,7 +5,10 @@
     "keywords": [
         "DDD",
         "zf2",
-        "Domain Driven Design"
+        "doctrine",
+        "domain driven design",
+        "sample",
+        "REST"
     ],
     "homepage": "https://github.com/codeliner/php-ddd-cargo-sample",
     "authors": [

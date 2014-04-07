@@ -56,11 +56,11 @@ class FeatureContext extends MinkContext
     public static function clearDatabase()
     {
         $em = self::$zendApp->getServiceManager()->get('doctrine.entitymanager.orm_default');
-        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\Cargo');
+        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\Cargo');
         $q->execute();
-        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\RouteSpecification');
+        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\RouteSpecification');
         $q->execute();
-        $q = $em->createQuery('delete from Application\Domain\Model\Cargo\Itinerary');
+        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\Itinerary');
         $q->execute();
     }
     
@@ -80,6 +80,16 @@ class FeatureContext extends MinkContext
             throw new \RuntimeException("Can not find the submit btn");
         }
     }
+
+    /**
+     * @Then /^I should wait until I see "([^"]*)"$/
+     */
+    public function iShouldSeeAvailableRoutes($arg1)
+    {
+        $this->getSession()->wait(5000, '(0 === jQuery.active)');
+
+        $this->assertElementOnPage($arg1);
+    }
     
     /**
      * @When /^I click on first item in the list "([^"]*)"$/
@@ -94,6 +104,20 @@ class FeatureContext extends MinkContext
         $li = $ul->find('css', 'li');
         
         $li->find('css', 'a')->click();
+    }
+
+    /**
+     * @When /^I follow first "([^"]*)" link$/
+     */
+    public function iFollowFirstLink($arg1)
+    {
+        $page = $this->getSession()->getPage();
+
+        $link = $page->find('css', $arg1);
+
+        if ($link) {
+            $link->click();
+        }
     }
     
     /**

@@ -54,7 +54,7 @@ class CargoForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'finalDestination',
+            'name' => 'final_destination',
             'options' => array(
                 'label' => 'Destination',
                 'value_options' => $this->locations,
@@ -114,7 +114,7 @@ class CargoForm extends Form
                 )
             ));
 
-            $destinationInput = new Input('finalDestination');
+            $destinationInput = new Input('final_destination');
             $destinationInput->getValidatorChain()
                 ->attach($inArrayValidator)
                 ->attach($notSameValidator);

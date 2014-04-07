@@ -38,7 +38,7 @@ class RouteCandidateDtoAssembler
             $legDto->setLoadLocation($leg->loadLocation());
             $legDto->setUnloadLocation($leg->unloadLocation());
             $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ISO8601));
-            $legDto->setUnloadTime($leg->loadTime()->format(\DateTime::ISO8601));
+            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ISO8601));
 
             $legs[] = $legDto;
         }

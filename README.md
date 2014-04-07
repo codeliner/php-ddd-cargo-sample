@@ -46,6 +46,12 @@ the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/mas
 We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
 business expectations.
 
+You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app with following command:
+`java -jar bin/selenium-server-standalone-2.37.0.jar`
+After the server started successful open another console, navigate to project root again and run Behat with the command `php bin/behat`.
+
+*If it does not work, check that the behat file is executable.
+
 Unit Tests
 ----------
 Unit Tests are of course also available. You can find them in [module/CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests).
@@ -62,34 +68,4 @@ Maybe I've missed a concept that you hoped to find in the example.
 Chapter Overview
 ----------------
 
-###ChapterOne
-`git checkout ChapterOne`
-
-Chapter One release contains the first draft of the Cargo DDD model.
-It contains the Entities `Cargo` and `Voyage` and also an `Application BookingService` that works with an `overbooking policy`
-to allow the booking of a Cargo even when the Voyage has not enough free capacity.
-
-[ChapterOne Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterOne-Review.md)
-###ChapterTwo
-`git checkout ChapterTwo`
-
-In Chapter Two we learn the importance of the Ubiquitous Language. With it's help the team works out a Cargo Router and redefines the use cases for the Shipping Application. The `Application BookingService` is replaced with a `Application RoutingService`, cause the system focuses on planing an `Itinerary` for a `Cargo` that satisfies a `RouteSpecification`.
-
-[ChapterTwo Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterTwo-Review.md)
-
-###ChapterThree
-`git checkout ChapterThree`
-
-ChapterThree is about Model-Driven Design.
-
-> "Design a portion of the software system to reflect the domain model in a very literal way, so that
-> mapping is obvious. Revisit the model and modify it to be implemented more naturally in software,
-> even as you seek to make it reflect deeper insight into the domain. Demand a single model that
-> serves both purposes well, in addition to supporting a robust UBIQUITOUS LANGUAGE.
-> Draw from the model the terminology used in the design and the basic assignment of responsibilities.
-> The code becomes an expression of the model, so a change to the code may be a change to the
-> model. Its effect must ripple through the rest of the project's activities accordingly."
->
-> -- Eric Evans: Domain-Driven Design: Tackling Complexity in the Heart of Software
-
-[ChapterThree Review](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterThree-Review.md)
+The chapter overview has moved to the [PHP DDD Cargo Sample project page](http://codeliner.github.io/php-ddd-cargo-sample/)

@@ -68,6 +68,18 @@ return array(
                             ),
 
                         ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'routecandidates' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/routecandidates',
+                                    'defaults' => array(
+                                        'controller' => 'Api\Controller\RouteCandidates',
+                                    ),
+                                ),
+                            ),
+                        ),
                     )
                 )
             ),
@@ -90,9 +102,10 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'main_navigation'   => 'Zend\Navigation\Service\DefaultNavigationFactory',
-            'cargo_form'        => 'Application\Form\Service\CargoFormFactory',
-            'cargo_routing_resource' => 'Application\Resource\Service\CargoRoutingFactory',
+            'main_navigation'           => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'cargo_form'                => 'Application\Form\Service\CargoFormFactory',
+            'cargo_routing_resource'    => 'Application\Resource\Service\CargoRoutingFactory',
+            'route_candidate_resource'  => 'Application\Resource\Service\RouteCandidateFactory'
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -178,6 +191,15 @@ return array(
                 'route_name' => 'api/cargoroutings',
                 'identifier_name' => 'tracking_id',
                 'collection_name' => 'cargoroutings',
+                'collection_http_options' => array('get', 'post'),
+                'resource_http_options'   => array('get', 'put'),
+            ),
+            'Api\Controller\RouteCandidates' => array(
+                'listener' => 'route_candidate_resource',
+                'route_name' => 'api/cargoroutings/routecandidates',
+                'collection_name' => 'routecandidates',
+                'collection_http_options' => array('get'),
+                'resource_http_options'   => array(),
             )
         ),
         'renderer' => array(
@@ -188,6 +210,10 @@ return array(
                 'hydrator'        => 'ArraySerializable',
                 'identifier_name' => 'tracking_id',
                 'route'           => 'api/cargoroutings',
+            ),
+            'CargoBackend\API\Booking\Dto\RouteCandidateDto' => array(
+                'hydrator'        => 'ArraySerializable',
+                'route'           => 'api/cargoroutings/routecandidates',
             )
         ),
     ),

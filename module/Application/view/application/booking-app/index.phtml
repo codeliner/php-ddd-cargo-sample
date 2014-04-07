@@ -14,6 +14,9 @@
 <div id="booking-app-container">
     <img src="<?php echo $this->basePath('/img/ajax-loader.gif') ?>" alt="loading ..." />
 </div>
+<footer>
+    <button id="overview-btn" class="btn btn-default icon icon-align-left icon-arrow-left">back to overview</button>
+</footer>
 
 <script id="cargo-overview-tpl" type="text/template">
     <div class="row">
@@ -33,7 +36,66 @@
 </script>
 
 <script id="cargo-list-item-tpl" type="text/template">
-    <li><a href="#"><%- obj.cargo.tracking_id %></a> From: <%- obj.locations.get(obj.cargo.origin).get('name') %> To: <%- obj.locations.get(obj.cargo.final_destination).get('name') %></li>
+    <li><a href="#" class="cargo-details-link"><%- cargo.tracking_id %></a> From: <%- locations.get(cargo.origin).get('name') %> To: <%- locations.get(cargo.final_destination).get('name') %></li>
+</script>
+
+<script id="cargo-show-tpl" type="text/template">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Cargo from <%- locations.get(cargo.origin).get('name') %> (<%- cargo.tracking_id %>)</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>route specification</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 alert-info">
+            <strong>From: </strong><%- locations.get(cargo.origin).get('name') %>
+    </div>
+        <div class="col-md-6 alert-info">
+            <strong>To: </strong><%- locations.get(cargo.final_destination).get('name') %>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Itinerary</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default itinerary">
+                <div class="panel-body">
+                <% if (cargo.legs == "undefined" || cargo.legs.length == 0) { %>
+                <p class="warning">Cargo is not assigned to a route</p>
+                <% } else { %>
+                <% _.each(cargo.legs, function(leg) { %>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <strong>Load location: </strong><%- locations.get(leg.load_location).get('name') %>
+                        </div>
+                    <div class="col-md-6">
+                        <strong>Load time: </strong><%- formatDateTime(leg.load_time) %>
+                        </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Unload location: </strong><%- locations.get(leg.unload_location).get('name') %>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Unload time: </strong><%- formatDateTime(leg.unload_time) %>
+                        </div>
+                    </div>
+                <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="cargo-show-jumbotron-tpl" type="test/template">
+    <h1><?php echo $this->translate('Cargo Overview') ?></h1>
 </script>
 
 <script id="cargo-form-tpl" type="text/template">
@@ -50,7 +112,7 @@
             $origin = $form->get('origin');
             echo $this->ztbFormElement($origin);
 
-            $destination = $form->get('finalDestination');
+            $destination = $form->get('final_destination');
             echo $this->ztbFormElement($destination);
 
             $trackingId = $form->get('trackingId');
@@ -66,6 +128,65 @@
     </div>
 </script>
 
+<script id="cargo-form-jumbotron-tpl" type="text/template">
+    <h1><?php echo $this->translate('Add new Cargo') ?></h1>
+    <p><?php echo $this->translate('In the ChapterFour version of the Shipping System you can specify origin and destination of a Cargo. In a second step, the booking system suggest possible routes and you can assign the new Cargo to one of the routes.') ?></p>
+</script>
+
+<script id="show-route-candidates-tpl" type="text/template">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Cargo from <%- obj.locations.get(obj.cargo.origin).get('name') %> (<%- obj.cargo.tracking_id %> )</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Available routes</h3>
+        </div>
+    </div>
+    <div id="route-candidate-list"></div>
+</script>
+
+<script id="show-route-candidates-jumbotron-tpl" type="text/template">
+    <h1><?php echo $this->translate('Assign Route to Cargo') ?></h1>
+</script>
+
+<script id="route-candidate-tpl" type="text/template">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default itinerary">
+                <div class="panel-body">
+                <% _.each(legs, function(leg) { %>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <strong>Load location: </strong><%- obj.locations.get(leg.load_location).get('name') %>
+                        </div>
+                    <div class="col-md-6">
+                        <strong>Load time: </strong><%- obj.formatDateTime(leg.load_time) %>
+                        </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Unload location: </strong><%- obj.locations.get(leg.unload_location).get('name') %>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Unload time: </strong><%- obj.formatDateTime(leg.unload_time) %>
+                        </div>
+                    </div>
+                <% }) %>
+                <div class="row">
+                        <div class="col-md-12">
+                            <a href="#"
+                               class="btn btn-success assign-cargo-btn">Assign Cargo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
 <script type="text/javascript">
 
     //Models
@@ -76,6 +197,8 @@
     var LocationModel = Backbone.Model.extend({
         idAttribute : "un_locode"
     });
+
+    var RouteCandidateModel = Backbone.Model.extend({});
 
     //Collections
     var CargoRoutingCollection = Backbone.Collection.extend({
@@ -96,12 +219,50 @@
 
     Locations.reset(<?php echo json_encode($this->locations) ?>);
 
+
+    var RouteCandidateCollection = Backbone.Collection.extend({
+        urlFromCargoRouting : function (cargoRouting) {
+            this.url = cargoRouting.get('_links').self.href + '/routecandidates';
+        },
+        parse : function (response) {
+            return response._embedded.routecandidates;
+        },
+        model : RouteCandidateModel
+    });
+
     //Views
+    var ViewHelpers = {
+        formatDateTime : function(dateString) {
+            var date = new Date(dateString);
+
+            return date.getFullYear() + '/' + ViewHelpers.addLeadingZero(date.getMonth()) + '/' + ViewHelpers.addLeadingZero(date.getDate()) + ' '
+                + ViewHelpers.addLeadingZero(date.getHours()) + ':' + ViewHelpers.addLeadingZero(date.getMinutes());
+        },
+        addLeadingZero : function (number) {
+            if (number < 10) {
+                return '0' + number;
+            }
+
+            return number;
+        }
+    };
+
     var CargoRoutingListItemView = Backbone.View.extend({
         template : _.template($("#cargo-list-item-tpl").html()),
+        events : {
+            "click .cargo-details-link" : "showCargoDetails"
+        },
+        setApp : function (app) {
+            this.app = app;
+        },
         render : function() {
             this.$el.html(this.template({ cargo : this.model.toJSON(), locations : Locations}));
             return this;
+        },
+        showCargoDetails : function (e) {
+            e.preventDefault();
+
+            this.app.renderCargoRoutingDetails(this.model);
         }
     });
 
@@ -119,6 +280,8 @@
 
             CargoRoutings.each(function(cargoRouting) {
                 var view = new CargoRoutingListItemView({model : cargoRouting});
+
+                view.setApp(this.app);
 
                 this.$("#cargo-list").append(view.render().el);
             }, this);
@@ -147,7 +310,7 @@
 
             var cargoRoutingData = {
                 origin : this.$("select[name=origin]").val(),
-                finalDestination : this.$("select[name=finalDestination]").val()
+                final_destination : this.$("select[name=final_destination]").val()
             };
 
             var cargoRouting = new CargoRoutingModel();
@@ -159,8 +322,8 @@
             cargoRouting.save(
                 cargoRoutingData,
                 {
-                    success : function () {
-                        console.log(arguments);
+                    success : function (model) {
+                        self.requestRouteCandidatesForCargo(model);
                     },
                     error : function (model, response) {
                         var json = response.responseJSON;
@@ -177,8 +340,94 @@
                     }
                 }
             );
+        },
+        requestRouteCandidatesForCargo : function (cargoRouting) {
+            var routeCandidates = new RouteCandidateCollection();
+            routeCandidates.urlFromCargoRouting(cargoRouting);
+
+            var self = this;
+
+            routeCandidates.fetch({reset : true, success : function() {
+                self.app.renderListRouteCandidates(cargoRouting, routeCandidates);
+            }});
         }
     });
+
+    var RouteCandidateItemView = Backbone.View.extend({
+        template : _.template($("#route-candidate-tpl").html()),
+        events : {
+            "click .assign-cargo-btn" : "onAssignCargo"
+        },
+        setApp : function (app) {
+            this.app = app;
+        },
+        render : function() {
+            this.$el.html(this.template(_.extend(this.model.toJSON(), {locations : Locations}, ViewHelpers)));
+            return this;
+        },
+        onAssignCargo : function (e) {
+            e.preventDefault();
+
+            var self = this;
+
+            this.cargo.set();
+
+            this.cargo.save(
+                {legs : this.model.get("legs")},
+                {
+                    success : function () {
+                        self.app.renderCargoOverview();
+                    },
+                    error : function() {
+                        console.log(arguments);
+                        alert("Error while assigning cargo to route. Please check console for details.");
+                    }
+                }
+            );
+        },
+        setCargo : function (aCargo) {
+            this.cargo = aCargo;
+        }
+    });
+
+    var RouteCandidateListView = Backbone.View.extend({
+        template : _.template($("#show-route-candidates-tpl").html()),
+        setApp : function (app) {
+            this.app = app;
+        },
+        render : function() {
+            this.$el.html(this.template({cargo : this.model.cargoRouting.toJSON(), locations : this.model.locations}));
+
+            this.model.routeCandidates.each(function(routeCandidate) {
+                var view = new RouteCandidateItemView({model : routeCandidate});
+
+                view.setCargo(this.model.cargoRouting);
+                view.setApp(this.app);
+
+                this.$("#route-candidate-list").append(view.render().el);
+            }, this);
+
+
+        }
+    });
+
+    var CargoRoutingDetailsView = Backbone.View.extend({
+        template : _.template($("#cargo-show-tpl").html()),
+        setApp : function (app) {
+            this.app = app;
+        },
+        render : function() {
+            this.$el.html(
+                this.template(
+                    _.extend(
+                        {cargo : this.model.cargoRouting.toJSON(), locations : this.model.locations},
+                        ViewHelpers
+                    )
+                )
+            );
+        }
+    })
+
 
     var AppView = Backbone.View.extend({
         initialize : function() {
@@ -200,15 +449,52 @@
             this.$el.html(childView.el);
 
             this.currentView = childView;
+
+            $("#overview-btn").click(function (e) {
+                e.preventDefault();
+                App.renderCargoOverview();
+            });
         },
         renderCargoOverview : function () {
             this.render(new CargoOverviewView());
+            Jumbotron.render();
+            $("#overview-btn").hide();
         },
         renderBookCargo : function () {
             this.render(new CargoFormView());
+            Jumbotron.render($("#cargo-form-jumbotron-tpl").html());
+        },
+        renderListRouteCandidates : function (cargoRouting, routeCandidates) {
+            this.render(new RouteCandidateListView({model : {cargoRouting : cargoRouting, routeCandidates : routeCandidates, locations : Locations}}));
+            Jumbotron.render($("#show-route-candidates-jumbotron-tpl").html());
+        },
+        renderCargoRoutingDetails : function (cargoRouting) {
+            this.render(
+                new CargoRoutingDetailsView({model : {
+                    cargoRouting : cargoRouting,
+                    locations : Locations
+                }})
+            );
+            Jumbotron.render($("#cargo-show-jumbotron-tpl").html());
+            $("#overview-btn").show();
         }
     });
 
+    var JumbotronView = Backbone.View.extend({
+        initialize : function() {
+            this.defaultContent = this.$el.html();
+        },
+        render : function (content) {
+            if (typeof content == "undefined") {
+                this.$el.html(this.defaultContent);
+            } else {
+                this.$el.html(content);
+            }
+        }
+    })
+
+    var Jumbotron = new JumbotronView({el : $(".jumbotron")});
     var App = new AppView({el : $("#booking-app-container")});
+
 </script>
 

@@ -1,14 +1,18 @@
 Feature: Book new Cargo
     In order to manage a transport of a Cargo
     As a booking clerk
-    I need to define an origin and a destination of a Cargo and assign it to a proper itinerary
+    I need to define an origin and a destination of a Cargo and assign it to a proper route
 
 @javascript
-Scenario: Add a Cargo and assign Itinerary
-    Given I am on "application/cargo/add"
-    When I select "DEHAM" from "origin"
-    And I select "USNYC" from "destination"
+Scenario: Add a Cargo and assign route
+    Given I am on "application/bookingApp/index"
+    Then I should wait until I see "#book-cargo"
+    When I follow "book-cargo"
+    And I select "DEHAM" from "origin"
+    And I select "USNYC" from "final_destination"
     And I click the submit button
-    And I follow "assign-itinerary-link-1"
-    Then the url should match "application/cargo/show/trackingid/[\w-]{36,36}"
-    And I should see 1 ".itinerary" elements
+    Then I should wait until I see "#route-candidate-list"
+    When I follow first ".assign-cargo-btn" link
+    Then I should wait until I see "#cargo-list"
+    When I click on first item in the list "#cargo-list"
+    Then I should see 1 ".itinerary" elements
