@@ -68,4 +68,4 @@ Maybe I've missed a concept that you hoped to find in the example.
 Chapter Overview
 ----------------
 
-The chapter overview has moved to the [PHP DDD Cargo Sample project page](http://codeliner.github.io/php-ddd-cargo-sample/)
+The chapter overview has moved to the [PHP DDD Cargo Sample project page](http://codeliner.github.io/php-ddd-cargo-sample/#chapter-overview)
