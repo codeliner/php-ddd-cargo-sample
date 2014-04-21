@@ -29,8 +29,17 @@ simply `git checkout ChapterOne` and you only get the starting view of the domai
 with just to entities `Cargo` and `Voyage`. Our application evolves chapter by chapter
 the more knowledge we get about the domain. Each chapter ships with it's own review, where you can find additional information about the implementation, tips and tricks and many more.
 
-+ [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
-+ [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md)
+Installation
+------------
+See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
+
+Useful DDD tools
+----------------
+Check our collection of [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
+
+Become a member
+---------------
+If you want to share your experience with other DDD enthusiasts or want to ask a question about DDD then the [DDDinPHP google group](https://groups.google.com/forum/#!forum/dddinphp) is good place to do so.
 
 Project Structure
 -----------------
@@ -46,11 +55,11 @@ the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/mas
 We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
 business expectations.
 
-You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app with following command:
+You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app:
 `java -jar bin/selenium-server-standalone-2.37.0.jar`
-After the server started successful open another console, navigate to project root again and run Behat with the command `php bin/behat`.
+After the server started successfully open another console, navigate to project root again and run Behat with the command `php bin/behat`.
 
-*If it does not work, check that the behat file is executable.
+*Note: If it does not work, check that the behat file is executable.
 
 Unit Tests
 ----------
@@ -69,3 +78,19 @@ Chapter Overview
 ----------------
 
 The chapter overview has moved to the [PHP DDD Cargo Sample project page](http://codeliner.github.io/php-ddd-cargo-sample/)
+
+Contributing
+------------
+See the [CONTRIBUTING](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
+
+TODO
+----
+- Provide vagrant support for simple application set up [not started]
+- Improve project pages (include reviews, DDD tools, ...) [not started]
+- Review of ChapterFour [in progress]
+- Implement ChapterFive [not started]
+    - Switch to [ValueObjects](https://github.com/nicolopignatelli/valueobjects) and use VOs whenever possible
+    - Add reroute Cargo use case
+    - Add HandlingEvents
+    - Add delivery progress use cases
+
