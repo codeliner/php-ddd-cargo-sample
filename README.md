@@ -41,6 +41,8 @@ Become a member
 ---------------
 If you want to share your experience with other DDD enthusiasts or want to ask a question about DDD then the [DDDinPHP google group](https://groups.google.com/forum/#!forum/dddinphp) is good place to do so.
 
+You can find more DDD stuff like interesting articles and related libraries on the [PhpFriendsOfDdd/state-of-the-union](https://github.com/PhpFriendsOfDdd/state-of-the-union) project.
+
 Project Structure
 -----------------
 There is no problem if you don't know the structure of a ZF2 application. All the important
