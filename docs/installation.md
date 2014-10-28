@@ -44,6 +44,40 @@ project and you should be ready to go! It should look something like below:
         </Directory>
     </VirtualHost>
 
+### nginx & php-fpm
+
+    server {
+
+        root /path/to/php-ddd-cargo-sample/public;
+        index index.html index.htm index.php;
+
+        server_name cargo-sample.localhost;
+
+        location / {
+            try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ .*\.(php|phtml)?$ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param APPLICATION_ENV development;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+        }
+
+        location ~ .*\.(git|jpg|jpeg|png|bmp|swf|ico)?$ {
+            expires 30d;
+        }
+
+        location ~ .*\.(js|css)?$ {
+            expires 1h;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+    }
+
 
 Permissions
 -----------
