@@ -15,8 +15,8 @@ before_script:
   - chmod -R 777 ./data/cache
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
-  - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
-  - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
+  - "wget http://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar"
+  - "java -jar selenium-server-standalone-2.46.0.jar > /dev/null &"
   # webserver setup
   -  php -S localhost:8000 -t public/ &
   - sleep 10
