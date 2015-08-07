@@ -4,7 +4,7 @@ php-ddd-cargo-sample
 PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
 
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/)
-[![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
+[![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=zf2-version)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
 
 Goal of the Project
 -------------------
