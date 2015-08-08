@@ -1,0 +1,17 @@
+<div class="content">
+
+</div>
+<script type="text/javascript">
+    function(context) {
+        var self = this;
+
+        context.app.on("route", function (con) {
+
+            var rm = con.routeMatch;
+
+            if (! rm.collection) {
+                con.app.renderInto(self, ".content", "home");
+            }
+        });
+    }
+</script>

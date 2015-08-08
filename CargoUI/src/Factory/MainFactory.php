@@ -30,6 +30,6 @@ final class MainFactory implements FactoryInterface
         $layout = (isset($config['view']['layout']) && is_string($config['view']['layout']))
             ? $config['view']['layout'] : 'CargoUI/view/layout/layout.phtml';
 
-        return new Main($layout, $cacheEnabled);
+        return new Main($layout, $cacheEnabled, $container->get('cargo.ui.riot_compiler'));
     }
 }

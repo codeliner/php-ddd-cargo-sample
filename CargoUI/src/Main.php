@@ -43,13 +43,20 @@ final class Main
     private $layoutCacheFile = 'data/cache/layout.phtml';
 
     /**
+     * @var RiotCompiler
+     */
+    private $riotCompiler;
+
+    /**
      * @param string $layout
      * @param bool $cacheEnabled
+     * @param RiotCompiler $riotCompiler
      */
-    public function __construct($layout, $cacheEnabled)
+    public function __construct($layout, $cacheEnabled, RiotCompiler $riotCompiler)
     {
         $this->layout = (string)$layout;
         $this->cacheEnabled = (bool)$cacheEnabled;
+        $this->riotCompiler = $riotCompiler;
     }
 
     /**
@@ -98,8 +105,11 @@ final class Main
         return $layout;
     }
 
+    /**
+     * @return string
+     */
     private function compileRiot()
     {
-        return "alert('it works')";
+        return $this->riotCompiler->compileToRiotStatements();
     }
 }
