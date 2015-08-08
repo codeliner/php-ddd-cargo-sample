@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>PHP Cargo Shipping Application</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Scripts -->
+        <?php /*echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/backbone-1.1.2.min.js')
+            ->prependFile($this->basePath() . '/js/underscore.1.6.0.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ;*/ ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">                    
+                    <a class="navbar-brand" href="/">PHP Cargo Shipping System</a>
+                </div>
+                <div class="collapse navbar-collapse">
+
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <div id="app"></div>
+            <hr>
+            <footer>
+                <p>&copy; 2013<?php echo (date('Y') > 2013)? ' - ' . date('Y') : ''; ?> by Alexander Miertsch. All rights reserved.</p>
+            </footer>
+        </div> <!-- /container -->
+        <script type="text/javascript">
+            <?php echo $this->compileRiot() ?>
+        </script>
+    </body>
+</html>
