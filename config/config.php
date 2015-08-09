@@ -9,7 +9,6 @@ return [
         [
             'path' => '/api',
             'middleware' => 'cargo.backend',
-            'allowed_methods' => [ 'GET', 'POST' ],
         ],
     ],
     'view' => [

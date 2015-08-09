@@ -22,7 +22,9 @@
                     <a class="navbar-brand" href="/">PHP Cargo Shipping System</a>
                 </div>
                 <div class="collapse navbar-collapse">
-
+                    <ul class="nav navbar-nav">
+                        <li><a href="#booking">Booking App</a></li>
+                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
@@ -36,10 +38,35 @@
         <script type="text/javascript">
             <?php echo $this->compileRiot() ?>
 
-            window.CargoUI = ProophRiot.App.create();
+            var CargoUI = ProophRiot.App.create({
+                config : {
+                    url : {
+                        forResource : function (resource) {
+                            return '/api/' + resource.getName() + 's/' + resource.getId();
+                        }
+                    },
+                    chapter: "ChapterFour"
+                },
+                Resource : function (id, name, data) {
+                    var self = this;
+
+                    self.getId = function () {return id};
+                    self.getName = function () {return name};
+                    self.getProp = function(prop) {
+                        return data[prop]? data[prop] : null;
+                    }
+                    self.setProp = function(prop, val) {
+                        data[prop] = val;
+                    }
+
+                    self.props = function () {
+                        return data;
+                    }
+                }
+            });
 
             $(function () {
-                window.CargoUI.bootstrap("main").ready();
+                CargoUI.bootstrap("main").ready();
             });
         </script>
     </body>

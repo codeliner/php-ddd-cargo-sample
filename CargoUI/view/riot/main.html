@@ -3,15 +3,24 @@
 </div>
 <script type="text/javascript">
     function(context) {
-        var self = this;
+        var self = this,
+                _routeListener = function (con) {
+                    var rm = con.routeMatch;
 
-        context.app.on("route", function (con) {
+                    if (!rm[0]) {
+                        con.app.renderInto(self, ".content", "home");
+                        con.app.removeRouterForRoutePath(["booking"]);
+                        return;
+                    }
 
-            var rm = con.routeMatch;
+                    if (rm[0] == "booking") {
+                        var subRouter = con.router.getSubRouter("booking");
+                        con.app.renderInto(self, ".content", "booking-app", {router : subRouter});
+                        subRouter.route(rm, con);
+                        return;
+                    }
+                };
 
-            if (! rm.collection) {
-                con.app.renderInto(self, ".content", "home");
-            }
-        });
+        context.router.on("route", _routeListener);
     }
 </script>

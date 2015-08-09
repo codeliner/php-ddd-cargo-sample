@@ -961,12 +961,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive.git",
-                "reference": "0ef3b498be781f18d469acd593b46b710ed1bd6c"
+                "reference": "6e61de03a8213634ac9cb5843c3a8cbbf4e83c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/0ef3b498be781f18d469acd593b46b710ed1bd6c",
-                "reference": "0ef3b498be781f18d469acd593b46b710ed1bd6c",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/6e61de03a8213634ac9cb5843c3a8cbbf4e83c30",
+                "reference": "6e61de03a8213634ac9cb5843c3a8cbbf4e83c30",
                 "shasum": ""
             },
             "require": {
@@ -1007,7 +1007,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2015-08-07 17:03:42"
+            "time": "2015-08-08 17:59:21"
         },
         {
             "name": "zendframework/zend-servicemanager",
