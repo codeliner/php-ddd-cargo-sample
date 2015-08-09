@@ -1,0 +1,58 @@
+<?php
+/*
+ * This file is part of the codeliner/php-ddd-cargo-sample package.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine;
+
+use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
+use Codeliner\CargoBackend\Model\Cargo\Cargo;
+use Codeliner\CargoBackend\Model\Cargo\TrackingId;
+use Doctrine\ORM\EntityRepository;
+use Rhumsaa\Uuid\Uuid;
+
+/**
+ *  CargoRepositoryDoctrine
+ * 
+ * @author Alexander Miertsch <kontakt@codeliner.ws>
+ */
+class CargoRepositoryDoctrine extends EntityRepository implements CargoRepositoryInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function get(TrackingId $trackingId)
+    {
+        return $this->find($trackingId->toString());
+    }
+
+    /**
+     * List all cargo.
+     *
+     * @return Cargo[] List of all Cargos
+     */
+    public function getAll()
+    {
+        return $this->findAll();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function store(Cargo $cargo)
+    {
+        $this->getEntityManager()->persist($cargo);
+        $this->getEntityManager()->flush($cargo);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function getNextTrackingId()
+    {
+        return new TrackingId(Uuid::uuid4());
+    }
+}

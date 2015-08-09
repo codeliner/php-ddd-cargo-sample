@@ -17,11 +17,12 @@
     "require": {
         "php": ">=5.5",
         "codeliner/php-equalsbuilder": "~1.1",
-        "codeliner/shared-domain-set": "~1.0",
+        "codeliner/shared-domain-set": "1.0",
         "ramsey/uuid" : "~2.8",
         "zendframework/zend-expressive": "*@dev",
         "zendframework/zend-servicemanager": "^2.6",
-        "zendframework/zend-stdlib": "^2.5"
+        "zendframework/zend-stdlib": "^2.5",
+        "doctrine/orm" : "^2.5"
     },
     "require-dev" : {
         "phpunit/phpunit": "~4.7",
@@ -37,10 +38,14 @@
     "autoload" : {
         "psr-4" : {
             "Codeliner\\CargoBackend\\"  : "CargoBackend/src",
-            "Codeliner\\CargoUI\\" : "CargoUI/src"
+            "Codeliner\\CargoUI\\" : "CargoUI/src",
+            "Codeliner\\GraphTraversalService\\" : "GraphTraversalService/src"
         }
     },
     "autoload-dev" : {
-        "CodelinerTest\\CargoBackend\\"  : "tests/CargoBackend"
+        "psr-4" : {
+            "CodelinerTest\\CargoBackend\\"  : "CargoBackend/tests",
+            "CodelinerTest\\GraphTraversalService\\" : "GraphTraversalService/tests"
+        }
     }
 }
