@@ -12,8 +12,7 @@
 namespace Codeliner\CargoBackend\Infrastructure\Persistence\Service;
 
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
 /**
  * Class CargoRepositoryFactory
@@ -21,17 +20,17 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package Application\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class CargoRepositoryFactory implements FactoryInterface
+class CargoRepositoryFactory
 {
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return CargoRepositoryInterface
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container)
     {
-        $em = $serviceLocator->get('doctrine.entitymanager.orm_default');
+        $em = $container->get('doctrine.entitymanager.orm_default');
         return $em->getRepository('Codeliner\CargoBackend\Model\Cargo\Cargo');
     }
 }

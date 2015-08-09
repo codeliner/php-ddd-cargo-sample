@@ -9,11 +9,10 @@
  * Date: 30.03.14 - 00:18
  */
 
-namespace Codeliner\CargoBackend\API\Booking\Service;
+namespace Codeliner\CargoBackend\API\Factory;
 
 use Codeliner\CargoBackend\API\Booking\BookingService;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
 /**
  * Class BookingServiceFactory
@@ -21,22 +20,22 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package Codeliner\CargoBackend\API\Booking\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class BookingServiceFactory implements FactoryInterface
+class BookingServiceFactory
 {
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return BookingService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container)
     {
-        $configuration = $serviceLocator->get('configuration');
+        $configuration = $container->get('configuration');
 
         return new BookingService(
-            $serviceLocator->get('cargo_repository'),
-            $serviceLocator->get('cargo_transaction_manager'),
-            $serviceLocator->get('cargo_routing_service'),
+            $container->get('cargo_repository'),
+            $container->get('cargo_transaction_manager'),
+            $container->get('cargo_routing_service'),
             $configuration['locations']
         );
     }

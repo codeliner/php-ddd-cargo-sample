@@ -6,7 +6,7 @@
 chdir(dirname(__DIR__));
 
 //we activate full error reporting for our sample, to ease support
-error_reporting(E_ALL);
+error_reporting(E_ALL ^ E_STRICT);
 ini_set('display_errors', 1);
 
 // Decline static file requests back to the PHP built-in webserver
@@ -20,5 +20,9 @@ require 'vendor/autoload.php';
 $services = new \Zend\ServiceManager\ServiceManager(new \Zend\ServiceManager\Config(require 'config/services.php'));
 
 $app = $services->get('Zend\Expressive\Application');
+
+$cargoBackend = $services->get('cargo.backend');
+
+$app->pipe('/api', $cargoBackend);
 
 $app->run();

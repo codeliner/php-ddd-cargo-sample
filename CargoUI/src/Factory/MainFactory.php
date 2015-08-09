@@ -11,18 +11,17 @@
 namespace Codeliner\CargoUI\Factory;
 
 use Codeliner\CargoUI\Main;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-final class MainFactory implements FactoryInterface
+final class MainFactory
 {
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $container
+     * @param ContainerInterface $container
      * @return mixed
      */
-    public function createService(ServiceLocatorInterface $container)
+    public function __invoke(ContainerInterface $container)
     {
         $config = $container->get('config');
 

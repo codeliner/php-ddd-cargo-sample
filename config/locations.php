@@ -8,10 +8,4 @@
  * 
  * Date: 01.03.14 - 19:44
  */
-return array(
-    'DEHAM' => 'Hamburg',
-    'CNHKG' => 'Hongkong',
-    'USNYC' => 'New York',
-    'NLRTM' => 'Rotterdam',
-    'SESTO' => 'Stockholm',
-);
+return ;

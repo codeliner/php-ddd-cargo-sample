@@ -12,8 +12,7 @@
 namespace Codeliner\CargoBackend\Infrastructure\Routing\Service;
 
 use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
 /**
  * Class ExternalRoutingServiceFactory
@@ -21,17 +20,17 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package Codeliner\CargoBackend\Infrastructure\Routing\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class ExternalRoutingServiceFactory implements FactoryInterface
+class ExternalRoutingServiceFactory
 {
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return ExternalRoutingService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container)
     {
-        return new ExternalRoutingService($serviceLocator->get('graph_traversal_service'));
+        return new ExternalRoutingService($container->get('graph_traversal_service'));
     }
 }
  

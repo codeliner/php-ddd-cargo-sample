@@ -11,8 +11,7 @@
 
 namespace Codeliner\GraphTraversalService;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
 /**
  * Class GraphTraversalServiceFactory
@@ -20,18 +19,18 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package Application\Service
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class GraphTraversalServiceFactory implements FactoryInterface
+class GraphTraversalServiceFactory
 {
     /**
      * Create service
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container)
     {
         return new GraphTraversalService(
-            $serviceLocator->get('config')['itineraries']
+            $container->get('config')['itineraries']
         );
     }
 }

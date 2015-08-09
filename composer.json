@@ -21,6 +21,7 @@
         "ramsey/uuid" : "~2.8",
         "zendframework/zend-expressive": "*@dev",
         "zendframework/zend-servicemanager": "^2.6",
+        "aura/router": "^2.3",
         "zendframework/zend-stdlib": "^2.5",
         "doctrine/orm" : "^2.5"
     },

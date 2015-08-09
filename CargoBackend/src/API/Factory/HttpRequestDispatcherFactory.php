@@ -6,31 +6,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 27.03.14 - 20:27
+ * Date: 8/9/15 - 10:26 PM
  */
-
-namespace Codeliner\CargoBackend\Infrastructure\Persistence\Service;
-
-use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+namespace Codeliner\CargoBackend\API\Factory;
 use Interop\Container\ContainerInterface;
+use Zend\Expressive\AppFactory;
 
 /**
- * Class TransactionManagerFactory
+ * Class HttpRequestDispatcherFactory
  *
- * @package Codeliner\CargoBackend\Infrastructure\Persistence\Transaction
+ * @package Codeliner\CargoBackend\API\Factory
  * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
-class TransactionManagerFactory
+final class HttpRequestDispatcherFactory
 {
     /**
      * Create service
      *
      * @param ContainerInterface $container
-     * @return TransactionManager
+     * @return mixed
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new TransactionManager($container->get('doctrine.entitymanager.orm_default'));
+        $bookingService = $container->get('cargo_booking_service');
+
+        return AppFactory::create($container);
     }
 }
- 
