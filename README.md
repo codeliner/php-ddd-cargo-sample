@@ -9,7 +9,7 @@ PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
 Sneak Preview
 -------------
 
-Want to have a look on the next generation of the `php-ddd-cargo-sample`? Simply switch to the `expressive-frontcontroller` branch and enjoy. The new version of the cargo sample no longer uses a MVC stack but instead a `PSR-7 middleware` implementation based on [zend-expressive](https://github.com/zendframework/zend-expressive). The domain model remains the same. We just changed the sourounding application layer to be more simple and therefor easier to understand. 
+Want to have a look on the next generation of the `php-ddd-cargo-sample`? Simply switch to the [expressive-frontcontroller](https://github.com/codeliner/php-ddd-cargo-sample/tree/expressive-frontcontroller) branch and enjoy. The new version of the cargo sample no longer uses a MVC stack but instead a `PSR-7 middleware` implementation based on [zend-expressive](https://github.com/zendframework/zend-expressive). The domain model remains the same. We just changed the sourounding application layer to be more simple and therefor easier to understand. 
 More information coming soon. Stay tuned!
 
 
