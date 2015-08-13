@@ -9,6 +9,7 @@
  * Date: 8/9/15 - 10:26 PM
  */
 namespace Codeliner\CargoBackend\API\Factory;
+
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\AppFactory;
 
@@ -28,8 +29,12 @@ final class HttpRequestDispatcherFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $bookingService = $container->get('cargo_booking_service');
+        $router = $container->get('cargo.backend.router');
 
-        return AppFactory::create($container);
+        $app = AppFactory::create($container, $router);
+
+        $app->pipe("/", [$app, 'routeMiddleware']);
+
+        return $app;
     }
 }

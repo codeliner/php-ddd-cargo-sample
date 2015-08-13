@@ -11,7 +11,7 @@
 
 namespace Codeliner\CargoBackend\API\Booking\Dto;
 
-class LocationDto 
+class LocationDto implements \JsonSerializable
 {
     /**
      * @var string
@@ -57,6 +57,17 @@ class LocationDto
     public function getUnLocode()
     {
         return $this->unLocode;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'unLocode' => $this->getUnLocode(),
+        ];
     }
 }
  

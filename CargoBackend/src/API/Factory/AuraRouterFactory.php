@@ -12,6 +12,7 @@ namespace Codeliner\CargoBackend\API\Factory;
 
 use Aura\Router\RouterFactory;
 use Interop\Container\ContainerInterface;
+use Zend\Expressive\Router\Aura;
 
 final class AuraRouterFactory
 {
@@ -19,8 +20,15 @@ final class AuraRouterFactory
     {
         $router = (new RouterFactory())->newInstance();
 
-        $router->addTokens([
+        $router->addGet('cargo.backend.api.action.get_cargo_routings', '/cargoroutings');
+        $router->addGet('cargo.backend.api.action.get_locations', '/locations');
 
-        ]);
+        //$router->addGet('cargo.read', '/cargoroutings/{tracking_id}');
+
+        //->addTokens([
+        //    'tracking_id' => '[a-zA-Z0-9-]{36,36}'
+        //])
+
+        return new Aura($router);
     }
 } 

@@ -823,6 +823,64 @@
             "time": "2015-04-02 20:40:18"
         },
         {
+            "name": "filp/whoops",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Whoops": "src/"
+                },
+                "classmap": [
+                    "src/deprecated"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://github.com/filp/whoops",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "silex-provider",
+                "whoops",
+                "zf2"
+            ],
+            "time": "2015-06-29 05:42:04"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0",
             "source": {
@@ -996,16 +1054,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "bac9f86a4dbf282a3029602411ae655225bc370b"
+                "reference": "e2f5c12916c74da384058d0dfbc7fbc0b03d1181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/bac9f86a4dbf282a3029602411ae655225bc370b",
-                "reference": "bac9f86a4dbf282a3029602411ae655225bc370b",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/e2f5c12916c74da384058d0dfbc7fbc0b03d1181",
+                "reference": "e2f5c12916c74da384058d0dfbc7fbc0b03d1181",
                 "shasum": ""
             },
             "require": {
@@ -1042,7 +1100,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2015-07-12 17:59:47"
+            "time": "2015-08-10 20:04:20"
         },
         {
             "name": "zendframework/zend-escaper",
@@ -1094,17 +1152,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive.git",
-                "reference": "902062c3e41a64fcc76feaa9047792afb8c8b55b"
+                "reference": "3019d256e8108aafae779e539f0ab38fef710204"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/902062c3e41a64fcc76feaa9047792afb8c8b55b",
-                "reference": "902062c3e41a64fcc76feaa9047792afb8c8b55b",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/3019d256e8108aafae779e539f0ab38fef710204",
+                "reference": "3019d256e8108aafae779e539f0ab38fef710204",
                 "shasum": ""
             },
             "require": {
                 "aura/router": "^2.3",
                 "container-interop/container-interop": "^1.1",
+                "filp/whoops": "^1.1",
                 "php": ">=5.5",
                 "psr/http-message": "^1.0",
                 "zendframework/zend-diactoros": "^1.1",
@@ -1112,16 +1171,22 @@
                 "zendframework/zend-stratigility": "^1.1"
             },
             "require-dev": {
+                "league/plates": "^3.1",
                 "nikic/fast-route": "^0.6.0",
                 "phpunit/phpunit": "^4.7",
                 "squizlabs/php_codesniffer": "^2.3",
+                "twig/twig": "^1.19",
                 "zendframework/zend-mvc": "^2.5",
-                "zendframework/zend-psr7bridge": "^0.1.0"
+                "zendframework/zend-psr7bridge": "^0.1.0",
+                "zendframework/zend-view": "^2.5"
             },
             "suggest": {
+                "league/plates": "^3.1 to use the Plates template adapter",
                 "nikic/fast-route": "^0.6.0 to use the FastRoute routing adapter",
+                "twig/twig": "^1.19 to use the Twig template adapter",
                 "zendframework/zend-mvc": "^2.5 to use the zend-mvc TreeRouteStack routing adapter",
-                "zendframework/zend-psr7bridge": "^0.1.0 to use the zend-mvc TreeRouteStack routing adapter"
+                "zendframework/zend-psr7bridge": "^0.1.0 to use the zend-mvc TreeRouteStack routing adapter",
+                "zendframework/zend-view": "^2.5 to use the Zend View template adapter"
             },
             "type": "library",
             "autoload": {
@@ -1140,7 +1205,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2015-08-08 19:17:45"
+            "time": "2015-08-12 15:32:57"
         },
         {
             "name": "zendframework/zend-servicemanager",
@@ -2314,16 +2379,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.2",
+            "version": "4.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "748c6963c0a8c983fa69ee8884c885d0e98209bf"
+                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/748c6963c0a8c983fa69ee8884c885d0e98209bf",
-                "reference": "748c6963c0a8c983fa69ee8884c885d0e98209bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fd3050e26e3105f416d74c4d33aea659b406c59d",
+                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d",
                 "shasum": ""
             },
             "require": {
@@ -2382,7 +2447,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-07 12:56:50"
+            "time": "2015-08-10 09:16:56"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

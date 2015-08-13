@@ -19,7 +19,9 @@ require 'vendor/autoload.php';
 
 $services = new \Zend\ServiceManager\ServiceManager(new \Zend\ServiceManager\Config(require 'config/services.php'));
 
-$app = $services->get('Zend\Expressive\Application');
+//$app = $services->get('Zend\Expressive\Application');
+
+$app = \Zend\Expressive\AppFactory::create($services);
 
 $cargoBackend = $services->get('cargo.backend');
 

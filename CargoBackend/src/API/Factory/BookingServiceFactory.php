@@ -33,9 +33,9 @@ class BookingServiceFactory
         $configuration = $container->get('configuration');
 
         return new BookingService(
-            $container->get('cargo_repository'),
-            $container->get('cargo_transaction_manager'),
-            $container->get('cargo_routing_service'),
+            $container->get('cargo.backend.cargo_repository'),
+            $container->get('cargo.backend.transaction_manager'),
+            $container->get('cargo.backend.cargo_routing_service'),
             $configuration['locations']
         );
     }
