@@ -9,13 +9,17 @@ PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
 CQRS & ES?
 ----------
 
-The original cargo sample is not based on CQRS and EventSourcing. These patterns have arisen later.
-But today you will read something about it sooner or later when exploring Domain-Driven Design.
+The original cargo sample is not based on CQRS and EventSourcing. However, you may have read something about it in relation to Domain-Driven Design.
 The php-ddd-cargo-sample shows you the original approach using application services, a combined write and read model
 and an ORM (Doctrine in our case) to hide the persistence layer. This is still a very good and valid approach but CQRS and
-EventSourcing gets a lot of attention because it gives you a great new way to tackle complex problems.
-Our suggestion is that you have a look at this example application and compare it with [proophessor-do](https://github.com/prooph/proophessor-do).
-**Proophessor-do** is different then other example applications. It is incomplete and you are ask to get the job done.
+EventSourcing gets a lot of attention these days because it offers a great way to tackle complex problems.
+
+Our suggestion is that you have a look at the cargo example and also at [proophessor-do](https://github.com/prooph/proophessor-do).
+
+**Proophessor-do** demonstrates CQRS and ES using [prooph components](https://github.com/prooph/proophessor/blob/master/docs/book/components.md)
+and it is different then other example applications.
+
+Proophessor-do is incomplete and you are ask to get the job done.
 **This is a great way to learn more about CQRS and EventSourcing**. Don't worry, the prooph community is available in a chat
 to help you with your task. See the [HALL OF FAME](https://github.com/prooph/proophessor-do#hall-of-fame). The first tasks are already done
 and the next ones in progress. So what are you waiting for? Go pick up a task, too!
