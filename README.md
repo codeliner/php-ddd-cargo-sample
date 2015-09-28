@@ -20,6 +20,8 @@ Our suggestion is that you have a look at this example application and compare i
 to help you with your task. See the [HALL OF FAME](https://github.com/prooph/proophessor-do#hall-of-fame). The first tasks are already done
 and the next ones in progress. So what are you waiting for? Go pick up a task, too!
 
+Ok, you would like to explore the cargo sample first? Just read on. It starts with the next heading.
+
 Goal of the Project
 -------------------
 We want to show the PHP way of implementing Domain-Driven Design with the help of
