@@ -6,12 +6,19 @@ PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/)
 [![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
 
-Sneak Preview
--------------
+CQRS & ES?
+----------
 
-Want to have a look on the next generation of the `php-ddd-cargo-sample`? Simply switch to the [expressive-frontcontroller](https://github.com/codeliner/php-ddd-cargo-sample/tree/expressive-frontcontroller) branch and enjoy. The new version of the cargo sample no longer uses a MVC stack but instead a `PSR-7 middleware` implementation based on [zend-expressive](https://github.com/zendframework/zend-expressive). The domain model remains the same. We just changed the sourounding application layer to be more simple and therefor easier to understand. 
-More information coming soon. Stay tuned!
-
+The original cargo sample is not based on CQRS and EventSourcing. These patterns have arisen later.
+But today you will read something about it sooner or later when exploring Domain-Driven Design.
+The php-ddd-cargo-sample shows you the original approach using application services, a combined write and read model
+and an ORM (Doctrine in our case) to hide the persistence layer. This is still a very good and valid approach but CQRS and
+EventSourcing gets a lot of attention because it gives you a great new way to tackle complex problems.
+Our suggestion is that you have a look at this example application and compare it with [proophessor-do](https://github.com/prooph/proophessor-do).
+**Proophessor-do** is different then other example applications. It is incomplete and you are ask to get the job done.
+**This is a great way to learn more about CQRS and EventSourcing**. Don't worry, the prooph community is available in a chat
+to help you with your task. See the [HALL OF FAME](https://github.com/prooph/proophessor-do#hall-of-fame). The first tasks are already done
+and the next ones in progress. So what are you waiting for? Go pick up a task, too!
 
 Goal of the Project
 -------------------
