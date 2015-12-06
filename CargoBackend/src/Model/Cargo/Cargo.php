@@ -10,8 +10,6 @@ declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Model\Cargo;
 
-use CargoBackend\Model\Cargo\Itinerary;
-
 /**
  * A Cargo. This is the central class in the domain model.
  *
@@ -28,7 +26,7 @@ use CargoBackend\Model\Cargo\Itinerary;
  * a new route is specified for the cargo and a new route is requested. The old itinerary,
  * being a value object, is discarded and a new one is attached.
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class Cargo
 {

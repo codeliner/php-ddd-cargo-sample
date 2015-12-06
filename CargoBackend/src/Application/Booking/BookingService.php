@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
+ * This file is part of the prooph/php-ddd-cargo-sample.
  * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -8,29 +8,30 @@
  * 
  * Date: 29.03.14 - 17:55
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking;
+namespace Codeliner\CargoBackend\Application\Booking;
 
-use CargoBackend\API\Booking\Assembler\CargoRoutingDtoAssembler;
-use CargoBackend\API\Booking\Assembler\RouteCandidateDtoAssembler;
-use CargoBackend\API\Booking\Dto\CargoRoutingDto;
-use CargoBackend\API\Booking\Dto\LocationDto;
-use CargoBackend\API\Booking\Dto\RouteCandidateDto;
-use CargoBackend\API\Exception\CargoNotFoundException;
-use CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
-use CargoBackend\Model\Cargo\Cargo;
-use CargoBackend\Model\Cargo\CargoRepositoryInterface;
-use CargoBackend\Model\Cargo\RouteSpecification;
-use CargoBackend\Model\Cargo\TrackingId;
-use CargoBackend\Model\Service\RoutingServiceInterface;
+use Codeliner\CargoBackend\Application\Booking\Assembler\CargoRoutingDtoAssembler;
+use Codeliner\CargoBackend\Application\Booking\Assembler\RouteCandidateDtoAssembler;
+use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
+use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
+use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+use Codeliner\CargoBackend\Model\Cargo\Cargo;
+use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
+use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
+use Codeliner\CargoBackend\Model\Cargo\TrackingId;
+use Codeliner\CargoBackend\Model\Routing\RoutingServiceInterface;
 
 /**
  * Class BookingService
  *
- * @package CargoBackend\API\Booking
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package Codeliner\CargoBackend\Application\Booking
+ * @author Alexander Miertsch <contact@prooph.de>
  */
-class BookingService implements BookingServiceInterface
+class BookingService
 {
     /**
      * @var CargoRepositoryInterface
@@ -76,7 +77,7 @@ class BookingService implements BookingServiceInterface
      * @throws \Exception If booking fails
      * @return string TrackingId
      */
-    public function bookNewCargo($anOrigin, $aDestination)
+    public function bookNewCargo(string $anOrigin, string $aDestination): string
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
 
@@ -101,20 +102,17 @@ class BookingService implements BookingServiceInterface
 
     /**
      * @param string $aTrackingId
-     * @throws \CargoBackend\API\Exception\CargoNotFoundException
+     * @throws \Codeliner\CargoBackend\Application\Exception\CargoNotFoundException
      * @return CargoRoutingDto
      */
-    public function loadCargoForRouting($aTrackingId)
+    public function loadCargoForRouting(string $aTrackingId): CargoRoutingDto
     {
-        $cargo = $this->cargoRepository->get(TrackingId::fromString($aTrackingId));
+        $aTrackingId = TrackingId::fromString($aTrackingId);
+
+        $cargo = $this->cargoRepository->get($aTrackingId);
 
         if (! $cargo) {
-            throw new CargoNotFoundException(
-                sprintf(
-                    'Cargo with TrackingId -%s- can not be found.',
-                    $aTrackingId
-                )
-            );
+            throw CargoNotFoundException::forTrackingId($aTrackingId);
         }
 
         $cargoRoutingDtoAssembler = new CargoRoutingDtoAssembler();
@@ -124,20 +122,17 @@ class BookingService implements BookingServiceInterface
 
     /**
      * @param string $aTrackingId
-     * @throws \CargoBackend\API\Exception\CargoNotFoundException
+     * @throws CargoNotFoundException
      * @return RouteCandidateDto[]
      */
-    public function requestPossibleRoutesForCargo($aTrackingId)
+    public function requestPossibleRoutesForCargo(string $aTrackingId): array
     {
-        $cargo = $this->cargoRepository->get(TrackingId::fromString($aTrackingId));
+        $aTrackingId = TrackingId::fromString($aTrackingId);
+
+        $cargo = $this->cargoRepository->get($aTrackingId);
 
         if (! $cargo) {
-            throw new CargoNotFoundException(
-                sprintf(
-                    'Cargo with TrackingId -%s- could not be found',
-                    $aTrackingId
-                )
-            );
+            throw CargoNotFoundException::forTrackingId($aTrackingId);
         }
 
         $itineraries = $this->routingService->fetchRoutesForSpecification($cargo->routeSpecification());
@@ -155,21 +150,17 @@ class BookingService implements BookingServiceInterface
     /**
      * @param string $aTrackingId
      * @param RouteCandidateDto $aRoute
-     * @throws \CargoBackend\API\Exception\CargoNotFoundException
+     * @throws CargoNotFoundException
      * @throws \Exception
      * @return void
      */
-    public function assignCargoToRoute($aTrackingId, RouteCandidateDto $aRoute)
+    public function assignCargoToRoute(string $aTrackingId, RouteCandidateDto $aRoute)
     {
+        $aTrackingId = TrackingId::fromString($aTrackingId);
         $cargo = $this->cargoRepository->get(TrackingId::fromString($aTrackingId));
 
         if (! $cargo) {
-            throw new CargoNotFoundException(
-                sprintf(
-                    'Cargo with TrackingId -%s- could not be found',
-                    $aTrackingId
-                )
-            );
+            throw CargoNotFoundException::forTrackingId($aTrackingId);
         }
 
         $routeCandidateAssembler = new RouteCandidateDtoAssembler();
@@ -197,7 +188,7 @@ class BookingService implements BookingServiceInterface
     /**
      * @return LocationDto[]
      */
-    public function listShippingLocations()
+    public function listShippingLocations(): array
     {
         $locationDtos = array();
 
@@ -215,7 +206,7 @@ class BookingService implements BookingServiceInterface
     /**
      * @return CargoRoutingDto[]
      */
-    public function listAllCargos()
+    public function listAllCargos(): array
     {
         $cargos = $this->cargoRepository->getAll();
 
@@ -230,4 +221,3 @@ class BookingService implements BookingServiceInterface
         return $cargoRoutingDtos;
     }
 }
- 

@@ -16,7 +16,7 @@ use Ramsey\Uuid\UuidInterface;
 /**
  * TrackingId is the unique identifier of a Cargo
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class TrackingId
 {
@@ -24,15 +24,24 @@ class TrackingId
      * @param string $aTrackingId
      * @return TrackingId
      */
-    public static function fromString($aTrackingId): TrackingId
+    public static function fromString(string $aTrackingId): TrackingId
     {
         return new self(Uuid::fromString($aTrackingId));
+    }
+
+    /**
+     * @return TrackingId
+     */
+    public static function generate(): TrackingId
+    {
+        return new self(Uuid::uuid4());
     }
 
     /**
      * @var Uuid
      */
     private $uuid;
+
     /**
      * Always provide a string representation of the TrackingId to construct the VO
      * 
@@ -56,7 +65,7 @@ class TrackingId
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }

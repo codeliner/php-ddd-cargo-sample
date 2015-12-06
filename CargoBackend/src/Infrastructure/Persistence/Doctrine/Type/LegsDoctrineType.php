@@ -20,7 +20,7 @@ use Doctrine\DBAL\Types\TextType;
  * Class LegsDoctrineType
  *
  * @package Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 final class LegsDoctrineType extends TextType
 {

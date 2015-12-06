@@ -15,7 +15,7 @@ namespace Codeliner\CargoBackend\Model\Cargo;
  *
  * A Leg is part of an Itinerary. It describes a voyage from one location to another, with concrete load und unload times.
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class Leg
 {
@@ -45,8 +45,8 @@ class Leg
      * @param \DateTime $aLoadTime
      * @param \DateTime $anUnloadTime
      */
-    public function __construct($aLoadLocation,
-                                $anUnloadLocation,
+    public function __construct(string $aLoadLocation,
+                                string $anUnloadLocation,
                                 \DateTime $aLoadTime,
                                 \DateTime $anUnloadTime)
     {

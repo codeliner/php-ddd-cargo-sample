@@ -18,7 +18,7 @@ use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
  * Interface RoutingServiceInterface
  *
  * @package Codeliner\CargoBackend\Model\Service
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 interface RoutingServiceInterface 
 {

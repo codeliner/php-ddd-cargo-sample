@@ -8,6 +8,7 @@
  * 
  * Date: 27.03.14 - 20:27
  */
+declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Container\Infrastructure;
 
@@ -18,9 +19,9 @@ use Interop\Container\ContainerInterface;
  * Class TransactionManagerFactory
  *
  * @package Codeliner\CargoBackend\Infrastructure\Persistence\Transaction
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
-class TransactionManagerFactory
+final class TransactionManagerFactory
 {
     /**
      * Create service
@@ -28,9 +29,8 @@ class TransactionManagerFactory
      * @param ContainerInterface $container
      * @return TransactionManager
      */
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): TransactionManager
     {
         return new TransactionManager($container->get('doctrine.entitymanager.orm_default'));
     }
 }
- 

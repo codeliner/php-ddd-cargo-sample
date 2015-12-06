@@ -1,26 +1,27 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 21:06
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Assembler;
+namespace Codeliner\CargoBackend\Application\Booking\Assembler;
 
-use CargoBackend\API\Booking\Dto\LegDto;
-use CargoBackend\API\Booking\Dto\RouteCandidateDto;
-use CargoBackend\Model\Cargo\Itinerary;
-use CargoBackend\Model\Cargo\Leg;
+use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
+use Codeliner\CargoBackend\Model\Cargo\Itinerary;
+use Codeliner\CargoBackend\Model\Cargo\Leg;
 
 /**
  * Class RouteCandidateDtoAssembler
  *
  * @package CargoBackend\API\Booking\Assembler
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class RouteCandidateDtoAssembler 
 {
@@ -28,7 +29,7 @@ class RouteCandidateDtoAssembler
      * @param Itinerary $anItinerary
      * @return RouteCandidateDto
      */
-    public function toDto(Itinerary $anItinerary)
+    public function toDto(Itinerary $anItinerary): RouteCandidateDto
     {
         $legs = array();
 
@@ -54,7 +55,7 @@ class RouteCandidateDtoAssembler
      * @param RouteCandidateDto $aRouteCandidate
      * @return Itinerary
      */
-    public function toItinerary(RouteCandidateDto $aRouteCandidate)
+    public function toItinerary(RouteCandidateDto $aRouteCandidate): Itinerary
     {
         $legs = array();
 

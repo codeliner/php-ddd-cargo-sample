@@ -8,11 +8,14 @@
  * 
  * Date: 8/9/15 - 10:07 PM
  */
+declare(strict_types = 1);
+
 namespace Codeliner\CargoBackend\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType;
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\TrackingIdDoctrineType;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 
 final class DoctrineEntityManagerFactory
@@ -23,7 +26,7 @@ final class DoctrineEntityManagerFactory
      * @param ContainerInterface $container
      * @return mixed
      */
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): EntityManager
     {
         $appConfig = $container->get('config');
 

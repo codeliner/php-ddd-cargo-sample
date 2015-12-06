@@ -1,17 +1,20 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 17:09
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Dto;
+namespace Codeliner\CargoBackend\Application\Booking\Dto;
 
-class RouteCandidateDto 
+use Assert\Assertion;
+
+class RouteCandidateDto
 {
     /**
      * @var LegDto[]
@@ -21,9 +24,11 @@ class RouteCandidateDto
     /**
      * @param LegDto[] $legs
      */
-    public function setLegs($legs)
+    public function setLegs(array $legs)
     {
-        \Assert\that($legs)->all()->isInstanceOf('CargoBackend\API\Booking\Dto\LegDto');
+        foreach($legs as $leg) {
+            Assertion::isInstanceOf($leg, LegDto::class);
+        }
 
         $this->legs = $legs;
     }
@@ -31,7 +36,7 @@ class RouteCandidateDto
     /**
      * @return LegDto[]
      */
-    public function getLegs()
+    public function getLegs(): array
     {
         return $this->legs;
     }
@@ -39,7 +44,7 @@ class RouteCandidateDto
     /**
      * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         $legsList = array();
 

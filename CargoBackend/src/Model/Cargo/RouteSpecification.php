@@ -15,7 +15,7 @@ namespace Codeliner\CargoBackend\Model\Cargo;
  *
  * Describes where a cargo origin and destination is.
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class RouteSpecification
 {
@@ -37,7 +37,7 @@ class RouteSpecification
      * @param string $origin
      * @param string $destination
      */
-    public function __construct($origin, $destination)
+    public function __construct(string $origin, string $destination)
     {
         $this->origin = $origin;
         $this->destination = $destination;

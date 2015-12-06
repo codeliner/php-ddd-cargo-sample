@@ -10,7 +10,7 @@ return [
             \Codeliner\CargoUI\RiotCompiler::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
 
             //Doctrine
-            'doctrine.entity_manager.orm_default' => \Codeliner\CargoBackend\Container\Infrastructure\DoctrineEntityManagerFactory::class,
+            'doctrine.entitymanager.orm_default' => \Codeliner\CargoBackend\Container\Infrastructure\DoctrineEntityManagerFactory::class,
             \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
         'aliases' => [

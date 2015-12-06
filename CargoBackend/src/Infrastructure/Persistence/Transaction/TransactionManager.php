@@ -10,13 +10,14 @@
  */
 
 namespace Codeliner\CargoBackend\Infrastructure\Persistence\Transaction;
+
 use Doctrine\ORM\EntityManager;
 
 /**
  * Class TransactionManager
  *
  * @package Codeliner\CargoBackend\Infrastructure\Persistence\Transaction
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class TransactionManager 
 {

@@ -18,7 +18,7 @@ namespace Codeliner\CargoUI;
  * the parts into a riot.tag() statement.
  *
  * @package Codeliner\CargoUI
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 final class RiotCompiler 
 {

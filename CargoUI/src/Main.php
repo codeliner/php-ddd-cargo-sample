@@ -23,7 +23,7 @@ use Psr\Http\Message\ResponseInterface;
  * and let the riot SPA handle the client logic.
  *
  * @package Codeliner\CargoUI
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 final class Main
 {

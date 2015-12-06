@@ -1,17 +1,20 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 17:48
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Dto;
+namespace Codeliner\CargoBackend\Application\Booking\Dto;
 
-class LocationDto 
+use Assert\Assertion;
+
+class LocationDto
 {
     /**
      * @var string
@@ -26,17 +29,16 @@ class LocationDto
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
-        \Assert\that($name)->notEmpty()->string();
-
+        Assertion::notEmpty($name);
         $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -44,17 +46,16 @@ class LocationDto
     /**
      * @param string $unLocode
      */
-    public function setUnLocode($unLocode)
+    public function setUnLocode(string $unLocode)
     {
-        \Assert\that($unLocode)->notEmpty()->string();
-
+        Assertion::notEmpty($unLocode);
         $this->unLocode = $unLocode;
     }
 
     /**
      * @return string
      */
-    public function getUnLocode()
+    public function getUnLocode(): string
     {
         return $this->unLocode;
     }

@@ -11,7 +11,7 @@ namespace Codeliner\CargoBackend\Model\Cargo\Exception;
 /**
  * CargoException Class of an InvalidArgumentException
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class InvalidArgumentException extends \InvalidArgumentException implements CargoException
 {

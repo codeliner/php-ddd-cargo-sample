@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * It is composed of one or more Legs.
  * Each Leg describes a part of the entire route, f.e. from one port to another.
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class Itinerary
 {

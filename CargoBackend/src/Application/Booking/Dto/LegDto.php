@@ -1,17 +1,20 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 26.03.14 - 22:22
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Dto;
+namespace Codeliner\CargoBackend\Application\Booking\Dto;
 
-class LegDto 
+use Assert\Assertion;
+
+class LegDto
 {
     /**
      * @var string
@@ -36,9 +39,9 @@ class LegDto
     /**
      * @param string $loadLocation
      */
-    public function setLoadLocation($loadLocation)
+    public function setLoadLocation(string $loadLocation)
     {
-        \Assert\that($loadLocation)->notEmpty()->string();
+        Assertion::notEmpty($loadLocation);
 
         $this->loadLocation = $loadLocation;
     }
@@ -46,7 +49,7 @@ class LegDto
     /**
      * @return string
      */
-    public function getLoadLocation()
+    public function getLoadLocation(): string
     {
         return $this->loadLocation;
     }
@@ -54,9 +57,9 @@ class LegDto
     /**
      * @param string $loadTime
      */
-    public function setLoadTime($loadTime)
+    public function setLoadTime(string $loadTime)
     {
-        \Assert\that($loadTime)->notEmpty()->string();
+        Assertion::notEmpty($loadTime);
 
         $this->loadTime = $loadTime;
     }
@@ -72,9 +75,9 @@ class LegDto
     /**
      * @param string $unloadLocation
      */
-    public function setUnloadLocation($unloadLocation)
+    public function setUnloadLocation(string $unloadLocation)
     {
-        \Assert\that($unloadLocation)->notEmpty()->string();
+        Assertion::notEmpty($unloadLocation);
 
         $this->unloadLocation = $unloadLocation;
     }
@@ -82,7 +85,7 @@ class LegDto
     /**
      * @return string
      */
-    public function getUnloadLocation()
+    public function getUnloadLocation(): string
     {
         return $this->unloadLocation;
     }
@@ -90,9 +93,9 @@ class LegDto
     /**
      * @param string $unloadTime
      */
-    public function setUnloadTime($unloadTime)
+    public function setUnloadTime(string $unloadTime)
     {
-        \Assert\that($unloadTime)->notEmpty()->string();
+        Assertion::notEmpty($unloadTime);
 
         $this->unloadTime = $unloadTime;
     }
@@ -100,7 +103,7 @@ class LegDto
     /**
      * @return string
      */
-    public function getUnloadTime()
+    public function getUnloadTime(): string
     {
         return $this->unloadTime;
     }

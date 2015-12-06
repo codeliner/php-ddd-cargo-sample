@@ -11,7 +11,7 @@ namespace Codeliner\CargoBackend\Model\Cargo\Exception;
 /**
  * Marker interface for a CargoException
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 interface CargoException
 {

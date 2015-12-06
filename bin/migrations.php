@@ -20,7 +20,7 @@ require 'vendor/autoload.php';
 $container = require 'config/container.php';
 
 /** @var \Doctrine\ORM\EntityManager $em */
-$em = $container->get('doctrine.entity_manager.orm_default');
+$em = $container->get('doctrine.entitymanager.orm_default');
 
 $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interface', \Doctrine\DBAL\Migrations\MigrationsVersion::VERSION());
 

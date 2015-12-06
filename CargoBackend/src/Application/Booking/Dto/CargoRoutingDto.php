@@ -1,21 +1,23 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 16:59
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Dto;
+namespace Codeliner\CargoBackend\Application\Booking\Dto;
+use Assert\Assertion;
 
 /**
  * Class CargoRoutingDto
  *
  * @package CargoBackend\API\Booking\Dto
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class CargoRoutingDto 
 {
@@ -42,7 +44,7 @@ class CargoRoutingDto
     /**
      * @param string $finalDestination
      */
-    public function setFinalDestination($finalDestination)
+    public function setFinalDestination(string $finalDestination)
     {
         \Assert\that($finalDestination)->notEmpty()->string();
 
@@ -52,7 +54,7 @@ class CargoRoutingDto
     /**
      * @return string
      */
-    public function getFinalDestination()
+    public function getFinalDestination(): string
     {
         return $this->finalDestination;
     }
@@ -60,9 +62,11 @@ class CargoRoutingDto
     /**
      * @param LegDto[] $legs
      */
-    public function setLegs($legs)
+    public function setLegs(array $legs): array
     {
-        \Assert\that($legs)->all()->isInstanceOf('CargoBackend\API\Booking\Dto\LegDto');
+        foreach($legs as $leg) {
+            Assertion::isInstanceOf($leg, LegDto::class);
+        }
 
         $this->legs = $legs;
     }
@@ -75,7 +79,7 @@ class CargoRoutingDto
     /**
      * @return LegDto[]
      */
-    public function getLegs()
+    public function getLegs(): array
     {
         return $this->legs;
     }
@@ -83,9 +87,9 @@ class CargoRoutingDto
     /**
      * @param string $origin
      */
-    public function setOrigin($origin)
+    public function setOrigin(string $origin)
     {
-        \Assert\that($origin)->notEmpty()->string();
+        Assertion::notEmpty($origin);
 
         $this->origin = $origin;
     }
@@ -101,9 +105,9 @@ class CargoRoutingDto
     /**
      * @param string $trackingId
      */
-    public function setTrackingId($trackingId)
+    public function setTrackingId(string $trackingId)
     {
-        \Assert\that($trackingId)->uuid();
+        Assertion::uuid($trackingId);
 
         $this->trackingId = $trackingId;
     }
@@ -111,12 +115,15 @@ class CargoRoutingDto
     /**
      * @return string
      */
-    public function getTrackingId()
+    public function getTrackingId(): string
     {
         return $this->trackingId;
     }
 
-    public function getArrayCopy()
+    /**
+     * @return array
+     */
+    public function getArrayCopy(): array
     {
         $legsArrayCopy = array();
 

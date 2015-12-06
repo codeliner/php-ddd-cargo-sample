@@ -8,12 +8,10 @@
  */
 namespace Codeliner\CargoBackend\Model\Cargo;
 
-use CargoBackend\Model\Cargo\TrackingId;
-
 /**
  * CargoRepository to load and store Cargos
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 interface CargoRepositoryInterface
 {

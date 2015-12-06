@@ -1,24 +1,26 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <kontakt@codeliner.ws>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 18:21
  */
+declare(strict_types = 1);
 
-namespace CargoBackend\API\Booking\Assembler;
-use CargoBackend\API\Booking\Dto\CargoRoutingDto;
-use CargoBackend\API\Booking\Dto\LegDto;
-use CargoBackend\Model\Cargo\Cargo;
+namespace Codeliner\CargoBackend\Application\Booking\Assembler;
+
+use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
+use Codeliner\CargoBackend\Model\Cargo\Cargo;
 
 /**
  * Class CargoRoutingDtoAssembler
  *
- * @package CargoBackend\API\Booking\Assembler
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package Codeliner\CargoBackend\Application\Booking\Assembler
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class CargoRoutingDtoAssembler 
 {
@@ -26,7 +28,7 @@ class CargoRoutingDtoAssembler
      * @param Cargo $aCargo
      * @return CargoRoutingDto
      */
-    public function toDto(Cargo $aCargo)
+    public function toDto(Cargo $aCargo): CargoRoutingDto
     {
         $cargoRoutingDto = new CargoRoutingDto();
 
