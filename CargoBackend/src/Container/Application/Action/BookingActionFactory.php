@@ -6,29 +6,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 06.12.2015 - 9:46 PM
+ * Date: 06.12.2015 - 11:13 PM
  */
-declare(strict_types = 1);
-
 namespace Codeliner\CargoBackend\Container\Application\Action;
 
-use Codeliner\CargoBackend\Application\Action\GetLocations;
+use Assert\Assertion;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Interop\Container\ContainerInterface;
 
 /**
- * Class GetLocationsFactory
+ * Class BookingActionFactory
  *
  * @package Codeliner\CargoBackend\Container\Application\Action
  */
-final class GetLocationsFactory
+final class BookingActionFactory
 {
-    /**
-     * @param ContainerInterface $container
-     * @return GetLocations
-     */
-    public function __invoke(ContainerInterface $container): GetLocations
+    public function __invoke(ContainerInterface $container, $requestedService)
     {
-        return new GetLocations($container->get(BookingService::class));
+        Assertion::classExists($requestedService);
+
+        return new $requestedService($container->get(BookingService::class));
     }
 }

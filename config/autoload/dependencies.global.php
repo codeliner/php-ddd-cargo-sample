@@ -10,8 +10,8 @@ return [
             //Cargo Backend
             'Codeliner\CargoBackend' => \Zend\Expressive\Container\ApplicationFactory::class,
                 //Actions
-            \Codeliner\CargoBackend\Application\Action\GetLocations::class => \Codeliner\CargoBackend\Container\Application\Action\GetLocationsFactory::class,
-            \Codeliner\CargoBackend\Application\Action\CreateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\CreateCargoFactory::class,
+            \Codeliner\CargoBackend\Application\Action\GetLocations::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Application\Action\CreateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
               //Action Helper middleware
             \Psr7Middlewares\Middleware\Payload::class => \Codeliner\CargoBackend\Container\Application\Action\PayloadParserFactory::class,
               //Application
