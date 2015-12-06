@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <jb-cargo-list if="{ activeMode == 'cargo-list' }"></jb-cargo-list>
+    <jb-new-cargo if="{ activeMode == 'new-cargo' }"></jb-new-cargo>
+</div>
+<div id="booking-app-container">
+    <img src="/img/ajax-loader.gif" alt="loading ..." />
+</div>
+<footer>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{ router.get('') }" class="btn btn-default icon icon-align-left icon-arrow-left pull-right">back to overview</a>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">
+    function (context) {
+        var self = this,
+            renderCargoList = function (mixins) {
+                context.app.renderInto(self, "#booking-app-container", "cargo-list", mixins);
+                self.activeMode = "cargo-list";
+                self.update();
+            },
+            renderNewCargo = function (mixins) {
+                context.app.renderInto(self, "#booking-app-container", "new-cargo", mixins);
+                self.activeMode = "new-cargo";
+                self.update();
+            },
+            _routeListener = function (con) {
+                var rm = con.routeMatch;
+                if (! rm[0]) {
+                    renderCargoList({router : con.router});
+                    return;
+                }
+
+                if (rm[0] == "cargos") {
+                    if (! rm[1]) {
+                        renderCargoList({router : con.router});
+                        return;
+                    }
+
+                    if (rm[1] == "add") {
+                        renderNewCargo({router : con.router});
+                        return;
+                    }
+                }
+            };
+
+        self.router = context.router;
+
+        self.on("mount", function () {
+            context.router.on("route", _routeListener);
+        })
+    }
+</script>

@@ -1,42 +1,48 @@
 {
     "name": "codeliner/php-ddd-cargo-sample",
-    "description": "PHP DDD Cargo Sample",
+    "description": "PHP DDD Cargo Sample v2",
     "license": "BSD-3-Clause",
     "keywords": [
-        "DDD",
-        "zf2",
-        "doctrine",
-        "domain driven design",
-        "sample",
-        "REST"
+        "PHP7",
+        "PSR7",
+        "DDD"
     ],
     "homepage": "https://github.com/codeliner/php-ddd-cargo-sample",
     "authors": [
         {
             "name": "Alexander Miertsch",
-            "email": "kontakt@codeliner.ws",
-            "homepage": "http://www.codeliner.ws/"
+            "email": "contact@prooph.de",
+            "homepage": "http://www.prooph.de/"
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "zendframework/zendframework": "2.2.*",
-        "doctrine/doctrine-orm-module": "*",
-        "mwillbanks/zfc-twitter-bootstrap" : "dev-master",
-        "codeliner/php-equalsbuilder": "1.1.*",
-        "codeliner/shared-domain-set": "1.0.*",
-        "rhumsaa/uuid" : "2.5.*",
-        "phly/phly-restfully" : "2.2.*"
+        "php": ">=7.0",
+        "zendframework/zend-expressive": "1.0.0rc2",
+        "zendframework/zend-expressive-aurarouter": "^0.2.0",
+        "zendframework/zend-servicemanager": "dev-develop as 2.6",
+        "zendframework/zend-stdlib": "^2.5",
+        "zendframework/zend-config": "^2.5",
+        "ramsey/uuid" : "^3.0",
+        "doctrine/orm" : "^2.5",
+        "doctrine/migrations": "^1.0",
+        "sandrokeil/interop-config": "^0.3.1",
+        "beberlei/assert": "^2.4",
+        "roave/security-advisories": "dev-master"
     },
     "require-dev" : {
-        "phpunit/phpunit": "3.7.*",
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "1.4@stable",
-        "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "phpunit/phpunit": "^5.0"
     },
-    "config": {
-        "bin-dir": "bin/"
+    "autoload" : {
+        "psr-4" : {
+            "Codeliner\\CargoUI\\" : "CargoUI/src",
+            "Codeliner\\CargoBackend\\"  : "CargoBackend/src",
+            "Codeliner\\GraphTraversalBackend\\" : "GraphTraversalBackend/src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "CodelinerTest\\CargoBackend\\"  : "CargoBackend/tests",
+            "CodelinerTest\\GraphTraversalBackend\\" : "GraphTraversalBackend/tests"
+        }
     }
 }

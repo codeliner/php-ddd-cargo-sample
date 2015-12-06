@@ -15,7 +15,34 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
 }
 
 // Setup autoloading
-require 'init_autoloader.php';
+require 'vendor/autoload.php';
 
-// Run the application!
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+$container = require 'config/container.php';
+
+$app = new \Zend\Stratigility\MiddlewarePipe();
+
+//CargoUI route
+$app->pipe(
+    '/',
+    function(\Psr\Http\Message\ServerRequestInterface $request,
+             \Psr\Http\Message\ResponseInterface $response,
+             callable $next = null) use ($container) {
+        if ($request->getUri()->getPath() === "/") {
+            /** @var $cargoUi \Codeliner\CargoUI\Main::class */
+            $cargoUi = $container->get(\Codeliner\CargoUI\Main::class);
+
+            return $cargoUi($request, $response, $next);
+        }
+
+        return $next($request, $response);
+    }
+);
+
+$server = \Zend\Diactoros\Server::createServer($app,
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
+);
+$server->listen();

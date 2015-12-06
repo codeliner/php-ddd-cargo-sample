@@ -1,0 +1,24 @@
+<div class="jumbotron">
+    <h1>Welcome to the PHP DDD Cargo Sample</h1>
+    <p><strong>Congratulations!</strong> You have successfully installed the Container Shipping System. You are currently running the <strong>{chapter}</strong> Version of the Application.</p>
+    <p><a class="btn btn-success btn-lg" href="https://github.com/codeliner/php-ddd-cargo-sample" target="_blank">Fork PHP DDD Cargo Sample on GitHub &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Goal of the Sample Application</h3>
+            </div>
+            <div class="panel-body">
+                <p>The Cargo Shipping System is based on the example used in Eric Evans book Domain-Driven Design: <i>Tackling Complexity in the Heart of Software</i>. It\'s a PHP Version of the Cargo Sample to show you how DDD can be applied to a PHP Project.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function (context) {
+        var self = this;
+
+        self.chapter = context.app.config.chapter;
+    }
+</script>

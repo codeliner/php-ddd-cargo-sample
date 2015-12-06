@@ -1,0 +1,26 @@
+<div class="content">
+
+</div>
+<script type="text/javascript">
+    function(context) {
+        var self = this,
+                _routeListener = function (con) {
+                    var rm = con.routeMatch;
+
+                    if (!rm[0]) {
+                        con.app.renderInto(self, ".content", "home");
+                        con.app.removeRouterForRoutePath(["booking"]);
+                        return;
+                    }
+
+                    if (rm[0] == "booking") {
+                        var subRouter = con.router.getSubRouter("booking");
+                        con.app.renderInto(self, ".content", "booking-app", {router : subRouter});
+                        subRouter.route(rm, con);
+                        return;
+                    }
+                };
+
+        context.router.on("route", _routeListener);
+    }
+</script>
