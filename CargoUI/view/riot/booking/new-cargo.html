@@ -60,6 +60,18 @@
         self.onSave = function (e) {
             e.preventDefault();
 
+            _checkIsValid();
+
+            if (! self.isValid) {
+                return;
+            }
+
+            $.postJSON('/api/cargos', {
+                origin: self.origin.value,
+                destination: self.final_destination.value
+            }).then(function(data){
+                console.log(data);
+            }, $.failNotify);
         }
 
         self.on('mount', function () {
@@ -72,7 +84,6 @@
                 })
 
                 _.forEach(data, function (location) {
-                    console.log(data);
                     self.locations.push(location.getProps())
                 });
 

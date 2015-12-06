@@ -9,12 +9,12 @@
  * Date: 29.03.14 - 18:48
  */
 
-namespace CargoBackend\Infrastructure\Routing;
+namespace Codeliner\CargoBackend\Infrastructure\Routing;
 
-use CargoBackend\Model\Cargo\Itinerary;
-use CargoBackend\Model\Cargo\Leg;
-use CargoBackend\Model\Cargo\RouteSpecification;
-use CargoBackend\Model\Service\RoutingServiceInterface;
+use Codeliner\CargoBackend\Model\Cargo\Itinerary;
+use Codeliner\CargoBackend\Model\Cargo\Leg;
+use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
+use Codeliner\CargoBackend\Model\Routing\RoutingServiceInterface;
 use GraphTraversalService\Dto\EdgeDto;
 use GraphTraversalService\Dto\TransitPathDto;
 use GraphTraversalService\GraphTraversalServiceInterface;
@@ -39,16 +39,16 @@ class ExternalRoutingService implements RoutingServiceInterface
     /**
      * @param GraphTraversalServiceInterface $aGraphTraversalService
      */
-    public function __construct(GraphTraversalServiceInterface $aGraphTraversalService)
-    {
-        $this->graphTraversalService = $aGraphTraversalService;
-    }
+    //public function __construct(GraphTraversalServiceInterface $aGraphTraversalService)
+    //{
+    //    $this->graphTraversalService = $aGraphTraversalService;
+    //}
 
     /**
      * @param RouteSpecification $aRouteSpecification
      * @return Itinerary[] A list of itineraries that satisfy the specification. May be an empty list if no route is found.
      */
-    public function fetchRoutesForSpecification(RouteSpecification $aRouteSpecification)
+    public function fetchRoutesForSpecification(RouteSpecification $aRouteSpecification): array
     {
         $transitPaths = $this->graphTraversalService->findShortestPath(
             $aRouteSpecification->origin(),
@@ -68,7 +68,7 @@ class ExternalRoutingService implements RoutingServiceInterface
      * @param TransitPathDto $aTransitPath
      * @return Itinerary
      */
-    private function toItinerary(TransitPathDto $aTransitPath)
+    private function toItinerary(TransitPathDto $aTransitPath): Itinerary
     {
         $legs = array();
 
@@ -83,7 +83,7 @@ class ExternalRoutingService implements RoutingServiceInterface
      * @param EdgeDto $anEdgeDto
      * @return Leg
      */
-    private function toLeg(EdgeDto $anEdgeDto)
+    private function toLeg(EdgeDto $anEdgeDto): Leg
     {
         return new Leg(
             $anEdgeDto->getFromUnLocode(),
@@ -93,4 +93,3 @@ class ExternalRoutingService implements RoutingServiceInterface
         );
     }
 }
- 

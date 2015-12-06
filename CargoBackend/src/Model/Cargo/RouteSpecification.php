@@ -75,11 +75,4 @@ class RouteSpecification
 
         return true;
     }
-    
-    /**
-     * Surrogate key, required by Doctrine
-     * 
-     * @var string 
-     */
-    private $id;
 }

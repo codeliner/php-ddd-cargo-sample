@@ -10,6 +10,8 @@
  */
 namespace Codeliner\CargoBackend\Application\Action;
 
+use Codeliner\CargoBackend\Application\Booking\BookingService;
+use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\JsonResponse;
@@ -22,14 +24,19 @@ use Zend\Diactoros\Response\JsonResponse;
  */
 final class GetLocations
 {
-
+    /**
+     * @var BookingService
+     */
+    private $bookingService;
 
     /**
-     * @param QueryBus $queryBus
+     * GetLocations constructor.
+     *
+     * @param BookingService $bookingService
      */
-    public function __construct(QueryBus $queryBus)
+    public function __construct(BookingService $bookingService)
     {
-        $this->locationsQueryBus = $queryBus;
+        $this->bookingService = $bookingService;
     }
 
     /**
@@ -40,14 +47,11 @@ final class GetLocations
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $promise = $this->locationsQueryBus->dispatch(new BackendQuery('Codeliner\LocationsBackend\API\Query\GetLocations'));
-
-        $locations = null;
-
-        \React\Promise\resolve($promise)->done(function($result) use (&$locations) {
-            $locations = json_decode($result, true);
-        });
-
-        return new JsonResponse(['locations' => $locations]);
+        return new JsonResponse(['locations' => array_map(function(LocationDto $locationDto) {
+            return [
+                'name' => $locationDto->getName(),
+                'unLocode' => $locationDto->getUnLocode()
+            ];
+        }, $this->bookingService->listShippingLocations())]);
     }
 }

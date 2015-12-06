@@ -13,6 +13,9 @@ return [
             //    'path'  => '/path/to/match',
             //    'error' => true,
             //],
+            [
+                'middleware' => \Psr7Middlewares\Middleware\Payload::class,
+            ]
         ],
 
         // An array of middleware to register after registration of the

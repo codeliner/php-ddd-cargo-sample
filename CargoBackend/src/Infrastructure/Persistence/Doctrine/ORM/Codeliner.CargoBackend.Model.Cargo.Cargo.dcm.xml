@@ -5,16 +5,10 @@
                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="Codeliner\CargoBackend\Model\Cargo\Cargo"
             table="cargo" 
-            repository-class="Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\CargoRepositoryDoctrine">
+            repository-class="Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineCargoRepository">
         <id name="trackingId" type="cargo_tracking_id" column="tracking_id" />
         <field name="origin" type="string" />
-        <one-to-one field="routeSpecification" target-entity="Codeliner\CargoBackend\Model\Cargo\RouteSpecification">
-            <cascade><cascade-all /></cascade>
-            <join-column name="route_specification_id" referenced-column-name="id"/>
-        </one-to-one>
-        <one-to-one field="itinerary" target-entity="Codeliner\CargoBackend\Model\Cargo\Itinerary">
-            <cascade><cascade-all /></cascade>
-            <join-column name="itinerary_id" referenced-column-name="id"/>
-        </one-to-one>
+        <embedded name="routeSpecification" class="Codeliner\CargoBackend\Model\Cargo\RouteSpecification" column-prefix="route_" />
+        <embedded name="itinerary" class="Codeliner\CargoBackend\Model\Cargo\Itinerary" column-prefix="itinerary_" />
     </entity>
 </doctrine-mapping>

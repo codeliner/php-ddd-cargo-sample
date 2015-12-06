@@ -75,7 +75,7 @@ class BookingService
      * @param string $anOrigin
      * @param string $aDestination
      * @throws \Exception If booking fails
-     * @return string TrackingId
+     * @return string
      */
     public function bookNewCargo(string $anOrigin, string $aDestination): string
     {

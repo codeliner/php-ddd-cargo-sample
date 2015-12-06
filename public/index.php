@@ -38,6 +38,10 @@ $app->pipe(
     }
 );
 
+$cargoBackend = $container->get('Codeliner\CargoBackend');
+
+$app->pipe('/api', $cargoBackend);
+
 $server = \Zend\Diactoros\Server::createServer($app,
     $_SERVER,
     $_GET,

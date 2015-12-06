@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Codeliner\CargoBackend\Infrastructure\Persistence;
+namespace Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine;
 
 use Codeliner\CargoBackend\Model\Cargo\Cargo;
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;

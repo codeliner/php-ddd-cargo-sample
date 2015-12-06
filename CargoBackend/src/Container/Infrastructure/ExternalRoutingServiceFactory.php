@@ -6,26 +6,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 06.12.2015 - 8:29 PM
+ * Date: 06.12.2015 - 10:01 PM
  */
 declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Container\Infrastructure;
 
-use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineCargoRepository;
-use Codeliner\CargoBackend\Model\Cargo\Cargo;
+use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
 use Interop\Container\ContainerInterface;
 
 /**
- * Class DoctrineCargoRepositoryFactory
+ * Class ExternalRoutingServiceFactory
  *
  * @package Codeliner\CargoBackend\Container\Infrastructure
  */
-final class DoctrineCargoRepositoryFactory
+final class ExternalRoutingServiceFactory
 {
-    public function __invoke(ContainerInterface $container): DoctrineCargoRepository
+    /**
+     * @param ContainerInterface $container
+     * @return ExternalRoutingService
+     */
+    public function __invoke(ContainerInterface $container): ExternalRoutingService
     {
-        $em = $container->get('doctrine.entitymanager.orm_default');
-        return $em->getRepository(Cargo::class);
+        return new ExternalRoutingService();
     }
 }
