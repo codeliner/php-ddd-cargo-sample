@@ -1,34 +1,30 @@
-php-ddd-cargo-sample
-====================
+# PHP DDD Cargo Sample
 
-PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
+PHP 7 port of the cargo sample used in Eric Evans Domain-Driven Design book
 
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/)
-[![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/)
+[![Build Status](https://travis-ci.org/prooph/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/prooph/php-ddd-cargo-sample)
 
-CQRS & ES?
-----------
+## Cargo Sample Reloaded
 
-The original cargo sample is not based on CQRS and EventSourcing. However, you may have read something about it in relation to Domain-Driven Design.
-The php-ddd-cargo-sample shows you the original approach using application services, a combined write and read model
-and an ORM (Doctrine in our case) to hide the persistence layer. This is still a very good and valid approach but CQRS and
-EventSourcing gets a lot of attention these days because it offers a great way to tackle complex problems.
+After two years of inactivity a new version of the PHP DDD Cargo Sample is available [2015/12/07].
+The new version is a complete rewrite of the cargo sample using cutting edge technology.
 
-Our suggestion is that you have a look at the cargo example and also at [proophessor-do](https://github.com/prooph/proophessor-do).
+### Sponsoring
+This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on [twitter](https://twitter.com/prooph_software)
 
-**Proophessor-do** demonstrates CQRS and ES using [prooph components](https://github.com/prooph/proophessor/blob/master/docs/book/components.md)
-and it is different then other example applications.
+### What Is New?
 
-Proophessor-do is incomplete and you are ask to get the job done.
-**This is a great way to learn more about CQRS and EventSourcing**. Don't worry, the prooph community is available in a chat
-to help you with your task. See the [HALL OF FAME](https://github.com/prooph/proophessor-do#hall-of-fame). The first tasks are already done
-and the next ones in progress. So what are you waiting for? Go pick up a task, too!
+- [x] PHP 7 with strict scalar type hints
+- [x] PSR-7 middleware layer using [zend-expressive](https://github.com/zendframework/zend-expressive)
+- [x] Doctrine ORM ^2.5 [Embeddables](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/tutorials/embeddables.html)
+- [x] PHPUnit ^5.0
+- [x] Behat ^3.0
+- [x] Single Page UI using [riot.js](http://riotjs.com/)
 
-Ok, you would like to explore the cargo sample first? Just read on. It starts with the next heading.
+## Goal of the Project
 
-Goal of the Project
--------------------
-We want to show the PHP way of implementing Domain-Driven Design with the help of
+We want to show the PHP 7 way of implementing Domain-Driven Design with the help of
 the original Cargo sample used in Eric Evans book
 `Domain-Driven Design: Tackling Complexity in the Heart of Software`.
 This has already been done using java and a C# version is also available.
@@ -37,25 +33,13 @@ It is not the one way to apply DDD, but should help you understand the theory
 and gives you a starting point. Also see the [Caveats](http://dddsample.sourceforge.net/) of the 
 java implementation. The same applies for our version. 
 
-<b>The PHP port is work in progress. Your welcome to fork the repo and help finishing the cargo sample application.</b>
-
-The application layer is based on ZF2 and we use Doctrine2 to persist our aggregates.
-This would be a common combination in a large PHP project but both frameworks are not required. They just make our life easier and let us focus on the Domain-Driven Design implementation. Both can be replaced with any other PHP based components.
-
-Iterative Implementation
-------------------------
-To go with you when you read the book, our sample has a [release of each chapter](https://github.com/codeliner/php-ddd-cargo-sample#chapter-overview). So you can
-simply `git checkout ChapterOne` and you only get the starting view of the domain
-with just to entities `Cargo` and `Voyage`. Our application evolves chapter by chapter
-the more knowledge we get about the domain. Each chapter ships with it's own review, where you can find additional information about the implementation, tips and tricks and many more.
-
-Installation
+## Installation
 ------------
-See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
+See the [Installation](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
 
 Useful DDD tools
 ----------------
-Check our collection of [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
+Check our collection of [DDD Tools and Libs](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
 
 Become a member
 ---------------
@@ -63,36 +47,29 @@ If you want to share your experience with other DDD enthusiasts or want to ask a
 
 You can find more DDD stuff like interesting articles and related libraries on the [PhpFriendsOfDdd/state-of-the-union](https://github.com/PhpFriendsOfDdd/state-of-the-union) project.
 
-Project Structure
------------------
-There is no problem if you don't know the structure of a ZF2 application. All the important
-parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/src/CargoBackend) of the CargoBackend module.
-
-*Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the domain and infrastructure classes were included in the Application module!*
-
 Behavior Driven Design
 ----------------------
 All features of the application are described in feature files. You can find them in
-the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
+the [features folder](https://github.com/prooph/php-ddd-cargo-sample/tree/master/features) of the project.
 We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
 business expectations.
 
 You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app:
-`java -jar bin/selenium-server-standalone-2.37.0.jar`
+`java -jar bin/selenium-server-standalone-2.46.0.jar`
 After the server started successfully open another console, navigate to project root again and run Behat with the command `php bin/behat`.
 
 *Note: If it does not work, check that the behat file is executable.
 
 Unit Tests
 ----------
-Unit Tests are of course also available. You can find them in [module/CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests).
+Unit Tests are of course also available. You can find them in [CargoBackend/tests](https://github.com/prooph/php-ddd-cargo-sample/tree/master/CargoBackend/tests).
 Got to the directory and simply run `phpunit`.
 
 *Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the test classes were included in the Application module!*
 
 Support
 -------
-If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
+If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/prooph/php-ddd-cargo-sample/issues?state=open).
 Same applies if you have a question or a feature wish.
 Maybe I've missed a concept that you hoped to find in the example.
 
@@ -103,15 +80,4 @@ The chapter overview has moved to the [PHP DDD Cargo Sample project page](http:/
 
 Contributing
 ------------
-See the [CONTRIBUTING](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
-
-TODO
-----
-- Provide vagrant support for simple application set up [not started]
-- Improve project pages (include reviews, DDD tools, ...) [not started]
-- Review of ChapterFour [in progress]
-- Implement ChapterFive [not started]
-    - Switch to [ValueObjects](https://github.com/nicolopignatelli/valueobjects) and use VOs whenever possible
-    - Add reroute Cargo use case
-    - Add HandlingEvents
-    - Add delivery progress use cases
+See the [CONTRIBUTING](https://github.com/prooph/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.

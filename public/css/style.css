@@ -35,3 +35,15 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+span.subheading {
+    display:block;
+    margin-top: 15px;
+    margin-bottom: 45px;
+    text-transform: none;
+    font-size: 16px;
+    font-weight: 400;
+    color:#555;
+}
+
+.row.highlight:hover {background-color: rgba(80, 255, 26, 0.36)}

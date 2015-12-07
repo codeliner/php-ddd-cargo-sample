@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-12">
+        <form id="new-cargo-form">
+            <div class="form-group">
+                <label>Origin</label>
+                <select name="origin" class="form-control" onchange="{ onChangeOrigin }">
+                    <option each="{ locations }" value="{ unLocode }">{ name }</option>
+                </select>
+            </div>
+            <div class="{ form-group: true, has-error: hasError }">
+                <label>Destination</label>
+                <select name="final_destination" class="form-control" onchange="{ onChangeDestination }">
+                    <option each="{ locations }" value="{ unLocode }">{ name }</option>
+                </select>
+                <span if="{ hasError }" class="help-block">Origin and Destination must not be the same location!</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="save" value="assign to itinerary" class="{ btn: true, btn-success: true, disabled: !isValid }" onclick="{ onSave }">
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function (context) {
+        var self = this,
+            _checkIsValid = function () {
+                self.hasError = false;
+                self.isValid = false;
+
+                if (!_.isEmpty(self.origin.value) && !_.isEmpty(self.final_destination.value)) {
+                    if (self.origin.value === self.final_destination.value) {
+                        self.hasError = true;
+                        self.isValid = false;
+                        return;
+                    }
+
+                    self.isValid = true;
+                }
+            };
+
+        self.locations = [];
+
+        self.hasError = false;
+        self.isValid = false;
+
+        self.locations.push({
+            unLocode : '',
+            name : 'Fetching locations from server ...'
+        });
+
+        self.onChangeOrigin = function (e) {
+            _checkIsValid();
+        }
+
+        self.onChangeDestination = function (e) {
+            _checkIsValid();
+        }
+
+        self.onSave = function (e) {
+            e.preventDefault();
+
+            _checkIsValid();
+
+            if (! self.isValid) {
+                return;
+            }
+
+            context.app.one('cargo_created', function(cargo) {
+                window.location.hash = context.router.get('cargos/' + cargo.getId() + '/assign_route');
+            });
+
+            context.app.trigger('create_cargo', {origin: self.origin.value, destination: self.final_destination.value});
+        }
+
+        self.on('mount', function () {
+            context.app.one("locations_refreshed", function(locations) {
+                self.locations = [];
+
+                self.locations.push({
+                    unLocode : '',
+                    name : 'Select a location'
+                })
+
+                _.forEach(locations, function (location) {
+                    self.locations.push(location.getProps())
+                });
+
+                self.update();
+            });
+
+            context.app.trigger("refresh_locations");
+        });
+    }
+</script>

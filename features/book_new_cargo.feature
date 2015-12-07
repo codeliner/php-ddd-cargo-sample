@@ -5,7 +5,7 @@ Feature: Book new Cargo
 
 @javascript
 Scenario: Add a Cargo and assign route
-    Given I am on "application/bookingApp/index"
+    Given I am on "/#booking"
     Then I should wait until I see "#book-cargo"
     When I follow "book-cargo"
     And I select "DEHAM" from "origin"

@@ -1,13 +1,12 @@
-Installation
-============
+# Installation
 
-Using Git and Composer (recommended)
------------------------------------
+## Using Git and Composer (recommended)
+
 Clone the repository and manually invoke `composer` using the shipped
 `composer.phar`:
 
     cd my/www/dir
-    git clone https://github.com/codeliner/php-ddd-cargo-sample.git
+    git clone https://github.com/prooph/php-ddd-cargo-sample.git
     cd php-ddd-cargo-sample
     php composer.phar self-update
     php composer.phar install
@@ -15,17 +14,20 @@ Clone the repository and manually invoke `composer` using the shipped
 (The `self-update` directive is to ensure you have an up-to-date `composer.phar`
 available.)
 
-Setup a Database
-----------------
+## Setup a Database
+
 Our sample works with a MySql database so you need a running MySql Server and an
-empty test db called `cargo_sample`. Then you can use the [cargo_sample.sql](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/scripts/cargo_sample.sql) to create all
-required tables, but beware that each release chips with it's own `cargo_sample.sql`.
-When you switch from one chapter to another you have to recreate the database schema.
-Finally copy and rename the [local.php.dist](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
+empty test database called `cargo_sample`.
+
+The cargo sample ships with [doctrine/migrations](https://github.com/doctrine/migrations) to create the schema. But before we can run the migrations we
+need to configure a database connection.
+
+Copy and rename the [config/autoload/local.php.dist](https://github.com/prooph/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
 and fill in your database credentials.
 
-Web Server Setup
-----------------
+Now run `php bin/migrations.php migrations:migrate` in a terminal (Command must be invoked in project root)
+
+## Web Server Setup
 
 ### Apache Setup
 
@@ -78,8 +80,11 @@ project and you should be ready to go! It should look something like below:
         }
     }
 
+### PHP Build-In Webserver
 
-Permissions
------------
+Run `php -S 0.0.0.0:8080 -t public/ # then browse to http://localhost:8080/`
+
+
+## Permissions
 
 The application needs write access for the `data/` dir and all sub folders.

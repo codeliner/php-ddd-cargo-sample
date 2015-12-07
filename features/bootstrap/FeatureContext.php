@@ -1,4 +1,5 @@
 <?php
+namespace Codeliner\CargoFeature;
 
 use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
@@ -23,9 +24,9 @@ use Zend\ServiceManager\ServiceManager;
 class FeatureContext extends MinkContext
 {
     /**
-     * @var Application
+     * @var \Interop\Container\ContainerInterface
      */
-    private static $zendApp;
+    private static $container;
     
     /**
      * Initializes context.
@@ -33,7 +34,7 @@ class FeatureContext extends MinkContext
      *
      * @param array $parameters context parameters (set them up through behat.yml)
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
         // Initialize your context here
     }
@@ -41,12 +42,10 @@ class FeatureContext extends MinkContext
     /**
      * @BeforeSuite
      */
-    static public function iniializeZendFramework()
+    static public function iniializeContainer()
     {
-        if (self::$zendApp === null) {
-            $config = require __DIR__ . '/../../config/application.config.php';
-            
-            self::$zendApp = Application::init($config);
+        if (self::$container === null) {
+            self::$container = require __DIR__ . '/../../config/container.php';
         }
     }
     
@@ -55,12 +54,8 @@ class FeatureContext extends MinkContext
      */
     public static function clearDatabase()
     {
-        $em = self::$zendApp->getServiceManager()->get('doctrine.entitymanager.orm_default');
-        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\Cargo');
-        $q->execute();
-        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\RouteSpecification');
-        $q->execute();
-        $q = $em->createQuery('delete from CargoBackend\Model\Cargo\Itinerary');
+        $em = self::$container->get('doctrine.entitymanager.orm_default');
+        $q = $em->createQuery('delete from Codeliner\CargoBackend\Model\Cargo\Cargo');
         $q->execute();
     }
     

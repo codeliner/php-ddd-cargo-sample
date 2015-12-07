@@ -1,0 +1,13 @@
+<li>
+    <a href="{ router.get('cargos/' + cargo.getId()) }" class="cargo-details-link">{ cargo.getId() }</a> From: { getLocation(cargo.get('origin')).get('name') } To: { getLocation(cargo.get('final_destination')).get('name') }
+</li>
+<script type="text/javascript">
+    function (context) {
+        var self = this;
+
+        self.cargo = context.cargo;
+        self.getLocation = context.get_location;
+        console.log(self.getLocation(self.cargo.get('origin')));
+        self.router = context.router;
+    }
+</script>

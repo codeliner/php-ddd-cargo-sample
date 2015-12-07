@@ -3,7 +3,7 @@ Domain-Driven Design Tools for PHP
 
 We have listed a selection of useful tools and libraries that help you implementing Domain-Driven Design patterns.
 This list is not meant to be complete. It is just a choice of personal favorites.
-If you think we have missed an important tool, than please provide a pull request with your addition or simply open an [issue](https://github.com/codeliner/php-ddd-cargo-sample/issues).
+If you think we have missed an important tool, than please provide a pull request with your addition or simply open an [issue](https://github.com/prooph/php-ddd-cargo-sample/issues).
 
 DDD Interfaces
 --------------
@@ -33,7 +33,7 @@ A simple php library which contains assertions and guard methods for input valid
 
 ###codeliner/php-equalsbuilder
 EqualsBuilder for PHP. Ease the comparison of ValueObject properties within ValueObjectInterface#sameValueAs implementations.
-See our [RoteSpecification#sameValueAs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/module/Application/src/Application/Domain/Model/Cargo/RouteSpecification.php) as an example.
+See our [RoteSpecification#sameValueAs](https://github.com/prooph/php-ddd-cargo-sample/blob/master/module/Application/src/Application/Domain/Model/Cargo/RouteSpecification.php) as an example.
 
 [GitHub Repository](https://github.com/codeliner/php-equalsbuilder)
 

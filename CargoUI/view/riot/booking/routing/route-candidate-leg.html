@@ -1,0 +1,15 @@
+<div class="row highlight">
+    <div class="col-md-12">
+        <strong>{context.get_location(leg.load_location).get('name')}</strong>&nbsp;{print_time(leg.load_time)}&nbsp;<i class="glyphicon glyphicon-arrow-right"></i> <strong>{context.get_location(leg.unload_location).get('name')}</strong>&nbsp;{print_time(leg.unload_time)}
+    </div>
+</div>
+<script type="text/javascript">
+    function (context) {
+        var self = this;
+        self.leg = context.leg;
+        self.context = context;
+        self.print_time = function(timeStr) {
+            return moment(timeStr).format('YYYY/MM/DD HH:mm');
+        }
+    }
+</script>

@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.4
+  - 7.0
 services:
   - mysql
 
@@ -9,20 +9,20 @@ before_script:
   - composer self-update
   - composer update
   - mysql -e 'create database cargo_sample;'
-  - mysql -uroot cargo_sample < ./scripts/cargo_sample.sql
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
   - cp ./config/behat.yml.travis ./config/behat.yml
   - chmod -R 777 ./data/cache
+  - php ./bin/migrations.php migrations:migrate -n
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
   - "java -jar selenium-server-standalone-2.46.0.jar > /dev/null &"
   # webserver setup
-  -  php -S localhost:8000 -t public/ &
+  -  php -S localhost:8000 -t public &
   - sleep 10
 
 
 script:
-  - php ./bin/phpunit -c ./module/CargoBackend/tests
-  - php ./bin/phpunit -c ./module/GraphTraversalService/tests
+  - php ./bin/phpunit -c ./CargoBackend/tests
+  - php ./bin/phpunit -c ./GraphTraversalBackend/tests
   - bin/behat --verbose
 
