@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="bootstrap.php">
+<phpunit bootstrap="Bootstrap.php">
     <testsuites>
         <testsuite name="GraphTraversalBackend">
             <directory>.</directory>

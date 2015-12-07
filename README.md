@@ -5,15 +5,25 @@ PHP 7 port of the cargo sample used in Eric Evans Domain-Driven Design book
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/)
 [![Build Status](https://travis-ci.org/prooph/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/prooph/php-ddd-cargo-sample)
 
-## PHP Cargo Sample Reloaded
+## Cargo Sample Reloaded
 
 After two years of inactivity a new version of the PHP DDD Cargo Sample is available [2015/12/07].
 The new version is a complete rewrite of the cargo sample using cutting edge technology.
 
-##
+### Sponsors
+This brand new version is sponsored by prooph software GmbH. You can follow us on [github]()
 
-Goal of the Project
--------------------
+### What Is New?
+
+- [x] PHP 7 with strict scalar type hints
+- [x] PSR-7 middleware layer using [zend-expressive](https://github.com/zendframework/zend-expressive)
+- [x] Doctrine ORM ^2.5 [Embeddables](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/tutorials/embeddables.html)
+- [x] PHPUnit ^5.0
+- [x] Behat ^3.0
+- [x] Single Page UI with [riot.js](http://riotjs.com/)
+
+## Goal of the Project
+
 We want to show the PHP way of implementing Domain-Driven Design with the help of
 the original Cargo sample used in Eric Evans book
 `Domain-Driven Design: Tackling Complexity in the Heart of Software`.
