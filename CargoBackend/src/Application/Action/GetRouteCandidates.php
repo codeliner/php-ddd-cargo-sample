@@ -6,22 +6,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 06.12.2015 - 10:35 PM
+ * Date: 06.12.2015 - 11:23 PM
  */
 namespace Codeliner\CargoBackend\Application\Action;
 
-use Assert\Assertion;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
+use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
+use Codeliner\CargoBackend\Model\Cargo\TrackingId;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
- * Class CreateCargo
+ * Class GetRouteCandidates
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class CreateCargo
+final class GetRouteCandidates
 {
     /**
      * @var BookingService
@@ -29,7 +30,7 @@ final class CreateCargo
     private $bookingService;
 
     /**
-     * CreateCargo constructor.
+     * GetRouteCandidates constructor.
      *
      * @param BookingService $bookingService
      */
@@ -40,13 +41,14 @@ final class CreateCargo
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $data = $request->getParsedBody();
+        if (null === $trackingId = $request->getAttribute('trackingId')) {
+            throw new \InvalidArgumentException('Missing tracking id');
+        }
 
-        Assertion::keyExists($data, 'origin');
-        Assertion::keyExists($data, 'destination');
-
-        $trackingId = $this->bookingService->bookNewCargo($data['origin'], $data['destination']);
-
-        return new JsonResponse(['trackingId' => $trackingId]);
+        return new JsonResponse([
+            'routeCandidates' => array_map(function(RouteCandidateDto $routeCandidate){
+                return $routeCandidate->getArrayCopy();
+            }, $this->bookingService->requestPossibleRoutesForCargo($trackingId))
+        ]);
     }
 }

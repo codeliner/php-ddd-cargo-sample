@@ -1,17 +1,19 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <contact@prooph.de>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 01.03.14 - 22:35
  */
+declare(strict_types = 1);
 
-namespace GraphTraversalService;
-use GraphTraversalService\Dto\EdgeDto;
-use GraphTraversalService\Dto\TransitPathDto;
+namespace Codeliner\GraphTraversalBackend;
+
+use Codeliner\GraphTraversalBackend\Dto\EdgeDto;
+use Codeliner\GraphTraversalBackend\Dto\TransitPathDto;
 
 /**
  * Class GraphTraversalService
@@ -20,7 +22,7 @@ use GraphTraversalService\Dto\TransitPathDto;
  * and fetches compatible routes that are described by Itineraries.
  *
  * @package Application\Service
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class GraphTraversalService implements GraphTraversalServiceInterface
 {
@@ -39,7 +41,7 @@ class GraphTraversalService implements GraphTraversalServiceInterface
      * @param string $toUnLocode
      * @return TransitPathDto[]
      */
-    public function findShortestPath($fromUnLocode, $toUnLocode)
+    public function findShortestPath($fromUnLocode, $toUnLocode): array
     {
         $routes = \array_filter($this->routes, function($route) use ($fromUnLocode, $toUnLocode) {
             return $route['origin'] === $fromUnLocode && $route['destination'] === $toUnLocode;
@@ -60,7 +62,7 @@ class GraphTraversalService implements GraphTraversalServiceInterface
      * @param array $route
      * @return TransitPathDto
      */
-    private function routeToTransitPath(array $route)
+    private function routeToTransitPath(array $route): TransitPathDto
     {
         $edges = array();
 
@@ -94,8 +96,8 @@ class GraphTraversalService implements GraphTraversalServiceInterface
 
                 $edge->setFromUnLocode($currentLocation);
                 $edge->setToUnLocode($unLocode);
-                $edge->setFromDate($loadTime->format(\DateTime::ISO8601));
-                $edge->setToDate($unloadTime->format(\DateTime::ISO8601));
+                $edge->setFromDate($loadTime->format(\DateTime::ATOM));
+                $edge->setToDate($unloadTime->format(\DateTime::ATOM));
 
                 $edges[] = $edge;
 
@@ -118,8 +120,8 @@ class GraphTraversalService implements GraphTraversalServiceInterface
 
         $edge->setFromUnLocode($currentLocation);
         $edge->setToUnLocode($route['destination']);
-        $edge->setFromDate($loadTime->format(\DateTime::ISO8601));
-        $edge->setToDate($unloadTime->format(\DateTime::ISO8601));
+        $edge->setFromDate($loadTime->format(\DateTime::ATOM));
+        $edge->setToDate($unloadTime->format(\DateTime::ATOM));
 
         $edges[] = $edge;
 
@@ -129,6 +131,4 @@ class GraphTraversalService implements GraphTraversalServiceInterface
 
         return $transitPath;
     }
-
-
 }

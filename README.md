@@ -3,8 +3,8 @@ php-ddd-cargo-sample
 
 PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
 
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/)
-[![Build Status](https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/codeliner/php-ddd-cargo-sample)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/)
+[![Build Status](https://travis-ci.org/prooph/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/prooph/php-ddd-cargo-sample)
 
 CQRS & ES?
 ----------
@@ -44,18 +44,18 @@ This would be a common combination in a large PHP project but both frameworks ar
 
 Iterative Implementation
 ------------------------
-To go with you when you read the book, our sample has a [release of each chapter](https://github.com/codeliner/php-ddd-cargo-sample#chapter-overview). So you can
+To go with you when you read the book, our sample has a [release of each chapter](https://github.com/prooph/php-ddd-cargo-sample#chapter-overview). So you can
 simply `git checkout ChapterOne` and you only get the starting view of the domain
 with just to entities `Cargo` and `Voyage`. Our application evolves chapter by chapter
 the more knowledge we get about the domain. Each chapter ships with it's own review, where you can find additional information about the implementation, tips and tricks and many more.
 
 Installation
 ------------
-See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
+See the [Installation](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
 
 Useful DDD tools
 ----------------
-Check our collection of [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
+Check our collection of [DDD Tools and Libs](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
 
 Become a member
 ---------------
@@ -66,14 +66,14 @@ You can find more DDD stuff like interesting articles and related libraries on t
 Project Structure
 -----------------
 There is no problem if you don't know the structure of a ZF2 application. All the important
-parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/src/CargoBackend) of the CargoBackend module.
+parts like the domain and the infrastructure implementation can be found in the [namespace](https://github.com/prooph/php-ddd-cargo-sample/tree/master/module/CargoBackend/src/CargoBackend) of the CargoBackend module.
 
 *Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the domain and infrastructure classes were included in the Application module!*
 
 Behavior Driven Design
 ----------------------
 All features of the application are described in feature files. You can find them in
-the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
+the [features folder](https://github.com/prooph/php-ddd-cargo-sample/tree/master/features) of the project.
 We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
 business expectations.
 
@@ -85,14 +85,14 @@ After the server started successfully open another console, navigate to project 
 
 Unit Tests
 ----------
-Unit Tests are of course also available. You can find them in [module/CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests).
+Unit Tests are of course also available. You can find them in [module/CargoBackend/tests](https://github.com/prooph/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests).
 Got to the directory and simply run `phpunit`.
 
 *Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the test classes were included in the Application module!*
 
 Support
 -------
-If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
+If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/prooph/php-ddd-cargo-sample/issues?state=open).
 Same applies if you have a question or a feature wish.
 Maybe I've missed a concept that you hoped to find in the example.
 
@@ -103,7 +103,7 @@ The chapter overview has moved to the [PHP DDD Cargo Sample project page](http:/
 
 Contributing
 ------------
-See the [CONTRIBUTING](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
+See the [CONTRIBUTING](https://github.com/prooph/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
 
 TODO
 ----

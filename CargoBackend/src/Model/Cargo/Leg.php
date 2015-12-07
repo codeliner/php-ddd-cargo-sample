@@ -40,15 +40,15 @@ class Leg
     private $unloadTime;
 
     /**
-     * @param string    $aLoadLocation
-     * @param string    $anUnloadLocation
-     * @param \DateTime $aLoadTime
-     * @param \DateTime $anUnloadTime
+     * @param string $aLoadLocation
+     * @param string $anUnloadLocation
+     * @param \DateTimeImmutable $aLoadTime
+     * @param \DateTimeImmutable $anUnloadTime
      */
     public function __construct(string $aLoadLocation,
                                 string $anUnloadLocation,
-                                \DateTime $aLoadTime,
-                                \DateTime $anUnloadTime)
+                                \DateTimeImmutable $aLoadTime,
+                                \DateTimeImmutable $anUnloadTime)
     {
        $this->loadLocation   = $aLoadLocation;
         $this->unloadLocation = $anUnloadLocation;
@@ -73,7 +73,7 @@ class Leg
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
     public function loadTime()
     {
@@ -81,7 +81,7 @@ class Leg
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
     public function unloadTime()
     {

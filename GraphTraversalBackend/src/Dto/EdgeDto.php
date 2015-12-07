@@ -1,21 +1,22 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <contact@prooph.de>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 18:56
  */
+declare(strict_types = 1);
 
-namespace GraphTraversalService\Dto;
+namespace Codeliner\GraphTraversalBackend\Dto;
 
 /**
  * Class EdgeDto
  *
- * @package GraphTraversalService\Dto
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package Codeliner\GraphTraversalService\Dto
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class EdgeDto 
 {
@@ -42,7 +43,7 @@ class EdgeDto
     /**
      * @param string $fromDate
      */
-    public function setFromDate($fromDate)
+    public function setFromDate(string $fromDate)
     {
         $this->fromDate = $fromDate;
     }
@@ -50,7 +51,7 @@ class EdgeDto
     /**
      * @return string
      */
-    public function getFromDate()
+    public function getFromDate(): string
     {
         return $this->fromDate;
     }
@@ -58,7 +59,7 @@ class EdgeDto
     /**
      * @param string $fromUnLocode
      */
-    public function setFromUnLocode($fromUnLocode)
+    public function setFromUnLocode(string $fromUnLocode)
     {
         $this->fromUnLocode = $fromUnLocode;
     }
@@ -66,7 +67,7 @@ class EdgeDto
     /**
      * @return string
      */
-    public function getFromUnLocode()
+    public function getFromUnLocode(): string
     {
         return $this->fromUnLocode;
     }
@@ -74,7 +75,7 @@ class EdgeDto
     /**
      * @param string $toDate
      */
-    public function setToDate($toDate)
+    public function setToDate(string $toDate)
     {
         $this->toDate = $toDate;
     }
@@ -82,7 +83,7 @@ class EdgeDto
     /**
      * @return string
      */
-    public function getToDate()
+    public function getToDate(): string
     {
         return $this->toDate;
     }
@@ -90,7 +91,7 @@ class EdgeDto
     /**
      * @param string $toUnLocode
      */
-    public function setToUnLocode($toUnLocode)
+    public function setToUnLocode(string $toUnLocode)
     {
         $this->toUnLocode = $toUnLocode;
     }
@@ -98,9 +99,8 @@ class EdgeDto
     /**
      * @return string
      */
-    public function getToUnLocode()
+    public function getToUnLocode(): string
     {
         return $this->toUnLocode;
     }
 }
- 

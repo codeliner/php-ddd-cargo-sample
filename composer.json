@@ -7,7 +7,7 @@
         "PSR7",
         "DDD"
     ],
-    "homepage": "https://github.com/codeliner/php-ddd-cargo-sample",
+    "homepage": "https://github.com/prooph/php-ddd-cargo-sample",
     "authors": [
         {
             "name": "Alexander Miertsch",

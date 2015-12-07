@@ -41,8 +41,8 @@ class CargoRoutingDtoAssembler
 
             $legDto->setLoadLocation($leg->loadLocation());
             $legDto->setUnloadLocation($leg->unloadLocation());
-            $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ISO8601));
-            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ISO8601));
+            $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ATOM));
+            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ATOM));
 
             $cargoRoutingDto->addLeg($legDto);
         }

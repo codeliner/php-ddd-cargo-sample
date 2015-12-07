@@ -13,6 +13,7 @@ declare(strict_types = 1);
 namespace Codeliner\CargoBackend\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
+use Codeliner\GraphTraversalBackend\GraphTraversalServiceInterface;
 use Interop\Container\ContainerInterface;
 
 /**
@@ -28,6 +29,6 @@ final class ExternalRoutingServiceFactory
      */
     public function __invoke(ContainerInterface $container): ExternalRoutingService
     {
-        return new ExternalRoutingService();
+        return new ExternalRoutingService($container->get(GraphTraversalServiceInterface::class));
     }
 }

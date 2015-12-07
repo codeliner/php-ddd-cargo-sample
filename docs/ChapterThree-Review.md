@@ -8,4 +8,4 @@ Additionally, you can have a look at the [descriptions of the original cargo sam
 
 Domain-Driven Design Tools
 --------------------------
-Checkout our [collection of useful DDD tools and libraries](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md). The tools help you implement DDD and let you focus on the domain model, not on technical details.
+Checkout our [collection of useful DDD tools and libraries](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md). The tools help you implement DDD and let you focus on the domain model, not on technical details.

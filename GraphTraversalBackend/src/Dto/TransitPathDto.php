@@ -1,21 +1,22 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <contact@prooph.de>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
  * Date: 29.03.14 - 18:55
  */
+declare(strict_types = 1);
 
-namespace GraphTraversalService\Dto;
+namespace Codeliner\GraphTraversalBackend\Dto;
 
 /**
  * Class TransitPathDto
  *
- * @package GraphTraversalService\Dto
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package Codeliner\GraphTraversalService\Dto
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class TransitPathDto
 {
@@ -27,7 +28,7 @@ class TransitPathDto
     /**
      * @param EdgeDto[] $edges
      */
-    public function setEdges($edges)
+    public function setEdges(array $edges)
     {
         $this->edges = $edges;
     }
@@ -35,11 +36,8 @@ class TransitPathDto
     /**
      * @return EdgeDto[]
      */
-    public function getEdges()
+    public function getEdges(): array
     {
         return $this->edges;
     }
-
-
 }
- 

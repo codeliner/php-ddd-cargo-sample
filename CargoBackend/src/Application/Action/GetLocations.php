@@ -42,10 +42,9 @@ final class GetLocations
     /**
      * @param RequestInterface $request
      * @param ResponseInterface $response
-     * @param callable $next
      * @return JsonResponse
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
         return new JsonResponse(['locations' => array_map(function(LocationDto $locationDto) {
             return [

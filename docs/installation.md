@@ -7,7 +7,7 @@ Clone the repository and manually invoke `composer` using the shipped
 `composer.phar`:
 
     cd my/www/dir
-    git clone https://github.com/codeliner/php-ddd-cargo-sample.git
+    git clone https://github.com/prooph/php-ddd-cargo-sample.git
     cd php-ddd-cargo-sample
     php composer.phar self-update
     php composer.phar install
@@ -18,10 +18,10 @@ available.)
 Setup a Database
 ----------------
 Our sample works with a MySql database so you need a running MySql Server and an
-empty test db called `cargo_sample`. Then you can use the [cargo_sample.sql](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/scripts/cargo_sample.sql) to create all
+empty test db called `cargo_sample`. Then you can use the [cargo_sample.sql](https://github.com/prooph/php-ddd-cargo-sample/blob/master/scripts/cargo_sample.sql) to create all
 required tables, but beware that each release chips with it's own `cargo_sample.sql`.
 When you switch from one chapter to another you have to recreate the database schema.
-Finally copy and rename the [local.php.dist](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
+Finally copy and rename the [local.php.dist](https://github.com/prooph/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
 and fill in your database credentials.
 
 Web Server Setup

@@ -21,6 +21,8 @@ $transactionManager->beginTransaction();
 /** @var \Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface $cargoRepository */
 $cargoRepository = $container->get(\Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface::class);
 
+$getRouteCandidates = $container->get(\Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class);
+
 try {
     $cargo = new \Codeliner\CargoBackend\Model\Cargo\Cargo(
         \Codeliner\CargoBackend\Model\Cargo\TrackingId::generate(),

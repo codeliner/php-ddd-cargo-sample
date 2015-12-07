@@ -1,7 +1,7 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
- * (c) Alexander Miertsch <contact@prooph.de>
+ * This file is part of the prooph/php-ddd-cargo-sample.
+ * (c) Alexander Miertsch <kontakt@codeliner.ws>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,9 +9,9 @@
  * Date: 29.03.14 - 20:39
  */
 
-namespace GraphTraversalServiceTest\GraphTraversalServiceTest;
+namespace CodelinerTest\GraphTraversalService;
 
-use GraphTraversalService\GraphTraversalService;
+use Codeliner\GraphTraversalBackend\GraphTraversalService;
 
 class GraphTraversalServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,13 +40,13 @@ class GraphTraversalServiceTest extends \PHPUnit_Framework_TestCase
 
         $transitPath = $transitPaths[0];
 
-        $this->assertInstanceOf('GraphTraversalService\Dto\TransitPathDto', $transitPath);
+        $this->assertInstanceOf('Codeliner\GraphTraversalBackend\Dto\TransitPathDto', $transitPath);
 
         $edges = $transitPath->getEdges();
 
         $this->assertEquals(3, count($edges));
 
-        $this->assertInstanceOf('GraphTraversalService\Dto\EdgeDto', $edges[0]);
+        $this->assertInstanceOf('Codeliner\GraphTraversalBackend\Dto\EdgeDto', $edges[0]);
 
         $this->assertEquals('DEHAM', $edges[0]->getFromUnLocode());
         $this->assertEquals('NLRTM', $edges[0]->getToUnLocode());

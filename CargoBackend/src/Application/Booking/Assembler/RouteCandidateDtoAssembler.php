@@ -38,8 +38,8 @@ class RouteCandidateDtoAssembler
 
             $legDto->setLoadLocation($leg->loadLocation());
             $legDto->setUnloadLocation($leg->unloadLocation());
-            $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ISO8601));
-            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ISO8601));
+            $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ATOM));
+            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ATOM));
 
             $legs[] = $legDto;
         }
@@ -63,8 +63,8 @@ class RouteCandidateDtoAssembler
             $legs[] = new Leg(
                 $legDto->getLoadLocation(),
                 $legDto->getUnloadLocation(),
-                new \DateTime($legDto->getLoadTime()),
-                new \DateTime($legDto->getUnloadTime())
+                \DateTimeImmutable::createFromFormat(\DateTime::ATOM, $legDto->getLoadTime()),
+                \DateTimeImmutable::createFromFormat(\DateTime::ATOM, $legDto->getUnloadTime())
             );
         }
 

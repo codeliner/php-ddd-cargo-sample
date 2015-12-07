@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
+ * This file is part of the prooph/php-ddd-cargo-sample.
  * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,9 +15,9 @@ use Codeliner\CargoBackend\Model\Cargo\Itinerary;
 use Codeliner\CargoBackend\Model\Cargo\Leg;
 use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
 use Codeliner\CargoBackend\Model\Routing\RoutingServiceInterface;
-use GraphTraversalService\Dto\EdgeDto;
-use GraphTraversalService\Dto\TransitPathDto;
-use GraphTraversalService\GraphTraversalServiceInterface;
+use Codeliner\GraphTraversalBackend\Dto\EdgeDto;
+use Codeliner\GraphTraversalBackend\Dto\TransitPathDto;
+use Codeliner\GraphTraversalBackend\GraphTraversalServiceInterface;
 
 /**
  * Class ExternalRoutingService
@@ -39,10 +39,10 @@ class ExternalRoutingService implements RoutingServiceInterface
     /**
      * @param GraphTraversalServiceInterface $aGraphTraversalService
      */
-    //public function __construct(GraphTraversalServiceInterface $aGraphTraversalService)
-    //{
-    //    $this->graphTraversalService = $aGraphTraversalService;
-    //}
+    public function __construct(GraphTraversalServiceInterface $aGraphTraversalService)
+    {
+        $this->graphTraversalService = $aGraphTraversalService;
+    }
 
     /**
      * @param RouteSpecification $aRouteSpecification
@@ -88,8 +88,8 @@ class ExternalRoutingService implements RoutingServiceInterface
         return new Leg(
             $anEdgeDto->getFromUnLocode(),
             $anEdgeDto->getToUnLocode(),
-            new \DateTime($anEdgeDto->getFromDate()),
-            new \DateTime($anEdgeDto->getToDate())
+            \DateTimeImmutable::createFromFormat(\DateTime::ATOM, $anEdgeDto->getFromDate()),
+            \DateTimeImmutable::createFromFormat(\DateTime::ATOM, $anEdgeDto->getToDate())
         );
     }
 }

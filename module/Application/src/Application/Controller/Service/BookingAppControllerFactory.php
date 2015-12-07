@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the codeliner/php-ddd-cargo-sample.
+ * This file is part of the prooph/php-ddd-cargo-sample.
  * (c) Alexander Miertsch <contact@prooph.de>
  *
  * For the full copyright and license information, please view the LICENSE
