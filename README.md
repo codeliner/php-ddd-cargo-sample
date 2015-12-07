@@ -1,30 +1,16 @@
-php-ddd-cargo-sample
-====================
+# PHP DDD Cargo Sample
 
-PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book
+PHP 7 port of the cargo sample used in Eric Evans Domain-Driven Design book
 
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8)](https://scrutinizer-ci.com/g/prooph/php-ddd-cargo-sample/)
 [![Build Status](https://travis-ci.org/prooph/php-ddd-cargo-sample.png?branch=master)](https://travis-ci.org/prooph/php-ddd-cargo-sample)
 
-CQRS & ES?
-----------
+## PHP Cargo Sample Reloaded
 
-The original cargo sample is not based on CQRS and EventSourcing. However, you may have read something about it in relation to Domain-Driven Design.
-The php-ddd-cargo-sample shows you the original approach using application services, a combined write and read model
-and an ORM (Doctrine in our case) to hide the persistence layer. This is still a very good and valid approach but CQRS and
-EventSourcing gets a lot of attention these days because it offers a great way to tackle complex problems.
+After two years of inactivity a new version of the PHP DDD Cargo Sample is available [2015/12/07].
+The new version is a complete rewrite of the cargo sample using cutting edge technology.
 
-Our suggestion is that you have a look at the cargo example and also at [proophessor-do](https://github.com/prooph/proophessor-do).
-
-**Proophessor-do** demonstrates CQRS and ES using [prooph components](https://github.com/prooph/proophessor/blob/master/docs/book/components.md)
-and it is different then other example applications.
-
-Proophessor-do is incomplete and you are ask to get the job done.
-**This is a great way to learn more about CQRS and EventSourcing**. Don't worry, the prooph community is available in a chat
-to help you with your task. See the [HALL OF FAME](https://github.com/prooph/proophessor-do#hall-of-fame). The first tasks are already done
-and the next ones in progress. So what are you waiting for? Go pick up a task, too!
-
-Ok, you would like to explore the cargo sample first? Just read on. It starts with the next heading.
+##
 
 Goal of the Project
 -------------------
