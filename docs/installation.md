@@ -22,7 +22,7 @@ empty test database called `cargo_sample`.
 The cargo sample ships with [doctrine/migrations](https://github.com/doctrine/migrations) to create the schema. But before we can run the migrations we
 need to configure a database connection.
 
-Copy and rename the [config/autoload/local.php.dist](https://github.com/prooph/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
+Copy and rename the [config/autoload/local.php.dist](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/config/autoload/local.php.dist) to `local.php`
 and fill in your database credentials.
 
 Now run `php bin/migrations.php migrations:migrate` in a terminal (Command must be invoked in project root)
