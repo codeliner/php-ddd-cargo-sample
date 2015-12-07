@@ -35,11 +35,11 @@ java implementation. The same applies for our version.
 
 ## Installation
 ------------
-See the [Installation](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
+See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
 
 Useful DDD tools
 ----------------
-Check our collection of [DDD Tools and Libs](https://github.com/prooph/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
+Check our collection of [DDD Tools and Libs](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md).
 
 Become a member
 ---------------
@@ -50,7 +50,7 @@ You can find more DDD stuff like interesting articles and related libraries on t
 Behavior Driven Design
 ----------------------
 All features of the application are described in feature files. You can find them in
-the [features folder](https://github.com/prooph/php-ddd-cargo-sample/tree/master/features) of the project.
+the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
 We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to test our
 business expectations.
 
@@ -62,14 +62,14 @@ After the server started successfully open another console, navigate to project 
 
 Unit Tests
 ----------
-Unit Tests are of course also available. You can find them in [CargoBackend/tests](https://github.com/prooph/php-ddd-cargo-sample/tree/master/CargoBackend/tests).
+Unit Tests are of course also available. You can find them in [CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/CargoBackend/tests).
 Got to the directory and simply run `phpunit`.
 
 *Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the test classes were included in the Application module!*
 
 Support
 -------
-If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/prooph/php-ddd-cargo-sample/issues?state=open).
+If you have any problems with the application please let me know and send me an email `kontakt[at]codeliner[dot]ws` or open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
 Same applies if you have a question or a feature wish.
 Maybe I've missed a concept that you hoped to find in the example.
 
@@ -80,4 +80,4 @@ The chapter overview has moved to the [PHP DDD Cargo Sample project page](http:/
 
 Contributing
 ------------
-See the [CONTRIBUTING](https://github.com/prooph/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
+See the [CONTRIBUTING](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/CONTRIBUTING.md) file.
