@@ -4,7 +4,7 @@
 <div if="{ ready }">
     <div class="row">
         <div class="col-md-12">
-            <h2>Cargo from {getLocation(cargo.get('origin')).name} ({ cargo.getId() })</h2>
+            <h2>Cargo from {getLocation(cargo.get('origin')).get('name')} to {getLocation(cargo.get('final_destination')).get('name')}<span class="subheading">TrackingId: { cargo.getId() }</span></h2>
         </div>
     </div>
     <div class="row">
@@ -13,7 +13,11 @@
         </div>
     </div>
     <div id="route-candidate-list" >
-        <route-candidate></route-candidate>
+        <route-candidate each="{ routeCandidates }"
+                         routecandidate="{ this }"
+                         trigger_event="{ parent.triggerEvent }"
+                         route_to="{ parent.routeTo }"
+                         get_location="{ parent.getLocation }"></route-candidate>
     </div>
 </div>
 <script type="text/javascript">
@@ -28,44 +32,75 @@
                     return;
                 }
 
+                if (! self.routeCandidates) {
+                    return;
+                }
+
                 self.ready = true;
             };
 
         self.trackingId = context.trackingId;
-
         self.locations = [];
-
+        self.routeCandidates = null;
         self.cargo = null;
-
         self.ready = false;
 
         self.getLocation = function(unLocode) {
-            return _.findWhere(self.locations, {unLocode: unLocode});
+            return _.find(self.locations, function(location) {
+                return location.getId() === unLocode;
+            });
+        }
+
+        self.triggerEvent = function(eventName, eventData) {
+            context.app.trigger(eventName, eventData);
+        }
+
+        self.routeTo = function(routePath) {
+            context.app.routeTo(context.router.get(routePath));
+        }
+
+        self.onLocationsRefreshed = function(locations) {
+            self.locations = locations;
+            _checkReady();
+            self.update();
+        }
+
+        self.onCargoRefreshed = function(cargo) {
+            if (cargo.getId() === self.trackingId) {
+                self.cargo = cargo;
+
+                context.app.trigger('load_cargo_routecandidates', cargo);
+            }
+        }
+
+        self.onCargoRoutecandidatesLoaded = function(routeCandidates) {
+            if (_.isEmpty(routeCandidates)) {
+                return;
+            }
+
+            var first = _.first(routeCandidates);
+            if (first.getParentId() !== self.trackingId) {
+                return;
+            }
+
+            self.routeCandidates = routeCandidates;
+            _checkReady();
+            self.update();
         }
 
         self.on("mount", function() {
-            context.app.one("locations_refreshed", function(locations) {
-                self.locations = [];
-
-                _.forEach(locations, function (location) {
-                    self.locations.push(location.getProps())
-                });
-
-                _checkReady();
-                self.update();
-            });
+            context.app.on("locations_refreshed", self.onLocationsRefreshed);
+            context.app.on("cargo_refreshed", self.onCargoRefreshed);
+            context.app.on("cargo_routecandidates_loaded", self.onCargoRoutecandidatesLoaded);
 
             context.app.trigger("refresh_locations");
+            context.app.trigger("refresh_cargo", new Resource(self.trackingId, 'cargo', {}));
+        });
 
-            context.app.one("cargo_refreshed", function(cargo) {
-                if (cargo.getId() === self.trackingId) {
-                    self.cargo = cargo;
-                    _checkReady();
-                    self.update();
-                }
-            })
-
-            context.app.trigger("refresh_cargo", {id: self.trackingId});
+        self.on("unmount", function() {
+            context.app.off("locations_refreshed", self.onLocationsRefreshed);
+            context.app.off("cargo_refreshed", self.onCargoRefreshed);
+            context.app.off("cargo_routecandidates_loaded", self.onCargoRoutecandidatesLoaded);
         });
     }
 </script>

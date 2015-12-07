@@ -33,13 +33,19 @@
     },
     "require-dev" : {
         "phpunit/phpunit": "^5.0",
-        "filp/whoops": "^1.1"
+        "filp/whoops": "^1.1",
+        "behat/behat": "^3.0",
+        "behat/mink": "^1.6",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*"
     },
     "autoload" : {
         "psr-4" : {
             "Codeliner\\CargoUI\\" : "CargoUI/src",
             "Codeliner\\CargoBackend\\"  : "CargoBackend/src",
-            "Codeliner\\GraphTraversalBackend\\" : "GraphTraversalBackend/src"
+            "Codeliner\\GraphTraversalBackend\\" : "GraphTraversalBackend/src",
+            "Codeliner\\CargoFeature\\" : "features/bootstrap"
         }
     },
     "autoload-dev" : {
@@ -47,5 +53,8 @@
             "CodelinerTest\\CargoBackend\\"  : "CargoBackend/tests",
             "CodelinerTest\\GraphTraversalBackend\\" : "GraphTraversalBackend/tests"
         }
+    },
+    "config": {
+        "bin-dir": "bin/"
     }
 }

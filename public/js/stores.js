@@ -6,11 +6,7 @@ var Resource = (function () {
         self.getName = function () {return name};
         self.get = function(prop) {
             return data[prop]? data[prop] : null;
-        }
-        self.set = function(prop, val) {
-            data[prop] = val;
-        }
-
+        };
         self.getProps = function () {
             return data;
         }
@@ -18,6 +14,30 @@ var Resource = (function () {
 
     return Resource;
 })();
+
+var ChildResource = (function (Resource) {
+    var ChildResource = function (parent, id, name, data) {
+        var self = this;
+
+        if (! parent instanceof Resource) {
+            throw new Error("Parent of child resource" + name + " must be of type Resource");
+        }
+
+        self.getParentName = function () {return parent.getName()};
+        self.getParentId = function() {return parent.getId()};
+        self.getParent = function() {return parent};
+        self.getId = function () {return id};
+        self.getName = function () {return name};
+        self.get = function(prop) {
+            return data[prop]? data[prop] : null;
+        };
+        self.getProps = function () {
+            return data;
+        }
+    }
+
+    return ChildResource;
+})(Resource);
 
 var LocationStore = (function ($, _, Q, Resource) {
     var LocationStore = function (app) {
@@ -32,7 +52,7 @@ var LocationStore = (function ($, _, Q, Resource) {
 
         self.getAll = function () {
             if (_.isEmpty(_locations)) {
-                return Q($.getJSON('/api/locations')).then(function (data) {
+                return Q($.getJSON(app.config.url.forResourceCollection('location'))).then(function (data) {
 
                     _.each(data.locations, function (locationData) {
                         _locations.push(new Resource(locationData.unLocode, 'location', locationData))
@@ -56,7 +76,7 @@ var CargoStore = (function ($, _, Q, Resource) {
         var self = this;
 
         app.on('create_cargo', function(cargoData) {
-            $.postJSON('/api/cargos', {
+            $.postJSON(app.config.url.forResourceCollection('cargo'), {
                 origin: cargoData.origin,
                 destination: cargoData.destination
             }).then(function(data){
@@ -65,29 +85,56 @@ var CargoStore = (function ($, _, Q, Resource) {
             }, $.failNotify);
         });
 
-        app.on('refresh_cargo', function(data) {
-            $.getJSON('/api/cargos/' + data.id).then(function(data) {
+        app.on('refresh_cargo', function(cargo) {
+            $.getJSON(app.config.url.forResource(cargo)).then(function(data) {
                 var cargo = new Resource(data.tracking_id, 'cargo', data);
 
                 app.trigger('cargo_refreshed', cargo);
             }, $.failNotify);
         });
 
-        self.getAll = function () {
-            var _cargos = [];
+        app.on('assign_route_candidate_to_cargo', function(routeCandidate) {
+            var cargo = routeCandidate.getParent();
+            $.putJSON(app.config.url.forResource(cargo), routeCandidate.getProps()).then(function(data) {
+                var cargo = new Resource(data.tracking_id, 'cargo', data);
+                app.trigger('cargo_refreshed', cargo);
+            }, $.failNotify)
+        })
 
-            return Q($.getJSON('/api/cargos')).then(function (data) {
-
+        app.on('refresh_cargo_list', function() {
+            $.getJSON(app.config.url.forResourceCollection('cargo')).then(function (data) {
+                var cargos = [];
                 _.each(data.cargos, function (cargoData) {
-                    _cargos.push(new Resource(cargoData.trackingId, 'cargo', cargoData))
+                    cargos.push(new Resource(cargoData.tracking_id, 'cargo', cargoData))
                 });
 
-                return _cargos;
-            });
-        }
-
-
+                app.trigger('cargo_list_refreshed', cargos);
+            }, $.failNotify);
+        })
     }
 
     return CargoStore;
+})(jQuery, _, Q, Resource);
+
+var RouteCandidateStore = (function($, _, Q, Resource){
+    var RouteCandidateStore = function(app) {
+        var self = this;
+
+        app.on('load_cargo_routecandidates', function(cargo) {
+            if (! cargo instanceof Resource) {
+                throw new Error("Cargo must be an instance of Resource");
+            }
+
+            $.getJSON(app.config.url.forChildResourceCollection(cargo, 'routecandidate')).then(function(data) {
+                var candidates = [];
+
+                _.each(data.routeCandidates, function(candidateData) {
+                    candidates.push(new ChildResource(cargo, candidateData.id, 'routecandidate', candidateData));
+                });
+                app.trigger('cargo_routecandidates_loaded', candidates);
+            }, $.failNotify);
+        })
+    }
+
+    return RouteCandidateStore;
 })(jQuery, _, Q, Resource);

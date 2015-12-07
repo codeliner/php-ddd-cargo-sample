@@ -1,23 +1,69 @@
-<div class="row">
-    <div class="col-md-12">
-        <p if="{ !cargos.length }" class="alert alert-danger">The list is empty. How about booking the first <a href="{ router.get('cargos/add') }">cargo</a>?</p>
-        <ul if="{ cargos.length }" id="cargo-list">
-
-        </ul>
-    </div>
+<div if="{ !ready }">
+    <img src="/img/ajax-loader.gif" alt="loading ..." />
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <p><a id="book-cargo" class="btn btn-success btn-lg" href="{ router.get('cargos/add') }">Book new Cargo &raquo;</a></p>
+<div if="{ ready }">
+    <div class="row">
+        <div class="col-md-12">
+            <p if="{ !cargos.length }" class="alert alert-danger">The list is empty. How about booking the first <a href="{ router.get('cargos/add') }">cargo</a>?</p>
+            <ul if="{ cargos.length }" id="cargo-list">
+                <cargo-list-entry each="{ cargos }" cargo="{ this }" get_location="{ parent.getLocation }" router="{ parent.router }"></cargo-list-entry>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><a id="book-cargo" class="btn btn-success btn-lg" href="{ router.get('cargos/add') }">Book new Cargo &raquo;</a></p>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
     function (context) {
-        var self = this;
+        var self = this,
+            _checkReady = function() {
+                if (! self.cargos) {
+                    return;
+                }
 
-        self.cargos = context.cargos || [];
-        self.router = context.router
+                if (! self.locations) {
+                    return;
+                }
 
+                self.ready = true;
+                self.update();
+            };
 
+        self.ready = false;
+        self.router = context.router;
+
+        self.getLocation = function(unLocode) {
+            return _.find(self.locations, function(location) {
+                return location.getId() === unLocode;
+            })
+        }
+
+        self.onCargoListRefreshed = function(cargos) {
+            self.cargos = cargos;
+            _checkReady();
+            self.update();
+        }
+
+        self.onLocationsRefreshed = function(locations) {
+            self.locations = locations;
+            _checkReady();
+            self.update();
+        }
+
+        self.on('mount', function() {
+            context.app.on('cargo_list_refreshed', self.onCargoListRefreshed);
+            context.app.on('locations_refreshed', self.onLocationsRefreshed);
+
+            context.app.trigger('refresh_cargo_list');
+            context.app.trigger('refresh_locations');
+        })
+
+        self.on("unmount", function() {
+            context.app.off('cargo_list_refreshed', self.onCargoListRefreshed);
+            context.app.off('locations_refreshed', self.onLocationsRefreshed);
+        })
     }
 </script>

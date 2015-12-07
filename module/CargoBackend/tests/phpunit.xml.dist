@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit bootstrap="Bootstrap.php">
-    <testsuites>
-        <testsuite name="CargoShippingSystem">
-            <directory>./CargoBackendTest</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>

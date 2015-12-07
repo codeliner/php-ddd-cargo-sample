@@ -1,0 +1,93 @@
+<div if="{ !ready }">
+    <img src="/img/ajax-loader.gif" alt="loading ..." />
+</div>
+<div if="{ ready }">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Cargo from { getLocation(cargo.get('origin')).get('name') } ({ cargo.getId() })</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>route specification</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 alert-info">
+            <strong>From: </strong>{ getLocation(cargo.get('origin')).get('name') }
+        </div>
+        <div class="col-md-6 alert-info">
+            <strong>To: </strong>{ getLocation(cargo.get('final_destination')).get('name') }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Itinerary</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default itinerary">
+                <div class="panel-body">
+                    <p class="alert alert-warning" if="{ cargo.get('legs').length == 0 }"><i class="glyphicon glyphicon-warning-sign"></i>&nbsp;Cargo is not assigned to a route! <a href="{ router.get('cargos/' + cargo.getId() + '/assign_route') }" class="btn btn-primary">assign now</a></p>
+                    <div if="{ cargo.get('legs').length > 0 }">
+                        <route-candidate-leg each="{ cargo.get('legs') }" leg="{ this }" get_location="{ parent.getLocation }"></route-candidate-leg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function (context) {
+        var self = this,
+            _checkReady = function() {
+                if (! self.cargo) {
+                    return;
+                }
+
+                self.ready = true;
+            };
+
+        self.ready = false;
+
+        self.trackingId = context.trackingId;
+        self.router = context.router;
+
+        self.getLocation = function(unLocode) {
+            return _.find(self.locations, function(location) {
+                return location.getId() === unLocode;
+            })
+        }
+
+        self.onCargoRefreshed = function(cargo) {
+            if (! cargo.getId() === self.trackingId) {
+                return;
+            }
+
+            self.cargo = cargo;
+
+            _checkReady();
+            self.update();
+        }
+
+        self.onLocationsRefreshed = function(locations) {
+            self.locations = locations;
+            _checkReady();
+            self.update();
+        }
+
+        self.on("mount", function() {
+            context.app.on('cargo_refreshed', self.onCargoRefreshed);
+            context.app.on('locations_refreshed', self.onLocationsRefreshed);
+
+            context.app.trigger('refresh_cargo', new Resource(self.trackingId, 'cargo', {}));
+            context.app.trigger('refresh_locations');
+        });
+
+        self.on("unmount", function() {
+            context.app.off('cargo_refreshed', self.onCargoRefreshed);
+            context.app.off('locations_refreshed', self.onLocationsRefreshed);
+        })
+    }
+</script>

@@ -51,8 +51,8 @@ final class LegsDoctrineType extends TextType
             $legs[] = new Leg(
                 $legData['load_location'],
                 $legData['unload_location'],
-                new \DateTime($legData['load_time']),
-                new \DateTime($legData['unload_time'])
+                \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $legData['load_time']),
+                \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $legData['unload_time'])
             );
         }
 

@@ -46,9 +46,13 @@ final class GetRouteCandidates
             return new EmptyResponse(404);
         }
 
+        $candidateIndex = 1;
         return new JsonResponse([
-            'routeCandidates' => array_map(function(RouteCandidateDto $routeCandidate){
-                return $routeCandidate->getArrayCopy();
+            'routeCandidates' => array_map(function(RouteCandidateDto $routeCandidate) use (&$candidateIndex) {
+                $candidateData = $routeCandidate->getArrayCopy();
+                $candidateData['id'] = $candidateIndex;
+                $candidateIndex++;
+                return $candidateData;
             }, $this->bookingService->requestPossibleRoutesForCargo($trackingId))
         ]);
     }

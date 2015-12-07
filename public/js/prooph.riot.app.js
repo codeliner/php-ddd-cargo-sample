@@ -197,6 +197,10 @@ var ProophRiot = (function(riot, _, $, RouterStack, RiotRouterBridge){
                     _routerStack.removeRouter(router);
                 }
             }
+
+            self.routeTo = function(routePath) {
+                window.location.hash = routePath;
+            }
         };
 
     ProophRiot.App = {

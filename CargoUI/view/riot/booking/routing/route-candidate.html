@@ -2,28 +2,12 @@
     <div class="col-md-12">
         <div class="panel panel-default itinerary">
             <div class="panel-body">
-                <% _.each(legs, function(leg) { %>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Load location: </strong><%- obj.locations.get(leg.load_location).get('name') %>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Load time: </strong><%- obj.formatDateTime(leg.load_time) %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Unload location: </strong><%- obj.locations.get(leg.unload_location).get('name') %>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Unload time: </strong><%- obj.formatDateTime(leg.unload_time) %>
-                    </div>
-                </div>
-                <% }) %>
+                <route-candidate-leg each="{ routeCandidate.get('legs') }" leg="{ this }" get_location="{ parent.context.get_location }"></route-candidate-leg>
+                <p>&nbsp;</p>
                 <div class="row">
                     <div class="col-md-12">
                         <a href="#"
-                           class="btn btn-success assign-cargo-btn">Assign to Cargo</a>
+                           class="btn btn-success assign-cargo-btn" onclick="{ onAssignCargo }">Assign to Cargo</a>
                     </div>
                 </div>
             </div>
@@ -33,7 +17,15 @@
 <script type="text/javascript">
     function (context) {
         var self = this;
+        self.context = context;
+        self.routeCandidate = context.routecandidate;
 
+        self.onAssignCargo = function(e) {
+            e.preventDefault();
 
+            context.trigger_event('assign_route_candidate_to_cargo', self.routeCandidate);
+
+            context.route_to('cargos');
+        }
     }
 </script>

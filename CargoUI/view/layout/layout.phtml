@@ -44,13 +44,26 @@
             var CargoUI = ProophRiot.App.create({
                 config : {
                     url : {
-                        forResource : function (resource, action) {
-                            if (action) {
-                                action = '/' + action;
-                            }else {
-                                action = '';
-                            }
-                            return '/api/' + resource.getName() + 's/' + resource.getId() + action;
+                        apiRoot: '/api/',
+                        forResource : function (resource) {
+                            return this.apiRoot + this.resourcePlural(resource.getName()) + '/' + resource.getId();
+                        },
+                        forResourceCollection : function (resourceName) {
+                            return this.apiRoot + this.resourcePlural(resourceName);
+                        },
+                        resourcePlural: function(resourceName) {
+                            return resourceName + 's';
+                        },
+                        forChildResource : function(childResource) {
+                            return this.apiRoot + this.resourcePlural(childResource.getParentName())
+                                    + '/' + childResource.getParentId()
+                                    + '/' + this.resourcePlural(childResource.getName())
+                                    + '/' + childResource.getId()
+                        },
+                        forChildResourceCollection : function(parentResource, childResourceName) {
+                            return this.apiRoot + this.resourcePlural(parentResource.getName())
+                                    + '/' + parentResource.getId()
+                                    + '/' + this.resourcePlural(childResourceName);
                         }
                     },
                     chapter: "ChapterFour"
@@ -59,6 +72,7 @@
 
             var locationsStore = new LocationStore(CargoUI);
             var cargoStore = new CargoStore(CargoUI);
+            var routeCandidateStore = new RouteCandidateStore(CargoUI);
 
             $(function () {
                 CargoUI.bootstrap("main").ready();

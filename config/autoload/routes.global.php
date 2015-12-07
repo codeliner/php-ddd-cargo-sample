@@ -18,6 +18,11 @@ return [
         ],
         [
             'path' => '/cargos',
+            'middleware' => \Codeliner\CargoBackend\Application\Action\GetCargos::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'path' => '/cargos',
             'middleware' => \Codeliner\CargoBackend\Application\Action\CreateCargo::class,
             'allowed_methods' => ['POST'],
         ],
@@ -32,7 +37,17 @@ return [
             ]
         ],
         [
-            'path' => '/cargos/{trackingId}/route_candidates',
+            'path' => '/cargos/{trackingId}',
+            'middleware' => \Codeliner\CargoBackend\Application\Action\UpdateCargo::class,
+            'allowed_methods' => ['PUT'],
+            'options' => [
+                'tokens' => [
+                    'trackingId' => '[\w+-]{36,36}'
+                ]
+            ]
+        ],
+        [
+            'path' => '/cargos/{trackingId}/routecandidates',
             'middleware' => \Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class,
             'allowed_methods' => ['GET'],
             'options' => [
