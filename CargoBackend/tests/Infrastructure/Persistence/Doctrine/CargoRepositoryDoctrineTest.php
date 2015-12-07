@@ -6,16 +6,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest\Infrastructure\Persistence\Doctrine;
+namespace CodelinerTest\CargoBackend\Infrastructure\Persistence\Doctrine;
 
-use CargoBackendTest\Fixture\LegFixture;
-use CargoBackendTest\TestCase;
-use CargoBackend\Model\Cargo;
-use CargoBackend\Model\Cargo\RouteSpecification;
+use CodelinerTest\CargoBackend\Fixture\LegFixture;
+use CodelinerTest\CargoBackend\TestCase;
+use Codeliner\CargoBackend\Model\Cargo;
+use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
 /**
  *  CargoRepositoryDoctrineTest
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class CargoRepositoryDoctrineTest extends TestCase
 {
@@ -27,11 +27,11 @@ class CargoRepositoryDoctrineTest extends TestCase
     
     protected function setUp()
     {
-        $this->createEntitySchema('CargoBackend\Model\Cargo\Cargo');
-        $this->createEntitySchema('CargoBackend\Model\Cargo\Itinerary');
-        $this->createEntitySchema('CargoBackend\Model\Cargo\RouteSpecification');
+        $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Cargo');
+        $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Itinerary');
+        $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\RouteSpecification');
         
-        $this->cargoRepository = $this->getTestEntityManager()->getRepository('CargoBackend\Model\Cargo\Cargo');
+        $this->cargoRepository = $this->getTestEntityManager()->getRepository('Codeliner\CargoBackend\Model\Cargo\Cargo');
     }
 
     /**
@@ -41,7 +41,7 @@ class CargoRepositoryDoctrineTest extends TestCase
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         
-        $this->assertInstanceOf('CargoBackend\Model\Cargo\TrackingId', $trackingId);
+        $this->assertInstanceOf('Codeliner\CargoBackend\Model\Cargo\TrackingId', $trackingId);
     }
 
     /**

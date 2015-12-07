@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="Bootstrap.php">
+<phpunit bootstrap="bootstrap.php">
     <testsuites>
         <testsuite name="CargoShippingSystem">
-            <directory>./CargoBackendTest</directory>
+            <directory>.</directory>
         </testsuite>
     </testsuites>
 </phpunit>

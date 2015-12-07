@@ -9,22 +9,25 @@
  * Date: 29.03.14 - 17:59
  */
 
-namespace CargoBackendTest\Domain\API\Booking;
+namespace CodelinerTest\CargoBackend\Domain\API\Booking;
 
-use CargoBackend\API\Booking\BookingService;
-use CargoBackend\API\Booking\BookingServiceInterface;
-use CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
-use CargoBackend\Infrastructure\Routing\ExternalRoutingService;
-use CargoBackend\Model\Cargo\CargoRepositoryInterface;
-use CargoBackend\Model\Cargo\TrackingId;
-use CargoBackendTest\Mock\GraphTraversalServiceMock;
-use CargoBackendTest\TestCase;
+use Codeliner\CargoBackend\Application\Booking\BookingService;
+use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
+use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
+use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
+use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
+use Codeliner\CargoBackend\Model\Cargo\TrackingId;
+use CodelinerTest\CargoBackend\Mock\GraphTraversalServiceMock;
+use CodelinerTest\CargoBackend\TestCase;
 
 /**
  * Class BookingServiceTest
  *
- * @package CargoBackendTest\Domain\API\Booking
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package CodelinerTest\CargoBackend\Domain\API\Booking
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class BookingServiceTest extends TestCase
 {
@@ -34,17 +37,15 @@ class BookingServiceTest extends TestCase
     private $cargoRepository;
 
     /**
-     * @var BookingServiceInterface
+     * @var BookingService
      */
     private $bookingService;
 
     protected function setUp()
     {
-        $this->createEntitySchema('CargoBackend\Model\Cargo\Cargo');
-        $this->createEntitySchema('CargoBackend\Model\Cargo\Itinerary');
-        $this->createEntitySchema('CargoBackend\Model\Cargo\RouteSpecification');
+        $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Cargo');
 
-        $this->cargoRepository = $this->getTestEntityManager()->getRepository('CargoBackend\Model\Cargo\Cargo');
+        $this->cargoRepository = $this->getTestEntityManager()->getRepository('Codeliner\CargoBackend\Model\Cargo\Cargo');
 
         $this->bookingService = new BookingService(
             $this->cargoRepository,
@@ -81,7 +82,7 @@ class BookingServiceTest extends TestCase
 
         $cargoRoutingDto = $this->bookingService->loadCargoForRouting($trackingId);
 
-        $this->assertInstanceOf('CargoBackend\API\Booking\Dto\CargoRoutingDto', $cargoRoutingDto);
+        $this->assertInstanceOf(CargoRoutingDto::class, $cargoRoutingDto);
 
         $this->assertEquals('USNYC', $cargoRoutingDto->getOrigin());
         $this->assertEquals('DEHAM', $cargoRoutingDto->getFinalDestination());
@@ -101,13 +102,13 @@ class BookingServiceTest extends TestCase
 
         $routeCandidate = $routeCandidates[0];
 
-        $this->assertInstanceOf('CargoBackend\API\Booking\Dto\RouteCandidateDto', $routeCandidate);
+        $this->assertInstanceOf(RouteCandidateDto::class, $routeCandidate);
 
         $legs = $routeCandidate->getLegs();
 
         $this->assertEquals(1, count($legs));
 
-        $this->assertInstanceOf('CargoBackend\API\Booking\Dto\LegDto', $legs[0]);
+        $this->assertInstanceOf(LegDto::class, $legs[0]);
     }
 
     /**
@@ -140,7 +141,7 @@ class BookingServiceTest extends TestCase
 
         $this->assertEquals(2, count($locations));
 
-        $this->assertInstanceOf('CargoBackend\API\Booking\Dto\LocationDto', $locations[0]);
+        $this->assertInstanceOf(LocationDto::class, $locations[0]);
 
         $this->assertEquals('DEHAM', $locations[0]->getUnLocode());
         $this->assertEquals('Hamburg', $locations[0]->getName());

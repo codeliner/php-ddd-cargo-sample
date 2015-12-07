@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest\Domain\Model\Cargo;
+namespace CodelinerTest\CargoBackend\Domain\Model\Cargo;
 
-use CargoBackend\Model\Cargo\Itinerary;
-use CargoBackendTest\Fixture\LegFixture;
-use CargoBackendTest\TestCase;
+use Codeliner\CargoBackend\Model\Cargo\Itinerary;
+use CodelinerTest\CargoBackend\Fixture\LegFixture;
+use CodelinerTest\CargoBackend\TestCase;
 use Doctrine\Common\Collections\ArrayCollection;
-use CargoBackend\Model\Cargo\Leg;
+use Codeliner\CargoBackend\Model\Cargo\Leg;
 /**
  * Class ItineraryTest
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class ItineraryTest extends TestCase
 {

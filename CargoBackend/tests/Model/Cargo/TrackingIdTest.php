@@ -6,16 +6,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest\Domain\Model\Cargo;
+namespace CodelinerTest\CargoBackend\Domain\Model\Cargo;
 
-use CargoBackend\Model\Cargo\TrackingId;
-use CargoBackendTest\TestCase;
-use Rhumsaa\Uuid\Uuid;
+use Codeliner\CargoBackend\Model\Cargo\TrackingId;
+use CodelinerTest\CargoBackend\TestCase;
+use Ramsey\Uuid\Uuid;
 
 /**
  * TrackingIdTest
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class TrackingIdTest extends TestCase
 {

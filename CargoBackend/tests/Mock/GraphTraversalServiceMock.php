@@ -9,17 +9,17 @@
  * Date: 29.03.14 - 19:57
  */
 
-namespace CargoBackendTest\Mock;
+namespace CodelinerTest\CargoBackend\Mock;
 
-use GraphTraversalService\Dto\EdgeDto;
-use GraphTraversalService\Dto\TransitPathDto;
-use GraphTraversalService\GraphTraversalServiceInterface;
+use Codeliner\GraphTraversalBackend\Dto\EdgeDto;
+use Codeliner\GraphTraversalBackend\Dto\TransitPathDto;
+use Codeliner\GraphTraversalBackend\GraphTraversalServiceInterface;
 
 /**
  * Class GraphTraversalServiceMock
  *
- * @package CargoBackendTest\Domain\Mock
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package CodelinerTest\CargoBackend\Domain\Mock
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class GraphTraversalServiceMock implements GraphTraversalServiceInterface
 {
@@ -28,7 +28,7 @@ class GraphTraversalServiceMock implements GraphTraversalServiceInterface
      * @param string $toUnLocode
      * @return TransitPathDto[]
      */
-    public function findShortestPath($fromUnLocode, $toUnLocode)
+    public function findShortestPath($fromUnLocode, $toUnLocode): array
     {
         $transitPath = new TransitPathDto();
 

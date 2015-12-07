@@ -6,15 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest;
+namespace CodelinerTest\CargoBackend;
 
+use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType;
+use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\TrackingIdDoctrineType;
 use PHPUnit_Framework_TestCase;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Types\Type;
 /**
  *  TestCase
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class TestCase extends PHPUnit_Framework_TestCase
 {
@@ -30,7 +32,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         if (null === $this->entityManager) {
             $conn = \Doctrine\DBAL\DriverManager::getConnection(array(
                 'driver' => 'pdo_sqlite',
-                'memory' => true
+                'dbname' => ':memory:'
             ));
 
             $config = new \Doctrine\ORM\Configuration();
@@ -41,7 +43,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             $config->setMetadataDriverImpl(
                 new \Doctrine\ORM\Mapping\Driver\XmlDriver(
                     array(
-                        __DIR__ . '/../../src/CargoBackend/Infrastructure/Persistence/Doctrine/ORM'
+                        __DIR__ . '/../src/Infrastructure/Persistence/Doctrine/ORM'
                     )
                 )
             );
@@ -58,10 +60,12 @@ class TestCase extends PHPUnit_Framework_TestCase
             
             //Add custom DDD types to map ValueObjects correctly
             if (!Type::hasType('cargo_itinerary_legs')) {
-                Type::addType('cargo_itinerary_legs', 'CargoBackend\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType');
-            } 
-            
+                Type::addType('cargo_itinerary_legs', LegsDoctrineType::class);
+            }
 
+            if (!Type::hasType('cargo_tracking_id')) {
+                Type::addType('cargo_tracking_id', TrackingIdDoctrineType::class);
+            }
         }
         
         

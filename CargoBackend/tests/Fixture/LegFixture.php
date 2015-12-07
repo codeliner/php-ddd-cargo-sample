@@ -9,15 +9,15 @@
  * Date: 28.02.14 - 20:09
  */
 
-namespace CargoBackendTest\Fixture;
+namespace CodelinerTest\CargoBackend\Fixture;
 
-use CargoBackend\Model\Cargo\Leg;
+use Codeliner\CargoBackend\Model\Cargo\Leg;
 
 /**
  * Class LegFixture
  *
- * @package CargoBackendTest\Fixture
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package CodelinerTest\CargoBackend\Fixture
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class LegFixture 
 {
@@ -37,29 +37,29 @@ class LegFixture
                 return new Leg(
                     'Hongkong',
                     'Hamburg',
-                    new \DateTime('2014-01-20 10:00:00'),
-                    new \DateTime('2014-02-02 18:00:00')
+                    new \DateTimeImmutable('2014-01-20 10:00:00'),
+                    new \DateTimeImmutable('2014-02-02 18:00:00')
                 );
             case self::HONGKONG_NEWYORK:
                 return new Leg(
                     'Hongkong',
                     'New York',
-                    new \DateTime('2014-01-20 10:00:00'),
-                    new \DateTime('2014-02-02 18:00:00')
+                    new \DateTimeImmutable('2014-01-20 10:00:00'),
+                    new \DateTimeImmutable('2014-02-02 18:00:00')
                 );
             case self::NEWYORK_HAMBURG:
                 return new Leg(
                     'New York',
                     'Hamburg',
-                    new \DateTime('2014-02-20 10:00:00'),
-                    new \DateTime('2014-03-02 18:00:00')
+                    new \DateTimeImmutable('2014-02-20 10:00:00'),
+                    new \DateTimeImmutable('2014-03-02 18:00:00')
                 );
             case self::HAMBURG_ROTTERDAM:
                 return new Leg(
                     'Hamburg',
                     'Rotterdam',
-                    new \DateTime('2014-03-10 10:00:00'),
-                    new \DateTime('2014-03-10 14:00:00')
+                    new \DateTimeImmutable('2014-03-10 10:00:00'),
+                    new \DateTimeImmutable('2014-03-10 14:00:00')
                 );
 
         }

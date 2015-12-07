@@ -6,14 +6,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest\Domain\Model\Cargo;
+namespace CodelinerTest\CargoBackend\Domain\Model\Cargo;
 
-use CargoBackendTest\TestCase;
-use CargoBackend\Model\Cargo\RouteSpecification;
+use CodelinerTest\CargoBackend\TestCase;
+use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
 /**
  *  RouteSpecificationTest
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class RouteSpecificationTest extends TestCase
 {

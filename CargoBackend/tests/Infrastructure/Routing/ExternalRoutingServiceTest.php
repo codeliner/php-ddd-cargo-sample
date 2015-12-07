@@ -9,18 +9,18 @@
  * Date: 29.03.14 - 19:56
  */
 
-namespace CargoBackendTest\Infrastructure\Routing;
+namespace CodelinerTest\CargoBackend\Infrastructure\Routing;
 
-use CargoBackend\Infrastructure\Routing\ExternalRoutingService;
-use CargoBackend\Model\Cargo\RouteSpecification;
-use CargoBackendTest\Mock\GraphTraversalServiceMock;
-use CargoBackendTest\TestCase;
+use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
+use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
+use CodelinerTest\CargoBackend\Mock\GraphTraversalServiceMock;
+use CodelinerTest\CargoBackend\TestCase;
 
 /**
  * Class ExternalRoutingServiceTest
  *
- * @package CargoBackendTest\Infrastructure\Routing
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @package CodelinerTest\CargoBackend\Infrastructure\Routing
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class ExternalRoutingServiceTest extends TestCase
 {
@@ -47,7 +47,7 @@ class ExternalRoutingServiceTest extends TestCase
 
         $itinerary = $itineraries[0];
 
-        $this->assertInstanceOf('CargoBackend\Model\Cargo\Itinerary', $itinerary);
+        $this->assertInstanceOf('Codeliner\CargoBackend\Model\Cargo\Itinerary', $itinerary);
 
         $legs = $itinerary->legs();
 
@@ -55,7 +55,7 @@ class ExternalRoutingServiceTest extends TestCase
 
         $leg = $legs[0];
 
-        $this->assertInstanceOf('CargoBackend\Model\Cargo\Leg', $leg);
+        $this->assertInstanceOf('Codeliner\CargoBackend\Model\Cargo\Leg', $leg);
 
         $loadDate     = new \DateTime('2014-03-29 19:59:23');
         $unloadDate   = new \DateTime('2014-03-30 21:30:00');

@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace CargoBackendTest\Domain\Model\Cargo;
+namespace CodelinerTest\CargoBackend\Domain\Model\Cargo;
 
-use CargoBackend\Model\Cargo\Leg;
-use CargoBackend\Model\Voyage\Voyage;
-use CargoBackend\Model\Voyage\VoyageNumber;
-use CargoBackendTest\TestCase;
+use Codeliner\CargoBackend\Model\Cargo\Leg;
+use Codeliner\CargoBackend\Model\Voyage\Voyage;
+use Codeliner\CargoBackend\Model\Voyage\VoyageNumber;
+use CodelinerTest\CargoBackend\TestCase;
 
 /**
  * Class LegTest
  * 
- * @author Alexander Miertsch <kontakt@codeliner.ws>
+ * @author Alexander Miertsch <contact@prooph.de>
  */
 class LegTest extends TestCase
 {
@@ -31,8 +31,8 @@ class LegTest extends TestCase
         $this->leg = new Leg(
             'Hongkong',
             'Hamburg',
-            new \DateTime('2014-01-20 10:00:00'),
-            new \DateTime('2014-02-02 18:00:00')
+            new \DateTimeImmutable('2014-01-20 10:00:00'),
+            new \DateTimeImmutable('2014-02-02 18:00:00')
         );
     }
 
@@ -60,8 +60,8 @@ class LegTest extends TestCase
         $sameLeg = new Leg(
             'Hongkong',
             'Hamburg',
-            new \DateTime('2014-01-20 10:00:00'),
-            new \DateTime('2014-02-02 18:00:00')
+            new \DateTimeImmutable('2014-01-20 10:00:00'),
+            new \DateTimeImmutable('2014-02-02 18:00:00')
         );
 
         $this->assertTrue($this->leg->sameValueAs($sameLeg));
