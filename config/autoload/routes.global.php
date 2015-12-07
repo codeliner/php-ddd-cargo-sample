@@ -22,6 +22,16 @@ return [
             'allowed_methods' => ['POST'],
         ],
         [
+            'path' => '/cargos/{trackingId}',
+            'middleware' => \Codeliner\CargoBackend\Application\Action\GetCargo::class,
+            'allowed_methods' => ['GET'],
+            'options' => [
+                'tokens' => [
+                    'trackingId' => '[\w+-]{36,36}'
+                ]
+            ]
+        ],
+        [
             'path' => '/cargos/{trackingId}/route_candidates',
             'middleware' => \Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class,
             'allowed_methods' => ['GET'],

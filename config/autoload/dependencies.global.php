@@ -14,6 +14,7 @@ return [
             \Codeliner\CargoBackend\Application\Action\GetLocations::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
             \Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
             \Codeliner\CargoBackend\Application\Action\CreateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Application\Action\GetCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
 
               //Action Helper middleware
             \Psr7Middlewares\Middleware\Payload::class => \Codeliner\CargoBackend\Container\Application\Action\PayloadParserFactory::class,

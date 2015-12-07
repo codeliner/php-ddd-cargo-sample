@@ -44,16 +44,21 @@
             var CargoUI = ProophRiot.App.create({
                 config : {
                     url : {
-                        forResource : function (resource) {
-                            return '/api/' + resource.getName() + 's/' + resource.getId();
+                        forResource : function (resource, action) {
+                            if (action) {
+                                action = '/' + action;
+                            }else {
+                                action = '';
+                            }
+                            return '/api/' + resource.getName() + 's/' + resource.getId() + action;
                         }
                     },
                     chapter: "ChapterFour"
-                },
-                Store : {
-                    Locations : new LocationStore()
                 }
             });
+
+            var locationsStore = new LocationStore(CargoUI);
+            var cargoStore = new CargoStore(CargoUI);
 
             $(function () {
                 CargoUI.bootstrap("main").ready();

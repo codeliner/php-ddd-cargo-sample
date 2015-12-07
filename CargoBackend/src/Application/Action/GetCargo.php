@@ -6,50 +6,46 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 06.12.2015 - 11:23 PM
+ * Date: 07.12.2015 - 2:15 PM
  */
 namespace Codeliner\CargoBackend\Application\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
-use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
-use Codeliner\CargoBackend\Model\Cargo\TrackingId;
+use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
- * Class GetRouteCandidates
+ * Class GetCargo
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class GetRouteCandidates
+final class GetCargo
 {
     /**
      * @var BookingService
      */
     private $bookingService;
 
-    /**
-     * GetRouteCandidates constructor.
-     *
-     * @param BookingService $bookingService
-     */
     public function __construct(BookingService $bookingService)
     {
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);
         }
 
-        return new JsonResponse([
-            'routeCandidates' => array_map(function(RouteCandidateDto $routeCandidate){
-                return $routeCandidate->getArrayCopy();
-            }, $this->bookingService->requestPossibleRoutesForCargo($trackingId))
-        ]);
+        try {
+            $cargoRoutingDto = $this->bookingService->loadCargoForRouting($trackingId);
+
+            return new JsonResponse($cargoRoutingDto->getArrayCopy());
+        } catch (CargoNotFoundException $e) {
+            return new EmptyResponse(404);
+        }
     }
 }

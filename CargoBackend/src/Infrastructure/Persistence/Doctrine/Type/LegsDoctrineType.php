@@ -39,8 +39,8 @@ final class LegsDoctrineType extends TextType
      */
     public function convertToPhpValue($value, AbstractPlatform $platform)
     {
-        if (is_null($value)) {
-            return $value;
+        if (null === $value) {
+            return [];
         }
 
         $legsData = json_decode($value, true);
@@ -67,7 +67,7 @@ final class LegsDoctrineType extends TextType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return $value;
         }
 

@@ -1,39 +1,71 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default itinerary">
-            <div class="panel-body">
-                <% _.each(legs, function(leg) { %>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Load location: </strong><%- obj.locations.get(leg.load_location).get('name') %>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Load time: </strong><%- obj.formatDateTime(leg.load_time) %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Unload location: </strong><%- obj.locations.get(leg.unload_location).get('name') %>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Unload time: </strong><%- obj.formatDateTime(leg.unload_time) %>
-                    </div>
-                </div>
-                <% }) %>
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="#"
-                           class="btn btn-success assign-cargo-btn">Assign Cargo</a>
-                    </div>
-                </div>
-            </div>
+<div if="{ !ready }">
+    <p class="alert alert-info">Fetching data from server ...</p>
+</div>
+<div if="{ ready }">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Cargo from {getLocation(cargo.get('origin')).name} ({ cargo.getId() })</h2>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Available routes</h3>
+        </div>
+    </div>
+    <div id="route-candidate-list" >
+        <route-candidate></route-candidate>
     </div>
 </div>
 <script type="text/javascript">
     function (context) {
-        var self = this;
+        var self = this,
+            _checkReady = function() {
+                if (self.locations.length === 0) {
+                    return;
+                }
 
+                if (! self.cargo) {
+                    return;
+                }
 
+                self.ready = true;
+            };
+
+        self.trackingId = context.trackingId;
+
+        self.locations = [];
+
+        self.cargo = null;
+
+        self.ready = false;
+
+        self.getLocation = function(unLocode) {
+            return _.findWhere(self.locations, {unLocode: unLocode});
+        }
+
+        self.on("mount", function() {
+            context.app.one("locations_refreshed", function(locations) {
+                self.locations = [];
+
+                _.forEach(locations, function (location) {
+                    self.locations.push(location.getProps())
+                });
+
+                _checkReady();
+                self.update();
+            });
+
+            context.app.trigger("refresh_locations");
+
+            context.app.one("cargo_refreshed", function(cargo) {
+                if (cargo.getId() === self.trackingId) {
+                    self.cargo = cargo;
+                    _checkReady();
+                    self.update();
+                }
+            })
+
+            context.app.trigger("refresh_cargo", {id: self.trackingId});
+        });
     }
 </script>

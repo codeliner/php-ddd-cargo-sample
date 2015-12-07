@@ -23,7 +23,6 @@
 <script type="text/javascript">
     function (context) {
         var self = this,
-            locationStore = context.app.Store.Locations
             _checkIsValid = function () {
                 self.hasError = false;
                 self.isValid = false;
@@ -66,16 +65,15 @@
                 return;
             }
 
-            $.postJSON('/api/cargos', {
-                origin: self.origin.value,
-                destination: self.final_destination.value
-            }).then(function(data){
-                console.log(data);
-            }, $.failNotify);
+            context.app.one('cargo_created', function(cargo) {
+                window.location.hash = context.router.get('cargos/' + cargo.getId() + '/assign_route');
+            });
+
+            context.app.trigger('create_cargo', {origin: self.origin.value, destination: self.final_destination.value});
         }
 
         self.on('mount', function () {
-            locationStore.getAll().then(function (data) {
+            context.app.one("locations_refreshed", function(locations) {
                 self.locations = [];
 
                 self.locations.push({
@@ -83,12 +81,14 @@
                     name : 'Select a location'
                 })
 
-                _.forEach(data, function (location) {
+                _.forEach(locations, function (location) {
                     self.locations.push(location.getProps())
                 });
 
                 self.update();
-            }).done();
+            });
+
+            context.app.trigger("refresh_locations");
         });
     }
 </script>

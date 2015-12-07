@@ -1,6 +1,7 @@
 <div class="jumbotron">
     <jb-cargo-list if="{ activeMode == 'cargo-list' }"></jb-cargo-list>
     <jb-new-cargo if="{ activeMode == 'new-cargo' }"></jb-new-cargo>
+    <jb-assign-route if="{ activeMode == 'assign-route' }"></jb-assign-route>
 </div>
 <div id="booking-app-container">
     <img src="/img/ajax-loader.gif" alt="loading ..." />
@@ -25,6 +26,11 @@
                 self.activeMode = "new-cargo";
                 self.update();
             },
+            renderAssignRoute = function (mixins) {
+                context.app.renderInto(self, "#booking-app-container", "assign-route", mixins);
+                self.activeMode = "assign-route";
+                self.update();
+            },
             _routeListener = function (con) {
                 var rm = con.routeMatch;
                 if (! rm[0]) {
@@ -41,6 +47,14 @@
                     if (rm[1] == "add") {
                         renderNewCargo({router : con.router});
                         return;
+                    }
+
+                    if (! rm[2]) {
+                        //get cargo
+                    }
+
+                    if (rm[2] == "assign_route") {
+                        renderAssignRoute({router : con.router, trackingId : rm[1]})
                     }
                 }
             };
