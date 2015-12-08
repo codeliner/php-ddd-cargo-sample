@@ -29,11 +29,11 @@
         "beberlei/assert": "^2.4",
         "roave/security-advisories": "dev-master",
         "ramsey/uuid-doctrine": "^1.0",
-        "oscarotero/psr7-middlewares": "^3.8"
+        "oscarotero/psr7-middlewares": "^3.8",
+        "filp/whoops": "^1.1"
     },
     "require-dev" : {
         "phpunit/phpunit": "^5.0",
-        "filp/whoops": "^1.1",
         "behat/behat": "^3.0",
         "behat/mink": "^1.6",
         "behat/mink-extension": "*",
