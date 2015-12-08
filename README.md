@@ -13,6 +13,9 @@ The new version is a complete rewrite of the cargo sample using cutting edge tec
 ### Sponsoring
 This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on [twitter](https://twitter.com/prooph_software)
 
+### tl;dr
+Click [here](https://github.com/codeliner/php-ddd-cargo-sample/pull/22#issuecomment-162734730) :smile:
+
 ### What Is New?
 
 - [x] PHP 7 with strict scalar type hints
