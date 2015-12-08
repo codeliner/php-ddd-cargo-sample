@@ -3,101 +3,121 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="keywords" content="php, ddd, domain driven design, cargo, sample, design pattern">
-    <meta name="description"
-          content="Domain Driven Design is a well known set of tactical and strategic design patterns to structure and develop large enterprise applications. But it is hard to find example implementations. This is especially true for PHP based examples. Eric Evans Cargo Sample was written in Java and ported to C#. Now, it is also available for PHP.">
-    <title>PHP DDD Cargo sample by codeliner</title>
-
+    <title>PHP 7 DDD Cargo Sample by codeliner</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/codeliner/php-ddd-cargo-sample">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/codeliner/php-ddd-cargo-sample/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/codeliner/php-ddd-cargo-sample/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1 class="header">Php-ddd-cargo-sample</h1>
-        <p class="header">PHP Version of the cargo sample used in Eric Evans DDD book</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/codeliner/php-ddd-cargo-sample/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/codeliner/php-ddd-cargo-sample/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/codeliner/php-ddd-cargo-sample">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/codeliner">codeliner</a></p>
-
-
-      </header>
       <section>
-        <h1>
-<a name="php-ddd-cargo-sample" class="anchor" href="#php-ddd-cargo-sample"><span class="octicon octicon-link"></span></a>php-ddd-cargo-sample</h1>
+        <div id="title">
+          <h1>PHP 7 DDD Cargo Sample</h1>
+          <p>PHP 7 Version of the cargo sample used in Eric Evans DDD book</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/codeliner">codeliner</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-<p>PHP 5.4+ port of the cargo sample used in Eric Evans Domain-Driven Design book</p>
-
-<p><a href="https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/"><img src="https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8" alt="Scrutinizer Quality Score"></a>
+        <p><a href="https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/"><img src="https://scrutinizer-ci.com/g/codeliner/php-ddd-cargo-sample/badges/quality-score.png?s=d68042d97e40904ec369e137b60a1076509298f8" alt="Scrutinizer Quality Score"></a>
 <a href="https://travis-ci.org/codeliner/php-ddd-cargo-sample"><img src="https://travis-ci.org/codeliner/php-ddd-cargo-sample.png?branch=master" alt="Build Status"></a></p>
 
 <h2>
-<a name="cqrs-and-es" class="anchor" href="#cqrs-and-es"><span class="octicon octicon-link"></span></a>CQRS & ES?</h2>
+<a id="cargo-sample-reloaded" class="anchor" href="#cargo-sample-reloaded" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cargo Sample Reloaded</h2>
 
-<p>The original cargo sample is not based on CQRS and EventSourcing. However, you may have read something about it in relation to Domain-Driven Design.
-The php-ddd-cargo-sample shows you the original approach using application services, a combined write and read model
-and an ORM (Doctrine in our case) to hide the persistence layer. This is still a very good and valid approach but CQRS and
-EventSourcing gets a lot of attention these days because it offers a great way to tackle complex problems.</p>
+<p>After two years of inactivity a new version of the PHP DDD Cargo Sample is available [2015/12/07].
+The new version is a complete rewrite of the cargo sample using cutting edge technology.</p>
 
-<p>Our suggestion is that you have a look at the cargo example and also at <a href="https://github.com/prooph/proophessor-do">proophessor-do</a>.</p>
+<h3>
+<a id="sponsoring" class="anchor" href="#sponsoring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sponsoring</h3>
 
-<p><strong>Proophessor-do</strong> demonstrates CQRS and ES using <a href="http://prooph.github.io/proophessor/#prooph-components">prooph components</a> and it is different then other example applications.</p>
+<p>This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on <a href="https://twitter.com/prooph_software">twitter</a></p>
 
-<p>Proophessor-do is incomplete and you are ask to get the job done.
-<strong>This is a great way to learn more about CQRS and EventSourcing</strong>. Don't worry, the prooph community is available in a chat
-to help you with your task. See the <a href="https://github.com/prooph/proophessor-do#hall-of-fame">HALL OF FAME</a>. The first tasks are already done
-and the next ones in progress. So what are you waiting for? Go pick up a task, too!</p>
+<h3>
+<a id="tldr" class="anchor" href="#tldr" aria-hidden="true"><span class="octicon octicon-link"></span></a>tl;dr</h3>
 
-<p>Ok, you would like to explore the cargo sample first? Just read on. It starts with the next heading.</p>
+<p>Click <a href="https://github.com/codeliner/php-ddd-cargo-sample/pull/22#issuecomment-162734730">here</a> <img class="emoji" title=":smile:" alt=":smile:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle"></p>
+
+<h3>
+<a id="what-is-new" class="anchor" href="#what-is-new" aria-hidden="true"><span class="octicon octicon-link"></span></a>What Is New?</h3>
+
+<ul>
+<li>[x] PHP 7 with strict scalar type hints</li>
+<li>[x] PSR-7 middleware layer using <a href="https://github.com/zendframework/zend-expressive">zend-expressive</a>
+</li>
+<li>[x] Doctrine ORM ^2.5 <a href="http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/tutorials/embeddables.html">Embeddables</a>
+</li>
+<li>[x] PHPUnit ^5.0</li>
+<li>[x] Behat ^3.0</li>
+<li>[x] Single Page UI using <a href="http://riotjs.com/">riot.js</a>
+</li>
+</ul>
 
 <h2>
-<a name="goal-of-the-project" class="anchor" href="#goal-of-the-project"><span class="octicon octicon-link"></span></a>Goal of the Project</h2>
+<a id="goal-of-the-project" class="anchor" href="#goal-of-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goal of the Project</h2>
 
-<p>We want to show the PHP way of implementing Domain-Driven Design with the help of
+<p>We want to show the PHP 7 way of implementing Domain-Driven Design with the help of
 the original Cargo sample used in Eric Evans book
 <code>Domain-Driven Design: Tackling Complexity in the Heart of Software</code>.
-This has already been done using java and a C# version is also available.</p>
+This has also been done using Java, C#, Ruby and other programming languages.</p>
 
-<p>It is not the one way to apply DDD, but should help you understand the theory
+<p>It is not the one way to apply DDD and only covers the tactical part of DDD. 
+However, the cargo sample should help you understand the theory
 and gives you a starting point. Also see the <a href="http://dddsample.sourceforge.net/">Caveats</a> of the 
 java implementation. The same applies for our version. </p>
 
-<p><b>The PHP port is work in progress. Your welcome to fork the repo and help finishing the cargo sample application.</b></p>
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>The application layer is based on ZF2 and we use Doctrine2 to persist our aggregates.
-This would be a common combination in a large PHP project but both frameworks are not required. They just make our life easier and let us focus on the Domain-Driven Design implementation. Both can be replaced with any other PHP based components.</p>
+<p>See the <a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md">Installation</a> file.</p>
 
 <h2>
-<a name="iterative-implementation" class="anchor" href="#iterative-implementation"><span class="octicon octicon-link"></span></a>Iterative Implementation</h2>
+<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Structure</h2>
 
-<p>To go with you when you read the book, our sample has a <a href="https://github.com/codeliner/php-ddd-cargo-sample#chapter-overview">release of each chapter</a>. So you can
-simply <code>git checkout ChapterOne</code> and you only get the starting view of the domain
-with just to entities <code>Cargo</code> and <code>Voyage</code>. Our application evolves chapter by chapter
-the more knowledge we get about the domain. Each chapter ships with it's own review, where you can find additional information about the implementation, tips and tricks and many more.</p>
-
-<ul>
-<li><a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md">Installation</a></li>
-<li><a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/domain-driven-design-tools.md">DDD Tools and Libs</a></li>
-</ul><h2>
-<a name="project-structure" class="anchor" href="#project-structure"><span class="octicon octicon-link"></span></a>Project Structure</h2>
-
-<p>There is no problem if you don't know the structure of a ZF2 application. All the important
-parts like the domain and the infrastructure implementation can be found in the <a href="https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/src/CargoBackend">namespace</a> of the CargoBackend module.</p>
-
-<p><em>Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the domain and infrastructure classes were included in the Application module!</em></p>
+<p>The <a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/structure.md">annotated project overview</a>
+gives you an idea of the system structure.</p>
 
 <h2>
-<a name="behavior-driven-design" class="anchor" href="#behavior-driven-design"><span class="octicon octicon-link"></span></a>Behavior Driven Design</h2>
+<a id="support" class="anchor" href="#support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support</h2>
+
+<p>If you have any problems with the application please open a <a href="https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open">GitHub issue</a>.
+Same applies if you have a question or a feature wish.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Contributions of any kind are welcome. The PHP 7 DDD cargo sample aims to help people understand the tactical design part of DDD.
+So we'd be very happy if you tell your friends about it, link it in discussions and mention it on twitter.
+If you've found a bug or have an idea for an improvement, just submit a PR like usual.</p>
+
+<h2>
+<a id="become-a-member" class="anchor" href="#become-a-member" aria-hidden="true"><span class="octicon octicon-link"></span></a>Become A Member</h2>
+
+<p>If you want to share your experience with other DDD enthusiasts or want to ask a question about DDD then the <a href="https://groups.google.com/forum/#!forum/dddinphp">DDDinPHP google group</a> is good place to do so.</p>
+
+<p>You can find more DDD stuff like interesting articles and related libraries on the <a href="https://github.com/PhpFriendsOfDdd/state-of-the-union">PhpFriendsOfDdd/state-of-the-union</a> project.</p>
+
+<h2>
+<a id="behavior-driven-design" class="anchor" href="#behavior-driven-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behavior Driven Design</h2>
 
 <p>All features of the application are described in feature files. You can find them in
 the <a href="https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features">features folder</a> of the project.
@@ -105,75 +125,20 @@ We make use of <a href="http://behat.org/">Behat</a> and <a href="http://mink.be
 business expectations.</p>
 
 <p>You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app:
-<code>java -jar bin/selenium-server-standalone-2.37.0.jar</code>
+<code>java -jar bin/selenium-server-standalone-2.46.0.jar</code>
 After the server started successfully open another console, navigate to project root again and run Behat with the command <code>php bin/behat</code>.</p>
 
-<p><em>Note: If it does not work, check that the behat file is executable.</em></p>
+<p>*Note: If it does not work, check that the behat file is executable.</p>
 
 <h2>
-<a name="unit-tests" class="anchor" href="#unit-tests"><span class="octicon octicon-link"></span></a>Unit Tests</h2>
+<a id="unit-tests" class="anchor" href="#unit-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unit Tests</h2>
 
-<p>Unit Tests are of course also available. You can find them in <a href="https://github.com/codeliner/php-ddd-cargo-sample/tree/master/module/CargoBackend/tests">module/CargoBackend/tests</a>.
+<p>Unit Tests are of course also available. You can find them in <a href="https://github.com/codeliner/php-ddd-cargo-sample/tree/master/CargoBackend/tests">CargoBackend/tests</a>.
 Got to the directory and simply run <code>phpunit</code>.</p>
-
-<p><em>Note: Project structure has changed in ChapterFour. In ChapterOne - ChapterThree the test classes were included in the Application module!</em></p>
-
-<h2>
-<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h2>
-
-<p>If you have any problems with the application please let me know and send me an email <code>kontakt[at]codeliner[dot]ws</code> or open a <a href="https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open">GitHub issue</a>.
-Same applies if you have a question or a feature wish.
-Maybe I've missed a concept that you hoped to find in the example.</p>
-
-<h2>
-<a name="chapter-overview" class="anchor" href="#chapter-overview"><span class="octicon octicon-link"></span></a>Chapter Overview</h2>
-
-<h3>
-<a name="chapterone" class="anchor" href="#chapterone"><span class="octicon octicon-link"></span></a>ChapterOne</h3>
-
-<p><code>git checkout ChapterOne</code></p>
-
-<p>Chapter One release contains the first draft of the Cargo DDD model.
-It contains the Entities <code>Cargo</code> and <code>Voyage</code> and also an <code>Application BookingService</code> that works with an <code>overbooking policy</code>
-to allow the booking of a Cargo even when the Voyage has not enough free capacity.</p>
-
-<p><a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterOne-Review.md">ChapterOne Review</a></p>
-
-<h3>
-<a name="chaptertwo" class="anchor" href="#chaptertwo"><span class="octicon octicon-link"></span></a>ChapterTwo</h3>
-
-<p><code>git checkout ChapterTwo</code></p>
-
-<p>In Chapter Two we learn the importance of the Ubiquitous Language. With it's help the team works out a Cargo Router and redefines the use cases for the Shipping Application. The <code>Application BookingService</code> is replaced with a <code>Application RoutingService</code>, cause the system focuses on planing an <code>Itinerary</code> for a <code>Cargo</code> that satisfies a <code>RouteSpecification</code>.</p>
-
-<p><a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterTwo-Review.md">ChapterTwo Review</a></p>
-
-<h3>
-<a name="chapterthree" class="anchor" href="#chapterthree"><span class="octicon octicon-link"></span></a>ChapterThree</h3>
-
-<p><code>git checkout ChapterThree</code></p>
-
-<p>ChapterThree is about Model-Driven Design.</p>
-
-<blockquote>
-<p>"Design a portion of the software system to reflect the domain model in a very literal way, so that
-mapping is obvious. Revisit the model and modify it to be implemented more naturally in software,
-even as you seek to make it reflect deeper insight into the domain. Demand a single model that
-serves both purposes well, in addition to supporting a robust UBIQUITOUS LANGUAGE.
-Draw from the model the terminology used in the design and the basic assignment of responsibilities.
-The code becomes an expression of the model, so a change to the code may be a change to the
-model. Its effect must ripple through the rest of the project's activities accordingly."</p>
-
-<p>-- Eric Evans: Domain-Driven Design: Tackling Complexity in the Heart of Software</p>
-</blockquote>
-
-<p><a href="https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/ChapterThree-Review.md">ChapterThree Review</a></p>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    
   </body>
 </html>
