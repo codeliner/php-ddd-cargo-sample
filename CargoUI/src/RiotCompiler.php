@@ -24,10 +24,6 @@ final class RiotCompiler
 {
     private $riotTagsRootDir = 'CargoUI/view/riot';
 
-    private $search = ['"', "\n"];
-
-    private $replace = ['\"', ""];
-
     public function compileToRiotStatements()
     {
         $riotRootDir = new \DirectoryIterator($this->riotTagsRootDir);
@@ -58,7 +54,10 @@ final class RiotCompiler
         $jsFunc = $this->extractJsFunction($tag, $tagName);
         $tagHtml = $this->removeJsFromTag($tag, $tagName);
 
-        return 'riot.tag("'.$tagName.'", "' . str_replace($this->search, $this->replace, $tagHtml) . '", '.$jsFunc.');';
+        $tagHtml = str_replace('"', '\"', $tagHtml);
+        $tagHtml = preg_replace("/\r|\n/", "", $tagHtml);
+
+        return 'riot.tag("'.$tagName.'", "' . $tagHtml . '", '.$jsFunc.');';
     }
 
     private function extractJsFunction($tag, $tagName)
