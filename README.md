@@ -10,11 +10,6 @@ PHP 7 port of the cargo sample used in Eric Evans Domain-Driven Design book
 After two years of inactivity a new version of the PHP DDD Cargo Sample is available [2015/12/07].
 The new version is a complete rewrite of the cargo sample using cutting edge technology.
 
-### Sponsoring
-[![prooph software](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/assets/prooph-software-logo.png)](http://prooph.de)
-
-This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on [twitter](https://twitter.com/prooph_software)
-
 ### tl;dr
 Click [here](https://github.com/codeliner/php-ddd-cargo-sample/pull/22#issuecomment-162734730) :smile:
 
@@ -55,11 +50,6 @@ Contributions of any kind are welcome. The PHP 7 DDD cargo sample aims to help p
 So we'd be very happy if you tell your friends about it, link it in discussions and mention it on twitter.
 If you've found a bug or have an idea for an improvement, just submit a PR like usual.
 
-## Become A Member
-If you want to share your experience with other DDD enthusiasts or want to ask a question about DDD then the [DDDinPHP google group](https://groups.google.com/forum/#!forum/dddinphp) is good place to do so.
-
-You can find more DDD stuff like interesting articles and related libraries on the [PhpFriendsOfDdd/state-of-the-union](https://github.com/PhpFriendsOfDdd/state-of-the-union) project.
-
 ## Behavior Driven Design
 All features of the application are described in feature files. You can find them in
 the [features folder](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/features) of the project.
@@ -75,3 +65,13 @@ After the server started successfully open another console, navigate to project 
 ## Unit Tests
 Unit Tests are of course also available. You can find them in [CargoBackend/tests](https://github.com/codeliner/php-ddd-cargo-sample/tree/master/CargoBackend/tests).
 Got to the directory and simply run `phpunit`.
+
+## Sponsoring
+[![prooph software](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/assets/prooph-software-logo.png)](http://prooph.de)
+
+This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on [twitter](https://twitter.com/prooph_software)
+
+## Become A Member
+If you want to share your experience with other DDD enthusiasts or want to ask a question about DDD then the [DDDinPHP google group](https://groups.google.com/forum/#!forum/dddinphp) is good place to do so.
+
+You can find more DDD stuff like interesting articles and related libraries on the [PhpFriendsOfDdd/state-of-the-union](https://github.com/PhpFriendsOfDdd/state-of-the-union) project.
