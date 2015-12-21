@@ -11,7 +11,7 @@ After two years of inactivity a new version of the PHP DDD Cargo Sample is avail
 The new version is a complete rewrite of the cargo sample using cutting edge technology.
 
 ### Sponsoring
-[![prooph software](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/assets/prooph-software.png)](http://prooph.de)
+[![prooph software](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/assets/prooph-software-logo.png)](http://prooph.de)
 
 This brand new cargo sample version is sponsored by prooph software GmbH. You can follow us on [twitter](https://twitter.com/prooph_software)
 
