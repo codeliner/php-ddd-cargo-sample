@@ -41,6 +41,10 @@ See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/ma
 The [annotated project overview](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/structure.md)
 gives you an idea of the system structure.
 
+## PHP 5.6 compatible Version
+Looking for a PHP 5.6 compatible version of the cargo sample? [@josecelano](https://github.com/josecelano) has downgraded his fork.
+You can find it [here](https://github.com/josecelano/php-ddd-cargo-sample).
+
 ## Support
 If you have any problems with the application please open a [GitHub issue](https://github.com/codeliner/php-ddd-cargo-sample/issues?state=open).
 Same applies if you have a question or a feature wish.
