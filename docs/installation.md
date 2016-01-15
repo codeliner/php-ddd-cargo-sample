@@ -6,7 +6,7 @@ Clone the repository and manually invoke `composer` using the shipped
 `composer.phar`:
 
     cd my/www/dir
-    git clone https://github.com/prooph/php-ddd-cargo-sample.git
+    git clone https://github.com/codeliner/php-ddd-cargo-sample.git
     cd php-ddd-cargo-sample
     php composer.phar self-update
     php composer.phar install
