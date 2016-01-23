@@ -3,31 +3,19 @@
 return [
     // This can be used to seed pre- and/or post-routing middleware
     'middleware_pipeline' => [
-        // An array of middleware to register prior to registration of the
-        // routing middleware
-        'pre_routing' => [
-            //[
-            // Required:
-            //    'middleware' => 'Name of middleware service, or a callable',
-            // Optional:
-            //    'path'  => '/path/to/match',
-            //    'error' => true,
-            //],
-            [
-                'middleware' => \Psr7Middlewares\Middleware\Payload::class,
-            ]
-        ],
+        'always' => [
+            'middleware' => [
+                \Psr7Middlewares\Middleware\Payload::class,
+            ],
+            'priority' => PHP_INT_MAX,
 
-        // An array of middleware to register after registration of the
-        // routing middleware
-        'post_routing' => [
-            //[
-            // Required:
-            //    'middleware' => 'Name of middleware service, or a callable',
-            // Optional:
-            //    'path'  => '/path/to/match',
-            //    'error' => true,
-            //],
         ],
+        'routing' => [
+            'middleware' => [
+                \Zend\Expressive\Container\ApplicationFactory::ROUTING_MIDDLEWARE,
+                \Zend\Expressive\Container\ApplicationFactory::DISPATCH_MIDDLEWARE,
+            ],
+            'priortiy' => 1
+        ]
     ],
 ];

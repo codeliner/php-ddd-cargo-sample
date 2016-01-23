@@ -18,6 +18,6 @@ final class PayloadParserFactory
 {
     public function __invoke(): Middleware\Payload
     {
-        return Middleware::Payload()->associative(true);
+        return Middleware::Payload();
     }
 }
