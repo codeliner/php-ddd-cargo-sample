@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Codeliner\CargoBackend\Container\Application\Action;
+namespace Codeliner\CargoBackend\Infrastructure\Container\Application\Action;
 
 use Psr7Middlewares\Middleware;
 

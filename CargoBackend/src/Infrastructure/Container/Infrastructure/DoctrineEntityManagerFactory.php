@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Codeliner\CargoBackend\Container\Infrastructure;
+namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\LegsDoctrineType;
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\TrackingIdDoctrineType;
@@ -42,7 +42,7 @@ final class DoctrineEntityManagerFactory
         $config->setMetadataDriverImpl(
             new \Doctrine\ORM\Mapping\Driver\XmlDriver(
                 array(
-                    __DIR__ . '/../../Infrastructure/Persistence/Doctrine/ORM'
+                    __DIR__ . '/../../Persistence/Doctrine/ORM'
                 )
             )
         );

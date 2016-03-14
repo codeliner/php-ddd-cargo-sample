@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Codeliner\CargoBackend\Container\Infrastructure;
+namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
 use Interop\Container\ContainerInterface;
