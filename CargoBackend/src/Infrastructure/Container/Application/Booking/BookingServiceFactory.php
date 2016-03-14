@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Codeliner\CargoBackend\Container\Application\Booking;
+namespace Codeliner\CargoBackend\Infrastructure\Container\Application\Booking;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
