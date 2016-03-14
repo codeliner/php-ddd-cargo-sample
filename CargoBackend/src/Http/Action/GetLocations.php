@@ -8,7 +8,7 @@
  * 
  * Date: 8/13/15 - 12:11 AM
  */
-namespace Codeliner\CargoBackend\Application\Action;
+namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;

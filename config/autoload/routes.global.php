@@ -13,22 +13,22 @@ return [
     'routes' => [
         [
             'path' => '/locations',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\GetLocations::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\GetLocations::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'path' => '/cargos',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\GetCargos::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\GetCargos::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'path' => '/cargos',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\CreateCargo::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\CreateCargo::class,
             'allowed_methods' => ['POST'],
         ],
         [
             'path' => '/cargos/{trackingId}',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\GetCargo::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\GetCargo::class,
             'allowed_methods' => ['GET'],
             'options' => [
                 'tokens' => [
@@ -38,7 +38,7 @@ return [
         ],
         [
             'path' => '/cargos/{trackingId}',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\UpdateCargo::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\UpdateCargo::class,
             'allowed_methods' => ['PUT'],
             'options' => [
                 'tokens' => [
@@ -48,7 +48,7 @@ return [
         ],
         [
             'path' => '/cargos/{trackingId}/routecandidates',
-            'middleware' => \Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class,
+            'middleware' => \Codeliner\CargoBackend\Http\Action\GetRouteCandidates::class,
             'allowed_methods' => ['GET'],
             'options' => [
                 'tokens' => [

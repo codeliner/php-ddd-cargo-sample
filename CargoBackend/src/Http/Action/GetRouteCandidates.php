@@ -8,7 +8,7 @@
  * 
  * Date: 06.12.2015 - 11:23 PM
  */
-namespace Codeliner\CargoBackend\Application\Action;
+namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
