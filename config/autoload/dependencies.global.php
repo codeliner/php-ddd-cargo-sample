@@ -11,12 +11,12 @@ return [
             'Codeliner\CargoBackend' => \Zend\Expressive\Container\ApplicationFactory::class,
 
               //Actions
-            \Codeliner\CargoBackend\Application\Action\GetLocations::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
-            \Codeliner\CargoBackend\Application\Action\GetRouteCandidates::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
-            \Codeliner\CargoBackend\Application\Action\CreateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
-            \Codeliner\CargoBackend\Application\Action\GetCargos::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
-            \Codeliner\CargoBackend\Application\Action\GetCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
-            \Codeliner\CargoBackend\Application\Action\UpdateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\GetLocations::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\GetRouteCandidates::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\CreateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\GetCargos::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\GetCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
+            \Codeliner\CargoBackend\Http\Action\UpdateCargo::class => \Codeliner\CargoBackend\Container\Application\Action\BookingActionFactory::class,
 
               //Action Helper middleware
             \Psr7Middlewares\Middleware\Payload::class => \Codeliner\CargoBackend\Container\Application\Action\PayloadParserFactory::class,
