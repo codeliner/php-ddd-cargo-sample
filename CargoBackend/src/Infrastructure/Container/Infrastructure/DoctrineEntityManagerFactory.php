@@ -42,7 +42,7 @@ final class DoctrineEntityManagerFactory
         $config->setMetadataDriverImpl(
             new \Doctrine\ORM\Mapping\Driver\XmlDriver(
                 array(
-                    __DIR__ . '/../../Infrastructure/Persistence/Doctrine/ORM'
+                    __DIR__ . '/../../Persistence/Doctrine/ORM'
                 )
             )
         );
