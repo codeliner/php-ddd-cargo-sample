@@ -22,6 +22,7 @@ before_script:
 
 
 script:
+  - php ./bin/kawaii gherkin:check features/
   - php ./bin/phpunit -c ./CargoBackend/tests
   - php ./bin/phpunit -c ./GraphTraversalBackend/tests
   - bin/behat --verbose
