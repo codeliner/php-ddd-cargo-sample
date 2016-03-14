@@ -38,7 +38,8 @@
         "behat/mink": "^1.6",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "behat/mink-selenium2-driver": "*",
+        "malukenho/kawaii-gherkin": "^0.1.2"
     },
     "autoload" : {
         "psr-4" : {

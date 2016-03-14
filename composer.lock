@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e53176ab3463d47c3f46d83e06c8e20d",
-    "content-hash": "c1b26038c2a7a1f9b907a3758c97ec1d",
+    "hash": "7d3c334ae7d495b1cb092fa179621f41",
+    "content-hash": "630b60eabe9f27ec91d108c707a2a095",
     "packages": [
         {
             "name": "aura/router",
@@ -1143,7 +1143,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9835fc4f8463c944bdc2617cbbdb6b688ca17944",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/dcdeb1d923b981a55f0a4ce6c2ceac14cb8476f8",
                 "reference": "9835fc4f8463c944bdc2617cbbdb6b688ca17944",
                 "shasum": ""
             },
@@ -1917,7 +1917,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/b1880fbb1a2fdb98b248ac8fcc1add4954fcd39f",
+                "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/6461d15efa044fb66e5aa0db2e6e811e03e9df2f",
                 "reference": "b1880fbb1a2fdb98b248ac8fcc1add4954fcd39f",
                 "shasum": ""
             },
@@ -2816,6 +2816,58 @@
                 "webtest"
             ],
             "time": "2015-06-15 20:19:33"
+        },
+        {
+            "name": "malukenho/kawaii-gherkin",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malukenho/kawaii-gherkin.git",
+                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
+                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
+                "shasum": ""
+            },
+            "require": {
+                "behat/gherkin": "^4.4",
+                "php": "~5.5|^7.0",
+                "sebastian/diff": "~1.2",
+                "symfony/console": "~2.0",
+                "symfony/finder": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "bin": [
+                "bin/kawaii"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "KawaiiGherkin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jefersson Nathan",
+                    "email": "malukenho@phpse.net"
+                }
+            ],
+            "description": "A small library to check and fix annoying gherkin code style",
+            "homepage": "https://github.com/malukenho/kawaii-gherkin",
+            "keywords": [
+                "Code style",
+                "code standard",
+                "gherkin"
+            ],
+            "time": "2016-02-08 14:10:57"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3870,7 +3922,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/41ee6c70758f40fa1dbf90d019ae0a66c4a09e74",
+                "url": "https://api.github.com/repos/symfony/config/zipball/ee4cdda66aff834c8125e8f2c15932461667c521",
                 "reference": "41ee6c70758f40fa1dbf90d019ae0a66c4a09e74",
                 "shasum": ""
             },
@@ -4189,6 +4241,55 @@
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
             "time": "2015-12-22 10:39:06"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v2.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "877bb4b16ea573cc8c024e9590888fcf7eb7e0f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/877bb4b16ea573cc8c024e9590888fcf7eb7e0f7",
+                "reference": "877bb4b16ea573cc8c024e9590888fcf7eb7e0f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-02-22 16:12:45"
         },
         {
             "name": "symfony/translation",
