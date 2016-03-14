@@ -6,29 +6,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  * 
- * Date: 07.12.2015 - 2:15 PM
+ * Date: 07.12.2015 - 8:39 PM
  */
-namespace Codeliner\CargoBackend\Application\Action;
-
+namespace Codeliner\CargoBackend\Http\Action;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
-use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
+use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
- * Class GetCargo
+ * Class GetCargos
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class GetCargo
+final class GetCargos
 {
     /**
      * @var BookingService
      */
     private $bookingService;
 
+    /**
+     * GetCargos constructor.
+     * @param BookingService $bookingService
+     */
     public function __construct(BookingService $bookingService)
     {
         $this->bookingService = $bookingService;
@@ -36,16 +38,8 @@ final class GetCargo
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
-        if (null === $trackingId = $request->getAttribute('trackingId')) {
-            return new EmptyResponse(404);
-        }
-
-        try {
-            $cargoRoutingDto = $this->bookingService->loadCargoForRouting($trackingId);
-
-            return new JsonResponse($cargoRoutingDto->getArrayCopy());
-        } catch (CargoNotFoundException $e) {
-            return new EmptyResponse(404);
-        }
+        return new JsonResponse(['cargos' => array_map(function(CargoRoutingDto $cargoRoutingDto) {
+            return $cargoRoutingDto->getArrayCopy();
+        }, $this->bookingService->listAllCargos() )]);
     }
 }

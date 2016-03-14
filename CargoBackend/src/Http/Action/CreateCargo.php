@@ -8,7 +8,7 @@
  * 
  * Date: 06.12.2015 - 10:35 PM
  */
-namespace Codeliner\CargoBackend\Application\Action;
+namespace Codeliner\CargoBackend\Http\Action;
 
 use Assert\Assertion;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
