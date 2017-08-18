@@ -19,7 +19,7 @@
         "php": ">=7.0",
         "zendframework/zend-expressive": "1.0.0rc6",
         "zendframework/zend-expressive-aurarouter": "^0.2.0",
-        "zendframework/zend-servicemanager": "dev-develop as 2.6",
+        "zendframework/zend-servicemanager": "2.6",
         "zendframework/zend-stdlib": "^2.5",
         "zendframework/zend-config": "^2.5",
         "ramsey/uuid" : "^3.0",
