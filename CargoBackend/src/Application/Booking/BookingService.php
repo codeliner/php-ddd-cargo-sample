@@ -18,7 +18,7 @@ use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
 use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
-use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+use Codeliner\CargoBackend\Application\TransactionManager;
 use Codeliner\CargoBackend\Model\Cargo\Cargo;
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
 use Codeliner\CargoBackend\Model\Cargo\RouteSpecification;
@@ -85,7 +85,7 @@ class BookingService
 
         $cargo = new Cargo($trackingId, $routeSpecification);
 
-        $this->transactionManager->beginTransaction();
+        $this->transactionManager->begin();
 
         try {
             $this->cargoRepository->store($cargo);
@@ -167,7 +167,7 @@ class BookingService
 
         $itinerary = $routeCandidateAssembler->toItinerary($aRoute);
 
-        $this->transactionManager->beginTransaction();
+        $this->transactionManager->begin();
 
         try {
 

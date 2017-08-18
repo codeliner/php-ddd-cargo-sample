@@ -16,7 +16,7 @@ use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
-use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineORMTransactionManager;
 use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
 use Codeliner\CargoBackend\Model\Cargo\TrackingId;
@@ -49,7 +49,7 @@ class BookingServiceTest extends TestCase
 
         $this->bookingService = new BookingService(
             $this->cargoRepository,
-            new TransactionManager($this->getTestEntityManager()),
+            new DoctrineORMTransactionManager($this->getTestEntityManager()),
             new ExternalRoutingService(new GraphTraversalServiceMock()),
             array('DEHAM' => 'Hamburg', 'USNYC' => 'New York')
         );

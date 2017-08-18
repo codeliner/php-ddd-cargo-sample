@@ -11,9 +11,10 @@
 declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
+use Codeliner\CargoBackend\Application\TransactionManager;
+use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineORMTransactionManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
-use Interop\Container\ContainerInterface;
 
 /**
  * Class TransactionManagerFactory
@@ -31,6 +32,6 @@ final class TransactionManagerFactory
      */
     public function __invoke(ContainerInterface $container): TransactionManager
     {
-        return new TransactionManager($container->get('doctrine.entitymanager.orm_default'));
+        return new DoctrineORMTransactionManager($container->get('doctrine.entitymanager.orm_default'));
     }
 }
