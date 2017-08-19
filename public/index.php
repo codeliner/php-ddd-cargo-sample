@@ -21,6 +21,8 @@ $container = require 'config/container.php';
 
 $app = new \Zend\Stratigility\MiddlewarePipe();
 
+$app->raiseThrowables();
+
 //CargoUI route
 $app->pipe(
     '/',
@@ -49,4 +51,4 @@ $server = \Zend\Diactoros\Server::createServer($app,
     $_COOKIE,
     $_FILES
 );
-$server->listen();
+$server->listen(new \Zend\Stratigility\NoopFinalHandler());

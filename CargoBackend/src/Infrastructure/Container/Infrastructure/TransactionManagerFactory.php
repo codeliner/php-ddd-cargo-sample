@@ -11,9 +11,10 @@
 declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
+
 use Codeliner\CargoBackend\Application\TransactionManager;
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineORMTransactionManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 
 /**

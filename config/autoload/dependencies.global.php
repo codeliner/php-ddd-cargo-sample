@@ -31,7 +31,7 @@ return [
               //Infrastructure
             'doctrine.entitymanager.orm_default' => \Codeliner\CargoBackend\Infrastructure\Container\Infrastructure\DoctrineEntityManagerFactory::class,
             \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
-            \Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager::class => \Codeliner\CargoBackend\Infrastructure\Container\Infrastructure\TransactionManagerFactory::class,
+            \Codeliner\CargoBackend\Application\TransactionManager::class => \Codeliner\CargoBackend\Infrastructure\Container\Infrastructure\TransactionManagerFactory::class,
 
             //GraphTraversalBackend
             \Codeliner\GraphTraversalBackend\GraphTraversalServiceInterface::class => \Codeliner\GraphTraversalBackend\GraphTraversalServiceFactory::class,
