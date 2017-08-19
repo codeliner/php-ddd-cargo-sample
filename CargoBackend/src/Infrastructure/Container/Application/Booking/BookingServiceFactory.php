@@ -13,7 +13,7 @@ declare(strict_types = 1);
 namespace Codeliner\CargoBackend\Infrastructure\Container\Application\Booking;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
-use Codeliner\CargoBackend\Infrastructure\Persistence\Transaction\TransactionManager;
+use Codeliner\CargoBackend\Application\TransactionManager;
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
 use Codeliner\CargoBackend\Model\Routing\RoutingServiceInterface;
 use Interop\Container\ContainerInterface;
