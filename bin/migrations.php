@@ -26,7 +26,7 @@ $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interfa
 
 $helperSet = new \Symfony\Component\Console\Helper\HelperSet();
 
-$helperSet->set(new \Symfony\Component\Console\Helper\DialogHelper(), 'dialog');
+$helperSet->set(new \Symfony\Component\Console\Helper\QuestionHelper(), 'dialog');
 
 $helperSet->set(
     new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper(

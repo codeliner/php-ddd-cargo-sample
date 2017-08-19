@@ -1,5 +1,9 @@
 # Installation
 
+## Requirements
+
+You need >=PHP 7.1
+
 ## Using Git and Composer (recommended)
 
 Clone the repository and manually invoke `composer` using the shipped
