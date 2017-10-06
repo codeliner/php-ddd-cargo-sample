@@ -26,3 +26,8 @@ services:
       - MYSQL_USER=dev
       - MYSQL_PASSWORD=dev
       - MYSQL_DATABASE=cargo_sample
+
+  adminer:
+    image: adminer:4.3
+    ports:
+      - 8081:8080
