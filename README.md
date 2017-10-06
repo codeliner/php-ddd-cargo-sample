@@ -61,7 +61,7 @@ We make use of [Behat](http://behat.org/) and [Mink](http://mink.behat.org/) to 
 business expectations.
 
 You can run the feature tests by navigating to the project root and start the selenium server shipped with the sample app:
-`java -jar bin/selenium-server-standalone-2.46.0.jar`
+`java -jar selenium-server-standalone-2.46.0.jar`
 After the server started successfully open another console, navigate to project root again and run Behat with the command `php bin/behat`.
 
 *Note: If it does not work, check that the behat file is executable.

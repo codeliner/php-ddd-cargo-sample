@@ -4,9 +4,10 @@
 +-- CargoBackend                   # Cargo Booking Context
 |  +-- src                             # Production source code
 |  |  +-- Application                      # Application layer
-|  |  |  +-- Action                            # REST API Endpoints (as PSR-7)
 |  |  |  +-- Booking                           # Booking Application Service
 |  |  |  +-- Exception                         # Application related exceptions
+|  |  +-- Http
+|  |  |  |  +-- Action                         # REST API Endpoints (as PSR-7)
 |  |  +-- Container                            # Namespace for all service factories
 |  |  |  +-- ...                               # Same sub structure as in src
 |  |  +-- Infrastructure                   # Infrastructure layer

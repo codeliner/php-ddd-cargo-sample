@@ -5,6 +5,11 @@ php:
 services:
   - mysql
 
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
+
 before_script:
   - php ./composer.phar install
   - mysql -e 'create database cargo_sample;'
@@ -12,9 +17,10 @@ before_script:
   - cp ./config/behat.yml.travis ./config/behat.yml
   - chmod -R 777 ./data/cache
   - php ./bin/migrations.php migrations:migrate -n
-  - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
-  - "java -jar ./selenium-server-standalone-2.46.0.jar > /dev/null &"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - "java -jar ./selenium-server-standalone-2.46.0.jar -Dwebdriver.chrome.driver=./chromedriver > /dev/null &"
   # webserver setup
   - php -S localhost:8000 -t ./public &
   - sleep 10
