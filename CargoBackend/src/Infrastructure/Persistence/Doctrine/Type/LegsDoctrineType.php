@@ -68,7 +68,7 @@ final class LegsDoctrineType extends TextType
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
-            return;
+            return null;
         }
 
         if (!is_array($value)) {

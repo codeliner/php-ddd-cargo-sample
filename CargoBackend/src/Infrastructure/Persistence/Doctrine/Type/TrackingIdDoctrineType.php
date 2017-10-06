@@ -35,7 +35,7 @@ final class TrackingIdDoctrineType extends UuidType
     public function convertToPHPValue($value, AbstractPlatform $platform): ?TrackingId
     {
         if (empty($value)) {
-            return;
+            return null;
         }
 
         if ($value instanceof TrackingId) {
@@ -58,7 +58,7 @@ final class TrackingIdDoctrineType extends UuidType
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
-            return;
+            return null;
         }
 
         if ($value instanceof TrackingId) {
