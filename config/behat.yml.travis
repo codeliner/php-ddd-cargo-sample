@@ -10,3 +10,6 @@ default:
             sessions:
               default:
                 selenium2: ~
+        Behat\MinkExtension\Extension:
+              browser_name: chrome
+             
