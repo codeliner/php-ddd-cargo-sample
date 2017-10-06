@@ -10,3 +10,4 @@ default:
             sessions:
               default:
                 selenium2: ~
+            browser_name: chrome
