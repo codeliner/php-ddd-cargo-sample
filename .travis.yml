@@ -21,7 +21,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
-  - "java -jar selenium-server-standalone-2.46.0.jar > /dev/null &"
+  - "java -jar selenium-server-standalone-2.46.0.jar -Dwebdriver.chrome.driver="/bin/chromedriver > /dev/null &"
   # webserver setup
   -  php -S localhost:8000 -t public &
   - sleep 10
