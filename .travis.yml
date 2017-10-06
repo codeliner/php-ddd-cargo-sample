@@ -5,6 +5,11 @@ php:
 services:
   - mysql
 
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
+
 before_script:
   - composer self-update
   - composer update
