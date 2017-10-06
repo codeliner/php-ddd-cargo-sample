@@ -25,7 +25,7 @@ class CargoRepositoryDoctrineTest extends TestCase
      */
     protected $cargoRepository;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Cargo');
         $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Itinerary');
@@ -37,7 +37,7 @@ class CargoRepositoryDoctrineTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_a_new_tracking_id()
+    public function it_returns_a_new_tracking_id(): void
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         
@@ -47,7 +47,7 @@ class CargoRepositoryDoctrineTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_and_returns_a_cargo()
+    public function it_stores_and_returns_a_cargo(): void
     {
         $trackingId = $this->cargoRepository->getNextTrackingId();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");

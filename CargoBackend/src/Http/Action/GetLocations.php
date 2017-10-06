@@ -44,7 +44,7 @@ final class GetLocations
      * @param ResponseInterface $response
      * @return JsonResponse
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         return new JsonResponse(['locations' => array_map(function(LocationDto $locationDto) {
             return [

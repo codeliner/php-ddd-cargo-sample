@@ -36,7 +36,7 @@ final class GetCargos
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         return new JsonResponse(['cargos' => array_map(function(CargoRoutingDto $cargoRoutingDto) {
             return $cargoRoutingDto->getArrayCopy();

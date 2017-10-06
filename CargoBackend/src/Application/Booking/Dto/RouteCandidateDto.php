@@ -24,7 +24,7 @@ class RouteCandidateDto
     /**
      * @param LegDto[] $legs
      */
-    public function setLegs(array $legs)
+    public function setLegs(array $legs): void
     {
         foreach($legs as $leg) {
             Assertion::isInstanceOf($leg, LegDto::class);

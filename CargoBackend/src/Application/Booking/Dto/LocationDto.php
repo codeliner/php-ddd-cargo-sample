@@ -29,7 +29,7 @@ class LocationDto
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         Assertion::notEmpty($name);
         $this->name = $name;
@@ -46,7 +46,7 @@ class LocationDto
     /**
      * @param string $unLocode
      */
-    public function setUnLocode(string $unLocode)
+    public function setUnLocode(string $unLocode): void
     {
         Assertion::notEmpty($unLocode);
         $this->unLocode = $unLocode;
@@ -60,4 +60,3 @@ class LocationDto
         return $this->unLocode;
     }
 }
- 

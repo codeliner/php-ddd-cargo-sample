@@ -25,7 +25,7 @@ final class DoctrineCargoRepository  extends EntityRepository implements CargoRe
      * @param TrackingId $trackingId Id
      * @return Cargo if found, else null
      */
-    public function get(TrackingId $trackingId)
+    public function get(TrackingId $trackingId): ?Cargo
     {
         return $this->find($trackingId);
     }
@@ -45,7 +45,7 @@ final class DoctrineCargoRepository  extends EntityRepository implements CargoRe
      *
      * @param Cargo $cargo Cargo to save
      */
-    public function store(Cargo $cargo)
+    public function store(Cargo $cargo): void
     {
         $this->getEntityManager()->persist($cargo);
         $this->getEntityManager()->flush($cargo);

@@ -26,7 +26,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_its_tracking_id()
+    public function it_returns_its_tracking_id(): void
     {
         $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
@@ -40,7 +40,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_initial_route_specification()
+    public function it_returns_initial_route_specification(): void
     {
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
         $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
@@ -52,7 +52,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_takes_origin_from_initial_route_specification()
+    public function it_takes_origin_from_initial_route_specification(): void
     {
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
         $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
@@ -63,7 +63,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_specifies_new_route_but_do_not_change_the_origin()
+    public function it_specifies_new_route_but_do_not_change_the_origin(): void
     {
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
         $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
@@ -80,7 +80,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_assigns_cargo_to_route_described_by_itinerary()
+    public function it_assigns_cargo_to_route_described_by_itinerary(): void
     {
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
         $cargo = new Cargo(new TrackingId(Uuid::uuid4()), $routeSpecification);
@@ -97,7 +97,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_detects_same_tracking_id()
+    public function it_detects_same_tracking_id(): void
     {
         $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");
@@ -117,7 +117,7 @@ class CargoTest extends TestCase
     /**
      * @test
      */
-    public function it_detects_different_tracking_id()
+    public function it_detects_different_tracking_id(): void
     {
         $uuid = Uuid::uuid4();
         $routeSpecification = new RouteSpecification("Hongkong", "Hamburg");

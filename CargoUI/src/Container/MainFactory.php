@@ -20,9 +20,9 @@ final class MainFactory
      * Create service
      *
      * @param ContainerInterface $container
-     * @return mixed
+     * @return Main
      */
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): Main
     {
         $config = $container->get('config');
 

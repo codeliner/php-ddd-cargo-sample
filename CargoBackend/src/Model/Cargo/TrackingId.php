@@ -71,10 +71,10 @@ class TrackingId
     }
 
     /**
-     * @param TrackingId $other
+     * @param self $other
      * @return bool
      */
-    public function sameValueAs(TrackingId $other): bool
+    public function sameValueAs(self $other): bool
     {
         return $this->toString() === $other->toString();
     }

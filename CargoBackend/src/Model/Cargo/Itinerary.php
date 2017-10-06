@@ -39,7 +39,7 @@ class Itinerary
     /**
      * @return Leg[] Immutable list of Legs
      */
-    public function legs()
+    public function legs(): array
     {
         return $this->legs;
     }

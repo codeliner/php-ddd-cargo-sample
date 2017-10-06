@@ -26,7 +26,7 @@ class CargoNotFoundException extends \RuntimeException implements ApiException
      * @param TrackingId $aTrackingId
      * @return CargoNotFoundException
      */
-    public static function forTrackingId(TrackingId $aTrackingId): CargoNotFoundException
+    public static function forTrackingId(TrackingId $aTrackingId): self
     {
         return new self(sprintf(
             'Cargo with TrackingId -%s- can not be found.',

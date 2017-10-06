@@ -101,7 +101,7 @@ class Cargo
      *
      * @param RouteSpecification $aRouteSpecification
      */
-    public function specifyNewRoute(RouteSpecification $aRouteSpecification)
+    public function specifyNewRoute(RouteSpecification $aRouteSpecification): void
     {
         $this->routeSpecification = $aRouteSpecification;
     }
@@ -123,7 +123,7 @@ class Cargo
      *
      * @param Itinerary $anItinerary
      */
-    public function assignToRoute(Itinerary $anItinerary)
+    public function assignToRoute(Itinerary $anItinerary): void
     {
         $this->itinerary = $anItinerary;
     }

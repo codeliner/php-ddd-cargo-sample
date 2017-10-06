@@ -44,7 +44,7 @@ class CargoRoutingDto
     /**
      * @param string $finalDestination
      */
-    public function setFinalDestination(string $finalDestination)
+    public function setFinalDestination(string $finalDestination): void
     {
         \Assert\that($finalDestination)->notEmpty()->string();
 
@@ -71,7 +71,7 @@ class CargoRoutingDto
         $this->legs = $legs;
     }
 
-    public function addLeg(LegDto $leg)
+    public function addLeg(LegDto $leg): void
     {
         $this->legs[] = $leg;
     }
@@ -87,7 +87,7 @@ class CargoRoutingDto
     /**
      * @param string $origin
      */
-    public function setOrigin(string $origin)
+    public function setOrigin(string $origin): void
     {
         Assertion::notEmpty($origin);
 
@@ -97,7 +97,7 @@ class CargoRoutingDto
     /**
      * @return string
      */
-    public function getOrigin()
+    public function getOrigin(): string
     {
         return $this->origin;
     }
@@ -105,7 +105,7 @@ class CargoRoutingDto
     /**
      * @param string $trackingId
      */
-    public function setTrackingId(string $trackingId)
+    public function setTrackingId(string $trackingId): void
     {
         Assertion::uuid($trackingId);
 
@@ -144,4 +144,3 @@ class CargoRoutingDto
         );
     }
 }
- 

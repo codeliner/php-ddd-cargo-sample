@@ -39,7 +39,7 @@ class LegDto
     /**
      * @param string $loadLocation
      */
-    public function setLoadLocation(string $loadLocation)
+    public function setLoadLocation(string $loadLocation): void
     {
         Assertion::notEmpty($loadLocation);
 
@@ -57,7 +57,7 @@ class LegDto
     /**
      * @param string $loadTime
      */
-    public function setLoadTime(string $loadTime)
+    public function setLoadTime(string $loadTime): void
     {
         Assertion::notEmpty($loadTime);
 
@@ -67,7 +67,7 @@ class LegDto
     /**
      * @return string
      */
-    public function getLoadTime()
+    public function getLoadTime(): string
     {
         return $this->loadTime;
     }
@@ -75,7 +75,7 @@ class LegDto
     /**
      * @param string $unloadLocation
      */
-    public function setUnloadLocation(string $unloadLocation)
+    public function setUnloadLocation(string $unloadLocation): void
     {
         Assertion::notEmpty($unloadLocation);
 
@@ -93,7 +93,7 @@ class LegDto
     /**
      * @param string $unloadTime
      */
-    public function setUnloadTime(string $unloadTime)
+    public function setUnloadTime(string $unloadTime): void
     {
         Assertion::notEmpty($unloadTime);
 
@@ -108,6 +108,4 @@ class LegDto
         return $this->unloadTime;
     }
 
-
 }
- 

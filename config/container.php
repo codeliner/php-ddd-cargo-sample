@@ -1,6 +1,5 @@
 <?php
 
-use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
 
 // Load configuration

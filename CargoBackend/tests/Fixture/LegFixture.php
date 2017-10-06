@@ -30,7 +30,7 @@ class LegFixture
      * @param string $aLegConstant
      * @return Leg
      */
-    public static function get($aLegConstant)
+    public static function get($aLegConstant): ?Leg
     {
         switch($aLegConstant) {
             case self::HONGKONG_HAMBURG:
@@ -61,8 +61,6 @@ class LegFixture
                     new \DateTimeImmutable('2014-03-10 10:00:00'),
                     new \DateTimeImmutable('2014-03-10 14:00:00')
                 );
-
         }
-
     }
 } 

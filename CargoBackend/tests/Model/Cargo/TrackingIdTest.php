@@ -22,7 +22,7 @@ class TrackingIdTest extends TestCase
     /**
      * @test
      */
-    public function it_constructs_itself_from_string()
+    public function it_constructs_itself_from_string(): void
     {
         $uuid = Uuid::uuid4();
 
@@ -33,7 +33,7 @@ class TrackingIdTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_string_representation_of_uuid()
+    public function it_returns_string_representation_of_uuid(): void
     {
         $uuid = Uuid::uuid4();
 
@@ -45,7 +45,7 @@ class TrackingIdTest extends TestCase
     /**
      * @test
      */
-    public function it_is_same_value_as()
+    public function it_is_same_value_as(): void
     {
         $uuid = Uuid::uuid4();
 
@@ -59,7 +59,7 @@ class TrackingIdTest extends TestCase
     /**
      * @test
      */
-    public function it_is_not_same_value_as()
+    public function it_is_not_same_value_as(): void
     {
         $trackingId = new TrackingId(Uuid::uuid4());
         $otherTrackingId = new TrackingId(Uuid::uuid4());

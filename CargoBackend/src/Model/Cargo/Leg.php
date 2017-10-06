@@ -10,6 +10,8 @@ declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Model\Cargo;
 
+use DateTimeImmutable;
+
 /**
  * Class Leg
  *
@@ -30,25 +32,25 @@ class Leg
     private $unloadLocation;
 
     /**
-     * @var \DateTime
+     * @var DateTimeImmutable
      */
     private $loadTime;
 
     /**
-     * @var \DateTime
+     * @var DateTimeImmutable
      */
     private $unloadTime;
 
     /**
      * @param string $aLoadLocation
      * @param string $anUnloadLocation
-     * @param \DateTimeImmutable $aLoadTime
-     * @param \DateTimeImmutable $anUnloadTime
+     * @param DateTimeImmutable $aLoadTime
+     * @param DateTimeImmutable $anUnloadTime
      */
     public function __construct(string $aLoadLocation,
                                 string $anUnloadLocation,
-                                \DateTimeImmutable $aLoadTime,
-                                \DateTimeImmutable $anUnloadTime)
+                                DateTimeImmutable $aLoadTime,
+                                DateTimeImmutable $anUnloadTime)
     {
        $this->loadLocation   = $aLoadLocation;
         $this->unloadLocation = $anUnloadLocation;
@@ -59,7 +61,7 @@ class Leg
     /**
      * @return string
      */
-    public function loadLocation()
+    public function loadLocation(): string
     {
         return $this->loadLocation;
     }
@@ -67,23 +69,23 @@ class Leg
     /**
      * @return string
      */
-    public function unloadLocation()
+    public function unloadLocation(): string
     {
         return $this->unloadLocation;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function loadTime()
+    public function loadTime(): DateTimeImmutable
     {
         return $this->loadTime;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function unloadTime()
+    public function unloadTime(): DateTimeImmutable
     {
         return $this->unloadTime;
     }
@@ -92,7 +94,7 @@ class Leg
      * @param Leg $other
      * @return bool
      */
-    public function sameValueAs(Leg $other)
+    public function sameValueAs(Leg $other): bool
     {
         if ($this->loadLocation() !== $other->loadLocation()) {
             return false;

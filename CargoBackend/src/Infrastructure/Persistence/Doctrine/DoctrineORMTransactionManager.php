@@ -6,7 +6,7 @@ namespace Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine;
 use Codeliner\CargoBackend\Application\TransactionManager;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DoctrineORMTransactionManager implements TransactionManager
+final class DoctrineORMTransactionManager implements TransactionManager
 {
     /**
      * @var EntityManagerInterface
@@ -22,17 +22,17 @@ class DoctrineORMTransactionManager implements TransactionManager
         $this->entityManager = $entityManager;
     }
 
-    public function begin()
+    public function begin(): void
     {
         $this->entityManager->beginTransaction();
     }
 
-    public function commit()
+    public function commit(): void
     {
         $this->entityManager->commit();
     }
 
-    public function rollback()
+    public function rollback(): void
     {
         $this->entityManager->rollback();
     }

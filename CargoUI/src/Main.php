@@ -67,7 +67,7 @@ final class Main
      * @param callable|null $next
      * @return ResponseInterface
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface
     {
         $layout = $this->renderLayout();
 
@@ -76,7 +76,7 @@ final class Main
         return $response;
     }
 
-    private function renderLayout()
+    private function renderLayout(): string
     {
         if ($this->cacheEnabled && file_exists($this->layoutCacheFile)) {
             return file_get_contents($this->layoutCacheFile);
@@ -108,7 +108,7 @@ final class Main
     /**
      * @return string
      */
-    private function compileRiot()
+    private function compileRiot(): string
     {
         return $this->riotCompiler->compileToRiotStatements();
     }
