@@ -19,7 +19,7 @@ require __DIR__ .'/../vendor/autoload.php';
 
 (function () {
     /** @var \Interop\Container\ContainerInterface $container */
-    $container = (require __DIR__ .'/../config/container.php')(require __DIR__ .'/../config/config.php');
+    $container = require __DIR__ .'/../config/container.php';
     /** @var \Zend\Expressive\Application $app */
     $app = $container->get(\Zend\Expressive\Application::class);
     // Import programmatic/declarative middleware pipeline and routing
