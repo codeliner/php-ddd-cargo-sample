@@ -26,6 +26,6 @@ interface GraphTraversalServiceInterface
      * @param string $toUnLocode
      * @return TransitPathDto[]
      */
-    public function findShortestPath($fromUnLocode, $toUnLocode): array;
+    public function findShortestPath(string $fromUnLocode, string $toUnLocode): array;
 }
  
