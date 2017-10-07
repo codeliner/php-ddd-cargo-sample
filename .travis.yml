@@ -11,8 +11,7 @@ addons:
       - google-chrome-stable
 
 before_script:
-  - composer self-update
-  - composer update
+  - php ./composer.phar install
   - mysql -e 'create database cargo_sample;'
   - cp ./config/autoload/local.php.dist ./config/autoload/local.php
   - cp ./config/behat.yml.travis ./config/behat.yml
@@ -23,13 +22,11 @@ before_script:
   - sleep 3
   - "java -jar ./selenium-server-standalone-2.46.0.jar -Dwebdriver.chrome.driver=./chromedriver > /dev/null &"
   # webserver setup
-  -  php -S localhost:8000 -t public &
+  - php -S localhost:8000 -t ./public &
   - sleep 10
-
 
 script:
   - php ./bin/kawaii gherkin:check features/
   - php ./bin/phpunit -c ./CargoBackend/tests
   - php ./bin/phpunit -c ./GraphTraversalBackend/tests
-  - bin/behat --verbose
-
+  - php ./bin/behat --verbose
