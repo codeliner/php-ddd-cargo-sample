@@ -15,40 +15,16 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
 }
 
 // Setup autoloading
-require 'vendor/autoload.php';
+require __DIR__ .'/../vendor/autoload.php';
 
-$container = require 'config/container.php';
-
-$app = new \Zend\Stratigility\MiddlewarePipe();
-
-$app->raiseThrowables();
-
-//CargoUI route
-$app->pipe(
-    '/',
-    function(\Psr\Http\Message\ServerRequestInterface $request,
-             \Psr\Http\Message\ResponseInterface $response,
-             callable $next = null) use ($container) {
-        if ($request->getUri()->getPath() === "/") {
-            /** @var $cargoUi \Codeliner\CargoUI\Main::class */
-            $cargoUi = $container->get(\Codeliner\CargoUI\Main::class);
-
-            return $cargoUi($request, $response, $next);
-        }
-
-        return $next($request, $response);
-    }
-);
-
-$cargoBackend = $container->get('Codeliner\CargoBackend');
-
-$app->pipe('/api', $cargoBackend);
-
-$server = \Zend\Diactoros\Server::createServer($app,
-    $_SERVER,
-    $_GET,
-    $_POST,
-    $_COOKIE,
-    $_FILES
-);
-$server->listen(new \Zend\Stratigility\NoopFinalHandler());
+(function () {
+    /** @var \Interop\Container\ContainerInterface $container */
+    $container = (require __DIR__ .'/../config/container.php')(require __DIR__ .'/../config/config.php');
+    /** @var \Zend\Expressive\Application $app */
+    $app = $container->get(\Zend\Expressive\Application::class);
+    // Import programmatic/declarative middleware pipeline and routing
+    // configuration statements
+    (require __DIR__ .'/../config/pipeline.php')($app);
+    (require __DIR__ .'/../config/routes.php')($app);
+    $app->run();
+})();

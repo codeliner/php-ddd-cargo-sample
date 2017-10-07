@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b494bdfa0440fd335c10ee60d10079a",
+    "content-hash": "d702e3eb7ff9f4c2528a351911a5feda",
     "packages": [
         {
             "name": "aura/router",
@@ -5219,6 +5219,166 @@
                 "validate"
             ],
             "time": "2016-11-23T20:04:58+00:00"
+        },
+        {
+            "name": "zendframework/zend-component-installer",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-component-installer.git",
+                "reference": "0ca44807dbcf356b75a869c61b533f917ccbc5ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-component-installer/zipball/0ca44807dbcf356b75a869c61b533f917ccbc5ae",
+                "reference": "0ca44807dbcf356b75a869c61b533f917ccbc5ae",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3.2",
+                "malukenho/docheader": "^0.1.5",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "class": "Zend\\ComponentInstaller\\ComponentInstaller"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\ComponentInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Composer plugin for automating component registration in zend-mvc and Expressive applications",
+            "time": "2017-04-25T16:43:54+00:00"
+        },
+        {
+            "name": "zendframework/zend-expressive-tooling",
+            "version": "0.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-expressive-tooling.git",
+                "reference": "df464ec88c2040a2213dd6b84e842953bfc82c88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-tooling/zipball/df464ec88c2040a2213dd6b84e842953bfc82c88",
+                "reference": "df464ec88c2040a2213dd6b84e842953bfc82c88",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "symfony/console": "^3.0 || ^2.8",
+                "zendframework/zend-code": "^3.1 || ^2.6.3",
+                "zendframework/zend-component-installer": "^1.0 || ^0.7.1",
+                "zendframework/zend-expressive": "^2.0",
+                "zendframework/zend-stdlib": "^3.1",
+                "zendframework/zend-stratigility": "^2.0",
+                "zfcampus/zf-composer-autoloading": "^2.0"
+            },
+            "require-dev": {
+                "malukenho/docheader": "^0.1.5",
+                "mikey179/vfsstream": "^1.6.4",
+                "mockery/mockery": "^0.9.8",
+                "php-mock/php-mock-phpunit": "^2.0 || ^1.1.2",
+                "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "bin": [
+                "bin/expressive",
+                "bin/expressive-migrate-original-messages",
+                "bin/expressive-module",
+                "bin/expressive-pipeline-from-config",
+                "bin/expressive-scan-for-error-middleware"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Expressive\\Tooling\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Migration and development tooling for Expressive",
+            "keywords": [
+                "http",
+                "middleware",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2017-05-09T15:23:19+00:00"
+        },
+        {
+            "name": "zfcampus/zf-composer-autoloading",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zfcampus/zf-composer-autoloading.git",
+                "reference": "3643d9dc4d3f0b6011ff643672e1cf187e21a7f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zfcampus/zf-composer-autoloading/zipball/3643d9dc4d3f0b6011ff643672e1cf187e21a7f4",
+                "reference": "3643d9dc4d3f0b6011ff643672e1cf187e21a7f4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-stdlib": "^3.1"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6.4",
+                "mockery/mockery": "^0.9.8",
+                "php-mock/php-mock-phpunit": "^2.0 || ^1.1.2",
+                "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "bin": [
+                "bin/zf-composer-autoloading"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ZF\\ComposerAutoloading\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Sets up Composer-based autoloading for your Zend Framework modules",
+            "homepage": "http://apigility.org/",
+            "keywords": [
+                "ZendFramework",
+                "autoloading",
+                "console",
+                "framework"
+            ],
+            "time": "2017-02-22T16:55:31+00:00"
         }
     ],
     "aliases": [],
