@@ -1,6 +1,6 @@
 <?php
 
-return function (\Zend\Expressive\Application $app) {
+return function (\Zend\Expressive\Application $app): void {
     $app->get('/', \Codeliner\CargoUI\Main::class);
     $app->get('/api/locations', \Codeliner\CargoBackend\Http\Action\GetLocations::class);
     $app->get('/api/cargos', \Codeliner\CargoBackend\Http\Action\GetCargos::class);

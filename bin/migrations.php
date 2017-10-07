@@ -17,7 +17,7 @@ chdir(dirname(__DIR__));
 // Setup autoloading
 require 'vendor/autoload.php';
 
-$container = require 'config/container.php';
+$container = (require 'config/container.php')(require 'config/config.php');
 
 /** @var \Doctrine\ORM\EntityManager $em */
 $em = $container->get('doctrine.entitymanager.orm_default');
