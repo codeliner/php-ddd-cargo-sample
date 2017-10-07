@@ -39,7 +39,7 @@ final class GetRouteCandidates
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);

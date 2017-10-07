@@ -2,13 +2,11 @@
 
 use Zend\ServiceManager\ServiceManager;
 
-// Load configuration
-$config = require 'config/config.php';
+return (function(): ServiceManager {
+    $config = require __DIR__ .'/config.php';
+    $dependencies = $config['dependencies'];
+    $dependencies['services']['config'] = $config;
 
-// Build container
-$container = new ServiceManager($config['dependencies']);
-
-// Inject config
-$container->setService('config', $config);
-
-return $container;
+    // Build container
+    return new ServiceManager($dependencies);
+})();

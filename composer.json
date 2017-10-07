@@ -17,14 +17,14 @@
     ],
     "require": {
         "php": ">=7.1",
-        "zendframework/zend-expressive": "1.0.0rc6",
-        "zendframework/zend-expressive-aurarouter": "^0.2.0",
+        "zendframework/zend-expressive": "^2.0.3",
+        "zendframework/zend-expressive-aurarouter": "^2.0",
         "zendframework/zend-servicemanager": "^3.0",
-        "zendframework/zend-stdlib": "^2.5",
-        "zendframework/zend-config": "^2.5",
-        "ramsey/uuid" : "^3.0",
-        "doctrine/orm" : "^2.5",
-        "doctrine/migrations": "^1.0",
+        "zendframework/zend-stdlib": "^3.1",
+        "zendframework/zend-config": "^3.1",
+        "ramsey/uuid" : "^3.7.1",
+        "doctrine/orm" : "^2.5.11",
+        "doctrine/migrations": "^1.5",
         "sandrokeil/interop-config": "^0.3.1",
         "beberlei/assert": "^2.4",
         "roave/security-advisories": "dev-master",
@@ -39,7 +39,8 @@
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
-        "malukenho/kawaii-gherkin": "^0.1.2"
+        "malukenho/kawaii-gherkin": "^0.1.2",
+        "zendframework/zend-expressive-tooling": "^0.4.4"
     },
     "autoload" : {
         "psr-4" : {

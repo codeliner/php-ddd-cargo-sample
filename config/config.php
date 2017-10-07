@@ -15,7 +15,7 @@ use Zend\Stdlib\Glob;
  * Obviously, if you use closures in your config you can't cache it.
  */
 
-$cachedConfigFile = 'data/cache/app_config.php';
+$cachedConfigFile = __DIR__ . '/../data/cache/app_config.php';
 
 $config = [];
 if (is_file($cachedConfigFile)) {
@@ -23,12 +23,7 @@ if (is_file($cachedConfigFile)) {
     $config = json_decode(file_get_contents($cachedConfigFile), true);
 } else {
     // Load configuration from autoload path
-    foreach (Glob::glob('config/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
-        $config = ArrayUtils::merge($config, include $file);
-    }
-
-    // Load configuration from autoload path
-    foreach (Glob::glob('library/config/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
+    foreach (Glob::glob(__DIR__ .'/autoload/{{,*.}global,{,*.}local}.php', Glob::GLOB_BRACE) as $file) {
         $config = ArrayUtils::merge($config, include $file);
     }
 
