@@ -15,4 +15,5 @@ Feature: Book new Cargo
         When I follow first ".assign-cargo-btn" link
         Then I should wait until I see "#cargo-list"
         When I click on first item in the list "#cargo-list"
+        Then I should wait until I see "#cargo-details"
         Then I should see 1 ".itinerary" elements

@@ -1,7 +1,7 @@
 <div if="{ !ready }">
     <img src="/img/ajax-loader.gif" alt="loading ..." />
 </div>
-<div if="{ ready }">
+<div if="{ ready }" id="cargo-details">
     <div class="row">
         <div class="col-md-12">
             <h2>Cargo from { getLocation(cargo.get('origin')).get('name') } ({ cargo.getId() })</h2>
