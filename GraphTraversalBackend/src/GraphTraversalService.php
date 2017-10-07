@@ -41,7 +41,7 @@ class GraphTraversalService implements GraphTraversalServiceInterface
      * @param string $toUnLocode
      * @return TransitPathDto[]
      */
-    public function findShortestPath($fromUnLocode, $toUnLocode): array
+    public function findShortestPath(string $fromUnLocode, string $toUnLocode): array
     {
         $routes = \array_filter($this->routes, function($route) use ($fromUnLocode, $toUnLocode) {
             return $route['origin'] === $fromUnLocode && $route['destination'] === $toUnLocode;
