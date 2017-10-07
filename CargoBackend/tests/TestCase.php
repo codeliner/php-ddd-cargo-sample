@@ -27,7 +27,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      *
      * @return EntityManager
      */
-    public function getTestEntityManager()
+    public function getTestEntityManager(): EntityManager
     {
         if (null === $this->entityManager) {
             $conn = \Doctrine\DBAL\DriverManager::getConnection(array(
@@ -72,7 +72,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         return $this->entityManager;
     }
 
-    public function createEntitySchema($entityNameOrNamespace, $pathToEntityDir = null)
+    public function createEntitySchema($entityNameOrNamespace, $pathToEntityDir = null): void
     {
         if (!is_null($pathToEntityDir)) {
             $dir = opendir($pathToEntityDir);

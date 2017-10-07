@@ -8,15 +8,15 @@ interface TransactionManager
     /**
      * Begin transaction
      */
-    public function begin();
+    public function begin(): void;
 
     /**
      * Commit transaction
      */
-    public function commit();
+    public function commit(): void;
 
     /**
      * Rollback transaction
      */
-    public function rollback();
+    public function rollback(): void;
 }

@@ -28,7 +28,7 @@ class TransitPathDto
     /**
      * @param EdgeDto[] $edges
      */
-    public function setEdges(array $edges)
+    public function setEdges(array $edges): void
     {
         $this->edges = $edges;
     }

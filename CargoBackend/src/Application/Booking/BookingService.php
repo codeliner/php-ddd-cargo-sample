@@ -154,7 +154,7 @@ class BookingService
      * @throws \Exception
      * @return void
      */
-    public function assignCargoToRoute(string $aTrackingId, RouteCandidateDto $aRoute)
+    public function assignCargoToRoute(string $aTrackingId, RouteCandidateDto $aRoute): void
     {
         $aTrackingId = TrackingId::fromString($aTrackingId);
         $cargo = $this->cargoRepository->get($aTrackingId);

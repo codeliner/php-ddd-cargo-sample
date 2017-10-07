@@ -38,7 +38,7 @@ final class CreateCargo
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $request->getParsedBody();
 

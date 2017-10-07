@@ -12,7 +12,6 @@ namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
-use Codeliner\CargoBackend\Model\Cargo\TrackingId;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -40,7 +39,7 @@ final class GetRouteCandidates
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);

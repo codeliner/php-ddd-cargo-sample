@@ -41,7 +41,7 @@ final class UpdateCargo
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);

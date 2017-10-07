@@ -37,7 +37,7 @@ class TransactionManager
     /**
      * @return void
      */
-    public function beginTransaction()
+    public function beginTransaction(): void
     {
         $this->entityManager->beginTransaction();
     }
@@ -45,7 +45,7 @@ class TransactionManager
     /**
      * @return void
      */
-    public function commit()
+    public function commit(): void
     {
         $this->entityManager->commit();
     }
@@ -53,7 +53,7 @@ class TransactionManager
     /**
      * @return void
      */
-    public function rollback()
+    public function rollback(): void
     {
         $this->entityManager->rollback();
     }

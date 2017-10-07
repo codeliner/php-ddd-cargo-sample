@@ -21,7 +21,7 @@ interface CargoRepositoryInterface
      * @param TrackingId $trackingId Id
      * @return Cargo if found, else {@code null}
      */
-    public function get(TrackingId $trackingId);
+    public function get(TrackingId $trackingId): ?Cargo;
     
     /**
      * List all cargo.
@@ -35,7 +35,7 @@ interface CargoRepositoryInterface
      * 
      * @param Cargo $cargo Cargo to save
      */
-    public function store(Cargo $cargo);
+    public function store(Cargo $cargo): void;
     
     /**
      * @return TrackingId A unique, generated tracking Id.

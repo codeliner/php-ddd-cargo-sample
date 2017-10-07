@@ -37,7 +37,7 @@ final class LegsDoctrineType extends TextType
      * @param AbstractPlatform $platform
      * @return Leg[]
      */
-    public function convertToPhpValue($value, AbstractPlatform $platform)
+    public function convertToPhpValue($value, AbstractPlatform $platform): array
     {
         if (null === $value) {
             return [];
@@ -62,13 +62,13 @@ final class LegsDoctrineType extends TextType
     /**
      * @param Leg[]|null $value
      * @param AbstractPlatform $platform
-     * @return string
+     * @return string|null
      * @throws \Doctrine\DBAL\Types\ConversionException
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
-            return $value;
+            return null;
         }
 
         if (!is_array($value)) {

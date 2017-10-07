@@ -60,10 +60,10 @@ class RouteSpecification
     }
 
     /**
-     * @param RouteSpecification $other
+     * @param self $other
      * @return bool
      */
-    public function sameValueAs(RouteSpecification $other): bool
+    public function sameValueAs(self $other): bool
     {
         if ($this->origin() !== $other->origin()) {
             return false;

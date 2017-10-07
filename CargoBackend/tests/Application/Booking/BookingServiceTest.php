@@ -41,7 +41,7 @@ class BookingServiceTest extends TestCase
      */
     private $bookingService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->createEntitySchema('Codeliner\CargoBackend\Model\Cargo\Cargo');
 
@@ -58,7 +58,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_a_new_cargo_and_assign_route_specification()
+    public function it_creates_a_new_cargo_and_assign_route_specification(): void
     {
         $trackingId = $this->bookingService->bookNewCargo('USNYC', 'DEHAM');
 
@@ -76,7 +76,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_loads_cargo_for_routing()
+    public function it_loads_cargo_for_routing(): void
     {
         $trackingId = $this->bookingService->bookNewCargo('USNYC', 'DEHAM');
 
@@ -92,7 +92,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_provides_possible_routes_for_cargo()
+    public function it_provides_possible_routes_for_cargo(): void
     {
         $trackingId = $this->bookingService->bookNewCargo('USNYC', 'DEHAM');
 
@@ -114,7 +114,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_assigns_cargo_to_route()
+    public function it_assigns_cargo_to_route(): void
     {
         $trackingId = $this->bookingService->bookNewCargo('USNYC', 'DEHAM');
 
@@ -135,7 +135,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_lists_available_shipping_locations()
+    public function it_lists_available_shipping_locations(): void
     {
         $locations = $this->bookingService->listShippingLocations();
 
@@ -150,7 +150,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_lists_all_stored_cargos()
+    public function it_lists_all_stored_cargos(): void
     {
         $trackingIdOne = $this->bookingService->bookNewCargo('USNYC', 'DEHAM');
 

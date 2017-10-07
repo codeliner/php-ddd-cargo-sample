@@ -1,15 +1,7 @@
 <?php
 namespace Codeliner\CargoFeature;
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
-use Zend\Mvc\Application;
-use Zend\ServiceManager\ServiceManager;
 
 //
 // Require 3rd-party libraries here:
@@ -42,7 +34,7 @@ class FeatureContext extends MinkContext
     /**
      * @BeforeSuite
      */
-    static public function iniializeContainer()
+    static public function iniializeContainer(): void
     {
         if (self::$container === null) {
             self::$container = require __DIR__ . '/../../config/container.php';
@@ -52,7 +44,7 @@ class FeatureContext extends MinkContext
     /**
      * @BeforeFeature
      */
-    public static function clearDatabase()
+    public static function clearDatabase(): void
     {
         $em = self::$container->get('doctrine.entitymanager.orm_default');
         $q = $em->createQuery('delete from Codeliner\CargoBackend\Model\Cargo\Cargo');
@@ -62,7 +54,7 @@ class FeatureContext extends MinkContext
     /**
      * @Given /^I click the submit button$/
      */
-    public function iClickTheSubmitButton()
+    public function iClickTheSubmitButton(): void
     {
         $session = $this->getSession();
         $page = $session->getPage();
@@ -79,7 +71,7 @@ class FeatureContext extends MinkContext
     /**
      * @Then /^I should wait until I see "([^"]*)"$/
      */
-    public function iShouldSeeAvailableRoutes($arg1)
+    public function iShouldSeeAvailableRoutes(string $arg1): void
     {
         $this->getSession()->wait(5000, '(0 === jQuery.active)');
 
@@ -89,7 +81,7 @@ class FeatureContext extends MinkContext
     /**
      * @When /^I click on first item in the list "([^"]*)"$/
      */
-    public function iClickOnFirstItemInTheList($arg1)
+    public function iClickOnFirstItemInTheList(string $arg1): void
     {
         $session = $this->getSession();
         $page = $session->getPage();
@@ -104,7 +96,7 @@ class FeatureContext extends MinkContext
     /**
      * @When /^I follow first "([^"]*)" link$/
      */
-    public function iFollowFirstLink($arg1)
+    public function iFollowFirstLink(string $arg1): void
     {
         $page = $this->getSession()->getPage();
 
@@ -118,7 +110,7 @@ class FeatureContext extends MinkContext
     /**
      * @Given /^I wait until I am on page "(?P<page>[^"]+)"$/
      */
-    public function iWaitUntilIAmOnPage($page)
+    public function iWaitUntilIAmOnPage(string $page): void
     {
         $matchingFound = false;
         

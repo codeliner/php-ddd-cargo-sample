@@ -32,7 +32,7 @@ final class TrackingIdDoctrineType extends UuidType
      * @param string|null                               $value
      * @param AbstractPlatform $platform
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): TrackingId
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?TrackingId
     {
         if (empty($value)) {
             return null;
@@ -43,12 +43,10 @@ final class TrackingIdDoctrineType extends UuidType
         }
 
         try {
-            $value = TrackingId::fromString($value);
+            return TrackingId::fromString($value);
         } catch (\Exception $ex) {
             throw ConversionException::conversionFailed($value, self::NAME);
         }
-
-        return $value;
     }
 
     /**
@@ -57,7 +55,7 @@ final class TrackingIdDoctrineType extends UuidType
      * @param TrackingId|null $value
      * @param AbstractPlatform $platform
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
             return null;

@@ -18,7 +18,7 @@ class GraphTraversalServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_finds_a_list_of_transit_paths()
+    public function it_finds_a_list_of_transit_paths(): void
     {
         $routes = array(
             array(

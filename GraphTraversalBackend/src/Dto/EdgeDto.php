@@ -43,7 +43,7 @@ class EdgeDto
     /**
      * @param string $fromDate
      */
-    public function setFromDate(string $fromDate)
+    public function setFromDate(string $fromDate): void
     {
         $this->fromDate = $fromDate;
     }
@@ -59,7 +59,7 @@ class EdgeDto
     /**
      * @param string $fromUnLocode
      */
-    public function setFromUnLocode(string $fromUnLocode)
+    public function setFromUnLocode(string $fromUnLocode): void
     {
         $this->fromUnLocode = $fromUnLocode;
     }
@@ -75,7 +75,7 @@ class EdgeDto
     /**
      * @param string $toDate
      */
-    public function setToDate(string $toDate)
+    public function setToDate(string $toDate): void
     {
         $this->toDate = $toDate;
     }
@@ -91,7 +91,7 @@ class EdgeDto
     /**
      * @param string $toUnLocode
      */
-    public function setToUnLocode(string $toUnLocode)
+    public function setToUnLocode(string $toUnLocode): void
     {
         $this->toUnLocode = $toUnLocode;
     }

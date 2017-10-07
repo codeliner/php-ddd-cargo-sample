@@ -25,7 +25,7 @@ class LegTest extends TestCase
      */
     private $leg;
 
-    public function setUp()
+    public function setUp(): void
     {
 
         $this->leg = new Leg(
@@ -39,7 +39,7 @@ class LegTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_load_location()
+    public function it_has_a_load_location(): void
     {
         $this->assertEquals('Hongkong', $this->leg->loadLocation());
     }
@@ -47,7 +47,7 @@ class LegTest extends TestCase
     /**
      * @test
      */
-    public function it_has_an_unload_location()
+    public function it_has_an_unload_location(): void
     {
         $this->assertEquals('Hamburg', $this->leg->unloadLocation());
     }
@@ -55,7 +55,7 @@ class LegTest extends TestCase
     /**
      * @test
      */
-    public function it_is_same_value_as_leg_with_same_properties()
+    public function it_is_same_value_as_leg_with_same_properties(): void
     {
         $sameLeg = new Leg(
             'Hongkong',

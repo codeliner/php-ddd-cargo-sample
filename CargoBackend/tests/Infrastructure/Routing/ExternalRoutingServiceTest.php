@@ -29,7 +29,7 @@ class ExternalRoutingServiceTest extends TestCase
      */
     private $externalRoutingService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->externalRoutingService = new ExternalRoutingService(new GraphTraversalServiceMock());
     }
@@ -37,7 +37,7 @@ class ExternalRoutingServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_fetches_routes_for_specification()
+    public function it_fetches_routes_for_specification(): void
     {
         $routeSpecification = new RouteSpecification('DEHAM', 'USNYC');
 

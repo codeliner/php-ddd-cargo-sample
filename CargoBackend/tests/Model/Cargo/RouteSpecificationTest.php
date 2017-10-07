@@ -23,7 +23,7 @@ class RouteSpecificationTest extends TestCase
      */
     protected $object;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new RouteSpecification('Hongkong', 'Berlin');
     }
@@ -31,7 +31,7 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_has_an_origin()
+    public function it_has_an_origin(): void
     {
         $this->assertEquals('Hongkong', $this->object->origin());
     }
@@ -39,7 +39,7 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_has_a_destination()
+    public function it_has_a_destination(): void
     {
         $this->assertEquals('Berlin', $this->object->destination());
     }
@@ -47,7 +47,7 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_is_same_value_as_route_specification_with_same_properties()
+    public function it_is_same_value_as_route_specification_with_same_properties(): void
     {
         $validCheck = new RouteSpecification('Hongkong', 'Berlin');
         
@@ -57,7 +57,7 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_is_not_same_value_as_route_specification_with_different_origin()
+    public function it_is_not_same_value_as_route_specification_with_different_origin(): void
     {
         $invalidCheck = new RouteSpecification('New York', 'Berlin');
 
@@ -67,7 +67,7 @@ class RouteSpecificationTest extends TestCase
     /**
      * @test
      */
-    public function it_is_not_same_value_as_route_specification_with_different_destination()
+    public function it_is_not_same_value_as_route_specification_with_different_destination(): void
     {
         $invalidCheck = new RouteSpecification('Hongkong', 'New York');
 

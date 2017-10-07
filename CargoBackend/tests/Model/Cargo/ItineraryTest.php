@@ -23,7 +23,7 @@ class ItineraryTest extends TestCase
     /**
      * @test
      */
-    public function it_has_list_of_legs()
+    public function it_has_list_of_legs(): void
     {
         $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
@@ -35,7 +35,7 @@ class ItineraryTest extends TestCase
     /**
      * @test
      */
-    public function it_is_same_value_as_itinerary_with_same_legs()
+    public function it_is_same_value_as_itinerary_with_same_legs(): void
     {
         $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
@@ -48,7 +48,7 @@ class ItineraryTest extends TestCase
     /**
      * @test
      */
-    public function it_is_not_same_value_as_itinerary_with_other_list_of_legs()
+    public function it_is_not_same_value_as_itinerary_with_other_list_of_legs(): void
     {
         $legs = [LegFixture::get(LegFixture::HONGKONG_NEWYORK), LegFixture::get(LegFixture::NEWYORK_HAMBURG)];
 
