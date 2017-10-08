@@ -16,7 +16,7 @@ Click [here](https://github.com/codeliner/php-ddd-cargo-sample/pull/22#issuecomm
 ### What Is New?
 
 - [x] PHP 7 with strict scalar type hints
-- [x] PSR-7 middleware layer using [zend-expressive](https://github.com/zendframework/zend-expressive)
+- [x] PSR-7 & PSR-15 middleware layer using [zend-expressive](https://github.com/zendframework/zend-expressive)
 - [x] Doctrine ORM ^2.5 [Embeddables](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/tutorials/embeddables.html)
 - [x] PHPUnit ^5.0
 - [x] Behat ^3.0
