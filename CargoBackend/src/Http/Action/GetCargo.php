@@ -12,6 +12,8 @@ namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -22,7 +24,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class GetCargo
+final class GetCargo implements MiddlewareInterface
 {
     /**
      * @var BookingService
@@ -34,7 +36,7 @@ final class GetCargo
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);

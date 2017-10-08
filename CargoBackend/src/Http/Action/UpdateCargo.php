@@ -14,6 +14,9 @@ use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
 use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -24,7 +27,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class UpdateCargo
+final class UpdateCargo implements MiddlewareInterface
 {
     /**
      * @var BookingService
@@ -41,7 +44,7 @@ final class UpdateCargo
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);
@@ -50,7 +53,7 @@ final class UpdateCargo
         $cargoData = $request->getParsedBody();
 
         if (! isset($cargoData['legs']) || ! is_array($cargoData['legs'])) {
-            throw new \InvalidArgumentException("Missing legs for cargo");
+            throw new InvalidArgumentException("Missing legs for cargo");
         }
 
         $routeCandidate = new RouteCandidateDto();
@@ -62,7 +65,7 @@ final class UpdateCargo
             $cargoRoutingDto = $this->bookingService->loadCargoForRouting($trackingId);
 
             return new JsonResponse($cargoRoutingDto->getArrayCopy());
-        }catch (CargoNotFoundException $e) {
+        } catch (CargoNotFoundException $e) {
             return new EmptyResponse(404);
         }
     }

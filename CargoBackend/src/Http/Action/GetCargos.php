@@ -9,8 +9,11 @@
  * Date: 07.12.2015 - 8:39 PM
  */
 namespace Codeliner\CargoBackend\Http\Action;
+
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
@@ -20,7 +23,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class GetCargos
+final class GetCargos implements MiddlewareInterface
 {
     /**
      * @var BookingService
@@ -36,7 +39,7 @@ final class GetCargos
         $this->bookingService = $bookingService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         return new JsonResponse(['cargos' => array_map(function(CargoRoutingDto $cargoRoutingDto) {
             return $cargoRoutingDto->getArrayCopy();
