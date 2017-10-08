@@ -16,7 +16,7 @@ use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\TransactionManager;
 use Codeliner\CargoBackend\Model\Cargo\CargoRepositoryInterface;
 use Codeliner\CargoBackend\Model\Routing\RoutingServiceInterface;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class BookingServiceFactory

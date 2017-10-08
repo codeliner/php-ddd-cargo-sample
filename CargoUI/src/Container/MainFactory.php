@@ -12,7 +12,7 @@ namespace Codeliner\CargoUI\Container;
 
 use Codeliner\CargoUI\Main;
 use Codeliner\CargoUI\RiotCompiler;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 final class MainFactory
 {

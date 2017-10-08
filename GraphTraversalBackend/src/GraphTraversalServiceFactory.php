@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace Codeliner\GraphTraversalBackend;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class GraphTraversalServiceFactory
