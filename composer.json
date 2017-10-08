@@ -25,6 +25,7 @@
         "ramsey/uuid" : "^3.7.1",
         "doctrine/orm" : "^2.5.11",
         "doctrine/migrations": "^1.5",
+        "psr/container": "^1.0",
         "sandrokeil/interop-config": "^0.3.1",
         "beberlei/assert": "^2.4",
         "roave/security-advisories": "dev-master",
