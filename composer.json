@@ -31,6 +31,7 @@
         "roave/security-advisories": "dev-master",
         "ramsey/uuid-doctrine": "^1.0",
         "oscarotero/psr7-middlewares": "3.12.x",
+        "http-interop/http-middleware": "^0.4.1",
         "filp/whoops": "^1.1"
     },
     "require-dev" : {

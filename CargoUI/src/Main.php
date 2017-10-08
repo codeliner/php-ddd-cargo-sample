@@ -10,8 +10,13 @@
  */
 namespace Codeliner\CargoUI;
 
-use Psr\Http\Message\RequestInterface;
+use Exception;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use UnexpectedValueException;
+use Zend\Diactoros\Response\HtmlResponse;
 
 /**
  * Class Main
@@ -25,7 +30,7 @@ use Psr\Http\Message\ResponseInterface;
  * @package Codeliner\CargoUI
  * @author Alexander Miertsch <contact@prooph.de>
  */
-final class Main
+final class Main implements MiddlewareInterface
 {
     /**
      * @var bool
@@ -61,19 +66,12 @@ final class Main
 
     /**
      * Render layout and write it to the response body
-     *
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @param callable|null $next
-     * @return ResponseInterface
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next = null): ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         $layout = $this->renderLayout();
 
-        $response->getBody()->write($layout);
-
-        return $response;
+        return new HtmlResponse($layout);
     }
 
     private function renderLayout(): string
@@ -87,12 +85,12 @@ final class Main
             ob_start();
             $includeReturn = include $this->layout;
             $layout = ob_get_clean();
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             ob_end_clean();
             throw $ex;
         }
         if ($includeReturn === false && empty($layout)) {
-            throw new \UnexpectedValueException(sprintf(
+            throw new UnexpectedValueException(sprintf(
                 'Unable to render layout "%s"; file include failed',
                 $this->layout
             ));

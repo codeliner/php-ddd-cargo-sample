@@ -12,8 +12,10 @@ namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\LocationDto;
-use Psr\Http\Message\RequestInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
@@ -22,7 +24,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\ApiGateway\Action
  */
-final class GetLocations
+final class GetLocations implements MiddlewareInterface
 {
     /**
      * @var BookingService
@@ -39,18 +41,13 @@ final class GetLocations
         $this->bookingService = $bookingService;
     }
 
-    /**
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @return JsonResponse
-     */
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
     {
         return new JsonResponse(['locations' => array_map(function(LocationDto $locationDto) {
             return [
                 'name' => $locationDto->getName(),
                 'unLocode' => $locationDto->getUnLocode()
             ];
-        }, $this->bookingService->listShippingLocations())]);
+        }, $this->bookingService->listShippingLocations())]);        
     }
 }
