@@ -16,7 +16,7 @@ use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\LegsDoctrine
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\Type\TrackingIdDoctrineType;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 final class DoctrineEntityManagerFactory
 {

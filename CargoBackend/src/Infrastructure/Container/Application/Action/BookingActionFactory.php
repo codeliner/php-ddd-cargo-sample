@@ -12,7 +12,7 @@ namespace Codeliner\CargoBackend\Infrastructure\Container\Application\Action;
 
 use Assert\Assertion;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class BookingActionFactory

@@ -14,7 +14,7 @@ namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Routing\ExternalRoutingService;
 use Codeliner\GraphTraversalBackend\GraphTraversalServiceInterface;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class ExternalRoutingServiceFactory

@@ -14,7 +14,7 @@ namespace Codeliner\CargoBackend\Infrastructure\Container\Infrastructure;
 
 use Codeliner\CargoBackend\Infrastructure\Persistence\Doctrine\DoctrineCargoRepository;
 use Codeliner\CargoBackend\Model\Cargo\Cargo;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class DoctrineCargoRepositoryFactory
