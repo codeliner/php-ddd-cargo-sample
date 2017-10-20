@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 01.03.14 - 22:35
  */
 declare(strict_types = 1);
@@ -92,14 +92,12 @@ class GraphTraversalService implements GraphTraversalServiceInterface
 
                 $unloadTime = clone $currentTime;
 
-                $edge = new EdgeDto();
-
-                $edge->setFromUnLocode($currentLocation);
-                $edge->setToUnLocode($unLocode);
-                $edge->setFromDate($loadTime->format(\DateTime::ATOM));
-                $edge->setToDate($unloadTime->format(\DateTime::ATOM));
-
-                $edges[] = $edge;
+                $edges[] = new EdgeDto(
+                    $currentLocation,
+                    $unLocode,
+                    $loadTime->format(\DateTime::ATOM),
+                    $unloadTime->format(\DateTime::ATOM)
+                );
 
                 $currentLocation = $unLocode;
             }
@@ -116,19 +114,13 @@ class GraphTraversalService implements GraphTraversalServiceInterface
 
         $unloadTime = clone $currentTime;
 
-        $edge = new EdgeDto();
+        $edges[] = new EdgeDto(
+            $currentLocation,
+            $route['destination'],
+            $loadTime->format(\DateTime::ATOM),
+            $unloadTime->format(\DateTime::ATOM)
+        );
 
-        $edge->setFromUnLocode($currentLocation);
-        $edge->setToUnLocode($route['destination']);
-        $edge->setFromDate($loadTime->format(\DateTime::ATOM));
-        $edge->setToDate($unloadTime->format(\DateTime::ATOM));
-
-        $edges[] = $edge;
-
-        $transitPath = new TransitPathDto();
-
-        $transitPath->setEdges($edges);
-
-        return $transitPath;
+        return new TransitPathDto($edges);
     }
 }

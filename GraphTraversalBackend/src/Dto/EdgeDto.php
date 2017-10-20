@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 18:56
  */
 declare(strict_types = 1);
@@ -18,7 +18,7 @@ namespace Codeliner\GraphTraversalBackend\Dto;
  * @package Codeliner\GraphTraversalService\Dto
  * @author Alexander Miertsch <contact@prooph.de>
  */
-class EdgeDto 
+class EdgeDto
 {
     /**
      * @var string
@@ -41,11 +41,17 @@ class EdgeDto
     private $toDate;
 
     /**
+     * @param string $fromUnLocode
+     * @param string $toUnLocode
      * @param string $fromDate
+     * @param string $toDate
      */
-    public function setFromDate(string $fromDate): void
+    public function __construct(string $fromUnLocode, string $toUnLocode, string $fromDate, string $toDate)
     {
-        $this->fromDate = $fromDate;
+        $this->setFromUnLocode($fromUnLocode);
+        $this->setToUnLocode($toUnLocode);
+        $this->setFromDate($fromDate);
+        $this->setToDate($toDate);
     }
 
     /**
@@ -57,27 +63,11 @@ class EdgeDto
     }
 
     /**
-     * @param string $fromUnLocode
-     */
-    public function setFromUnLocode(string $fromUnLocode): void
-    {
-        $this->fromUnLocode = $fromUnLocode;
-    }
-
-    /**
      * @return string
      */
     public function getFromUnLocode(): string
     {
         return $this->fromUnLocode;
-    }
-
-    /**
-     * @param string $toDate
-     */
-    public function setToDate(string $toDate): void
-    {
-        $this->toDate = $toDate;
     }
 
     /**
@@ -89,18 +79,42 @@ class EdgeDto
     }
 
     /**
-     * @param string $toUnLocode
-     */
-    public function setToUnLocode(string $toUnLocode): void
-    {
-        $this->toUnLocode = $toUnLocode;
-    }
-
-    /**
      * @return string
      */
     public function getToUnLocode(): string
     {
         return $this->toUnLocode;
+    }
+
+    /**
+     * @param string $fromDate
+     */
+    private function setFromDate(string $fromDate): void
+    {
+        $this->fromDate = $fromDate;
+    }
+
+    /**
+     * @param string $fromUnLocode
+     */
+    private function setFromUnLocode(string $fromUnLocode): void
+    {
+        $this->fromUnLocode = $fromUnLocode;
+    }
+
+    /**
+     * @param string $toDate
+     */
+    private function setToDate(string $toDate): void
+    {
+        $this->toDate = $toDate;
+    }
+
+    /**
+     * @param string $toUnLocode
+     */
+    private function setToUnLocode(string $toUnLocode): void
+    {
+        $this->toUnLocode = $toUnLocode;
     }
 }
