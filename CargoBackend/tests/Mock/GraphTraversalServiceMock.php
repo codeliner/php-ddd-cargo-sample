@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 19:57
  */
 
@@ -30,20 +30,18 @@ class GraphTraversalServiceMock implements GraphTraversalServiceInterface
      */
     public function findShortestPath(string $fromUnLocode, string $toUnLocode): array
     {
-        $transitPath = new TransitPathDto();
-
         $fromDate = new \DateTime('2014-03-29 19:59:23');
         $toDate   = new \DateTime('2014-03-30 21:30:00');
 
-        $edge = new EdgeDto();
-        $edge->setFromUnLocode($fromUnLocode);
-        $edge->setToUnLocode($toUnLocode);
-        $edge->setFromDate($fromDate->format(\DateTime::ISO8601));
-        $edge->setToDate($toDate->format(\DateTime::ISO8601));
+        $edge = new EdgeDto(
+            $fromUnLocode,
+            $toUnLocode,
+            $fromDate->format(\DateTime::ISO8601),
+            $toDate->format(\DateTime::ISO8601)
+        );
 
-        $transitPath->setEdges([$edge]);
+        $transitPath = new TransitPathDto([$edge]);
 
         return [$transitPath];
     }
 }
- 

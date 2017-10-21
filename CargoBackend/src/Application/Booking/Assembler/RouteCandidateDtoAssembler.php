@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 21:06
  */
 declare(strict_types = 1);
@@ -23,7 +23,7 @@ use Codeliner\CargoBackend\Model\Cargo\Leg;
  * @package CargoBackend\API\Booking\Assembler
  * @author Alexander Miertsch <contact@prooph.de>
  */
-class RouteCandidateDtoAssembler 
+class RouteCandidateDtoAssembler
 {
     /**
      * @param Itinerary $anItinerary
@@ -34,21 +34,15 @@ class RouteCandidateDtoAssembler
         $legs = array();
 
         foreach ($anItinerary->legs() as $leg) {
-            $legDto = new LegDto();
-
-            $legDto->setLoadLocation($leg->loadLocation());
-            $legDto->setUnloadLocation($leg->unloadLocation());
-            $legDto->setLoadTime($leg->loadTime()->format(\DateTime::ATOM));
-            $legDto->setUnloadTime($leg->unloadTime()->format(\DateTime::ATOM));
-
-            $legs[] = $legDto;
+            $legs[] = new LegDto(
+                $leg->loadLocation(),
+                $leg->unloadLocation(),
+                $leg->loadTime()->format(\DateTime::ATOM),
+                $leg->unloadTime()->format(\DateTime::ATOM)
+            );
         }
 
-        $routeCandidate = new RouteCandidateDto();
-
-        $routeCandidate->setLegs($legs);
-
-        return $routeCandidate;
+        return new RouteCandidateDto($legs);
     }
 
     /**
@@ -71,4 +65,3 @@ class RouteCandidateDtoAssembler
         return new Itinerary($legs);
     }
 }
- 

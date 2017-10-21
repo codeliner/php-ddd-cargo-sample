@@ -5,21 +5,23 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 16:59
  */
 declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Application\Booking\Dto;
+
+use Assert\Assert;
 use Assert\Assertion;
 
 /**
  * Class CargoRoutingDto
  *
  * @package CargoBackend\API\Booking\Dto
- * @author Alexander Miertsch <contact@prooph.de>
+ * @author  Alexander Miertsch <contact@prooph.de>
  */
-class CargoRoutingDto 
+class CargoRoutingDto
 {
     /**
      * @var string
@@ -42,56 +44,25 @@ class CargoRoutingDto
     private $legs = array();
 
     /**
-     * @param string $finalDestination
+     * @param string   $trackingId
+     * @param string   $origin
+     * @param string   $finalDestination
+     * @param LegDto[] $legs
      */
-    public function setFinalDestination(string $finalDestination): void
+    public function __construct(string $trackingId, string $origin, string $finalDestination, array $legs)
     {
-        \Assert\that($finalDestination)->notEmpty()->string();
-
-        $this->finalDestination = $finalDestination;
+        $this->setTrackingId($trackingId);
+        $this->setOrigin($origin);
+        $this->setFinalDestination($finalDestination);
+        $this->setLegs($legs);
     }
 
     /**
      * @return string
      */
-    public function getFinalDestination(): string
+    public function getTrackingId(): string
     {
-        return $this->finalDestination;
-    }
-
-    /**
-     * @param LegDto[] $legs
-     */
-    public function setLegs(array $legs): array
-    {
-        foreach($legs as $leg) {
-            Assertion::isInstanceOf($leg, LegDto::class);
-        }
-
-        $this->legs = $legs;
-    }
-
-    public function addLeg(LegDto $leg): void
-    {
-        $this->legs[] = $leg;
-    }
-
-    /**
-     * @return LegDto[]
-     */
-    public function getLegs(): array
-    {
-        return $this->legs;
-    }
-
-    /**
-     * @param string $origin
-     */
-    public function setOrigin(string $origin): void
-    {
-        Assertion::notEmpty($origin);
-
-        $this->origin = $origin;
+        return $this->trackingId;
     }
 
     /**
@@ -103,21 +74,19 @@ class CargoRoutingDto
     }
 
     /**
-     * @param string $trackingId
+     * @return string
      */
-    public function setTrackingId(string $trackingId): void
+    public function getFinalDestination(): string
     {
-        Assertion::uuid($trackingId);
-
-        $this->trackingId = $trackingId;
+        return $this->finalDestination;
     }
 
     /**
-     * @return string
+     * @return LegDto[]
      */
-    public function getTrackingId(): string
+    public function getLegs(): array
     {
-        return $this->trackingId;
+        return $this->legs;
     }
 
     /**
@@ -137,10 +106,60 @@ class CargoRoutingDto
         }
 
         return array(
-            'tracking_id'        => $this->getTrackingId(),
-            'origin'             => $this->getOrigin(),
-            'final_destination'  => $this->getFinalDestination(),
-            'legs'               => $legsArrayCopy
+            'tracking_id'       => $this->getTrackingId(),
+            'origin'            => $this->getOrigin(),
+            'final_destination' => $this->getFinalDestination(),
+            'legs'              => $legsArrayCopy
         );
+    }
+
+    /**
+     * @param string $trackingId
+     */
+    private function setTrackingId(string $trackingId): void
+    {
+        Assertion::uuid($trackingId);
+
+        $this->trackingId = $trackingId;
+    }
+
+    /**
+     * @param string $origin
+     */
+    private function setOrigin(string $origin): void
+    {
+        Assertion::notEmpty($origin);
+
+        $this->origin = $origin;
+    }
+
+    /**
+     * @param string $finalDestination
+     */
+    private function setFinalDestination(string $finalDestination): void
+    {
+        Assert::that($finalDestination)->notEmpty()->string();
+
+        $this->finalDestination = $finalDestination;
+    }
+
+    /**
+     * @param LegDto[] $legs
+     */
+    private function setLegs(array $legs)
+    {
+        $this->legs = array();
+
+        foreach ($legs as $leg) {
+            $this->addLeg($leg);
+        }
+    }
+
+    /**
+     * @param LegDto $leg
+     */
+    private function addLeg(LegDto $leg): void
+    {
+        $this->legs[] = $leg;
     }
 }

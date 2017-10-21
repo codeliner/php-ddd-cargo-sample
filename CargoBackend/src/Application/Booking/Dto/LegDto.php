@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 26.03.14 - 22:22
  */
 declare(strict_types = 1);
@@ -38,12 +38,16 @@ class LegDto
 
     /**
      * @param string $loadLocation
+     * @param string $unloadLocation
+     * @param string $loadTime
+     * @param string $unloadTime
      */
-    public function setLoadLocation(string $loadLocation): void
+    public function __construct(string $loadLocation, string $unloadLocation, string $loadTime, string $unloadTime)
     {
-        Assertion::notEmpty($loadLocation);
-
-        $this->loadLocation = $loadLocation;
+        $this->setLoadLocation($loadLocation);
+        $this->setUnloadLocation($unloadLocation);
+        $this->setLoadTime($loadTime);
+        $this->setUnloadTime($unloadTime);
     }
 
     /**
@@ -55,31 +59,11 @@ class LegDto
     }
 
     /**
-     * @param string $loadTime
-     */
-    public function setLoadTime(string $loadTime): void
-    {
-        Assertion::notEmpty($loadTime);
-
-        $this->loadTime = $loadTime;
-    }
-
-    /**
      * @return string
      */
     public function getLoadTime(): string
     {
         return $this->loadTime;
-    }
-
-    /**
-     * @param string $unloadLocation
-     */
-    public function setUnloadLocation(string $unloadLocation): void
-    {
-        Assertion::notEmpty($unloadLocation);
-
-        $this->unloadLocation = $unloadLocation;
     }
 
     /**
@@ -91,16 +75,6 @@ class LegDto
     }
 
     /**
-     * @param string $unloadTime
-     */
-    public function setUnloadTime(string $unloadTime): void
-    {
-        Assertion::notEmpty($unloadTime);
-
-        $this->unloadTime = $unloadTime;
-    }
-
-    /**
      * @return string
      */
     public function getUnloadTime(): string
@@ -108,4 +82,43 @@ class LegDto
         return $this->unloadTime;
     }
 
+    /**
+     * @param string $loadLocation
+     */
+    private function setLoadLocation(string $loadLocation): void
+    {
+        Assertion::notEmpty($loadLocation);
+
+        $this->loadLocation = $loadLocation;
+    }
+
+    /**
+     * @param string $loadTime
+     */
+    private function setLoadTime(string $loadTime): void
+    {
+        Assertion::notEmpty($loadTime);
+
+        $this->loadTime = $loadTime;
+    }
+
+    /**
+     * @param string $unloadLocation
+     */
+    private function setUnloadLocation(string $unloadLocation): void
+    {
+        Assertion::notEmpty($unloadLocation);
+
+        $this->unloadLocation = $unloadLocation;
+    }
+
+    /**
+     * @param string $unloadTime
+     */
+    private function setUnloadTime(string $unloadTime): void
+    {
+        Assertion::notEmpty($unloadTime);
+
+        $this->unloadTime = $unloadTime;
+    }
 }

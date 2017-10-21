@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 07.12.2015 - 6:30 PM
  */
 namespace Codeliner\CargoBackend\Http\Action;
@@ -56,8 +56,7 @@ final class UpdateCargo implements MiddlewareInterface
             throw new InvalidArgumentException("Missing legs for cargo");
         }
 
-        $routeCandidate = new RouteCandidateDto();
-        $routeCandidate->setLegs($this->toLegDtosFromData($cargoData['legs']));
+        $routeCandidate = new RouteCandidateDto($this->toLegDtosFromData($cargoData['legs']));
 
         try {
             $this->bookingService->assignCargoToRoute($trackingId, $routeCandidate);
@@ -79,14 +78,12 @@ final class UpdateCargo implements MiddlewareInterface
         $legDtos = array();
 
         foreach ($legs as $legData) {
-            $legDto = new LegDto();
-
-            $legDto->setLoadLocation($legData['load_location']);
-            $legDto->setUnloadLocation($legData['unload_location']);
-            $legDto->setLoadTime($legData['load_time']);
-            $legDto->setUnloadTime($legData['unload_time']);
-
-            $legDtos[] = $legDto;
+            $legDtos[] = new LegDto(
+                $legData['load_location'],
+                $legData['unload_location'],
+                $legData['load_time'],
+                $legData['unload_time']
+            );
         }
 
         return $legDtos;

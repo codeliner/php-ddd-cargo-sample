@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 17:55
  */
 declare(strict_types = 1);
@@ -193,11 +193,7 @@ class BookingService
         $locationDtos = array();
 
         foreach ($this->locations as $unLocode => $name) {
-            $locationDto = new LocationDto();
-            $locationDto->setUnLocode($unLocode);
-            $locationDto->setName($name);
-
-            $locationDtos[] = $locationDto;
+            $locationDtos[] = new LocationDto($unLocode, $name);
         }
 
         return $locationDtos;

@@ -5,14 +5,12 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 17:09
  */
 declare(strict_types = 1);
 
 namespace Codeliner\CargoBackend\Application\Booking\Dto;
-
-use Assert\Assertion;
 
 class RouteCandidateDto
 {
@@ -24,13 +22,9 @@ class RouteCandidateDto
     /**
      * @param LegDto[] $legs
      */
-    public function setLegs(array $legs): void
+    public function __construct(array $legs)
     {
-        foreach($legs as $leg) {
-            Assertion::isInstanceOf($leg, LegDto::class);
-        }
-
-        $this->legs = $legs;
+        $this->setLegs($legs);
     }
 
     /**
@@ -59,5 +53,24 @@ class RouteCandidateDto
 
         return array('legs' => $legsList);
     }
+
+    /**
+     * @param LegDto[] $legs
+     */
+    private function setLegs(array $legs): void
+    {
+        $this->legs = array();
+
+        foreach($legs as $leg) {
+            $this->addLeg($leg);
+        }
+    }
+
+    /**
+     * @param LegDto $leg
+     */
+    private function addLeg(LegDto $leg): void
+    {
+        $this->legs[] = $leg;
+    }
 }
- 

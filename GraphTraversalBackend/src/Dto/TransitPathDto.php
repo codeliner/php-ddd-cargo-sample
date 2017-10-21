@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Date: 29.03.14 - 18:55
  */
 declare(strict_types = 1);
@@ -28,9 +28,9 @@ class TransitPathDto
     /**
      * @param EdgeDto[] $edges
      */
-    public function setEdges(array $edges): void
+    public function __construct(array $edges)
     {
-        $this->edges = $edges;
+        $this->setEdges($edges);
     }
 
     /**
@@ -39,5 +39,25 @@ class TransitPathDto
     public function getEdges(): array
     {
         return $this->edges;
+    }
+
+    /**
+     * @param EdgeDto[] $edges
+     */
+    private function setEdges(array $edges): void
+    {
+        $this->edges = array();
+
+        foreach ($edges as $edge) {
+            $this->addEdge($edge);
+        }
+    }
+
+    /**
+     * @param EdgeDto $edge
+     */
+    private function addEdge(EdgeDto $edge): void
+    {
+        $this->edges[] = $edge;
     }
 }
