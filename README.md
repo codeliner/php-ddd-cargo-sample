@@ -29,13 +29,14 @@ the original Cargo sample used in Eric Evans book
 `Domain-Driven Design: Tackling Complexity in the Heart of Software`.
 This has also been done using Java, C#, Ruby and other programming languages.
 
-It is not the one way to apply DDD and only covers the tactical part of DDD. 
+It is not the one way to apply DDD and only covers the tactical part of DDD.
 However, the cargo sample should help you understand the theory
-and gives you a starting point. Also see the [Caveats](http://dddsample.sourceforge.net/) of the 
-java implementation. The same applies for our version. 
+and gives you a starting point. Also see the [Caveats](http://dddsample.sourceforge.net/) of the
+java implementation. The same applies for our version.
 
 ## Installation
-See the [Installation](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md) file.
+* [Standalone](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation.md)
+* [Dockerized](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/installation-docker.md)
 
 ## Structure
 The [annotated project overview](https://github.com/codeliner/php-ddd-cargo-sample/blob/master/docs/structure.md)

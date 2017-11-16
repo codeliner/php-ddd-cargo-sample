@@ -3,7 +3,7 @@ services:
   nginx:
     image: prooph/nginx:www
     ports:
-        - "8080:80"
+        - "${NGINX_PORT}:80"
         - "443:443"
     links:
       - php:php
@@ -20,7 +20,7 @@ services:
   mariadb:
     image: mariadb
     ports:
-      - "3306:3306"
+      - ${MYSQL_PORT}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=dev
       - MYSQL_USER=dev
@@ -30,4 +30,4 @@ services:
   adminer:
     image: adminer:4.3
     ports:
-      - 8081:8080
+      - ${ADMINER_PORT}:8080
