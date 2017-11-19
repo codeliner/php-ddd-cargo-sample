@@ -46,7 +46,7 @@
 +-- public                         # Public root of the project
 |  +-- index.php                       # PHP boostrap file for all non static routes
 |  +-- ...                             # All static files like css, global JS, images, etc.
-|  +-- vendor                      # Composer installation root for all vendor libs
++-- vendor                         # Composer installation root for all vendor libs
 +-- .travis.yml                    # Configuration for travis-ci
 +-- composer.json                  # Composer config
 +-- composer.lock                  # Composer lock of all installed vendor libs
