@@ -1,3 +1,4 @@
+/vendor/
 nbproject
 *~
 ._*
@@ -8,3 +9,4 @@ nbproject
 .idea
 .project
 .settings
+.env
