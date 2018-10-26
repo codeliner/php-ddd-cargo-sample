@@ -12,8 +12,7 @@ namespace Codeliner\CargoBackend\Http\Action;
 
 use Assert\Assertion;
 use Codeliner\CargoBackend\Application\Booking\BookingService;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
@@ -23,7 +22,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class CreateCargo implements MiddlewareInterface
+final class CreateCargo implements RequestHandlerInterface
 {
     /**
      * @var BookingService
@@ -40,9 +39,9 @@ final class CreateCargo implements MiddlewareInterface
         $this->bookingService = $bookingService;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-                $data = $request->getParsedBody();
+        $data = $request->getParsedBody();
 
         Assertion::keyExists($data, 'origin');
         Assertion::keyExists($data, 'destination');

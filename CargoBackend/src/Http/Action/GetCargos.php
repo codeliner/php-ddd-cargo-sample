@@ -12,8 +12,7 @@ namespace Codeliner\CargoBackend\Http\Action;
 
 use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\CargoRoutingDto;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
@@ -23,7 +22,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class GetCargos implements MiddlewareInterface
+final class GetCargos implements RequestHandlerInterface
 {
     /**
      * @var BookingService
@@ -39,7 +38,7 @@ final class GetCargos implements MiddlewareInterface
         $this->bookingService = $bookingService;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new JsonResponse(['cargos' => array_map(function(CargoRoutingDto $cargoRoutingDto) {
             return $cargoRoutingDto->getArrayCopy();

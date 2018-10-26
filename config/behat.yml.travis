@@ -1,7 +1,7 @@
 default:
     suites:
       default:
-        paths:    [ %paths.base%/../features ]
+        paths:    [ '%paths.base%/../features' ]
         contexts: [Codeliner\CargoFeature\FeatureContext]
     extensions:
         Behat\MinkExtension:

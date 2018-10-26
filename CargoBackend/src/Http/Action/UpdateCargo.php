@@ -14,8 +14,7 @@ use Codeliner\CargoBackend\Application\Booking\BookingService;
 use Codeliner\CargoBackend\Application\Booking\Dto\LegDto;
 use Codeliner\CargoBackend\Application\Booking\Dto\RouteCandidateDto;
 use Codeliner\CargoBackend\Application\Exception\CargoNotFoundException;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -27,7 +26,7 @@ use Zend\Diactoros\Response\JsonResponse;
  *
  * @package Codeliner\CargoBackend\Application\Action
  */
-final class UpdateCargo implements MiddlewareInterface
+final class UpdateCargo implements RequestHandlerInterface
 {
     /**
      * @var BookingService
@@ -44,7 +43,7 @@ final class UpdateCargo implements MiddlewareInterface
         $this->bookingService = $bookingService;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if (null === $trackingId = $request->getAttribute('trackingId')) {
             return new EmptyResponse(404);

@@ -17,48 +17,55 @@
     ],
     "require": {
         "php": ">=7.1",
-        "zendframework/zend-expressive": "^2.0.3",
-        "zendframework/zend-expressive-aurarouter": "^2.0",
-        "zendframework/zend-servicemanager": "^3.0",
-        "zendframework/zend-stdlib": "^3.1",
-        "zendframework/zend-config": "^3.1",
-        "ramsey/uuid" : "^3.7.1",
-        "doctrine/orm" : "^2.5.11",
-        "doctrine/migrations": "^1.5",
-        "psr/container": "^1.0",
-        "sandrokeil/interop-config": "^0.3.1",
         "beberlei/assert": "^2.4",
-        "roave/security-advisories": "dev-master",
-        "ramsey/uuid-doctrine": "^1.0",
-        "oscarotero/psr7-middlewares": "3.12.x",
+        "doctrine/migrations": "^1.5",
+        "doctrine/orm": "^2.5.11",
+        "filp/whoops": "^1.1",
         "http-interop/http-middleware": "^0.4.1",
-        "filp/whoops": "^1.1"
+        "oscarotero/psr7-middlewares": "3.12.x",
+        "psr/container": "^1.0",
+        "ramsey/uuid": "^3.7.1",
+        "ramsey/uuid-doctrine": "^1.0",
+        "roave/security-advisories": "dev-master",
+        "sandrokeil/interop-config": "^0.3.1",
+        "zendframework/zend-config": "^3.1",
+        "zendframework/zend-diactoros": "^2.0",
+        "zendframework/zend-expressive": "^3.2",
+        "zendframework/zend-expressive-aurarouter": "^3.0",
+        "zendframework/zend-servicemanager": "^3.0",
+        "zendframework/zend-stdlib": "^3.1"
     },
-    "require-dev" : {
-        "phpunit/phpunit": "^5.0",
+    "require-dev": {
         "behat/behat": "^3.0",
         "behat/mink": "^1.6",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
         "malukenho/kawaii-gherkin": "^0.1.2",
-        "zendframework/zend-expressive-tooling": "^0.4.4"
+        "phpunit/phpunit": "^5.0",
+        "zendframework/zend-component-installer": "^2.1",
+        "zendframework/zend-expressive-migration": "^0.1.3",
+        "zendframework/zend-expressive-tooling": "^1.0"
     },
-    "autoload" : {
-        "psr-4" : {
-            "Codeliner\\CargoUI\\" : "CargoUI/src",
-            "Codeliner\\CargoBackend\\"  : "CargoBackend/src",
-            "Codeliner\\GraphTraversalBackend\\" : "GraphTraversalBackend/src",
-            "Codeliner\\CargoFeature\\" : "features/bootstrap"
+    "autoload": {
+        "psr-4": {
+            "Codeliner\\CargoUI\\": "CargoUI/src",
+            "Codeliner\\CargoBackend\\": "CargoBackend/src",
+            "Codeliner\\GraphTraversalBackend\\": "GraphTraversalBackend/src",
+            "Codeliner\\CargoFeature\\": "features/bootstrap"
         }
     },
-    "autoload-dev" : {
-        "psr-4" : {
-            "CodelinerTest\\CargoBackend\\"  : "CargoBackend/tests",
-            "CodelinerTest\\GraphTraversalBackend\\" : "GraphTraversalBackend/tests"
+    "autoload-dev": {
+        "psr-4": {
+            "CodelinerTest\\CargoBackend\\": "CargoBackend/tests",
+            "CodelinerTest\\GraphTraversalBackend\\": "GraphTraversalBackend/tests"
         }
     },
     "config": {
-        "bin-dir": "bin/"
+        "bin-dir": "bin/",
+        "sort-packages": true
+    },
+    "scripts": {
+        "expressive": "expressive"
     }
 }
