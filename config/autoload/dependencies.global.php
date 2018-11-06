@@ -17,9 +17,6 @@ return [
             \Codeliner\CargoBackend\Http\Action\GetCargo::class => \Codeliner\CargoBackend\Infrastructure\Container\Application\Action\BookingActionFactory::class,
             \Codeliner\CargoBackend\Http\Action\UpdateCargo::class => \Codeliner\CargoBackend\Infrastructure\Container\Application\Action\BookingActionFactory::class,
 
-              //Action Helper middleware
-            \Psr7Middlewares\Middleware\Payload::class => \Codeliner\CargoBackend\Infrastructure\Container\Application\Action\PayloadParserFactory::class,
-
               //Application
             \Codeliner\CargoBackend\Application\Booking\BookingService::class => \Codeliner\CargoBackend\Infrastructure\Container\Application\Booking\BookingServiceFactory::class,
 
